@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_launch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".navigation.MainActivityBottomNavi">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/java8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="处理工程业务越来越大的时候的 项目组件化，Dagger2.android,rxjava2，怎样减轻开发负担"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/mvp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:text="测试mvp+rxjava2+dagger2.android"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_marginTop="@dimen/dp_40" y
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/JSBridge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android JSBridge"
+            android:paddingBottom="22dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/quickinput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="处理快速操作问题，防抖动"
+            android:paddingBottom="22dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:transitionName="@string/shared_name"
+            android:text="调用封装的系统相机拍带水印照片"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/baidu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="Webview Process"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/dragger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="dragger"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/kotlin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:visibility="gone"
+            android:text="kotlin"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/jni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="JNI敏感信息隐藏"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/memory_leak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="内存泄漏 等"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="== 退出登录，测试切换DB =="
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+
+
+        <ImageView
+            android:id="@+id/logo_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="44dp"
+            android:src="@drawable/id_img" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JSBridge</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, user-scalable=no"/>
+    <script src="file:///android_asset/JSBridge.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div>
+    <h3>JSBridge Demo</h3>
+</div>
+
+
+
+
+
+<ul class="list">
+    <li>
+        <div>
+            <!-- <button id='picBTN' onclick="JSBridge.call('NativeBridgeClsName','getImage',{'msg':'拍你的照片，不要说话'},function(res){alert(JSON.stringify(res))})"> -->
+            <button id="picBTN">
+                文件处理，上传身份证
+            </button>
+        </div>
+    </li>
+    <br/>
+</ul>
+
+
+<ul class="list">
+    <li>
+        <div id='showImg'>
+            <img width="250" height="150"
+                 src="http://img4.imgtn.bdimg.com/it/u=3152599414,369038589&fm=214&gp=0.jpg">
+        </div>
+    </li>
+    <br/>
+</ul>
+
+
+<ul class="list">
+    <li>
+        <div>
+
+            <!-- onClick 监听后会调用JS（JSBridge）中的call方法。 -->
+            <button onclick="JSBridge.call('NativeBridgeClsName','showToast',{'msg':'Hello-JSBridge'},function(res){alert('Native返回的数据：'+JSON.stringify(res))}  )">
+                JS 调用Android Service 静默获取WiFi 信息
+            </button>
+        </div>
+    </li>
+    <br/>
+</ul>
+
+
+<ul class="list">
+    <li>
+        <div>
+            <button onclick="JSBridge.call('NativeBridgeClsName','scanQRCode',{},function(res){alert(JSON.stringify(res))})">
+                扫描二维码
+            </button>
+        </div>
+    </li>
+    <br/>
+</ul>
+
+
+<ul class="list">
+    <li>
+        <div>
+            <button onclick="JSBridge.call('NativeBridgeClsName','testThread',{},function(res){alert(JSON.stringify(res))})">
+                获取系统权限
+            </button>
+        </div>
+    </li>
+    <br/>
+</ul>
+
+<p>
+    <a href="http://zhstatic.zhihu.com/pkg/store/zhihu/futureve-mobile-update-release-4.15.0(461).apk/">
+        DownLoad App</a></p>
+
+</body>
+
+<script type="text/javascript">
+  document.getElementById('picBTN').onclick = function (e) {
+    JSBridge.call('NativeBridgeClsName', 'getImage', {'msg': '这是带给移动端的msg参数'}, function (res) {
+      try {
+        if (res.code == 0) {
+          var imgSrc = res.result.imgData
+          var img = new Image()
+          img.src = imgSrc
+          img.width = '250'
+          img.height = '150'
+          img.onload = function () {
+            document.getElementById('showImg').appendChild(img)
+          }
+          img.error = function () {
+            alert('图片处理失败 - 1')
+          }
+        }
+      } catch (e) {
+        alert('图片处理异常 - 2')
+      }
+    })
+  }
+
+
+
+</script>
+</html>

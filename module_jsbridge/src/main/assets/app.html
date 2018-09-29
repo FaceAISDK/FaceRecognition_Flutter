@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv=“Content-Type” content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
+    <title>{{ notice.title }}</title>
+    <style>
+        html, body, div, span,
+        h1, h2, h3, h4, h5, h6, p, pre,
+        a, address, cite, code,
+        em, img, i，
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, footer, header, 
+        menu, nav, output, section，
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            font-family: 'Microsoft Yahei';
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        body {
+            font-size: .5rem;
+            padding: 2%;
+        }
+        img {
+            width:100%;
+        }
+        .watermark {
+            z-index: 9;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%) rotate(-30deg);
+            color: rgba(176, 170, 170, .2);
+            font-size: 2rem;
+        }
+        .statistics {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100%;
+            padding: 2em 1em;
+            color: #999;
+        }
+        .statistics span {
+            flex: 1;
+            text-align: center;
+        }
+        .statistics em {
+            color: #4DB87F;
+        }
+        @media only screen and (max-device-width : 375px) { 
+            html {
+                font-size: 14px;
+            }
+        }
+        @media only screen and (min-device-width : 375px) and (max-device-width : 480px) { 
+            html {
+                font-size: 16px;
+            }
+        }
+        @media only screen and (min-device-width : 481px) and (max-device-width : 600px) {  
+            html {
+                font-size: 18px;
+            }
+        }
+        @media only screen and (min-device-width : 601px) and (max-device-width : 720px) {  
+            html {
+                font-size: 20px;
+            }
+        }
+        @media only screen and (min-device-width : 721px) and (max-device-width : 960px) {  
+            html {
+                font-size: 24px;
+            }
+        }
+        @media only screen and (min-device-width : 961px) and (max-device-width : 1280px) {  
+            html {
+                font-size: 28px;
+            }
+        }
+        @media only screen and (min-device-width : 1281px) {  
+            html {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="watermark">{{ 'name' }}</div>
+    <div id="content" class="content" data-id="{{ notice.id }}">
+        {{ notice.content | safe}}
+    </div>
+    <div class="statistics">
+        <span>累计阅读次数：<em id="readTimes">{{ readTimes }}</em></span>
+        <span>累计阅读人数：<em id="readers">{{ readers }}</em></span>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="common.appBridge.js"></script>
+    <script src="le-bang.notice.app.js"></script>
+</body>
+</html>

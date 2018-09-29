@@ -1,0 +1,127 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'org.greenrobot.greendao'  //for greenDao
+apply plugin: 'io.objectbox' // after applying Android plugin
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        //配置使用ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            resValue("string", "PORT_NUMBER", "8089")  //数据库调试
+        }
+
+    }
+
+
+
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.targetCompatibility
+    }
+
+    greendao {
+        schemaVersion 11                  //修改这里的版本号，greenDAO会自动修改生成到DAOMaster中的版本号
+        targetGenDir 'src/main/java'     //表示greenDAO生成的DAOMaster和DaoSession的位置
+        daoPackage 'com.zlb.persistence.dbmaster' //我觉得最好放在Entity 下面的目录！！！
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
+
+    //HTTP Request
+    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    //rxjava
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    api 'io.reactivex.rxjava2:rxjava:2.1.8'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    //Router
+    api 'com.alibaba:arouter-api:1.3.1'
+
+    //数据存储 ORM DB
+    api 'org.greenrobot:greendao:3.2.2' //ORM DB
+//    api 'net.zetetic:android-database-sqlcipher:3.5.7'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+    //Toast & GSON
+    api 'com.github.GrenderG:Toasty:1.2.5'
+    api 'com.google.code.gson:gson:2.8.2'
+
+    api 'com.kingja.loadsir:loadsir:1.3.5'
+
+    api 'pub.devrel:easypermissions:1.1.3'        //没有其他的原因，其他的目前多少有BUG 啊
+
+    //dagger & dagger.android
+    api "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
+    api "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+
+    // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
+
+    //For Lifecycle, LiveData, and ViewModel
+    api "android.arch.lifecycle:runtime:1.1.1"
+    api "android.arch.lifecycle:extensions:1.1.1"
+
+    //Http Request log
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+
+    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    api 'com.github.florent37:singledateandtimepicker:1.2.2'    //高仿IOS 时间选择
+    api 'de.hdodenhof:circleimageview:2.2.0'                    //CircleImageView
+    api 'com.android.support.constraint:constraint-layout:1.1.2'
+    api 'com.liaoinstan.springview:library:1.3.2'               //refresh and load more data,准备删除
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30' //大大的减少代码量
+
+    api 'jp.wasabeef:recyclerview-animators:2.2.7'       //RecyclerView animal
+    api 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+
+    api 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    api 'com.journeyapps:zxing-android-embedded:3.5.0'  //只是为了简单
+
+    api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人
+
+    implementation 'com.android.support:multidex:1.0.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4' //
+
+}

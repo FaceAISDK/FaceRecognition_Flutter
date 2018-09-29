@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.anylife.github.githublife.activity.main.BottomTab.MainActivityTab">
+
+    <item android:id="@+id/action_example"
+        android:title="搜索"
+        android:orderInCategory="90"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_settings"
+          android:title="@string/action_settings"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+</menu>

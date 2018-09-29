@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".navigation.MainActivityBottomNavi">
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/main_toolbar"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:layout_width="99dp"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--app:titleTextColor="@android:color/white"-->
+        <!--app:subtitleTextColor="@color/light_white"-->
+        <!--app:navigationIcon="?attr/homeAsUpIndicator">-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_gray"
+        app:menu="@menu/navigation" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_above="@id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/common_gray"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/line"
+        android:layout_below="@+id/toolbar"/>
+
+</RelativeLayout>

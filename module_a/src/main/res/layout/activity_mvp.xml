@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".mvp.task.TaskMVPActivity">
+
+    <!--<include layout="@layout/basic_toolbar_layout"/>-->
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/springview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_common">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_common"
+                android:scrollbarStyle="insideInset"
+                app:layoutManager="LinearLayoutManager"
+                android:layout_marginBottom="5dp"
+                />
+        </com.liaoinstan.springview.widget.SpringView>
+
+
+</LinearLayout>

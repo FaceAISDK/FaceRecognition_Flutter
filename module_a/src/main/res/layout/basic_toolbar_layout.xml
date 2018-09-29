@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:background="?attr/colorPrimary"
+    app:titleTextColor="@android:color/white"
+    app:subtitleTextColor="@color/light_white"
+    app:navigationIcon="?attr/homeAsUpIndicator">
+    </android.support.v7.widget.Toolbar>
+
+<!-- 最基本的ToolBar,只含有返回 -->

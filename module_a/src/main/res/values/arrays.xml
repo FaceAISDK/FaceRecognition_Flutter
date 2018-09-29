@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="bubble">
+    <item>#41ffffff</item>
+    <item>#18ffffff</item>
+    <item>#1fffffff</item>
+    <item>#25ffffff</item>
+  </string-array>
+
+  <string-array name="BubbleAnimations">
+    <item>com.github.glomadrian.grav.generator.animation.SideToSideAnimator</item>
+    <item>com.github.glomadrian.grav.generator.animation.ShakeAnimator</item>
+  </string-array>
+
+  <string-array name="BallWaveAnimations">
+    <item>com.github.glomadrian.grav.generator.animation.SideToSideAnimator</item>
+    <item>com.github.glomadrian.grav.generator.animation.ShakeAnimator</item>
+    <item>com.github.glomadrian.grav.generator.animation.BallSizeAnimator</item>
+  </string-array>
+
+  <string-array name="Spectral">
+    <item>#44009949</item>
+    <item>#449E0142</item>
+    <item>#44D53E4F</item>
+    <item>#44F46D43</item>
+    <item>#44FDAE61</item>
+    <item>#44FEE08B</item>
+    <item>#44FFFFBF</item>
+    <item>#44E6F598</item>
+    <item>#44ABDDA4</item>
+    <item>#4466C2A5</item>
+    <item>#443288BD</item>
+    <item>#445E4FA2</item>
+  </string-array>
+
+
+
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zenglb.framework.demo.quick_input_things.QuickInputThingsActivity">
+
+    <!--<include layout="@layout/basic_toolbar_layout"/>-->
+
+    <EditText
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:id="@+id/edit_query"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <TextView
+        android:id="@+id/edit_keywords"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+
+
+
+    <Button
+        android:id="@+id/click"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击我一次，模拟推送一次"
+        />
+
+
+</LinearLayout>
