@@ -38,7 +38,7 @@
             android:drawableStart="@drawable/dot_blue"
             android:drawablePadding="10dp"
             android:padding="10dp"
-            android:layout_marginTop="@dimen/dp_40" y
+            android:layout_marginTop="@dimen/dp_40" 
             app:isAliganCenter="false" />
 
 
