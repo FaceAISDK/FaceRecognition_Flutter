@@ -1,18 +1,27 @@
 # 2018 年9月25 ，基于某些安全,licence和可能带来的不好影响，删除了原来的Repo,修改后重新
+
+
+![image.png](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+但还是熟悉配方和味道，欢迎交流👏
+
 # 教训：自由的世界也是有规则的
 
 
+# 关于本Demo-组件化的工程架构With MVP，Dagger2.android,RXjava2
 
-
-# 关于本Demo
   一直在纠结在何种开发模式之中，重构希望能把关注点集中到代码结构、整体架构、可测试性、可维护性这四个方面
   Rxjava2 + retrofit2 + MVP + Drager2 +,应该是当前Android开发主流的框架 ，我们都会参考Google的官方框架https://github.com/googlesamples/android-architecture 或者 Google 的最新的项目架构组件https://github.com/googlesamples/android-architecture-components
 
-  本 Demo目前已经完善了组件化架构，解决大型项目需要按需编译，模块化，代码隔离的问题
+本 Demo目前已经完善了组件化架构，解决大型项目需要按需编译，模块化，代码隔离的问题
   
  # [New]Android 组件化架构
-   简单的分为BaseLib(抽象出来的其他Module共用)，ModuleA,ModeleJsbridge和科大讯飞语音识别的module。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以通过修改gradle.properties 的isModule 值，然后Sync Project 生效
-   但是删除了以前的ButterKnife，因为烦人的R 资源问题
+   简单的分为BaseLib(抽象出来的其他Module共用)，ModuleA,ModeleJsbridge和科大讯飞语音识别的module。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以通过修改gradle.properties 的isModule 值，然后Sync Project 生效 
+   
+   加上Dagger2.android 真的炒鸡解耦，某个模块外包出去也可以，还大大减少大项目的编译调试时间，加快效率
+   
+   更多介绍：https://www.jianshu.com/p/5028eff76c30
+   
 
 # Error,empty,Loading,timeout等通用的场景处理，一处Root注入，处处可用
    项目中的toolbar几乎每个页面都要使用，每个Layout 都写？NONONO
@@ -89,21 +98,6 @@
 - Http (Rxjava2+Retrofit2)的闭环处理
 - Proguard 混淆 打包优化
 - [混淆压缩打包优化 Proguard　proguard-android-optimize　和 proguard-android 区别 ？](https://github.com/D-clock/Doc/blob/master/Android/Gradle/4_AndroidStudio%E4%B8%8BProGuard%E6%B7%B7%E6%B7%86%E6%89%93%E5%8C%85.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
