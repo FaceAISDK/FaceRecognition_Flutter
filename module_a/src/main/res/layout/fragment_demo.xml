@@ -21,7 +21,7 @@
             android:paddingTop="22dp"
             android:text="处理工程业务越来越大的时候的 项目组件化，Dagger2.android,rxjava2，怎样减轻开发负担"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:drawablePadding="10dp"
             android:padding="10dp"
             app:isAliganCenter="false" />
@@ -33,12 +33,12 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:gravity="center_vertical"
-            android:text="测试mvp+rxjava2+dagger2.android"
+            android:text="测试mvp+rxjava2+dagger2"
             android:textSize="18sp"
             android:drawableStart="@drawable/dot_blue"
             android:drawablePadding="10dp"
             android:padding="10dp"
-            android:layout_marginTop="@dimen/dp_40" 
+            android:layout_marginTop="22dp"
             app:isAliganCenter="false" />
 
 

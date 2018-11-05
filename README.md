@@ -15,8 +15,8 @@
 
 本 Demo目前已经完善了组件化架构，解决大型项目需要按需编译，模块化，代码隔离的问题
   
- # [New]Android 组件化架构
-   简单的分为BaseLib(抽象出来的其他Module共用)，ModuleA,ModeleJsbridge和科大讯飞语音识别的module。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以通过修改gradle.properties 的isModule 值，然后Sync Project 生效 
+ # [New] Android 组件化架构
+   简单的分为BaseLib(抽象出来的其他Module共用)，ModuleA,ModeleJsbridge和科大讯飞语音识别的module。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以通过添加修改gradle.properties 文件中 的isModule 值，然后Sync Project 生效 （gradle.properties 文件用来配置Gradle settings的，例如JVM参数等，我们在gradle.properties 中配置的字段都可以在build.gradle文件中直接读取出来，不用任何多余的代码）
    
    加上Dagger2.android 真的炒鸡解耦，某个模块外包出去也可以，还大大减少大项目的编译调试时间，加快效率
    

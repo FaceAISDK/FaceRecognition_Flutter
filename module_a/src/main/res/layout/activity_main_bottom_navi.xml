@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/common_gray"
+        android:background="#33000000"
         app:menu="@menu/navigation" />
 
     <View

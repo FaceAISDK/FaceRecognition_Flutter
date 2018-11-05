@@ -2,19 +2,23 @@ package com.zenglb.framework.modulea.demo.launch;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -31,8 +35,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -41,17 +43,14 @@ import pub.devrel.easypermissions.EasyPermissions;
  * Created by anylife.zlb@gmail.com on 2017/1/11.
  */
 public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.PermissionCallbacks {
-    private final static String TAG = LaunchActivity.class.getName();
 
     private static final int FINISH_LAUNCHER = 0;
     private Handler UiHandler = new MyHandler();
 
-
     private static final String[] PERMISSION_LIST =
-            {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA};
+            {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
 
-    private static final int RC_LOCATION_CONTACTS_PERM = 124;
-
+    private static final int RC_LOCATION_CONTACTS_PERM = 1001;
 
     @Inject
     SPDao spDao;
@@ -61,7 +60,7 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
     private InterstitialAd mInterstitialAd;
 
     /**
-     * 接受消息，处理消息 ，此Handler会与当前主线程一块运行，，只为测试只为测试只为测试只为测试
+     * 接受消息，处理消息 ，此Handler会与当前主线程一块运行，只为测试只为测试只为测试只为测试
      */
     class MyHandler extends Handler {
 
@@ -90,7 +89,9 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
                         LaunchActivity.this.finish();
                     }
                     break;
+
                 default:
+
                     break;
             }
         }
@@ -105,19 +106,29 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 3500);
+        if (hasAllPermissions()) {
+            UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 2500);  //测试内存泄漏,只为测试.
+        }
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LaunchActivity.this);
+        builder.setTitle(R.string.water_camera_permission_title_tips);
+        builder.setMessage(R.string.water_camera_permission_deny_tips);
+        builder.setCancelable(false);
 
-        UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 3500);
-
-//        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
-//        // This will display a dialog directing them to enable the permission in app settings.
-//        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-//            new AppSettingsDialog.Builder(this).build().show();
-//        }
+        builder.setPositiveButton(R.string.settings_settings, (dialog, which) -> {
+            Intent myAppSettings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.parse("package:" + LaunchActivity.this.getPackageName()));
+            myAppSettings.addCategory(Intent.CATEGORY_DEFAULT);
+            myAppSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            LaunchActivity.this.startActivity(myAppSettings);
+            LaunchActivity.this.finish();//最后的选择
+        });
+        AlertDialog dlg = builder.create();
+        dlg.show();
+        dlg.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
     }
 
     @Override
@@ -131,7 +142,7 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
 
         testAD();
 
-        locationAndContactsTask();
+        requestAllPermissions();
     }
 
 
@@ -175,15 +186,10 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
     }
 
 
-    @AfterPermissionGranted(RC_LOCATION_CONTACTS_PERM)
-    public void locationAndContactsTask() {
-        if (hasPermissions()) {
+    public void requestAllPermissions() {
+        if (hasAllPermissions()) {
             UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 2500);  //测试内存泄漏,只为测试.
-
-            // Have permissions, do the thing!
-            Toast.makeText(this, "TODO: Location and Contacts things", Toast.LENGTH_LONG).show();
         } else {
-
             // Ask for both permissions
             EasyPermissions.requestPermissions(
                     this,
@@ -194,7 +200,7 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
     }
 
 
-    private boolean hasPermissions() {
+    private boolean hasAllPermissions() {
         return EasyPermissions.hasPermissions(this, PERMISSION_LIST);
     }
 
