@@ -180,10 +180,6 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
             case 401:
                 //退回到登录页面
                 if (mContext != null) {  //Context 可以使Activity BroadCast Service !
-//                    Intent intent = new Intent();
-//                    //不要hard Code, 使用灵活的Intent 来做吧，ARouter 解耦
-//                    intent.setAction("app.intent.action.LOGIN");
-//                    mContext.startActivity(intent);
 
                     // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
                     ARouter.getInstance().build("/login/activity").navigation();

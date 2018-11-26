@@ -29,22 +29,24 @@
             android:theme="@style/Translucent" />
 
         <activity
-            android:name=".demo.status_view.StatusNormalErrorEmptyActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".navigation.MainActivityBottomNavi"
             android:label="@string/title_activity_main_bottom_navi"
             android:launchMode="singleTask" />
+
         <activity android:name=".demo.animal.SharedElementActivity" />
+
         <activity android:name=".demo.animal.AnimalMainActivity" />
 
         <!--<activity android:name="com.anylife.jsbridge.WebActivity" />-->
 
         <activity android:name=".demo.quick_input_things.QuickInputThingsActivity" />
+
         <activity android:name=".demo.demo.ConstraintLayoutActivity" />
+
         <activity android:name=".demo.demo.Rxjava_ZIP_Activity" />
 
         <activity android:name=".demo.MemoryLeakTest" />
+
         <activity android:name=".mvp.handylife.AnyLifeActivity" />
 
         <!--<provider-->
@@ -56,7 +58,6 @@
                 <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
                 <!--android:resource="@xml/file_paths" />-->
         <!--</provider>-->
-
 
     </application>
 

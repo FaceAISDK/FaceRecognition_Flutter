@@ -20,12 +20,8 @@ import com.zenglb.framework.modulea.demo.MemoryLeakTest;
 import com.zenglb.framework.modulea.demo.quick_input_things.QuickInputThingsActivity;
 import com.zenglb.framework.modulea.mvp.handylife.AnyLifeActivity;
 import com.zlb.dagger.scope.ActivityScope;
-import com.zlb.http.result.TestResult;
 import com.zlb.persistence.dbmaster.DaoSession;
 import com.zlb.takephoto.WaterCameraActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 

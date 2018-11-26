@@ -9,7 +9,8 @@ import com.zlb.httplib.R;
 
 
 /**
- * Description:TODO
+ * 网络请求超时的UI提示
+ *
  * Create Time:2017/9/2 16:17
  * Author:KingJA
  * Email:kingjavip@gmail.com

@@ -4,6 +4,8 @@ package com.zlb.config;
 import android.os.Environment;
 
 /**
+ * 图片，文件等外部存储存放路径定义
+ *
  * Created by zenglb on 2017/3/15.
  */
 public class FileCacheConfig {

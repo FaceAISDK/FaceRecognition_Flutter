@@ -8,14 +8,44 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".AIMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/MyAppTheme">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="debug.AILauncherActivity"/>
+
+        <activity
+            android:name="com.arcsoft.arcfacedemo.activity.PreviewActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.arcsoft.arcfacedemo.activity.SingleImageActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.arcsoft.arcfacedemo.activity.MultiImageActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.arcsoft.arcfacedemo.activity.RegisterAndRecognizeActivity"
+            android:theme="@style/FullscreenTheme"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="com.arcsoft.arcfacedemo.activity.FaceManageActivity"
+            android:launchMode="singleTop" />
+
+        <!--<provider-->
+        <!--android:name="android.support.v4.content.FileProvider"-->
+        <!--android:authorities="${applicationId}.provider"-->
+        <!--android:exported="false"-->
+        <!--android:grantUriPermissions="true">-->
+        <!--<meta-data-->
+        <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+        <!--android:resource="@xml/provider_paths" />-->
+        <!--</provider>-->
+
+
+
     </application>
 
 </manifest>

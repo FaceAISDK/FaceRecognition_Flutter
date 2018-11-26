@@ -20,10 +20,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 import com.zenglb.framework.modulea.R;
 import com.zlb.base.BaseMVPActivity;
 import com.zenglb.framework.modulea.mvp.login.LoginActivity;
@@ -55,9 +52,6 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
     @Inject
     SPDao spDao;
 
-    private AdView mAdView;
-
-    private InterstitialAd mInterstitialAd;
 
     /**
      * 接受消息，处理消息 ，此Handler会与当前主线程一块运行，只为测试只为测试只为测试只为测试
@@ -104,12 +98,15 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
+
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
         if (hasAllPermissions()) {
             UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 2500);  //测试内存泄漏,只为测试.
         }
     }
+
+
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
@@ -139,8 +136,6 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
 
         //bg_splash 是很长的图   bg_splash2 是短的图！  测试适配，测试适配
         scaleImage(LaunchActivity.this, findViewById(R.id.launch_img), R.drawable.bg);
-
-        testAD();
 
         requestAllPermissions();
     }
@@ -241,21 +236,6 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
         }
     }
 
-    /**
-     *
-     */
-    private void testAD() {
-        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
-        MobileAds.initialize(this, "ca-app-pub-8621230724267558~7770389405");
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8621230724267558/8554156299");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 
 
 }

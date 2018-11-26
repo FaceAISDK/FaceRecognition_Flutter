@@ -28,7 +28,7 @@ import es.dmoral.toasty.Toasty;
  * 1.toolbar 的处理封装
  * 2.增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
  *
- * @author zenglb 20170301
+ * @author anylife.zlb@gmail.com 20170301
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = BaseActivity.class.getSimpleName();
@@ -47,9 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         initViews();
         loadHttp();  //在这里进行Http 的请求
-
-        MD5Util.getUpperMD5Str16("AAAA");
-
     }
 
 

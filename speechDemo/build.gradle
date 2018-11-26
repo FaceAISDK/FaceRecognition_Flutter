@@ -41,7 +41,6 @@ android {
 dependencies {
     implementation files('libs/Sunflower.jar')
     implementation files('libs/Msc.jar')
-//    implementation project(':baselib')
 
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.ext.supportLibraryVersion"

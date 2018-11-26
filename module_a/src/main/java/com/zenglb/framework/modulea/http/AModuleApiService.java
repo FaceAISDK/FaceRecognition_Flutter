@@ -2,10 +2,8 @@ package com.zenglb.framework.modulea.http;
 
 import com.zenglb.framework.modulea.http.result.AnyLifeResult;
 import com.zenglb.framework.modulea.http.result.CustomWeatherResult;
-import com.zenglb.framework.modulea.http.result.JokesResult;
 import com.zenglb.framework.modulea.http.result.LoginResult;
 import com.zlb.http.param.LoginParams;
-import com.zlb.http.result.StaffMsg;
 import com.zlb.httplib.HttpResponse;
 
 import java.util.List;
@@ -16,7 +14,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 

@@ -3,19 +3,15 @@ package com.zenglb.framework.modulea.mvp.handylife;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zenglb.framework.modulea.R;
 import com.zenglb.framework.modulea.http.AModuleApiService;
 import com.zenglb.framework.modulea.http.result.AnyLifeResult;
-import com.zlb.http.result.StaffMsg;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.commontips.ErrorCallback;
 import com.zlb.dagger.scope.ActivityScope;
-import com.zlb.httplib.BaseObserver;
-import com.zlb.httplib.rxUtils.SwitchSchedulers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,12 +54,13 @@ public class AnyLifeFragment extends BaseStatusFragment implements AnyLifeContra
         }
 
         page++; //next page for simple
-        mBaseLoadService.showSuccess();          //ui status
+        mBaseLoadService.showSuccess();      // successful case -> show the data, eg RecyclerView,
         handyLifeResultBeans.addAll(tabsResultBeansTemp);
         handyLifeAdapter.notifyDataSetChanged(); // update ui
 
-        handyLifeAdapter.setEnableLoadMore(true); //can load more
-        mSwipeRefreshLayout.setRefreshing(false); //as u see
+        handyLifeAdapter.setEnableLoadMore(true); //可以加载更多的数据
+        mSwipeRefreshLayout.setRefreshing(false); //数据拉取成功，不在数据拉取Refreshing状态
+
         if (tabsResultBeansTemp.size() > perPageSize - 1) {
             handyLifeAdapter.loadMoreComplete();
         } else {

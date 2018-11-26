@@ -11,7 +11,7 @@ import com.zenglb.framework.goodlife.http.result.ArticlesResult;
 import java.util.List;
 
 /**
- * HandyLifeAdapter
+ * HandyLifeAdapter，要说代码简洁，我觉得你就是渣渣
  *
  * Created by zlb on 2018/3/23.
  */

@@ -26,7 +26,6 @@ import com.zlb.httplib.R;
  * <p>
  * 包含JSBridge 的WebView,不要写没有通用性的业务代码在这里
  */
-
 public abstract class BaseWebViewActivity extends BaseActivity {
     public static final String WEB_ACTION = "my.intent.action.GOTOWEB";
     public static final String WEB_CATEGORY = "my.intent.category.WEB";
@@ -41,7 +40,6 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 
     public WebView mWebView;
     private ProgressBar topLoadingBar;
-//    private SwipeRefreshLayout swipeRefreshLayout;
     protected String url;
 
     @Override
@@ -66,43 +64,8 @@ public abstract class BaseWebViewActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mWebView.setWebContentsDebuggingEnabled(true);
         }
-//        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mWebView.reload();
-//            }
-//        });
 
         WebSettings settings = mWebView.getSettings();
-
-//        //支持获取手势焦点，输入用户名、密码或其他
-//        mWebView.requestFocusFromTouch();
-
-//        settings.setRenderPriority(WebSettings.RenderPriority.HIGH); //提高渲染的优先级
-
-        //设置自适应屏幕，两者合用
-//        settings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-//        settings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-//
-//        settings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
-//        settings.setBuiltInZoomControls(true); //设置内置的缩放控件。
-        //若上面是false，则该WebView不可缩放，这个不管设置什么都不能缩放。
-//        settings.settingssetTextZoom(2);//设置文本的缩放倍数，默认为 100
-
-//        settings.setDisplayZoomControls(false); //隐藏原生的缩放控件
-
-//        setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
-//        supportMultipleWindows(); //多窗口
-//        setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存
-//        setAllowFileAccess(true); //设置可以访问文件
-//        setNeedInitialFocus(true); //当webview调用requestFocus时为webview设置节点
-//        setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
-//        setLoadsImagesAutomatically(true); //支持自动加载图片
-//        setDefaultTextEncodingName("utf-8");//设置编码格式
-//        settings.setDefaultFontSize(20);//设置 WebView 字体的大小，默认大小为 16
-//        settings.setMinimumFontSize(12);//设置 WebView 支持的最小字体大小，默认为 8
-
 
         settings.setJavaScriptEnabled(true);
         //手动设置UA,让运营商劫持DNS的浏览器广告不生效 http://my.oschina.net/zxcholmes/blog/596192
@@ -164,8 +127,6 @@ public abstract class BaseWebViewActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-//                swipeRefreshLayout.setRefreshing(false);
-
             }
         });
 
@@ -211,7 +172,6 @@ public abstract class BaseWebViewActivity extends BaseActivity {
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {
                     topLoadingBar.setVisibility(View.INVISIBLE);
-//                    swipeRefreshLayout.setRefreshing(false);
                 } else {
                     if (View.INVISIBLE == topLoadingBar.getVisibility()) {
                         topLoadingBar.setVisibility(View.VISIBLE);

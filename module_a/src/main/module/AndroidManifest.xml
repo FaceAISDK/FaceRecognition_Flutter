@@ -31,9 +31,6 @@
             android:name=".demo.access.RegisterActivity"
             android:theme="@style/Translucent" />
 
-        <activity
-            android:name=".demo.status_view.StatusNormalErrorEmptyActivity"
-            android:launchMode="singleTask" />
 
         <activity
             android:name=".navigation.MainActivityBottomNavi"

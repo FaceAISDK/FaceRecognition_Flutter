@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,28 +20,26 @@ import com.zenglb.framework.goodlife.R;
 import com.zlb.base.BaseMVPActivity;
 import com.zlb.base.BaseWebViewActivity;
 
+import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
+import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
+
 /**
- * GoodLifeActivity 主要Activity。这里的UI 就不做测试了
- *
+ * GoodLifeActivity 主要Activity。
+ * <p>
+ * 【关于华东冲突的处理】
+ * <p>
  * SwipeRefreshLayout和ViewPager 滑动冲突处理
- *
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * <p>
  * Created by zlb on 2018/3/23.
  */
 public class GoodLifeActivity extends BaseMVPActivity implements TabLayout.OnTabSelectedListener {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
     private TabLayout mTabLayout;       //TabLayout
     private String[] tabsTitle;         //tabs 的标题
@@ -66,24 +65,42 @@ public class GoodLifeActivity extends BaseMVPActivity implements TabLayout.OnTab
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager =  findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mTabLayout =  findViewById(R.id.layout_tab);
+        mTabLayout = findViewById(R.id.layout_tab);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);       //Set Mode
-
-//        mTabLayout.addTab(mTabLayout.newTab().setText(tabsTitle[0]));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(tabsTitle[1]));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(tabsTitle[2]));
 
         mTabLayout.addOnTabSelectedListener(this);
 
         //set mTabLayout up With mViewPager
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setOffscreenPageLimit(tabsTitle.length - 1);
+
+
+//        //添加页面滑动监听
+//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int i, float v, int i1) {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int i) {
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int i) {
+//                if (i == SCROLL_STATE_DRAGGING) {
+//                    mSwipeRefreshLayout.setEnabled(false);//设置不可触发
+//                } else if (i == SCROLL_STATE_SETTLING) {
+//                    mSwipeRefreshLayout.setEnabled(true);//设置可触发
+//                }
+//            }
+//        });
+
     }
 
 
@@ -106,21 +123,19 @@ public class GoodLifeActivity extends BaseMVPActivity implements TabLayout.OnTab
     }
 
 
-
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_good_life,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_good_life, menu);
         return true;
     }
 
 
     //定义菜单响应事件
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.action_author:
-                Toast.makeText(this,"刀爷在这里走丢了 ...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "刀爷在这里走丢了 ...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_more:
                 Intent intent = new Intent(getContext(), GoodLifeWebActivity.class);
@@ -134,9 +149,12 @@ public class GoodLifeActivity extends BaseMVPActivity implements TabLayout.OnTab
 
 
     /**
-     * A FragmentPagerAdapter that returns a fragment load tabsDataTypeTitle[position] type data
+     * FragmentStatePagerAdapter ：不可见会被回收资源，也就是占用的资源少啊
+     * FragmentPagerAdapter      ：可能会导致大量的内存被占用，资源一直占用
+     *
+     *
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

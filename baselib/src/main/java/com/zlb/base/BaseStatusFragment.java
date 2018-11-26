@@ -39,7 +39,7 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
             savedInstanceState) {
         View rootView = View.inflate(getActivity(), onCreateFragmentView(), null);
-//        ButterKnife.bind(this, rootView);
+
         mBaseLoadService = LoadSir.getDefault().register(rootView, new Callback.OnReloadListener() {
             @Override
             public void onReload(View v) {
@@ -94,8 +94,10 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
         mBaseLoadService.showSuccess();
     }
 
+
     @Inject
     DispatchingAndroidInjector<Fragment> childFragmentInjector;
+
 
     @Override
     public void onAttach(Context context) {
@@ -105,15 +107,19 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
         this.mActivity = (Activity) context;
     }
 
+
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return childFragmentInjector;
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         HttpUiTips.dismissDialog(getActivity());
     }
+
+
 
 }

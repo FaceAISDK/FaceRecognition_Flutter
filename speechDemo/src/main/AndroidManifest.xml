@@ -28,10 +28,8 @@
             android:name="IFLYTEK_CHANNEL"
             android:value="Android_Demo" />
 
-
     </application>
 
-    <uses-sdk android:minSdkVersion="8" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />

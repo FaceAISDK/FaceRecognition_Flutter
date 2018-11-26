@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.zlb.persistence.dbmaster.DaoMaster;
-import com.zlb.persistence.dbmaster.StaffMsgDao;
-import com.zlb.persistence.dbmaster.TestResultDao;
 
 
 /**
@@ -23,8 +21,7 @@ public class MySQLiteOpenHelper extends DaoMaster.OpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //数据库 的管理最好能组件化
-        MigrationHelper.migrate(db,TestResultDao.class);
-        MigrationHelper.migrate(db,StaffMsgDao.class);
+
 
         if (oldVersion == newVersion) {
             Log.d("onUpgrade", "数据库是最新版本" + oldVersion + "，不需要升级");

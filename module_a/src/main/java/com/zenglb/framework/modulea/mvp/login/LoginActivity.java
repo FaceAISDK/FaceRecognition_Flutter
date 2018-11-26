@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.zenglb.framework.modulea.R;
 import com.zenglb.framework.modulea.http.result.LoginResult;
 import com.zlb.base.BaseMVPActivity;
@@ -130,6 +131,14 @@ public class LoginActivity extends BaseMVPActivity implements LoginContract.Logi
 
         etPassword.setText("helloworld");
         etUsername.setText("18826562075");
+
+
+        findViewById(R.id.AITest).setOnClickListener(v -> {
+            // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
+            //
+            ARouter.getInstance().build("/ai/RegisterAndRecognize").navigation();
+        });
+
     }
 
 
@@ -197,6 +206,8 @@ public class LoginActivity extends BaseMVPActivity implements LoginContract.Logi
         }
 
     }
+
+
 
     /**
      * 跳转到注册®️

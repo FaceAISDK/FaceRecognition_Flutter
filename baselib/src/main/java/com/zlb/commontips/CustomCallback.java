@@ -8,7 +8,8 @@ import com.kingja.loadsir.callback.Callback;
 import com.zlb.httplib.R;
 
 /**
- * Description:TODO
+ *
+ *
  * Create Time:2017/9/3 10:22
  * Author:KingJA
  * Email:kingjavip@gmail.com

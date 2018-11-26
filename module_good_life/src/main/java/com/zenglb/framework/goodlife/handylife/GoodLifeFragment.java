@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,6 +16,7 @@ import com.zenglb.framework.goodlife.http.result.ArticlesResult;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.base.BaseWebViewActivity;
 import com.zlb.commontips.ErrorCallback;
+import com.zlb.customview.MySwipeRefreshLayout;
 import com.zlb.dagger.scope.ActivityScope;
 
 import java.util.ArrayList;
@@ -22,27 +24,37 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * fragment contain the content lists with 2 different types of items.
  * 代码仅供阅读，不可用于任何形式的商业用途
- *
- * PLK-AL10C00B20
- *
+ * <p>
+ * <p>
+ * 接口是没有分页的，仅仅是为了模拟分页
+ * <p>
  * Created by zlb on 2018/3/23.
  */
 @ActivityScope
 public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeContract.GoodLifeView {
-    private static final int perPageSize = 20;
     private static final String ARG_DATA_TYPE = "data_type";      //data type {cityguide,shop,eat}
 
-    private int page = 1;   //假设我们的Page 都是从1开始
+    private static final int perPageSize = 20;
+    private int page = 1;      //假设我们的Page 都是从1开始
+
     private RecyclerView mRecyclerView = null;
     private GoodLifeAdapter handyLifeAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private MySwipeRefreshLayout mSwipeRefreshLayout;
     private List<ArticlesResult.ArticlesBean> handyLifeResultBeans = new ArrayList<>();
 
     @Inject
     GoodLifePresenter mPresenter;  //dagger
+
+
+    @Inject
+    public GoodLifeFragment() {
+
+    }
 
     /**
      * 显示数据
@@ -51,19 +63,23 @@ public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeCont
      */
     @Override
     public void showHandyLifeData(ArticlesResult tabsResultBeansTemp) {
+        //全部在这里判断，上拉的时候下拉不会挂掉
+        if (page == 1) {
+            handyLifeResultBeans.clear();
+        }
         page++; //next page for simple
-        mBaseLoadService.showSuccess();          //ui status
+        mBaseLoadService.showSuccess();      // successful case -> show the data, eg RecyclerView,
         handyLifeResultBeans.addAll(tabsResultBeansTemp.getArticles());
         handyLifeAdapter.notifyDataSetChanged(); // update ui
 
         handyLifeAdapter.setEnableLoadMore(true); //can load more
         mSwipeRefreshLayout.setRefreshing(false); //as u see
 
-//        if (tabsResultBeansTemp.size() > perPageSize - 1) {
-//            handyLifeAdapter.loadMoreComplete();
-//        } else {
-//            handyLifeAdapter.loadMoreEnd();  //no more data
-//        }
+        if (tabsResultBeansTemp.getArticles().size() > perPageSize - 1) {
+            handyLifeAdapter.loadMoreComplete();
+        } else {
+            handyLifeAdapter.loadMoreEnd();  //no more data
+        }
 
     }
 
@@ -77,22 +93,23 @@ public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeCont
     @Override
     public void getHandyLifeDataFailed(int code, String message) {
         if (page == 1) {
+            handyLifeResultBeans.clear();
             handyLifeAdapter.notifyDataSetChanged();  //data clear ,then update ui
         }
         handyLifeAdapter.setEnableLoadMore(true);
         mSwipeRefreshLayout.setRefreshing(false);
+
         if (handyLifeResultBeans.size() == 0) {
             // should switch(code)
+            Toasty.error(getContext(), message).show();
             mBaseLoadService.showCallback(ErrorCallback.class);  //for easy
         } else {
+            Log.e("Hello", "loadMoreFail");
+
             handyLifeAdapter.loadMoreFail(); //load more failed
         }
     }
 
-    @Inject
-    public GoodLifeFragment() {
-
-    }
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -111,22 +128,15 @@ public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeCont
         return R.layout.fragment_good_life;
     }
 
+
     /**
      * refresh data
      */
     private void refresh() {
         page = 1;
-        handyLifeResultBeans.clear();
         mSwipeRefreshLayout.setRefreshing(true);
         handyLifeAdapter.setEnableLoadMore(false);  //这里的作用是防止下拉刷新的时候还可以上拉加载
-        mBaseLoadService.showSuccess();
-
-        for(int i=0;i<33;i++){
-            mPresenter.getHandyLifeData(getArguments().getString(ARG_DATA_TYPE), page);
-        }
-
         mPresenter.getHandyLifeData(getArguments().getString(ARG_DATA_TYPE), page);
-
     }
 
 
@@ -147,9 +157,9 @@ public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeCont
      */
     @Override
     public void initViews(View rootView) {
-        handyLifeAdapter = new GoodLifeAdapter(getContext(), handyLifeResultBeans);
-        mRecyclerView =  rootView.findViewById(R.id.recyclerView);
 
+        handyLifeAdapter = new GoodLifeAdapter(getContext(), handyLifeResultBeans);
+        mRecyclerView = rootView.findViewById(R.id.recyclerView);
 
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration
                 .Builder(getActivity())
@@ -161,24 +171,25 @@ public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeCont
         mRecyclerView.setAdapter(handyLifeAdapter);
 
         handyLifeAdapter.setOnLoadMoreListener(() ->
-                        mPresenter.getHandyLifeData(getArguments().getString(ARG_DATA_TYPE), page)
+                {
+                    Log.e("Hello", "onHttpLoad: " + getArguments().getString(ARG_DATA_TYPE));
+                    mPresenter.getHandyLifeData(getArguments().getString(ARG_DATA_TYPE), page);
+                }
                 , mRecyclerView);
 
         // 当列表滑动到倒数第N个Item的时候(默认是1)回调onLoadMoreRequested方法
-        handyLifeAdapter.setPreLoadNumber(3);
+        handyLifeAdapter.setPreLoadNumber(0);
         handyLifeAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         mSwipeRefreshLayout = rootView.findViewById(R.id.swipeLayout);
-        mSwipeRefreshLayout.setTag("tag"+getArguments().getString(ARG_DATA_TYPE));
+        mSwipeRefreshLayout.setTag("tag" + getArguments().getString(ARG_DATA_TYPE));
         mSwipeRefreshLayout.setOnRefreshListener(() -> refresh());
 
-        handyLifeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getContext(), GoodLifeWebActivity.class);
-                intent.putExtra(BaseWebViewActivity.URL, handyLifeResultBeans.get(position).getArticle().getContent_url());
+        handyLifeAdapter.setOnItemClickListener((adapter, view, position) -> {
 
-                startActivity(intent);
-            }
+            Intent intent = new Intent(getContext(), GoodLifeWebActivity.class);
+            intent.putExtra(BaseWebViewActivity.URL, handyLifeResultBeans.get(position).getArticle().getContent_url());
+
+            startActivity(intent);
         });
 
         refresh();
@@ -190,7 +201,6 @@ public class GoodLifeFragment extends BaseStatusFragment implements GoodLifeCont
         //Bind view to the presenter
         mPresenter.takeView(this);
     }
-
 
 
     @Override

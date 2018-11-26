@@ -115,9 +115,9 @@ public class HttpRetrofit {
 
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .retryOnConnectionFailure(true)
-                    .connectTimeout(10, TimeUnit.SECONDS)
-                    .readTimeout(11, TimeUnit.SECONDS)
-                    .writeTimeout(12, TimeUnit.SECONDS)
+                    .connectTimeout(7, TimeUnit.SECONDS)
+                    .readTimeout(6, TimeUnit.SECONDS)
+                    .writeTimeout(7, TimeUnit.SECONDS)
                     .addNetworkInterceptor(mRequestInterceptor)
                     .authenticator(mAuthenticator2)
                     .addInterceptor(loggingInterceptor)

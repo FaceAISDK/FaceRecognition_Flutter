@@ -80,6 +80,8 @@ public class BaseGlobalModule {
 //        return HttpRetrofit.getRetrofit(spDao, mContext).create(ApiService.class);
 //    }
 
+
+
     /**
      * 增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
      *
@@ -90,7 +92,6 @@ public class BaseGlobalModule {
     @Singleton
     public LoadSir provideCommonStatusService() {
         return new LoadSir.Builder()
-//                .addCallback(new LoadingCallback())
                 .addCallback(new EmptyCallback())
                 .addCallback(new ErrorCallback())
                 .addCallback(new TimeoutCallback())
@@ -98,7 +99,7 @@ public class BaseGlobalModule {
     }
 
     /**
-     * 数据库访问的DaoSession,因为是分账号分库，那么切换账号后怎么更换DaoSession链接的数据库DB呢？
+     * 数据库访问的DaoSession,因为是分账号分库，那么切换账号后怎么更换DaoSession链接的数据库DB呢？，不要Singleton 修饰了
      *
      */
     @Provides

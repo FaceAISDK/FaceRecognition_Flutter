@@ -60,7 +60,6 @@ public class WebActivity extends BaseWebViewActivity implements View.OnClickList
      * 比如拍照和二维码需要启动一个新的Activity 才能获取到需要的数据
      * 这个时候就发广播过来处理把，也许会有更好的方法，但是我不知道！
      */
-
     public class CallNewActForResultReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

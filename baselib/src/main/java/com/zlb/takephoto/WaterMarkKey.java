@@ -5,7 +5,6 @@ public class WaterMarkKey {
 
     String version;
 
-
     public String getVersion() {
         return version;
     }

@@ -116,10 +116,11 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/AITest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="9dp"
                 android:text="人脸识别 活体检测"
                 android:textColor="#9a9a9a"
                 android:textSize="12sp" />

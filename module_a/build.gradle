@@ -34,7 +34,7 @@ android {
 
     sourceSets {
         main {
-            jniLibs.srcDirs = ['src/main/libs']
+//            jniLibs.srcDirs = ['src/main/libs']
 
             if (isModule.toBoolean()) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
@@ -67,7 +67,6 @@ android {
         }
     }
 
-
 //    greendao {
 //        schemaVersion 7                  //修改这里的版本号，greenDAO会自动修改生成到DAOMaster中的版本号
 //        targetGenDir 'src/main/java'     //表示greenDAO生成的DAOMaster和DaoSession的位置
@@ -99,17 +98,11 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
 
-
-
-    implementation 'com.google.android.gms:play-services-ads:15.0.0'
-
-
-
     // For Lifecycle, LiveData, and ViewModel
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 
     // Robolectric
-    testImplementation "org.robolectric:robolectric:3.5.1"
+    testImplementation "org.robolectric:robolectric:3.8"
 
     // Dependencies for local unit tests
     testImplementation 'junit:junit:4.12'

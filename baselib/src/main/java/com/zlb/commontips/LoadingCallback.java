@@ -8,7 +8,8 @@ import com.zlb.httplib.R;
 
 
 /**
- * Description:TODO
+ * 数据加载中的提示
+ *
  * Create Time:2017/9/4 10:22
  * Author:KingJA
  * Email:kingjavip@gmail.com

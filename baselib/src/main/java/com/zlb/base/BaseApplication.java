@@ -43,10 +43,10 @@ public abstract class BaseApplication extends Application implements HasActivity
 
     //依赖注入的核心原则：一个类不应该知道如何实现依赖注入。
     @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;  //Activity 中的注入
 
     @Inject
-    DispatchingAndroidInjector<Service> dispatchingServiceInjector;  //Service 的实现
+    DispatchingAndroidInjector<Service> dispatchingServiceInjector;   //Service 中注入的
 
     @Override
     public AndroidInjector<Activity> activityInjector() {
@@ -65,20 +65,17 @@ public abstract class BaseApplication extends Application implements HasActivity
         initARouter();
         initDI();
 
-
+        //UI 状态提示页面
         LoadSir.beginBuilder()
-                .addCallback(new ErrorCallback())      //添加各种状态页
+                .addCallback(new ErrorCallback())          //添加各种状态页
                 .addCallback(new EmptyCallback())
                 .addCallback(new LoadingCallback())
                 .addCallback(new TimeoutCallback())
                 .addCallback(new CustomCallback())
-                .setDefaultCallback(LoadingCallback.class)//设置默认状态页
+                .setDefaultCallback(LoadingCallback.class) //设置默认状态页
                 .commit();
 
-
-
         showDebugDBAddressLogToast(this);
-
     }
 
     @Override
@@ -97,6 +94,21 @@ public abstract class BaseApplication extends Application implements HasActivity
      */
     abstract protected void injectApp();
 
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+    }
 
     /**
      * ARouter 尽早的初始化
@@ -129,8 +141,11 @@ public abstract class BaseApplication extends Application implements HasActivity
         }
     }
 
-
-
+    /**
+     * 数据库调试，在浏览器中输入地址后可以方便的操作SQLITE数据库
+     *
+     * @param context
+     */
     public  void showDebugDBAddressLogToast(Context context) {
         if (isDebug) {
             try {

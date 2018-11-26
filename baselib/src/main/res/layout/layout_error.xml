@@ -17,9 +17,12 @@
         android:textColor="#333333"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:text="API 暂时不提供数据，请自行替换."/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="click me to retry!he"/>
+        android:text="click me to retry!error"/>
+
 </LinearLayout>

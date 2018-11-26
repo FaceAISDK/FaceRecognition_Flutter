@@ -20,7 +20,10 @@ public class LauncherActivity extends AppCompatActivity {
         //在这里传值给需要调试的Activity
         Intent intent = new Intent(this, WebActivity.class);
 //        intent.putExtra(BaseWebViewActivity.URL, "https://www.baidu.com");
-        intent.putExtra(BaseWebViewActivity.URL, "file:///android_asset/index.html");
+//        intent.putExtra(BaseWebViewActivity.URL, "file:///android_asset/index.html");
+
+
+        intent.putExtra(BaseWebViewActivity.URL, "https://chenqiuling.github.io/service-worker-demo/");
 
         startActivity(intent);
         finish();

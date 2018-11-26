@@ -21,12 +21,15 @@ public class SPDao {
 
     /**
      * MODE_MULTI_PROCESS  will not work fine
+     *
+     * 在SPDao 中Dagger保证了单例，那么怎么保证用户不自己New SPDao(mContext)
+     *
      */
     public SPDao(Context mContext) {
         if (mContext != null) {
             sharedPreferences = mContext.getSharedPreferences(SharedPreferencesName, Context.MODE_PRIVATE);
         } else {
-            Log.e(TAG, "WARMIKNG! You must initSharePrefenceDao in your Application ！");
+            Log.e(TAG, "WARMING! You must init SharedPreferencesDao in your Application ！");
         }
     }
 
@@ -35,7 +38,7 @@ public class SPDao {
      The best way of storing double values in SharedPreferences without losing precision is:
      Transform to bit representation to store it as long:
      prefsEditor.putLong("Latitude", Double.doubleToLongBits(location.getLatitude()));
-     To retrieve, transfrom from bit representation to double:
+     To retrieve, transform from bit representation to double:
      double latitude = Double.longBitsToDouble(prefs.getLong("Latitude", 0);
      */
 

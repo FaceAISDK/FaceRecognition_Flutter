@@ -19,7 +19,6 @@ public class Installation {
     private static String sID = null;
     private static final String INSTALLATION_FILE_NAME = "installationUUID";
 
-
     /**
      * 创建目录
      *
@@ -58,6 +57,8 @@ public class Installation {
         return sID;
     }
 
+
+
     /**
      * 读取安装信息
      *
@@ -74,6 +75,7 @@ public class Installation {
         // 返回的是16 位的大写的MD5 后的值
         return MD5Util.getUpperMD5Str16(new String(bytes));
     }
+
 
     /**
      * 写安装信息，把UUID 的信息写在一个地方
