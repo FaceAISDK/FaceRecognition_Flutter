@@ -6,14 +6,10 @@
 .DS_Store
 /build
 /captures
-/settingViewLib
-/.settingViewLib
 .externalNativeBuild
 dbMaster/
-
 *.hprof
 *.bak
 build/*
 */build/*
 .idea/*
-gradle.properties

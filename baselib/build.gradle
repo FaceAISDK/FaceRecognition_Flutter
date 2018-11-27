@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 apply plugin: 'org.greenrobot.greendao'  //for greenDao
-apply plugin: 'io.objectbox' // after applying Android plugin
+//apply plugin: 'io.objectbox' // after applying Android plugin
 
 android {
 

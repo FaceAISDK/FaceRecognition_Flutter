@@ -4,10 +4,10 @@
  */
 rootProject.ext {
     //1.关于SDK version
-    compileSdkVersion = 27
+    compileSdkVersion = 28
 
-    minSdkVersion = 21
-    targetSdkVersion = 27
+    minSdkVersion = 21      //Android 开发者应该抵制更老版本适配，国内Android 生态圈太乱了
+    targetSdkVersion = 28
 
     //2.关于Debug和Realease 的不同配置
 
@@ -16,7 +16,8 @@ rootProject.ext {
     targetCompatibility = JavaVersion.VERSION_1_8
 
     //4.support Lib Version ,最好全部使用同一个版本号
-    supportLibraryVersion = '27.1.1'
+    supportLibraryVersion = '28.0.0'
+
 
     // UNIT TEST dependencies
     junitVersion = '4.12'
