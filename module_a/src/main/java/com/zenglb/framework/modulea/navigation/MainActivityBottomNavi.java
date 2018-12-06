@@ -99,8 +99,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
         getToolbar().setNavigationIcon(null); //没有返回按钮
 
         final BottomNavigationView navigation = findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigation);
-//        navigation.setAccessibilityLiveRegion(BottomNavigationView.ACCESSIBILITY_LIVE_REGION_ASSERTIVE);
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigation.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {

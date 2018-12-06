@@ -45,7 +45,7 @@ public class AModuleApplication extends BaseApplication {
         }
         LeakCanary.install(this);
         //部分 初始化服务最好能新开一个IntentService 去处理,bugly 在两个进程都有初始化
-        String processName = getProcessName();
+        String processName = getMyProcessName();
         switch (processName) {
 
             case MAIN_PROCESS_NAME:

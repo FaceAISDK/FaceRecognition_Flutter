@@ -7,7 +7,6 @@ import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 
 /**
- * Description:TODO
  * Create Time:2017/9/4 15:21
  * Author:KingJA
  * Email:kingjavip@gmail.com

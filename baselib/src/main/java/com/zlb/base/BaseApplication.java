@@ -175,7 +175,8 @@ public abstract class BaseApplication extends Application implements HasActivity
      *
      * @return
      */
-    public String getProcessName() {
+    public String getMyProcessName() {
+
         try {
             File file = new File("/proc/" + android.os.Process.myPid() + "/" + "cmdline");
             BufferedReader mBufferedReader = new BufferedReader(new FileReader(file));

@@ -1,3 +1,3 @@
-include ':module_a', ':baselib', ':module_jsbridge', ':app', ':module_good_life',':speechDemo', ':module_ai'
+include ':module_a', ':baselib', ':module_jsbridge', ':app', ':module_good_life',':speechDemo', ':module_ai' //, ':retrofit'
 
 //include ':baselib', ':module_good_life'

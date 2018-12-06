@@ -41,9 +41,7 @@ public class GoodLifeRepository implements IAnyLifeDataSource {
      */
     @Override
     public void getHandyLifeData(String type, int page, LoadHandyLifeDataCallback loadHandyLifeDataCallback) {
-
         //
-
         apiService.getArticles(type)
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改

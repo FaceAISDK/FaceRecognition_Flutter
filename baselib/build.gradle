@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'org.greenrobot.greendao'  //for greenDao
-//apply plugin: 'io.objectbox' // after applying Android plugin
 
 android {
 
@@ -13,7 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        multiDexEnabled true
+//        multiDexEnabled true
 
         //配置使用ARouter
         javaCompileOptions {
@@ -22,24 +20,21 @@ android {
             }
         }
 
-
-        ndk {
-            //设置支持的SO库架构
-            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-        }
+//        ndk {
+//            //设置支持的SO库架构
+//            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+//        }
 
     }
 
 
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
 
         debug {
+            debuggable true
             resValue("string", "PORT_NUMBER", "8089")  //数据库调试
         }
+
     }
 
     /***
@@ -64,6 +59,7 @@ android {
 
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -73,13 +69,13 @@ dependencies {
     api "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
 
-    //HTTP Request
+    api 'com.squareup.retrofit2:retrofit:2.5.0'     //为了更好的研究Retrofit 改用源码的方式
     api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
 
-    //rxjava
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //RxJava
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     api 'io.reactivex.rxjava2:rxjava:2.1.16'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -134,6 +130,6 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人
 
     implementation 'com.android.support:multidex:1.0.3'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4' //
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'   //！！！！
 
 }

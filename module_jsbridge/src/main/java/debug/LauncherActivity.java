@@ -19,11 +19,14 @@ public class LauncherActivity extends AppCompatActivity {
 
         //在这里传值给需要调试的Activity
         Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(BaseWebViewActivity.TITLE, "Android Hybrid&JSBridge");
+
+
 //        intent.putExtra(BaseWebViewActivity.URL, "https://www.baidu.com");
 //        intent.putExtra(BaseWebViewActivity.URL, "file:///android_asset/index.html");
 
 
-        intent.putExtra(BaseWebViewActivity.URL, "https://chenqiuling.github.io/service-worker-demo/");
+        intent.putExtra(BaseWebViewActivity.URL, "https://pure-ravine-40302.herokuapp.com/");
 
         startActivity(intent);
         finish();

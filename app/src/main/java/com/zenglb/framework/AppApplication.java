@@ -11,9 +11,10 @@ import com.zlb.commontips.TimeoutCallback;
 import com.zlb.base.BaseApplication;
 import com.zlb.dagger.module.BaseGlobalModule;
 
-
 /**
  * 整个项目的全局的Application，其他的Debug 目录下的 XX Application 都会expect
+ *
+ * https://www.jianshu.com/p/0d67f68beb38 编译加速
  *
  * 参考{@link dagger.android.DaggerApplication}Beta 项目，项目组没有3个以上的Android 开发不建议使用Dagger XXX
  * <p>
@@ -56,7 +57,7 @@ public class AppApplication extends BaseApplication  {
         }
         LeakCanary.install(this);
         //部分 初始化服务最好能新开一个IntentService 去处理,bugly 在两个进程都有初始化
-        String processName = getProcessName();
+        String processName = getMyProcessName();
         switch (processName) {
 
             case MAIN_PROCESS_NAME:

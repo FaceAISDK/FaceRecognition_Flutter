@@ -35,10 +35,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
 
         AGlobalModule.class,
 
-
-
-
 })
+
+
 
 //YourApplicationComponent
 public interface AppComponent {

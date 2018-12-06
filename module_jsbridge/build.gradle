@@ -15,8 +15,8 @@ android {
 
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //配置使用ARouter
@@ -70,10 +70,8 @@ dependencies {
     implementation 'pub.devrel:easypermissions:1.1.3'        //没有其他的原因，其他的目前多少有BUG 啊
     implementation project(':baselib')
 
-
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
-
 
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4' //
 

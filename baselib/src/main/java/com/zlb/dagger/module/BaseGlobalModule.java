@@ -2,16 +2,12 @@ package com.zlb.dagger.module;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.kingja.loadsir.core.LoadSir;
-//import com.squareup.leakcanary.LeakCanary;
-//import com.squareup.leakcanary.RefWatcher;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.commontips.EmptyCallback;
 import com.zlb.commontips.ErrorCallback;
 import com.zlb.commontips.TimeoutCallback;
-import com.zlb.http.HttpRetrofit;
 import com.zlb.persistence.dbmaster.DaoMaster;
 import com.zlb.persistence.dbmaster.DaoSession;
 import com.zlb.persistence.dbupdate.MySQLiteOpenHelper;
@@ -19,7 +15,6 @@ import com.zlb.persistence.dbupdate.MySQLiteOpenHelper;
 import org.greenrobot.greendao.database.Database;
 
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 

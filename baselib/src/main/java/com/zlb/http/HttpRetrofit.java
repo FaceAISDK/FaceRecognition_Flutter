@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * HTTP 请求Retrofit 配置
- *
+ * <p>
  * Created by Anylife.zlb@gmail.com on 2017/3/16.
  */
 public class HttpRetrofit {
@@ -96,6 +96,10 @@ public class HttpRetrofit {
                             .header("Content-Encoding", "gzip")  //使用GZIP 压缩内容，接收不用设置啥吧
                             .build();
 
+                    //拦截处理重复的HTTP 请求
+
+                    //拦截处理重复的HTTP 请求
+
                     Response originalResponse = chain.proceed(authorisedRequest);
 
                     //把统一拦截的header 打印出来
@@ -123,10 +127,13 @@ public class HttpRetrofit {
                     .addInterceptor(loggingInterceptor)
                     .build();
 
+
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .client(okHttpClient)
+                    .baseUrl(baseUrl)     //Set the Api Base URL
+                    .client(okHttpClient) //The HTTP client used for requests.
                     .addConverterFactory(GsonConverterFactory.create())
+                    //CallAdapter用于对原始Call进行再次封装，如Call<R>到Observable<R>
+                    //把response封装成rxjava的Observeble，然后进行流式操作
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
 
@@ -176,7 +183,6 @@ public class HttpRetrofit {
         }
         return false;
     }
-
 
 
 }

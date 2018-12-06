@@ -9,9 +9,14 @@ import org.greenrobot.greendao.annotation.Unique;
 
 
 /**
- * just a demo !
+ *
+ *
+ *
+ *
  * Created by zenglb on 2017/2/9.
  */
+
+// TODO: 2018/12/5 写在这里是无法生产Dao 的
 @Entity
 public class JokesResult implements Parcelable {
     private String topic;

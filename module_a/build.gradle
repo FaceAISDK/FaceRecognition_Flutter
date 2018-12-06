@@ -10,7 +10,7 @@ android {
     defaultConfig {
 
         if (isModule.toBoolean()) {
-            applicationId "com.zenglb.framework.modulea"  //制定 applicationId
+            applicationId "com.zenglb.framework.modulea"   //制定 applicationId
         }
 
         minSdkVersion rootProject.ext.minSdkVersion
@@ -34,7 +34,6 @@ android {
 
     sourceSets {
         main {
-//            jniLibs.srcDirs = ['src/main/libs']
 
             if (isModule.toBoolean()) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
@@ -50,28 +49,12 @@ android {
 
 
     buildTypes {
-        release {
-            minifyEnabled false    //proguard
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            manifestPlaceholders = [IS_DEBUG          : "no", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork",
-                                    RONG_CLOUD_APP_KEY: "6tnym1br6jw07"]
-        }
-
         debug {
             debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            manifestPlaceholders = [IS_DEBUG          : "yes", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork",
-                                    RONG_CLOUD_APP_KEY: "c9kqb3rdcvn1j"]
+            manifestPlaceholders = [IS_DEBUG : "yes", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork"]
         }
     }
 
-//    greendao {
-//        schemaVersion 7                  //修改这里的版本号，greenDAO会自动修改生成到DAOMaster中的版本号
-//        targetGenDir 'src/main/java'     //表示greenDAO生成的DAOMaster和DaoSession的位置
-//        daoPackage 'com.zenglb.framework.persistence.dbmaster' //我觉得最好放在Entity 下面的目录！！！
-//    }
 
     compileOptions {
         sourceCompatibility rootProject.ext.sourceCompatibility

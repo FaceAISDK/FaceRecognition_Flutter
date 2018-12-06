@@ -9,7 +9,7 @@ rootProject.ext {
     minSdkVersion = 21      //Android 开发者应该抵制更老版本适配，国内Android 生态圈太乱了
     targetSdkVersion = 28
 
-    //2.关于Debug和Realease 的不同配置
+    //2.关于Debug和Release 的不同配置
 
     //3.指定Java version
     sourceCompatibility = JavaVersion.VERSION_1_8
