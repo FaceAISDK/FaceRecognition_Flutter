@@ -6,9 +6,12 @@ import com.zenglb.framework.modulea.http.AModuleApiService;
 import com.zenglb.framework.modulea.http.result.LoginResult;
 import com.zlb.http.param.LoginParams;
 import com.zlb.httplib.BaseObserver;
+import com.zlb.httplib.HttpResponse;
 import com.zlb.httplib.rxUtils.SwitchSchedulers;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * Login Presenter
@@ -56,7 +59,10 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
      */
     @Override
     public void login(LoginParams loginParams) {
-        apiService.goLoginByRxjavaObserver(loginParams)
+
+        Observable<HttpResponse<LoginResult>>  responseObservable=apiService.goLoginByRxjavaObserver(loginParams);
+
+        responseObservable
                 .compose(SwitchSchedulers.applySchedulers())
                 .subscribe(new BaseObserver<LoginResult>((Activity) mLoginView) {
                     @Override
@@ -65,7 +71,6 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
                             mLoginView.loginSuccess(loginResult);
                         }
                     }
-
 
                     /**
                      * 因为LICENCE 等原因，现在不能登录接口废弃，这里假装就是就是登录成功

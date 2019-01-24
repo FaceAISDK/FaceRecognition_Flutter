@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+//        versionCode 1
+//        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 //        multiDexEnabled true
@@ -20,6 +20,8 @@ android {
             }
         }
 
+
+//        //假如设置了abiFilters ，是否有问题
 //        ndk {
 //            //设置支持的SO库架构
 //            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
@@ -32,7 +34,7 @@ android {
 
         debug {
             debuggable true
-            resValue("string", "PORT_NUMBER", "8089")  //数据库调试
+            resValue("string", "PORT_NUMBER", "8765")  //数据库调试
         }
 
     }
@@ -70,14 +72,14 @@ dependencies {
     api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
 
     api 'com.squareup.retrofit2:retrofit:2.5.0'     //为了更好的研究Retrofit 改用源码的方式
-    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     api 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     //RxJava
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.1.16'
+    api 'io.reactivex.rxjava2:rxjava:2.2.2'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     //Router
@@ -90,7 +92,7 @@ dependencies {
 
     //Toast & GSON
     api 'com.github.GrenderG:Toasty:1.2.5'
-    api 'com.google.code.gson:gson:2.8.2'
+    api 'com.google.code.gson:gson:2.8.4'
 
     api 'com.kingja.loadsir:loadsir:1.3.5'
 
@@ -131,5 +133,6 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'   //！！！！
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
 }

@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.zenglb.framework.modulea.demo.camera.CustomCameraActivity;
+import com.zenglb.framework.modulea.demo.ormdb.ORMDBActivity;
 import com.zenglb.framework.modulea.http.AModuleApiService;
 import com.zenglb.framework.modulea.http.result.CustomWeatherResult;
 import com.zlb.base.BaseActivity;
@@ -111,12 +113,17 @@ public class DemoFragment extends Fragment {
             startActivityForResult(intent, REQUEST_TAKE_WATER_IMAGE);
         });
 
-
         rootView.findViewById(R.id.quickinput).setOnClickListener(v -> {
             ((BaseActivity) getActivity()).startActivity(QuickInputThingsActivity.class);
         });
 
-        //
+
+
+        rootView.findViewById(R.id.ormdb_greendao).setOnClickListener(v -> {
+            ((BaseActivity) getActivity()).startActivity(ORMDBActivity.class);
+        });
+
+
         rootView.findViewById(R.id.JSBridge).setOnClickListener(v -> {
             ARouter.getInstance().build("/web/WebActivity")
                     .withString("url", "file:///android_asset/index.html")
@@ -187,11 +194,14 @@ public class DemoFragment extends Fragment {
 
         /**
          * dragger
+         *
          */
         rootView.findViewById(R.id.animation).setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), WaterCameraActivity.class);
+            Intent intent = new Intent(getContext(), CustomCameraActivity.class);
             startActivityForResult(intent, REQUEST_TAKE_WATER_IMAGE);
         });
+
+
 
     }
 
@@ -199,7 +209,6 @@ public class DemoFragment extends Fragment {
     private void transitionToActivity(Class target, TextView textView, String title) {
 //        final Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(getActivity(), true,
 //                new Pair<>(textView, getActivity().getString(R.string.shared_name)));
-//
 //        startActivity(target, pairs, title);
     }
 

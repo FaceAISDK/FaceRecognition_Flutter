@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:transitionName="@string/shared_name"
-            android:text="调用封装的系统相机拍带水印照片"
+            android:text="自定义相机拍照拍视频"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:drawableStart="@drawable/dot_blue"
@@ -133,6 +133,19 @@
             android:layout_height="wrap_content"
             android:paddingTop="22dp"
             android:text="JNI敏感信息隐藏"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/dot_blue"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            app:isAliganCenter="false" />
+
+        <com.zenglb.framework.modulea.customView.TextViewDrawable
+            android:id="@+id/ormdb_greendao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="22dp"
+            android:text="ORMDB_GREENDAO"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:drawableStart="@drawable/dot_blue"

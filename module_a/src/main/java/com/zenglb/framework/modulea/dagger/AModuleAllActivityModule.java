@@ -5,6 +5,7 @@ import android.content.Context;
 import com.zenglb.framework.modulea.demo.MemoryLeakTest;
 import com.zenglb.framework.modulea.demo.demo.Rxjava_ZIP_Activity;
 import com.zenglb.framework.modulea.demo.launch.LaunchActivity;
+import com.zenglb.framework.modulea.demo.ormdb.ORMDBActivity;
 import com.zenglb.framework.modulea.http.AModuleApiService;
 import com.zenglb.framework.modulea.mvp.handylife.AnyLifeActivity;
 import com.zenglb.framework.modulea.mvp.handylife.AnyLifeFragment;
@@ -78,6 +79,11 @@ public abstract class AModuleAllActivityModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = DefaultActivityModule.class)
     abstract AnyLifeActivity contributeTabsActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = DefaultActivityModule.class)
+    abstract ORMDBActivity contributeORMDBActivityInjector();
+
 
 //    Pro-tip: If your subcomponent and its builder have no other methods or supertypes than the ones mentioned in step #2, you can use @ContributesAndroidInjector to generate them for you. Instead of steps 2 and 3, add an abstract module method that returns your activity, annotate it with @ContributesAndroidInjector, and specify the modules you want to install into the subcomponent. If the subcomponent needs scopes, apply the scope annotations to the method as well.
 

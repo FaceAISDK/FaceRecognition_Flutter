@@ -71,15 +71,7 @@ public class Rxjava_ZIP_Activity extends BaseMVPActivity {
         super.onClick(view);
     }
 
-    @Override
-    public void setToolBarTitle(CharSequence title) {
-        super.setToolBarTitle(title);
-    }
 
-    @Override
-    protected boolean isShowBacking() {
-        return super.isShowBacking();
-    }
 
     @Override
     protected void onStart() {

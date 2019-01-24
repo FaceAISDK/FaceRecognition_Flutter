@@ -68,7 +68,6 @@ public class LoginActivity extends BaseMVPActivity implements LoginContract.Logi
         if (!isFromLaunch) {
             logoutCustomComponent();
         }
-
     }
 
     /**

@@ -58,7 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * @param <T>
      * @return
      */
-    public <T extends View> T $(@IdRes int resId) {
+     public final <T extends View> T $(@IdRes int resId) {
         return (T) super.findViewById(resId);
     }
 
@@ -141,7 +141,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 //        startActivity(intent);
     }
 
-    public Context getContext() {
+    public final Context getContext() {
         return mContext;
     }
 
@@ -159,7 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @param title
      */
-    public void setToolBarTitle(CharSequence title) {
+    public final void setToolBarTitle(CharSequence title) {
         getToolbar().setTitle(title);
         setSupportActionBar(getToolbar());
     }
@@ -170,7 +170,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @param visible
      */
-    public void setToolBarVisible(int visible) {
+    public final void setToolBarVisible(int visible) {
         getToolbar().setVisibility(visible);
         setSupportActionBar(getToolbar());
 
@@ -193,7 +193,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @return
      */
-    protected boolean isShowBacking() {
+    protected  boolean isShowBacking() {
         return true;
     }
 

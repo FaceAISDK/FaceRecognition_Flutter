@@ -5,12 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--默认都是需要Toolbar 的，如果不需要就设置为不可见就好了-->
+    <!--默认都是需要Toolbar 的，如果不需要就设置为不可见就好了
+
+        <item name="contentInsetStart">0dp</item>
+    <item name="contentInsetStartWithNavigation">0dp</item>
+    -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?attr/colorPrimary"
+        app:contentInsetStart="@dimen/dp_0"
+        app:contentInsetStartWithNavigation="@dimen/dp_4"
         app:navigationIcon="@drawable/ic_back_copy"
         app:subtitleTextColor="@color/light_white"
         app:titleTextColor="@android:color/white">

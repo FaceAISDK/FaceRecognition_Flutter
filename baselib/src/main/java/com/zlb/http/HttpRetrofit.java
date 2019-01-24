@@ -7,8 +7,11 @@ import android.util.Log;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.httplib.MyHttpLoggingInterceptor;
+import com.zlb.utils.MD5Util;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Authenticator;
@@ -43,9 +46,11 @@ public class HttpRetrofit {
         TOKEN = token;
     }
 
+    public static Map<String, Long> requestIdsMap = new HashMap<>();
+
     /**
-     * 每次都要invoke 这个方法不是很繁琐吗？
-     *
+     * @param spDao
+     * @param mContext
      * @return
      */
     public static Retrofit getRetrofit(SPDao spDao, Context mContext) {
@@ -97,8 +102,25 @@ public class HttpRetrofit {
                             .build();
 
                     //拦截处理重复的HTTP 请求
+                    String requestKey = MD5Util.getUpperMD5Str(authorisedRequest.toString());
 
-                    //拦截处理重复的HTTP 请求
+                    long lastRequestTime = 0;
+                    if (null != requestIdsMap.get(requestKey)) {
+                        lastRequestTime = requestIdsMap.get(requestKey);
+                    }
+                    long nowTime = System.currentTimeMillis();
+
+                    if (nowTime - lastRequestTime < 40 * 1000) {
+//                        authorisedRequest = originalRequest.newBuilder()
+//                                .url("")
+//                                .build();
+                    } else {
+                        requestIdsMap.put(requestKey, nowTime);
+                    }
+
+                    //在这里全局的处理重复的Http 请求
+
+
 
                     Response originalResponse = chain.proceed(authorisedRequest);
 
@@ -109,6 +131,7 @@ public class HttpRetrofit {
                 }
             };
 
+
             /**
              * 如果不喜欢系统的Http 的打印方式，可以自己去实现Interceptor 接口
              * 但是统一拦截的header 是无法打印的，因为是在请求发出后统一拦截打印的。
@@ -117,6 +140,8 @@ public class HttpRetrofit {
             MyHttpLoggingInterceptor loggingInterceptor = new MyHttpLoggingInterceptor();
             loggingInterceptor.setLevel(MyHttpLoggingInterceptor.Level.BODY);
 
+            //Retrofit 默认的网络请求执行期（callFactory）就是OkHttpClient
+            //这里仍然需要指定是因为参数，行为的设置等
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .retryOnConnectionFailure(true)
                     .connectTimeout(7, TimeUnit.SECONDS)

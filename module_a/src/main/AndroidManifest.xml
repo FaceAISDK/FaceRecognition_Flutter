@@ -3,17 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zenglb.framework.modulea">
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:theme="@style/MyAppTheme"
         tools:replace="android:theme">
-
         <activity
             android:name=".demo.launch.LaunchActivity"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -49,15 +48,11 @@
 
         <activity android:name=".mvp.handylife.AnyLifeActivity" />
 
-        <!--<provider-->
-            <!--android:name="android.support.v4.content.FileProvider"-->
-            <!--android:authorities="com.zenglb.framework.fileprovider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/file_paths" />-->
-        <!--</provider>-->
+        <activity android:name=".demo.ormdb.ORMDBActivity" />
+
+        <activity android:name=".demo.camera.CameraKitActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/FullscreenTheme" />
 
     </application>
 

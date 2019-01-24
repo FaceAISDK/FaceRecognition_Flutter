@@ -17,22 +17,33 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-
 import com.zenglb.framework.modulea.R;
+import com.zenglb.framework.modulea.http.AModuleApiService;
+import com.zenglb.framework.modulea.http.result.AnyLifeResult;
+import com.zenglb.framework.modulea.http.result.CustomWeatherResult;
+import com.zenglb.framework.modulea.http.result.LoginResult;
 import com.zlb.base.BaseMVPActivity;
 import com.zenglb.framework.modulea.mvp.login.LoginActivity;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zenglb.framework.modulea.navigation.MainActivityBottomNavi;
+import com.zlb.http.param.LoginParams;
+import com.zlb.httplib.HttpResponse;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
 
 /**
  * 启动页，并使所有的UI 的模型都需要MVP，复杂的才用
@@ -135,9 +146,58 @@ public class LaunchActivity extends BaseMVPActivity implements EasyPermissions.P
         setToolBarVisible(View.GONE);  //这里是不需要Base 中的Toolbar,不要的情况毕竟是少数
 
         //bg_splash 是很长的图   bg_splash2 是短的图！  测试适配，测试适配
-        scaleImage(LaunchActivity.this, findViewById(R.id.launch_img), R.drawable.bg);
+//        scaleImage(LaunchActivity.this, findViewById(R.id.launch_img), R.drawable.bg);
+
+        AModuleApiService aModuleApiService=new AModuleApiService() {
+            @Override
+            public Call<CustomWeatherResult> getWeather(String url, String city) {
+                return null;
+            }
+
+            @Override
+            public Observable<HttpResponse<List<AnyLifeResult>>> getHandyLifeData(String type, int page) {
+                return null;
+            }
+
+            @Override
+            public Observable<HttpResponse<LoginResult>> goLoginByRxjavaObserver(LoginParams loginRequest) {
+                return null;
+            }
+
+            @Override
+            public Call<String> getUserProfile(String url) {
+                return null;
+            }
+        };
 
         requestAllPermissions();
+
+        //动态代理
+        InvocationHandler invocationHandler=new MyInvocationHandler();
+
+        //这不是一个真的Person 对象，而是一个动态代理后的对象
+        Person person=(Person) Proxy.newProxyInstance(Person.class.getClassLoader(),new Class[]{Person.class},invocationHandler);
+
+        person.walk();
+
+        person.sayHello("may be you are a good man");
+    }
+
+
+
+    class MyInvocationHandler implements InvocationHandler{
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+            Log.d("TEST",method.getName()+"  -   "+args);
+            return null;
+        }
+    }
+
+
+    interface Person{
+         void walk();
+         void sayHello(String name);
     }
 
 

@@ -5,13 +5,13 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
 /**
- *
+ * 总是需要有一个类注解了Entity
  *
  * Created by zenglb on 2017/3/27.
  */
 @Entity
-public class SysAlertMess {
-    @Id(autoincrement = false)
+public class SysAlertMess2 {
+    @Id(autoincrement = true)
     private Long id;             // int --> long    要不要id序列化
 
     private String title;
@@ -20,9 +20,8 @@ public class SysAlertMess {
     private String detailUrl;       // 消息详情URL,不喜欢actionId 的命名方式
 
 
-
-    @Generated(hash = 389339895)
-    public SysAlertMess(Long id, String title, String actionType, String message,
+    @Generated(hash = 1949709738)
+    public SysAlertMess2(Long id, String title, String actionType, String message,
             String detailUrl) {
         this.id = id;
         this.title = title;
@@ -31,11 +30,17 @@ public class SysAlertMess {
         this.detailUrl = detailUrl;
     }
 
-    @Generated(hash = 536878860)
-    public SysAlertMess() {
+    @Generated(hash = 1903303945)
+    public SysAlertMess2() {
     }
 
-    
+
+    public SysAlertMess2(String title, String actionType, String message, String detailUrl) {
+        this.title = title;
+        this.actionType = actionType;
+        this.message = message;
+        this.detailUrl = detailUrl;
+    }
 
     public Long getId() {
         return id;

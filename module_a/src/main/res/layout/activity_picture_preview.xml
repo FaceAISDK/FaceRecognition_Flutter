@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true" />
+
+        <com.otaliastudios.cameraview.demo.MessageView
+            android:id="@+id/nativeCaptureResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.otaliastudios.cameraview.demo.MessageView
+            android:id="@+id/captureLatency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.otaliastudios.cameraview.demo.MessageView
+            android:id="@+id/exifRotation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

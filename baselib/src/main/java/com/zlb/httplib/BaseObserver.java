@@ -79,8 +79,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
     @Override
     public final void onNext(HttpResponse<T> response) {
 
-        Log.e("Thread-io",Thread.currentThread().getName());
-
+        Log.e("Thread-io",Thread.currentThread().getName());  //
 
         HttpUiTips.dismissDialog(mContext);
 
@@ -88,13 +87,15 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
             disposable.dispose();
         }
 
-        if (response.getCode() == RESPONSE_CODE_OK || response.getCode() == 200) { //response.getCode() == 200 GOOD LIFE  的API真够奇怪的
+        if (response.getCode() == RESPONSE_CODE_OK || response.getCode() == 200) {
+            //response.getCode() == 200 GOOD LIFE  的API真够奇怪的
             // 这里拦截一下使用测试
 
             onSuccess(response.getResult());
         } else {
             onFailure(response.getCode(), response.getError());
         }
+
     }
 
     /**
@@ -146,6 +147,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      */
     @Override
     public final void onComplete() {
+        int complete=11;
 //        HttpUiTips.dismissDialog(mContext);
     }
 
@@ -164,6 +166,15 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         } else {
             disposeEorCode(message, code);
         }
+    }
+
+
+    /**
+     * 处理重复的请求
+     */
+    public void onRepeatCall() {
+        //尝试全局的拦截重复的请求
+
     }
 
 

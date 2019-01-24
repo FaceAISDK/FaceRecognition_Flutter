@@ -7,11 +7,14 @@ import com.google.gson.reflect.TypeToken;
 import com.zenglb.framework.modulea.http.AModuleApiService;
 import com.zenglb.framework.modulea.http.result.AnyLifeResult;
 import com.zlb.httplib.BaseObserver;
+import com.zlb.httplib.HttpResponse;
 import com.zlb.httplib.rxUtils.SwitchSchedulers;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * 这里就不做什么先加载本地的ORM DB 然后再加载 HTTP 了
@@ -43,7 +46,10 @@ public class AnyLifeRepository implements IAnyLifeDataSource {
      */
     @Override
     public void getHandyLifeData(String type, int page, LoadHandyLifeDataCallback loadHandyLifeDataCallback) {
-        apiService.getHandyLifeData(type, page)
+
+        Observable<HttpResponse<List<AnyLifeResult>>> observableTest=apiService.getHandyLifeData(type, page);
+
+        observableTest
                 .compose(SwitchSchedulers.applySchedulers())
 
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
