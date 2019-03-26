@@ -1,1 +1,1 @@
-include ':app', ':baselib', ':module_main' , ':jni_lib','module_news','component-base'
+include ':app', ':baselib', ':module_main' , 'module_news','component-base'
