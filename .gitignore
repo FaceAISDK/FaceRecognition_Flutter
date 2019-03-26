@@ -18,4 +18,4 @@ build/*
 */build/*
 .idea/*
 
-jni/
+jni_lib/
