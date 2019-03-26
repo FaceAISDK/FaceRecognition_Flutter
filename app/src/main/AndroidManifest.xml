@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zenglb.framework">
 
+
     <application
         android:name=".AppApplication"
         android:allowBackup="true"
@@ -15,5 +16,6 @@
 
 
     </application>
+
 
 </manifest>

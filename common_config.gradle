@@ -6,10 +6,12 @@ rootProject.ext {
     //1.关于SDK version
     compileSdkVersion = 28
 
-    minSdkVersion = 21      //Android 开发者应该抵制更老版本适配，国内Android 生态圈太乱了
+    //Android 开发者应该抵制更老版本适配，国内Android 生态圈太乱了
+    minSdkVersion = 21
     targetSdkVersion = 28
 
     //2.关于Debug和Release 的不同配置
+
 
     //3.指定Java version
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -18,6 +20,9 @@ rootProject.ext {
     //4.support Lib Version ,最好全部使用同一个版本号
     supportLibraryVersion = '28.0.0'
 
+    daggerVersion = '2.21'
+    dexmakerVersion = '1.2'
+    roomVersion = "1.0.0"
 
     // UNIT TEST dependencies
     junitVersion = '4.12'
@@ -27,8 +32,8 @@ rootProject.ext {
     runnerVersion = '1.0.1'
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.1'
-    roomVersion = "1.0.0"
-    daggerVersion = '2.14.1'
-    dexmakerVersion = '1.2'
+    
 
 }
+
+

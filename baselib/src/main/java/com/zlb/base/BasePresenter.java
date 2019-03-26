@@ -1,6 +1,10 @@
 package com.zlb.base;
 
-
+/**
+ *
+ *
+ * @param <T>
+ */
 public interface BasePresenter<T> {
 
     /**

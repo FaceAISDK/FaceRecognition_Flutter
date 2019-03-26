@@ -7,12 +7,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-//        versionCode 1
-//        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-//        multiDexEnabled true
-
         //配置使用ARouter
         javaCompileOptions {
             annotationProcessorOptions {
@@ -20,13 +15,19 @@ android {
             }
         }
 
+        //multiDexEnabled true
 
-//        //假如设置了abiFilters ，是否有问题
-//        ndk {
-//            //设置支持的SO库架构
-//            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-//        }
+        //设置支持的SO abi库架构支持
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
 
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
     }
 
 
@@ -39,14 +40,6 @@ android {
 
     }
 
-    /***
-     * 配置JNI SO 库的放置路径
-     */
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
-    }
 
     compileOptions {
         sourceCompatibility rootProject.ext.sourceCompatibility
@@ -87,7 +80,7 @@ dependencies {
 
     //数据存储 ORM DB
     api 'org.greenrobot:greendao:3.2.2' //ORM DB
-//    api 'net.zetetic:android-database-sqlcipher:3.5.7'
+//    api 'net.zetetic:android-database-sqlcipher:3.5.7'  //数据库加密
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
     //Toast & GSON
@@ -102,7 +95,7 @@ dependencies {
     api "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
     api "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
 
-    // if you use the support libraries
+    //if you use the support libraries
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
 
@@ -113,8 +106,6 @@ dependencies {
     //Http Request log
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
 
-    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     api 'com.github.florent37:singledateandtimepicker:1.2.2'    //高仿IOS 时间选择
     api 'de.hdodenhof:circleimageview:2.2.0'                    //CircleImageView
@@ -131,8 +122,13 @@ dependencies {
 
     api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人
 
+    api project(':component-base')
+
     implementation 'com.android.support:multidex:1.0.3'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'   //！！！！
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'     //阿里巴巴的Arouter
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4' //数据库调试
+
+
+
 
 }

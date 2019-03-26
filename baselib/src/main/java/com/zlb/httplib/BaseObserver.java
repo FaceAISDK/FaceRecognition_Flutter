@@ -22,6 +22,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
+import static com.zlb.http.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
+
 /**
  * Base Observer 的封装处理
  * <p>
@@ -35,6 +37,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
 
     private final int RESPONSE_CODE_OK = 0;       //自定义的业务逻辑，成功返回积极数据
     private final int RESPONSE_FATAL_EOR = -1;    //返回数据失败,严重的错误
+    private final int CUSTOM_REPEAT_REQ_ERROR = -2; //同样的一个请求并且还是重复的话返回错误
 
     private Context mContext;
     private static Gson gson = new Gson();
@@ -79,7 +82,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
     @Override
     public final void onNext(HttpResponse<T> response) {
 
-        Log.e("Thread-io",Thread.currentThread().getName());  //
+        Log.e("Thread-io", Thread.currentThread().getName());  //
 
         HttpUiTips.dismissDialog(mContext);
 
@@ -90,7 +93,6 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         if (response.getCode() == RESPONSE_CODE_OK || response.getCode() == 200) {
             //response.getCode() == 200 GOOD LIFE  的API真够奇怪的
             // 这里拦截一下使用测试
-
             onSuccess(response.getResult());
         } else {
             onFailure(response.getCode(), response.getError());
@@ -126,8 +128,15 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
             errorCode = RESPONSE_FATAL_EOR;
             errorMsg = "未知的服务器错误";
         } else if (t instanceof IOException) {   //飞行模式等
-            errorCode = RESPONSE_FATAL_EOR;
-            errorMsg = "读取网络数据失败";
+            //这里处理一下重复请求的自定义返回的Response 导致的错误，
+            if (t.getMessage().contains(CUSTOM_REPEAT_REQ_PROTOCOL)) {
+                errorCode = CUSTOM_REPEAT_REQ_ERROR;
+                errorMsg = "可以忽略的重复的请求";
+            } else {
+                errorCode = RESPONSE_FATAL_EOR;
+                errorMsg = "读取网络数据失败";
+            }
+
         } else if (t instanceof NetworkOnMainThreadException) {
             //主线程不能网络请求，这个很容易发现
             errorCode = RESPONSE_FATAL_EOR;
@@ -147,8 +156,8 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      */
     @Override
     public final void onComplete() {
-        int complete=11;
-//        HttpUiTips.dismissDialog(mContext);
+        int complete = 11;
+        //        HttpUiTips.dismissDialog(mContext);
     }
 
 
@@ -163,18 +172,11 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
     public void onFailure(int code, String message) {
         if (code == RESPONSE_FATAL_EOR && mContext != null) {
             HttpUiTips.alertTip(mContext, message, code);
+        } else if (code == CUSTOM_REPEAT_REQ_ERROR) {
+            Log.i("Repeat http Req ", "onFailure: " + message);
         } else {
             disposeEorCode(message, code);
         }
-    }
-
-
-    /**
-     * 处理重复的请求
-     */
-    public void onRepeatCall() {
-        //尝试全局的拦截重复的请求
-
     }
 
 
@@ -185,16 +187,14 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      */
     private final void disposeEorCode(String message, int code) {
         switch (code) {
-            case 101:
+            case 101:  //业务code ,要求重新登陆
             case 112:
             case 123:
             case 401:
                 //退回到登录页面
                 if (mContext != null) {  //Context 可以使Activity BroadCast Service !
-
                     // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
                     ARouter.getInstance().build("/login/activity").navigation();
-
                 }
                 break;
         }

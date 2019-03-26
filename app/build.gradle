@@ -1,14 +1,11 @@
 apply plugin: 'com.android.application'
 
-//apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'  //for greenDao
-//apply plugin: 'io.objectbox' // after applying Android plugin
-
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "com.zenglb.framework"
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -25,38 +22,39 @@ android {
             }
         }
 
+        //设置支持的SO abi库架构支持
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
 
-//        ndk {
-//            //设置支持的SO库架构
-//            abiFilters 'armeabi'      //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-//        }
+    }
 
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
     }
 
 
     buildTypes {
         release {
+            minifyEnabled false
 //            zipAlignEnabled true  // Zipalign优化
 //            shrinkResources true  // 移除无用的resource文件,必须和minifyEnabled 一起使用
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            debuggable false
 //            signingConfig signingConfigs.MyConfig
-            manifestPlaceholders = [IS_DEBUG          : "no", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork",
-                                    RONG_CLOUD_APP_KEY: "6tnym1br6jw07"]
+            manifestPlaceholders = [IS_DEBUG: "no", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork"]
         }
 
         debug {
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            manifestPlaceholders = [IS_DEBUG          : "yes", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork",
-                                    RONG_CLOUD_APP_KEY: "c9kqb3rdcvn1j"]
+            manifestPlaceholders = [IS_DEBUG: "yes", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork"]
         }
-
     }
-
-
-
 
     sourceSets {
         main {
@@ -68,29 +66,35 @@ android {
         }
     }
 
+
     compileOptions {
         sourceCompatibility rootProject.ext.sourceCompatibility
         targetCompatibility rootProject.ext.targetCompatibility
     }
 
-}
 
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"  //需要吗？
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation project(':baselib')
 
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"  //需要吗？
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
-
+    //App 壳工程要包含的Module
     if (!isModule.toBoolean()) {
-        implementation project(':module_a')
-        implementation project(':module_jsbridge')
-        implementation project(':module_ai')
+        implementation project(':module_main')
+        implementation project(':module_news')
+
     }
 
 }

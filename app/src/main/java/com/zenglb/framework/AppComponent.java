@@ -1,9 +1,9 @@
 package com.zenglb.framework;
 
-
-import com.zenglb.framework.jsbridge.dagger.JSBridgeModuleAllActivityModule;
-import com.zenglb.framework.modulea.dagger.AGlobalModule;
-import com.zenglb.framework.modulea.dagger.AModuleAllActivityModule;
+import com.anylife.module_main.dagger.MainGlobalModule;
+import com.anylife.module_main.dagger.MainModuleAllActivityModule;
+import com.zenglb.framework.news.dagger.NewsGlobalModule;
+import com.zenglb.framework.news.dagger.NewsModuleAllActivityModule;
 import com.zlb.base.BaseApplication;
 import com.zlb.dagger.module.BaseGlobalModule;
 
@@ -14,7 +14,9 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
- * 全局的单例的东西提到这里来，比如SharedPrefenced,DaoSession 等等 ！
+ * 组件化开发模式下的壳工程的Component
+ *
+ * 壳工程的全局Component的单例的东西提到这里来，比如SharedPrefenced,DaoSession 等等 ！
  *
  * Created by anylife.zlb@gmail.com on 2018/1/11.
  */
@@ -27,19 +29,21 @@ import dagger.android.support.AndroidSupportInjectionModule;
         // 一般把AndroidInjectionModule放在ApplicationComponent中，其他的Component依赖Application即可
         AndroidSupportInjectionModule.class,  //使用的Fragment 是V4 包中的？不然就只需要AndroidInjectionModule
 
+
         //下面的是ABCD 等Module 的Activity 需要依赖注入的ActivityModule 配置
 
-        AModuleAllActivityModule.class, //减少模版代码,需要依赖注入的只需要添加两行代码就好了
-        JSBridgeModuleAllActivityModule.class,
+        MainModuleAllActivityModule.class, //减少模版代码,需要依赖注入的只需要添加两行代码就好了
+        MainGlobalModule.class,
 
-
-        AGlobalModule.class,
+        NewsModuleAllActivityModule.class,  //减少模版代码,需要依赖注入的只需要添加两行代码就好了
+        NewsGlobalModule.class,
 
 })
 
-
-
-//YourApplicationComponent
+/**
+ * 全局的AppComponent
+ *
+ */
 public interface AppComponent {
 
     void inject(BaseApplication application);

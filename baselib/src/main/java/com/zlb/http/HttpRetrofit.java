@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
-import com.zlb.httplib.MyHttpLoggingInterceptor;
+import com.zlb.httplib.MyHttpInterceptor;
 import com.zlb.utils.MD5Util;
 
 import java.io.IOException;
@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Authenticator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
@@ -31,7 +32,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HttpRetrofit {
     private static final String TAG = HttpRetrofit.class.getSimpleName() + "OKHTTP";
-    private static final String baseUrl = "https://www.baidu.com/";  // WARMING-just for test !
+    private static final String baseUrl = "http://t1.int.owl1024.com/";  // WARMING-just for test !
+
+    public static final String CUSTOM_REPEAT_REQ_PROTOCOL = "MY_CUSTOM_REPEAT_REQ_PROTOCOL";  // WARMING-just for test !
 
     /**
      * 下面apiService对象其实是一个动态代理对象，并不是一个真正的ApiService接口的implements产生的对象，
@@ -46,7 +49,7 @@ public class HttpRetrofit {
         TOKEN = token;
     }
 
-    public static Map<String, Long> requestIdsMap = new HashMap<>();
+    public static Map<String, Long> requestIdsMap = new HashMap<>();//Value 里面保存的是时间，我们实际业务是有用的
 
     /**
      * @param spDao
@@ -101,31 +104,49 @@ public class HttpRetrofit {
                             .header("Content-Encoding", "gzip")  //使用GZIP 压缩内容，接收不用设置啥吧
                             .build();
 
-                    //拦截处理重复的HTTP 请求
+
+                    //拦截处理重复的HTTP 请求,假如你们的业务有需求部分请求不去重可以自己处理啊
                     String requestKey = MD5Util.getUpperMD5Str(authorisedRequest.toString());
 
-                    long lastRequestTime = 0;
-                    if (null != requestIdsMap.get(requestKey)) {
-                        lastRequestTime = requestIdsMap.get(requestKey);
-                    }
-                    long nowTime = System.currentTimeMillis();
+//                    Log.e("REPEAT REQUEST", "Value:" + requestIdsMap.get(requestKey));
 
-                    if (nowTime - lastRequestTime < 40 * 1000) {
-//                        authorisedRequest = originalRequest.newBuilder()
-//                                .url("")
-//                                .build();
+                    if (null == requestIdsMap.get(requestKey)) {
+                        requestIdsMap.put(requestKey, System.currentTimeMillis());
+                        Log.e("REPEAT REQUEST", "Add Request:" + requestKey);
                     } else {
-                        requestIdsMap.put(requestKey, nowTime);
+
+                        Log.i("REPEAT REQUEST", "-------:" + requestKey);
+                        return new Response.Builder()
+                                .protocol(Protocol.get(CUSTOM_REPEAT_REQ_PROTOCOL))
+                                .request(authorisedRequest) //multi thread
+                                .build();
                     }
 
-                    //在这里全局的处理重复的Http 请求
 
+//                    String requestKey = MD5Util.getUpperMD5Str(authorisedRequest.toString());
+//                    long lastRequestTime = 0;
+//                    if (null != requestIdsMap.get(requestKey)) {
+//                        lastRequestTime = requestIdsMap.get(requestKey);
+//                    }
+//                    long nowTime = System.currentTimeMillis();
+//
+//                    //测试通过
+//                    if (nowTime - lastRequestTime < 40 * 1000) {
+//                        Log.i("REPEAT REQUEST", "-------:" + requestKey);
+////                        //测试让这里的请求停止请求，怎么来搞一波骚操作呢？
+////                        return new Response.Builder()
+////                                .protocol(Protocol.get(CUSTOM_REPEAT_REQ_PROTOCOL))
+////                                .request(authorisedRequest) //注意多线程的情况
+////                                .build();
+//                    } else {
+//                        requestIdsMap.put(requestKey, nowTime);
+//                    }
+//                    //在这里全局的处理重复的Http 请求
 
 
                     Response originalResponse = chain.proceed(authorisedRequest);
-
                     //把统一拦截的header 打印出来
-                    new MyHttpLoggingInterceptor().logInterceptorHeaders(authorisedRequest);
+                    new MyHttpInterceptor().logRequestHeaders(authorisedRequest);
 
                     return originalResponse.newBuilder().build();
                 }
@@ -137,19 +158,19 @@ public class HttpRetrofit {
              * 但是统一拦截的header 是无法打印的，因为是在请求发出后统一拦截打印的。
              *
              */
-            MyHttpLoggingInterceptor loggingInterceptor = new MyHttpLoggingInterceptor();
-            loggingInterceptor.setLevel(MyHttpLoggingInterceptor.Level.BODY);
+            MyHttpInterceptor myHttpInterceptor = new MyHttpInterceptor();
+            myHttpInterceptor.setLevel(MyHttpInterceptor.Level.BODY);
 
             //Retrofit 默认的网络请求执行期（callFactory）就是OkHttpClient
             //这里仍然需要指定是因为参数，行为的设置等
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .retryOnConnectionFailure(true)
+                    .retryOnConnectionFailure(true)  //是否在网络差的时候重试
                     .connectTimeout(7, TimeUnit.SECONDS)
                     .readTimeout(6, TimeUnit.SECONDS)
                     .writeTimeout(7, TimeUnit.SECONDS)
                     .addNetworkInterceptor(mRequestInterceptor)
                     .authenticator(mAuthenticator2)
-                    .addInterceptor(loggingInterceptor)
+                    .addInterceptor(myHttpInterceptor)
                     .build();
 
 

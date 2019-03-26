@@ -1,4 +1,4 @@
-# 2018 年9月25 ，基于某些安全,licence和可能带来的不好影响，删除了原来的Repo,修改后重新
+# 2018 年9月25 ，基于某些安全,licence和可能带来的不好影响，删除了原来的Repo,这是修改后的
 
 ---
 ![image.png](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -15,8 +15,8 @@
 
 本 Demo目前已经完善了组件化架构，解决大型项目需要按需编译，模块化，代码隔离的问题
   
- # [New] Android 组件化架构
-   简单的分为BaseLib(抽象出来的其他Module共用)，ModuleA,ModeleJsbridge和科大讯飞语音识别的module。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以clone完代码后自己手动通过添加修改gradle.properties 文件中 的isModule 值（这个文件不会上传git版本管理），然后Sync Project 生效 （gradle.properties 文件用来配置Gradle settings的，例如JVM参数等，我们在gradle.properties 中配置的字段都可以在build.gradle文件中直接读取出来，不用任何多余的代码）
+ # Android 组件化架构
+   简单的分为BaseLib(抽象出来的其他Module共用)，module_main,module_news;其中module_main 中的News_fragment组件化到了module_news。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以clone完代码后自己手动通过添加修改gradle.properties 文件中 的isModule 值（这个文件不会上传git版本管理），然后Sync Project 生效 （gradle.properties 文件用来配置Gradle settings的，例如JVM参数等，我们在gradle.properties 中配置的字段都可以在build.gradle文件中直接读取出来，不用任何多余的代码）
    
    加上Dagger2.android 真的炒鸡解耦，某个模块外包出去也可以，还大大减少大项目的编译调试时间，加快效率
    
@@ -28,6 +28,8 @@
    进行网络请求时候的Error，empty,Loading,timeout等通用场景也是必须要处理的，Demo中一处Root注入，处处可用(Power by Loadsir）
 
 # 关于Http网络请求 (Rxjava2+Retrofit2)
+  [New]使用Retrofit 全局屏蔽重复请求
+
   应该没有比Retrofit2 更好的了吧？不过api 不是restful 就需要再封装一下了，网路模块就是数据命脉，做好了
   整个app 的结构会简化很多，结合Rxjava2不是更快哉;配合RxLifeCycle 控制生命周期;
   BaseObserver 中getErrorMsg(HttpException httpException) 方法中的处理和我们的Api  结构有关，请知悉。可以在Activity，fragment，service，broadcast 等发起http请求。
@@ -82,11 +84,6 @@
  在Android热修复的三大领域：代码修复、资源修复、SO修复方面，以及方案的安全性和易用性方面，Sophix都做到了业界领先，可是要收费](https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650823404&idx=1&sn=c56458a97561f54b893b33a80635d399&chksm=80b78e72b7c00764b26972bd21cd3e4fe5bb075a8d80890340b2a7a0a565779add0757b161e8&mpshare=1&scene=1&srcid=0704C7XraNsOGvDsgN9bCNii&pass_ticket=AZhM9mvZM8BzU28oFsdChz0QSuCBcgFEhhet1%2FD2hXnrM%2FSkdWA5TsZ06l%2F%2Fhbwm#rd)
 
 
-# JSBridge Module
-  简单的JSBridge,前端的对应代码放在Assert目录
-
-# 关于单元测试
-  正在学怎么处理？
 
 # 项目中包含的基本的通用模块
 - Dagger.android 大大的优化Dagger 在android 中的使用，

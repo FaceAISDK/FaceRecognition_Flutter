@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">jsbridge</string>
-
-    <string name="camera_permission_title_tips">摄像头权限</string>
-    <string name="camera_permission_content_tips">需要摄像头权限，请你授权</string>
-
-
-</resources>

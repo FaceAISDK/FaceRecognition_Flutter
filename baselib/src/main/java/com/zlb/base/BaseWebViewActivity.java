@@ -23,6 +23,8 @@ import com.zlb.httplib.R;
 
 /**
  * 单独出来成为一个Module
+ *
+ *
  * <p>
  * 包含JSBridge 的WebView,不要写没有通用性的业务代码在这里
  */
@@ -62,7 +64,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 
         //Android 4.4 开始，默认的浏览器已经是 chrome 了，所以 webview 也是 chrome 了，这就给了 webview 远程调试的能力。
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mWebView.setWebContentsDebuggingEnabled(true);
+            mWebView.setWebContentsDebuggingEnabled(true);  //开发模式打开
         }
 
         WebSettings settings = mWebView.getSettings();

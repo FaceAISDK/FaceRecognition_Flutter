@@ -5,11 +5,8 @@ import com.zlb.httplib.R;
 
 
 /**
- * 当数据是空的时候
+ * 当数据是空的时候 UI 提示
  *
- * Create Time:2017/9/4 10:22
- * Author:KingJA
- * Email:kingjavip@gmail.com
  */
 
 public class EmptyCallback extends Callback {

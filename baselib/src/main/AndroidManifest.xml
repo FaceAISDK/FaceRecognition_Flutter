@@ -18,13 +18,9 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
-    <application android:theme="@style/MyAppTheme">
-
-        <activity
-            android:name="com.zlb.takephoto.WaterCameraActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan" />
+    <application
+        android:usesCleartextTraffic="true"
+        android:theme="@style/MyAppTheme">
 
         <!--  fileprovider 都是在这里提供的配置的   -->
         <provider

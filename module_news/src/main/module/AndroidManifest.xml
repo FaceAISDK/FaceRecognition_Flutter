@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zenglb.framework.goodlife">
+
+    <application
+        android:name="debug.NewsApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Module_news"
+        android:supportsRtl="true"
+        android:theme="@style/MyAppTheme"
+        tools:replace="android:label">
+
+        <activity
+            android:name="debug.NewsLauncherActivity"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.zenglb.framework.news.NewsWebActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name="com.zenglb.framework.news.handylife.NewsPackageActivity"/>
+
+    </application>
+
+</manifest>

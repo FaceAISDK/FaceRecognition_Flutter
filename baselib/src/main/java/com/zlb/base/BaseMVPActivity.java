@@ -24,8 +24,10 @@ public abstract class BaseMVPActivity extends BaseActivity implements HasSupport
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         //一处声明，处处依赖注入，before calling super.onCreate();:
         AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
     }
 

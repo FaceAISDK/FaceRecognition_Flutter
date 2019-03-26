@@ -9,7 +9,7 @@ package com.zlb.httplib;
 public class HttpResponse<T> {
 	private int code;
 	private String error;
-	private T result;    //泛型T来表示object，可能是数组，也可能是对象
+	private T result;    //result T
 
 	public int getCode() {
 		return code;

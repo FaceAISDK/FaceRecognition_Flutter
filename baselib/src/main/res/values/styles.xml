@@ -87,9 +87,6 @@
 
 
 
-
-
-
     <!-- Http 等待Dialog -->
     <style name="CustomHttpWaitDialog" parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>

@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zenglb.framework.news.handylife.NewsActivity">
+
+    <item
+        android:id="@+id/action_author"
+        android:icon="@mipmap/ic_launcher"
+        android:title="联系老板"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/action_more"
+        android:icon="@mipmap/ic_launcher"
+        android:title="开放源码"
+        app:showAsAction="withText" />
+</menu>

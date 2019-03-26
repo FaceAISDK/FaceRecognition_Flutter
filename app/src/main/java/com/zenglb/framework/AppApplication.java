@@ -1,23 +1,28 @@
 package com.zenglb.framework;
 
 import com.kingja.loadsir.core.LoadSir;
-import com.squareup.leakcanary.LeakCanary;
-
+import com.zenglb.framework.news.FragmentService.NewsFragmentService;
+import com.zlb.base.BaseApplication;
 import com.zlb.commontips.CustomCallback;
 import com.zlb.commontips.EmptyCallback;
 import com.zlb.commontips.ErrorCallback;
 import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
-import com.zlb.base.BaseApplication;
 import com.zlb.dagger.module.BaseGlobalModule;
+import com.zlb.utils.ntp.NtpUtils;
+
+import component.android.com.component_base.ComponentServiceFactory;
 
 /**
- * 整个项目的全局的Application，其他的Debug 目录下的 XX Application 都会expect
+ * 组件化开发模式 集成打包的壳工程的Application，其他组件Module模块工程在开发的时候配置Debug目录中的Application
  *
- * https://www.jianshu.com/p/0d67f68beb38 编译加速
+ * 在集成打包的时候其他组件Module模块工程下的Debug 目录下的 XXApplication 都配置会被expect
  *
- * 参考{@link dagger.android.DaggerApplication}Beta 项目，项目组没有3个以上的Android 开发不建议使用Dagger XXX
- * <p>
+ *
+ * 每个Module 中的Application的初始化在集成模式中也应该在这里一起初始化
+ *
+ *
+ * 参考{@link dagger.android.DaggerApplication}Beta 项目，项目组没有3个以上的Android 开发不建议引入Dagger
  * Created by anylife.zlb@gmail.com on 2017/3/15.
  */
 public class AppApplication extends BaseApplication  {
@@ -29,6 +34,12 @@ public class AppApplication extends BaseApplication  {
     public void onCreate() {
         super.onCreate();
         initApplication();
+
+
+        //集成模式还要帮子NewsModule 初始化数据,Fragment 组件化下沉
+        ComponentServiceFactory.getInstance(this)
+                .setNewsFragmentService(new NewsFragmentService());
+
     }
 
 
@@ -41,6 +52,53 @@ public class AppApplication extends BaseApplication  {
     }
 
 
+//    /**
+//     * 各个子模块的服务初始化
+//     *
+//     * @param application
+//     */
+//    @Override
+//    public void initMoudleApp(Application application) {
+//        for (String moduleApp : AppConfig.moduleApps) {
+//            try {
+//                Class clazz = Class.forName(moduleApp);
+//                BaseApp baseApp = (BaseApp) clazz.newInstance();
+//                baseApp.initMoudleApp(this);
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            } catch (InstantiationException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+
+
+//    /**
+//     * 各个子模块的数据初始化
+//     *
+//     * @param application
+//     */
+//    @Override
+//    public void initMoudleData(Application application) {
+//        for (String moduleApp : AppConfig.moduleApps) {
+//            try {
+//                Class clazz = Class.forName(moduleApp);
+//                BaseApp baseApp = (BaseApp) clazz.newInstance();
+//                baseApp.initMoudleData(this);
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            } catch (InstantiationException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+
 
     /**
      * 根据不同的进程来初始化不同的东西
@@ -50,12 +108,6 @@ public class AppApplication extends BaseApplication  {
      * 比如调试工具stetho 在debug 环境是要的，Release 是不需要的
      */
     private void initApplication() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
         //部分 初始化服务最好能新开一个IntentService 去处理,bugly 在两个进程都有初始化
         String processName = getMyProcessName();
         switch (processName) {
@@ -66,7 +118,6 @@ public class AppApplication extends BaseApplication  {
 //                DaggerMainComponent.builder().mainModule(new MainModule(this)).build().inject(this);
 
 //                DaggerModuleAComponent.builder().moduleaModule(new ModuleaModule(this)).build().inject(this);
-
 
                 //UI status Builder,需要
                 LoadSir.beginBuilder()

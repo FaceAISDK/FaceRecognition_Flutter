@@ -1,41 +1,36 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
-
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
-        classpath 'com.google.gms:google-services:3.0.0'
-
-        //classpath "io.objectbox:objectbox-gradle-plugin:1.5.0"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
-
 }
 
 /**
  * 工程中所有的module 都将能使用common_config 中的配置
+ *
+ * 统一版本配置等工作
+ *
  */
 subprojects {
     apply from: "${rootProject.rootDir}/common_config.gradle"
-    dependencies {
-//        testCompile 'junit:junit:4.12'
-    }
+
 }
 
 
 allprojects {
     repositories {
-        jcenter()
         google()
-
-        mavenCentral()
+        jcenter()
 
         maven {
             url 'https://dl.bintray.com/zouyuhan/maven'

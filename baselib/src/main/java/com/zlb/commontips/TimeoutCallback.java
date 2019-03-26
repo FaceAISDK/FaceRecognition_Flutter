@@ -11,9 +11,6 @@ import com.zlb.httplib.R;
 /**
  * 网络请求超时的UI提示
  *
- * Create Time:2017/9/2 16:17
- * Author:KingJA
- * Email:kingjavip@gmail.com
  */
 
 public class TimeoutCallback extends Callback {

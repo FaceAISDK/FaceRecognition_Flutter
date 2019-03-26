@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_10"
+    tools:context="com.anylife.module_main.business.navigation.fragment.BlankFragment">
+
+
+    <Button
+        android:id="@+id/httpReq"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:padding="@dimen/dp_10"
+        android:text="Magic 请求测试" />
+
+
+    <TextView
+        android:id="@+id/meProfile"
+        android:padding="@dimen/dp_4"
+        android:paddingTop="@dimen/dp_40"
+        android:textColor="@color/common_green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="退出登陆" />
+
+</LinearLayout>

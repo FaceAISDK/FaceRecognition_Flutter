@@ -98,7 +98,7 @@ public class BaseGlobalModule {
      *
      */
     @Provides
-//    @Singleton //这个怎么能够动态的替换呢DB 链接的a
+//    @Singleton
     public DaoSession provideDaoSession(SPDao spDao) {
         String account = spDao.getData(SPKey.KEY_LAST_ACCOUNT, "default_db", String.class);
         String DBName = ENCRYPTED ? account + "encrypted" : account;

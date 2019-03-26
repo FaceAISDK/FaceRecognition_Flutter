@@ -18,7 +18,6 @@ public class AESHelper{
      * @param  key   解密的key
      * @return HexString
      */
-
     public static String encrypt(String input, String key){
         byte[] crypted = null;
         try{

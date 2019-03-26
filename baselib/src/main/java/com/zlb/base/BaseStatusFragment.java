@@ -47,8 +47,12 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
             }
         });
 
-        initViews(rootView);
-        return mBaseLoadService.getLoadLayout();
+        initView(rootView);
+
+        loadHttp();
+
+
+        return rootView;
     }
 
     protected abstract int onCreateFragmentView();
@@ -56,14 +60,10 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loadHttp();
+//        loadHttp();
+
     }
 
-
-    //BaseFragment
-    public <T extends View> T $(View layoutView, @IdRes int resId){
-        return (T)layoutView.findViewById(resId);
-    }
 
 
     /**
@@ -77,7 +77,7 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
     }
 
 
-    public abstract void initViews(View rootView);
+    public  abstract void initView(View rootView);
 
     /**
      * Http 请求的重新加载,这个干啥

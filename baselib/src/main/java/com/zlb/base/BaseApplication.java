@@ -19,11 +19,14 @@ import com.zlb.commontips.EmptyCallback;
 import com.zlb.commontips.ErrorCallback;
 import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
+import com.zlb.jniInterface.JniInvokeInterface;
+import com.zlb.utils.ntp.NtpUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -41,12 +44,12 @@ public abstract class BaseApplication extends Application implements HasActivity
     public static final String TAG = BaseApplication.class.getSimpleName();
     public boolean isDebug = false;  //App 是否是调试模式，默认不是，不要把调试信息加进去
 
-    //依赖注入的核心原则：一个类不应该知道如何实现依赖注入。
+    //Activity ，Service 中的依赖注入。Fragment ---》BaseStatusFragment
     @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;  //Activity 中的注入
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;   //Activity 中的注入
 
     @Inject
-    DispatchingAndroidInjector<Service> dispatchingServiceInjector;   //Service 中注入的
+    DispatchingAndroidInjector<Service> dispatchingServiceInjector;    //Service 中注入的
 
     @Override
     public AndroidInjector<Activity> activityInjector() {
@@ -58,14 +61,28 @@ public abstract class BaseApplication extends Application implements HasActivity
         return dispatchingServiceInjector;
     }
 
+    /**
+     * 敏感的配置全部以HashMap 的方式保存在JNI 层的SO 库里面。
+     */
+    public static HashMap<String, String> globalJniMap = JniInvokeInterface.getJniHashMap();
+
+    private static Context appContext;
+
+    @Inject
+    NtpUtils ntpUtils;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        appContext = getApplicationContext();
+
         initARouter();
         initDI();
+        initLeakCanary();
 
-        //UI 状态提示页面
+        ntpUtils.initTimeDif2(); //校准对时
+
+        //UI 状态提示页面，全局的，不用每个页面都添加
         LoadSir.beginBuilder()
                 .addCallback(new ErrorCallback())          //添加各种状态页
                 .addCallback(new EmptyCallback())
@@ -76,12 +93,30 @@ public abstract class BaseApplication extends Application implements HasActivity
                 .commit();
 
         showDebugDBAddressLogToast(this);
+
+    }
+
+    public static Context getAppContext() {
+        return appContext;
     }
 
     @Override
     public void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(base);
+    }
+
+
+    /**
+     * 初始化内存泄露检测
+     */
+    private void initLeakCanary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
     }
 
 
@@ -115,11 +150,11 @@ public abstract class BaseApplication extends Application implements HasActivity
      */
     private void initARouter() {
         //ARouter 相关的配置
-        if (isAppDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
-            ARouter.openLog();     // 打印日志
-            ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+        if (isAppDebug()) {          // 这两行必须写在init之前，否则这些配置在init过程中将无效
+            ARouter.openLog();       // 打印日志
+            ARouter.openDebug();     // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
-        ARouter.init(this);       // 尽可能早，推荐在Application中初始化
+        ARouter.init(this);          // 尽可能早，推荐在Application中初始化
     }
 
 
@@ -146,13 +181,13 @@ public abstract class BaseApplication extends Application implements HasActivity
      *
      * @param context
      */
-    public  void showDebugDBAddressLogToast(Context context) {
+    public void showDebugDBAddressLogToast(Context context) {
         if (isDebug) {
             try {
                 Class<?> debugDB = Class.forName("com.amitshekhar.DebugDB");
                 Method getAddressLog = debugDB.getMethod("getAddressLog");
                 Object value = getAddressLog.invoke(null);
-                Toast.makeText(context, (String) value, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "DB Debug Address: " + (String) value, Toast.LENGTH_LONG).show();
             } catch (Exception ignore) {
 
             }

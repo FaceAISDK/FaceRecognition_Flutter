@@ -6,6 +6,8 @@ import android.os.Environment;
 /**
  * 图片，文件等外部存储存放路径定义
  *
+ * Installation 这种文件很容易会被腾讯管家之类的清除，放在私有目录又会卸载后自动清除
+ *
  * Created by zenglb on 2017/3/15.
  */
 public class FileCacheConfig {

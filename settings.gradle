@@ -1,3 +1,1 @@
-include ':module_a', ':baselib', ':module_jsbridge', ':app', ':module_good_life', ':module_ai' //, ':retrofit'
-
-//include ':baselib', ':module_good_life'
+include ':app', ':baselib', ':module_main' ,':jni','module_news','component-base'

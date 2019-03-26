@@ -1,5 +1,7 @@
 package com.zlb.http.param;
 
+import com.zlb.jniInterface.JniInvokeInterface;
+
 /**
  * 登录需要提交的参数，并不是所有的http 请求都需要一个XXXParams,@Body 提交json str 才需要
  * Created by zenglb on 2016/7/4.
@@ -7,8 +9,8 @@ package com.zlb.http.param;
 public class LoginParams {
     // FBI WARMING ！！！
     private String grant_type="password";
-    private String client_id="client_id";
-    private String client_secret="client_secret";
+    private String client_id=JniInvokeInterface.getJniHashMap().get("clientId");
+    private String client_secret= JniInvokeInterface.getJniHashMap().get("clientSecret");
     private String username;
     private String refresh_token;
     private String password;

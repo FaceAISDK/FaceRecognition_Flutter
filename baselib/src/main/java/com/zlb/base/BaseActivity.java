@@ -6,30 +6,31 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
-
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.zlb.httplib.HttpUiTips;
 import com.zlb.httplib.R;
-import com.zlb.utils.Installation;
-import com.zlb.utils.MD5Util;
-
-import es.dmoral.toasty.Toasty;
+import com.zlb.jniInterface.JniInvokeInterface;
+import java.util.HashMap;
 
 /**
  * [FBI WARMING] 不要为了方便，只有某几个Activity 才会用的（定位，Wi-Fi 数据收集啊，写在Base里面，那还abstract什么）
  * 基类就只做基类的事情,不要把业务层面的代码写到这里来
- * <p>
- * <p>
+ *
+ *
  * 1.toolbar 的处理封装
  * 2.增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
+ * 3.有些简单的页面真的没有必要弄 MVP 了，可以分别的继承BaseActivity 和 BaseMVPActivity
+ * 4.
+ *
  *
  * @author anylife.zlb@gmail.com 20170301
  */
+// TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private Toolbar mToolbar;
@@ -47,20 +48,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         initViews();
         loadHttp();  //在这里进行Http 的请求
+
+        HashMap<String, String> map = JniInvokeInterface.getJniHashMap();
+
+        Log.d("TAG",map.toString());
+
     }
 
-
-    /**
-     * ButterKnife 不再使用了，不就是写findViewByID吗？代码自动生成啊 https://blog.csdn.net/mp624183768/article/details/79513373
-     * AnnotationProcessor JavaPoet    https://www.jianshu.com/p/2967ff971177
-     *
-     * @param resId
-     * @param <T>
-     * @return
-     */
-     public final <T extends View> T $(@IdRes int resId) {
-        return (T) super.findViewById(resId);
-    }
 
 
     /**
@@ -84,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
             flContent.addView(content, params);
 
-//            ButterKnife.bind(this, rootView);   //ButterKnife 绑定,只要在这一处地方写好就可以了
+//            ButterKnife.bind(this, rootView);   //组件化后 ButterKnife 很不好使用，改用Android View Generator
 
             //增加Error，empty,Loading,timeout,等通用的场景处理
             mBaseLoadService = LoadSir.getDefault().register(content, (Callback.OnReloadListener) v -> onHttpReload(v));
