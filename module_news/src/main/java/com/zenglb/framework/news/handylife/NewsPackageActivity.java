@@ -2,7 +2,7 @@ package com.zenglb.framework.news.handylife;
 
 import android.os.Bundle;
 import android.view.View;
-import com.zenglb.framework.goodlife.R;
+import com.zenglb.framework.news.R;
 import com.zlb.base.BaseActivity;
 import com.zlb.base.BaseMVPActivity;
 import component.android.com.component_base.ComponentServiceFactory;

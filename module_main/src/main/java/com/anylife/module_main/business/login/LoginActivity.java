@@ -147,47 +147,16 @@ public class LoginActivity extends BaseMVPActivity {
                     @Override
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
+
+                        //去吧
+                        Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
+                        startActivity(i2);
+                        LoginActivity.this.finish();
+
                     }
                 });
 
-
-//                apiService.getMyUploadVideos(status)
-//                .compose(SwitchSchedulers.applySchedulers())
-//                //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
-//                .subscribe(new BaseObserver<MyUploadVideoResult>(null) {
-//                    @Override
-//                    public void onSuccess(MyUploadVideoResult lifeResultBeans) {
-//                        if (null != loadHandyLifeDataCallback) {
-//                            loadHandyLifeDataCallback.onHandyLifeDataSuccess(lifeResultBeans);
-//                        }
-//                    }
-
-//                    @Override
-//                    public void onFailure(int code, String message) {
-//                        super.onFailure(code, message);
-//                    }
-//                });
-
-//        loginPresenter.login(loginParams);
-
     }
-
-
-//    @Override
-//    public void loginFail(String failMsg) {
-//        Toasty.error(this.getApplicationContext(), "登录失败" + failMsg, Toast.LENGTH_SHORT).show();
-//
-//        if (isFromLaunch) {
-//            Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
-//            startActivity(i2);
-//            LoginActivity.this.finish();
-//        } else {//是来自Launcher启动的就跳转到主页面，否则从哪里来就到那里去
-//
-//            Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
-//            startActivity(i2);
-//            LoginActivity.this.finish();
-//        }
-//    }
 
 
 

@@ -108,8 +108,6 @@ public class HttpRetrofit {
                     //拦截处理重复的HTTP 请求,假如你们的业务有需求部分请求不去重可以自己处理啊
                     String requestKey = MD5Util.getUpperMD5Str(authorisedRequest.toString());
 
-//                    Log.e("REPEAT REQUEST", "Value:" + requestIdsMap.get(requestKey));
-
                     if (null == requestIdsMap.get(requestKey)) {
                         requestIdsMap.put(requestKey, System.currentTimeMillis());
                         Log.e("REPEAT REQUEST", "Add Request:" + requestKey);
@@ -121,27 +119,6 @@ public class HttpRetrofit {
                                 .request(authorisedRequest) //multi thread
                                 .build();
                     }
-
-
-//                    String requestKey = MD5Util.getUpperMD5Str(authorisedRequest.toString());
-//                    long lastRequestTime = 0;
-//                    if (null != requestIdsMap.get(requestKey)) {
-//                        lastRequestTime = requestIdsMap.get(requestKey);
-//                    }
-//                    long nowTime = System.currentTimeMillis();
-//
-//                    //测试通过
-//                    if (nowTime - lastRequestTime < 40 * 1000) {
-//                        Log.i("REPEAT REQUEST", "-------:" + requestKey);
-////                        //测试让这里的请求停止请求，怎么来搞一波骚操作呢？
-////                        return new Response.Builder()
-////                                .protocol(Protocol.get(CUSTOM_REPEAT_REQ_PROTOCOL))
-////                                .request(authorisedRequest) //注意多线程的情况
-////                                .build();
-//                    } else {
-//                        requestIdsMap.put(requestKey, nowTime);
-//                    }
-//                    //在这里全局的处理重复的Http 请求
 
 
                     Response originalResponse = chain.proceed(authorisedRequest);

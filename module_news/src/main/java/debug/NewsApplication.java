@@ -23,6 +23,7 @@ public class NewsApplication extends BaseApplication {
         ComponentServiceFactory.getInstance(this)
                 .setNewsFragmentService(new NewsFragmentService());
 
+
     }
 
 
@@ -37,12 +38,11 @@ public class NewsApplication extends BaseApplication {
 
     @Override
     protected void injectApp() {
-
         DaggerNewsModuleComponent.builder()
                 .baseGlobalModule(new BaseGlobalModule(this))
                 .build()
                 .inject(this);
-
     }
+
 
 }

@@ -11,7 +11,7 @@ android {
     defaultConfig {
 
         if (isModule.toBoolean()) {
-            applicationId "com.zenglb.framework.goodlife"  //制定 applicationId
+            applicationId "com.zenglb.framework.news"  //制定 applicationId
         }
 
         minSdkVersion rootProject.ext.minSdkVersion

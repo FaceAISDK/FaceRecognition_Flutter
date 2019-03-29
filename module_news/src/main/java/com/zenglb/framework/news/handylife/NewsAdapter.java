@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.zenglb.framework.goodlife.R;
+import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.http.result.ArticlesResult;
 import java.util.List;
 

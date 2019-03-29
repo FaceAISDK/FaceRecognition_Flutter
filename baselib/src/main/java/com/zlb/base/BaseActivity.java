@@ -9,24 +9,25 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.zlb.httplib.HttpUiTips;
 import com.zlb.httplib.R;
 import com.zlb.jniInterface.JniInvokeInterface;
+
 import java.util.HashMap;
 
 /**
  * [FBI WARMING] 不要为了方便，只有某几个Activity 才会用的（定位，Wi-Fi 数据收集啊，写在Base里面，那还abstract什么）
  * 基类就只做基类的事情,不要把业务层面的代码写到这里来
- *
- *
+ * <p>
+ * <p>
  * 1.toolbar 的处理封装
  * 2.增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
  * 3.有些简单的页面真的没有必要弄 MVP 了，可以分别的继承BaseActivity 和 BaseMVPActivity
  * 4.
- *
  *
  * @author anylife.zlb@gmail.com 20170301
  */
@@ -50,11 +51,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         loadHttp();  //在这里进行Http 的请求
 
         HashMap<String, String> map = JniInvokeInterface.getJniHashMap();
-
-        Log.d("TAG",map.toString());
-
+//        Log.d("TAG", map.toString());
     }
-
 
 
     /**
@@ -187,7 +185,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @return
      */
-    protected  boolean isShowBacking() {
+    protected boolean isShowBacking() {
         return true;
     }
 

@@ -64,6 +64,10 @@ dependencies {
     api "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
 
+//    api 'com.google.android.gms:play-services-ads:17.1.1'
+
+    api 'com.google.firebase:firebase-ads:17.1.3'  //所有的东西都集中到了FireBase
+
     api 'com.squareup.retrofit2:retrofit:2.5.0'     //为了更好的研究Retrofit 改用源码的方式
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
@@ -89,7 +93,7 @@ dependencies {
 
     api 'com.kingja.loadsir:loadsir:1.3.5'
 
-    api 'pub.devrel:easypermissions:1.1.3'        //没有其他的原因，其他的目前多少有BUG 啊
+    api 'pub.devrel:easypermissions:2.0.1'        //没有其他的原因，其他的目前多少有BUG 啊
 
     //dagger & dagger.android
     api "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
@@ -128,6 +132,7 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'     //阿里巴巴的Arouter
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4' //数据库调试
 
+    api 'anylife.scrolltextview:ScrollTextviewLib:1.4.2'  //滚动字幕
 
 
 

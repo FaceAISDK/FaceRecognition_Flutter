@@ -9,7 +9,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.zenglb.framework.news.NewsWebActivity;
-import com.zenglb.framework.goodlife.R;
+import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.http.result.ArticlesResult;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.base.BaseWebViewActivity;
@@ -47,7 +47,6 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
 
     @Inject
     NewsPresenter mPresenter;  //dagger
-
 
     @Inject
     public NewsFragment() {
@@ -185,7 +184,7 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
 
             Intent intent = new Intent(getContext(), NewsWebActivity.class);
             intent.putExtra(BaseWebViewActivity.URL, articlesBeans.get(position).getArticle().getContent_url());
-
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });
 

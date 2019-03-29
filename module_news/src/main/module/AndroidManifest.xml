@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.zenglb.framework.goodlife">
+    package="com.zenglb.framework.news">
 
     <application
         android:name="debug.NewsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Module_news"
+        android:label="Hot News"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme"
         tools:replace="android:label">
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name="com.zenglb.framework.news.NewsWebActivity"
+            android:name=".NewsWebActivity"
             android:launchMode="singleTop" />
 
         <activity android:name="com.zenglb.framework.news.handylife.NewsPackageActivity"/>

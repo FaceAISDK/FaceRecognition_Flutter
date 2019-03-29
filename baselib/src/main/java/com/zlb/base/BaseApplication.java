@@ -187,6 +187,7 @@ public abstract class BaseApplication extends Application implements HasActivity
                 Class<?> debugDB = Class.forName("com.amitshekhar.DebugDB");
                 Method getAddressLog = debugDB.getMethod("getAddressLog");
                 Object value = getAddressLog.invoke(null);
+
                 Toast.makeText(context, "DB Debug Address: " + (String) value, Toast.LENGTH_LONG).show();
             } catch (Exception ignore) {
 

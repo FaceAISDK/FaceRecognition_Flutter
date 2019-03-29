@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.zenglb.framework.goodlife.R;
+import com.zenglb.framework.news.R;
 
 
 /**

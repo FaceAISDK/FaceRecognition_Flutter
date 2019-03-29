@@ -76,13 +76,13 @@ public class NtpUtils {
                         spDao.saveData(SPKey.KEY_SOME_SERVER_TIME, o.longValue());
 
                         Log.e("TIME", o.longValue() + "---" + (System.currentTimeMillis() - o.longValue()));
-                        Toasty.info(BaseApplication.getAppContext(), o.longValue() + " time").show();
+//                        Toasty.info(BaseApplication.getAppContext(), o.longValue() + " time").show();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("TIME", e.toString() + "---");
-                        Toasty.info(BaseApplication.getAppContext(), e.toString()).show();
+                        Toasty.info(BaseApplication.getAppContext(), "very time error"+e.toString()).show();
                     }
 
                     @Override
