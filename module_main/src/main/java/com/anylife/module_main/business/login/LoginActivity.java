@@ -119,6 +119,9 @@ public class LoginActivity extends BaseMVPActivity {
 
     /**
      * Login ,普通的登录和使用Rxjava 的方式都可以
+     *
+     * 外网暂不支持访问
+     *
      */
     public void mvpLogin() {
         String userName = etUsername.getText().toString().trim();
@@ -135,7 +138,7 @@ public class LoginActivity extends BaseMVPActivity {
         loginParams.setPassword(globalJniMap.get("password")); //
 
 
-        //BaseApplication.globalJniMap.get("oauthPath") 是为了某些目的
+        //外网暂不支持访问  外网暂不支持访问  外网暂不支持访问
         mainModuleApiService.goLogin(globalJniMap.get("oauthPath"),loginParams)
                 .compose(SwitchSchedulers.applySchedulers())
                 .subscribe(new BaseObserver<LoginResult>(mContext){

@@ -32,7 +32,7 @@ import retrofit2.http.Path;
 public interface MainModuleApiService {
 
     /**
-     * Oauth,
+     * Oauth,外网暂不支持访问
      */
     @Headers("NeedOauthFlag: NeedOauthFlag")
     @POST("{OauthPath}")
@@ -41,7 +41,8 @@ public interface MainModuleApiService {
 
 
     /**
-     * MeProfile,
+     * MeProfile, 外网暂不支持访问
+     *
      */
     @GET("{MeProfilePath}")
     Observable<HttpResponse<MeProfileResult>> getMeProfile(@Path ("MeProfilePath") String url);
