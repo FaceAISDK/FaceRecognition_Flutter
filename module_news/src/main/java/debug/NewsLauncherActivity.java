@@ -69,7 +69,6 @@ public class NewsLauncherActivity extends AppCompatActivity {
         setContentView(R.layout.launcher_layout);
 
         // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
-
         MobileAds.initialize(this, "ca-app-pub-8621230724267558~7770389405");
 
         mAdView = findViewById(R.id.adView);
@@ -108,12 +107,13 @@ public class NewsLauncherActivity extends AppCompatActivity {
                 // Code to be executed when the user is about to return
                 // to the app after tapping on an ad.
                 int a=1;
-
             }
+
         });
 
 
         UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 3000);    //测试内存泄漏,只为测试.
+
     }
 
 

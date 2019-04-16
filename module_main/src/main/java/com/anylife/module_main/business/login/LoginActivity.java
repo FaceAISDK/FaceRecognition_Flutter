@@ -99,7 +99,7 @@ public class LoginActivity extends BaseMVPActivity {
         etPassword = findViewById(R.id.et_password);
 
         loginBtn = findViewById(R.id.login_btn);
-        loginBtn.setOnClickListener(view -> mvpLogin());
+        loginBtn.setOnClickListener(view -> goLogin());
 
         cardview = findViewById(R.id.cardview);
 
@@ -123,7 +123,7 @@ public class LoginActivity extends BaseMVPActivity {
      * 外网暂不支持访问
      *
      */
-    public void mvpLogin() {
+    public void goLogin() {
         String userName = etUsername.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
@@ -151,7 +151,7 @@ public class LoginActivity extends BaseMVPActivity {
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
 
-                        //去吧
+                        //外网暂不支持访问 ,但是里面的新闻接口是没有限制的
                         Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
                         startActivity(i2);
                         LoginActivity.this.finish();

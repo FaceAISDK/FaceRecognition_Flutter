@@ -18,11 +18,9 @@ public class NewsApplication extends BaseApplication {
         super.onCreate();
         login();
 
-
         //Fragment 组件化注册®️
         ComponentServiceFactory.getInstance(this)
                 .setNewsFragmentService(new NewsFragmentService());
-
 
     }
 
@@ -36,10 +34,14 @@ public class NewsApplication extends BaseApplication {
     }
 
 
+    /**
+     * 配置好依赖注入
+     *
+     */
     @Override
     protected void injectApp() {
         DaggerNewsModuleComponent.builder()
-                .baseGlobalModule(new BaseGlobalModule(this))
+                .baseGlobalModule(new BaseGlobalModule(this))  //这一行是把Base中的
                 .build()
                 .inject(this);
     }

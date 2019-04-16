@@ -1,5 +1,6 @@
 package com.zenglb.framework.news.dagger;
 
+import com.zenglb.framework.news.handylife.ItIsATestModule;
 import com.zenglb.framework.news.handylife.NewsPackageActivity;
 import com.zenglb.framework.news.handylife.NewsFragment;
 import com.zenglb.framework.news.handylife.NewsPackageFragment;
@@ -27,13 +28,6 @@ import dagger.android.ContributesAndroidInjector;
 })
 public abstract class NewsModuleAllActivityModule {
 
-    /**
-     * BaseActivity  <- BaseMVPActivity  这样的继承关系就好了
-     *
-     * 1 BaseActivity: 不要MVP模式，也不用DI 依赖注入（少写两行代码）就用这个吧
-     *
-     * 2 BaseMVPActivity 要MVP 要DI ，全局的依赖注入
-     */
 
     //2222222 新建了一个Activity 的并且需要inject 的只需要添加两行代码 DefaultActivityModule 适用于只要全局Module 中的内容
 
@@ -48,7 +42,7 @@ public abstract class NewsModuleAllActivityModule {
 
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = DefaultActivityModule.class)
+    @ContributesAndroidInjector(modules = ItIsATestModule.class)
     abstract NewsPackageActivity newsPackageActivityInjector();
 
 

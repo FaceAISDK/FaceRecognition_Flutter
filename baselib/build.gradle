@@ -64,7 +64,7 @@ dependencies {
     api "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
 
-//    api 'com.google.android.gms:play-services-ads:17.1.1'
+//    api 'com.google.android.gms:play-services-ads:17.1.1'  // ！！！
 
     api 'com.google.firebase:firebase-ads:17.1.3'  //所有的东西都集中到了FireBase
 
@@ -91,7 +91,7 @@ dependencies {
     api 'com.github.GrenderG:Toasty:1.2.5'
     api 'com.google.code.gson:gson:2.8.4'
 
-    api 'com.kingja.loadsir:loadsir:1.3.5'
+    api 'com.kingja.loadsir:loadsir:1.3.6'
 
     api 'pub.devrel:easypermissions:2.0.1'        //没有其他的原因，其他的目前多少有BUG 啊
 
@@ -110,7 +110,6 @@ dependencies {
     //Http Request log
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
 
-
     api 'com.github.florent37:singledateandtimepicker:1.2.2'    //高仿IOS 时间选择
     api 'de.hdodenhof:circleimageview:2.2.0'                    //CircleImageView
     api 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -124,7 +123,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     api 'com.journeyapps:zxing-android-embedded:3.6.0'  //只是为了简单
 
-    api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人
+    api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人 ------
 
     api project(':component-base')
 
@@ -135,5 +134,9 @@ dependencies {
     api 'anylife.scrolltextview:ScrollTextviewLib:1.4.2'  //滚动字幕
 
 
+//    debugImplementation project(':library') //debug 版本直接引用本地项目
+//    releaseImplementation '远程库地址'   //release 版本引用远程版本用来最终测试发现问题
+
+//    implementation fileTree(include: ['*.aar'], dir: 'libs/xxx')  //gradle 在编译前就会自动进到 xxx 目录下面，遍历并引用所有 aar 文件
 
 }

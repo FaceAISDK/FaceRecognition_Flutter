@@ -5,17 +5,23 @@ import android.view.View;
 import com.zenglb.framework.news.R;
 import com.zlb.base.BaseActivity;
 import com.zlb.base.BaseMVPActivity;
+
+import javax.inject.Inject;
+
 import component.android.com.component_base.ComponentServiceFactory;
 import component.android.com.component_base.base.IFragmentService;
 
 
 /**
- * Module_news 模块调试的时候包装NewsFragment
+ *  仅仅是调试的时候使用，没有实际的用途
  *
- * NewsFragment 实际上是在MainBotNavi 中被使用
  *
  */
 public class NewsPackageActivity extends BaseMVPActivity {
+
+    @Inject
+    String testNameStr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

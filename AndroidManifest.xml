@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.horn.hornggsm"
+    android:versionCode="31"
+    android:versionName="1.33.4">
+
+    <uses-sdk
+
+        />
+
+   
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        tools:replace="android:icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.horn.hornggsm.frmStart"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.horn.hornggsm.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".frmFastAdd"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".frmFirstAdd"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".frmMainControl"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".frmMainSet"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".frmMainMore"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".frmMainHostList"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".addGsmHost"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".editGsmHost"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".editGsmHostOne"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".gsmHostControl"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSet"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".gsmHostLog"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetTel"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetTime"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetRfid"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetRemote"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetZone"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetOther"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetComText"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".gsmHostUserAutoBufang"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetLangage"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetDateTime"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetWifi"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostZoneValue"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetDuima"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetDuimaA"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+        <activity
+            android:name=".gsmHostSetYaokongqi"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostsys"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".aboutsoft"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".gsmHostAlarmList"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".doalarminfo"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".frmFast"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".frmFastA"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".frmTest"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.qrcode.testMainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+
+        <service android:name="com.horn.hornggsm.gsmServer"
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE" android:exported="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+
+
+            </intent-filter>
+        </service>
+
+        <!-- 系统启动 主动加载 -->
+        <receiver android:name=".SmsBootReceiver"
+            android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter>
+
+
+                <action android:name="com.horn.hornggsm.customMsg" >
+                </action>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+                <data android:mimeType="application/vnd.wap.mms-message" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+    </application>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+    <!-- 访问网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 检查网络 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 读取sdk -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 读联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 写联系人权限 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <!-- 拨打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 获取电话 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 获取资源包 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!-- 发送短信 -->
+    <uses-permission android:name="android.permission.SEND_SMS"  />
+    <!-- 截取短信 -->
+    <!--<uses-permission android:name="android.permission.RECEIVE_SMS"  />-->
+
+    <!-- 添加系统启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+    <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限-->
+
+</manifest>

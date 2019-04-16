@@ -58,6 +58,8 @@ public class BaseGlobalModule {
     @Provides
     @Singleton  //在这加了Singleton 的注解就是单例的了，打出内存地址查看一下
     public SPDao provideSPDao() {
+
+        //todo 既然Not third part .why not inject ?
         return new SPDao(mContext);
     }
 

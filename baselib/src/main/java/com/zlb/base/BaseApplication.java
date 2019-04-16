@@ -69,7 +69,7 @@ public abstract class BaseApplication extends Application implements HasActivity
     private static Context appContext;
 
     @Inject
-    NtpUtils ntpUtils;
+    NtpUtils ntpUtils;  //
 
     @Override
     public void onCreate() {
@@ -159,7 +159,7 @@ public abstract class BaseApplication extends Application implements HasActivity
 
 
     /**
-     * 判断App是否是Debug版本
+     * 判断App是否是Debug版本.
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */

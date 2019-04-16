@@ -46,6 +46,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 public interface AppComponent {
 
-    void inject(BaseApplication application);
+    void inject(BaseApplication application); //
 
 }

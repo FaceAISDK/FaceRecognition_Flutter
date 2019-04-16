@@ -18,7 +18,6 @@ public class NewsWebActivity extends BaseWebViewActivity {
 
     private AdView mAdView;
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_news_webview;

@@ -27,10 +27,6 @@ public class NewsRepository implements INewsDataSource {
 
     }
 
-    public NewsRepository(NewsApiService apiService) {
-        this.apiService = apiService;
-    }
-
 
     /**
      * getHandyLifeData from http server
