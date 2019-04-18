@@ -3,13 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.anylife.module_main.business.navigation.fragment.BlankFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Video Page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="私密记事"
         android:textSize="33sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:gravity="center"
+        android:textColor="@color/black_overlay"
+        android:text="App不用联网，数据不上传，本地加密处理，换手机一键迁移；调用系统邮件定时给自己备份\n\n（内容由Module_note 提供）"
+        android:textSize="15sp" />
+
+
 
 </LinearLayout>

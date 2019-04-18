@@ -134,6 +134,12 @@ dependencies {
     api 'anylife.scrolltextview:ScrollTextviewLib:1.4.2'  //滚动字幕
 
 
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+
+
 //    debugImplementation project(':library') //debug 版本直接引用本地项目
 //    releaseImplementation '远程库地址'   //release 版本引用远程版本用来最终测试发现问题
 

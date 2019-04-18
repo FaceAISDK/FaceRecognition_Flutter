@@ -51,8 +51,9 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
 
         loadHttp();
 
-
-        return rootView;
+        //返回全局的加载反馈页面 ！
+        return mBaseLoadService.getLoadLayout();
+//        return rootView;
     }
 
     protected abstract int onCreateFragmentView();

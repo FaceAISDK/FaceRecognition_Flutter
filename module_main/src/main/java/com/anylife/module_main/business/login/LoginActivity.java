@@ -138,7 +138,8 @@ public class LoginActivity extends BaseMVPActivity {
         loginParams.setPassword(globalJniMap.get("password")); //
 
 
-        //外网暂不支持访问  外网暂不支持访问  外网暂不支持访问
+        //外网暂不支持访问
+        //外网暂不支持访问
         mainModuleApiService.goLogin(globalJniMap.get("oauthPath"),loginParams)
                 .compose(SwitchSchedulers.applySchedulers())
                 .subscribe(new BaseObserver<LoginResult>(mContext){

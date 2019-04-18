@@ -68,7 +68,7 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
                 return true;
             } else if (i == R.id.navigation_notifications) {
                 viewPager.setCurrentItem(2);
-                setToolBarTitle("视频");
+                setToolBarTitle("私密记事");
                 return true;
             } else if (i == R.id.navigation_set) {
                 viewPager.setCurrentItem(3);

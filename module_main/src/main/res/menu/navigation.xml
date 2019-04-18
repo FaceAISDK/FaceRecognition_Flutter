@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/icon_me"
-        android:title="视频" />
+        android:title="私密记事" />
 
     <item
         android:id="@+id/navigation_set"

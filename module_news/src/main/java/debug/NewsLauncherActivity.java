@@ -17,7 +17,6 @@ import com.zenglb.framework.news.handylife.NewsPackageActivity;
 import com.zlb.Sp.SPDao;
 import javax.inject.Inject;
 
-import es.dmoral.toasty.Toasty;
 
 import static com.google.android.gms.ads.AdRequest.ERROR_CODE_INTERNAL_ERROR;
 
@@ -65,6 +64,7 @@ public class NewsLauncherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.MyAppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_layout);
 
@@ -74,7 +74,6 @@ public class NewsLauncherActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
 
         mAdView.setAdListener(new AdListener() {
             @Override
@@ -111,8 +110,8 @@ public class NewsLauncherActivity extends AppCompatActivity {
 
         });
 
-
-        UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 3000);    //测试内存泄漏,只为测试.
+        //
+        UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 000);    //测试内存泄漏,只为测试.
 
     }
 

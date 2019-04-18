@@ -100,6 +100,7 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
             // should switch(code)
             Toasty.error(getContext(), message).show();
             mBaseLoadService.showCallback(ErrorCallback.class);  //for easy
+            int a=10;
         } else {
             Log.e("Hello", "loadMoreFail");
 

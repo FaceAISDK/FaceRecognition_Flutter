@@ -2,7 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="MyAppTheme" parent="AppTheme.Base"></style>
-
     <style name="AppTheme.Base" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <!-- 使用 API Level 22 編譯的話，要拿掉前綴字 -->
@@ -16,14 +15,23 @@
         <item name="android:windowBackground">@color/bg_common</item>
         <item name="android:windowIsTranslucent">true</item>
 
-        <item name="actionMenuTextColor">@color/white</item> <!--  敲定颜色-->
-        <item name="android:textSize">13sp</item>            <!--  搞掂字体大小-->
-        <item name="android:textColor">@color/colorPrimary</item> <!--  搞掂字体大小-->
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:windowContentTransitions">true</item>
 
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item> //AlertDialog
-
     </style>
+
+
+
+    <!--应用启动界面-->
+    <style name="MyAppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/ic_launcher_124dp</item>
+    </style>
+
+
+
 
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the title and text -->
@@ -33,8 +41,9 @@
     </style>
 
 
-    <style name="Translucent" parent="Theme.AppCompat.Light.NoActionBar">
 
+
+    <style name="Translucent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
@@ -45,6 +54,8 @@
     </style>
 
 
+
+
     <style name="FullscreenTheme" parent="Theme.AppCompat">
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
@@ -53,10 +64,13 @@
     </style>
 
 
+
+
     <style name="TextLabel" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
         <item name="colorControlActivated">#FFCC00</item>
     </style>
+
 
 
     <style name="Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -64,9 +78,11 @@
     </style>
 
 
+
     <style name="FullscreenActionBarStyle" parent="android:Widget.Holo.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
 
     <style name="MyAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -83,8 +99,6 @@
         <attr name="drawableBottomWidth" format="dimension"/>
         <attr name="isAliganCenter" format="boolean"/>
     </declare-styleable>
-
-
 
 
     <!-- Http 等待Dialog -->
@@ -110,5 +124,6 @@
         <item name="android:minHeight">35dp</item>
         <item name="android:maxHeight">35dp</item>
     </style>
+
 
 </resources>

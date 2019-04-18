@@ -14,7 +14,7 @@
 
         <activity
             android:name="debug.NewsLauncherActivity"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/MyAppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

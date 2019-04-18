@@ -49,7 +49,26 @@ public class AppApplication extends BaseApplication  {
                 .baseGlobalModule(new BaseGlobalModule(this))
                 .build()
                 .inject(this);
+
     }
+
+
+    /**
+     * 新开一个线程初始化第三方的服务，加快App 的启动的速度
+     *
+     */
+    private void initThirdService(){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                //... 初始化各种第三方服务
+
+            }
+        }.start();
+    }
+
+
 
 
 //    /**
@@ -116,7 +135,6 @@ public class AppApplication extends BaseApplication  {
                 //Module  带有构造方法并且参数被使用的情况下所产生的DaggerXXComponent 是没有Create方法的
 //                DaggerMainComponent.create().inject(this);
 //                DaggerMainComponent.builder().mainModule(new MainModule(this)).build().inject(this);
-
 //                DaggerModuleAComponent.builder().moduleaModule(new ModuleaModule(this)).build().inject(this);
 
                 //UI status Builder,需要

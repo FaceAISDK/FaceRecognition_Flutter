@@ -20,6 +20,7 @@
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-8621230724267558/4465517871">
+
     </com.google.android.gms.ads.AdView>
 
 

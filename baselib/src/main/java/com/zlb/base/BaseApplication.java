@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
+import com.squareup.leakcanary.LeakCanary;
 import com.zlb.commontips.CustomCallback;
 import com.zlb.commontips.EmptyCallback;
 import com.zlb.commontips.ErrorCallback;
@@ -46,10 +47,10 @@ public abstract class BaseApplication extends Application implements HasActivity
 
     //Activity ，Service 中的依赖注入。Fragment ---》BaseStatusFragment
     @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;   //Activity 中的注入
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Inject
-    DispatchingAndroidInjector<Service> dispatchingServiceInjector;    //Service 中注入的
+    DispatchingAndroidInjector<Service> dispatchingServiceInjector;
 
     @Override
     public AndroidInjector<Activity> activityInjector() {
@@ -63,13 +64,16 @@ public abstract class BaseApplication extends Application implements HasActivity
 
     /**
      * 敏感的配置全部以HashMap 的方式保存在JNI 层的SO 库里面。
+     *
+     * HashMap --> ArrayMap  是专门为移动设备而定制的。
+     *
      */
     public static HashMap<String, String> globalJniMap = JniInvokeInterface.getJniHashMap();
 
     private static Context appContext;
 
     @Inject
-    NtpUtils ntpUtils;  //
+    NtpUtils ntpUtils;
 
     @Override
     public void onCreate() {
@@ -78,20 +82,23 @@ public abstract class BaseApplication extends Application implements HasActivity
 
         initARouter();
         initDI();
+        //内存泄漏检查
         initLeakCanary();
 
-        ntpUtils.initTimeDif2(); //校准对时
+        //时间校准
+        ntpUtils.initTimeDif2();
 
         //UI 状态提示页面，全局的，不用每个页面都添加
         LoadSir.beginBuilder()
-                .addCallback(new ErrorCallback())          //添加各种状态页
+                .addCallback(new ErrorCallback())
                 .addCallback(new EmptyCallback())
                 .addCallback(new LoadingCallback())
                 .addCallback(new TimeoutCallback())
                 .addCallback(new CustomCallback())
-                .setDefaultCallback(LoadingCallback.class) //设置默认状态页
+                .setDefaultCallback(LoadingCallback.class)
                 .commit();
 
+        //测试环境下数据库可视化调试
         showDebugDBAddressLogToast(this);
 
     }
@@ -111,12 +118,12 @@ public abstract class BaseApplication extends Application implements HasActivity
      * 初始化内存泄露检测
      */
     private void initLeakCanary() {
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            return;
-//        }
-//        LeakCanary.install(this);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
 

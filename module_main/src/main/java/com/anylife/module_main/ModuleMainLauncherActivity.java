@@ -122,9 +122,7 @@ public class ModuleMainLauncherActivity extends BaseMVPActivity implements EasyP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setToolBarVisible(View.GONE);  //这里是不需要Base 中的Toolbar,不要的情况毕竟是少数
-
         requestAllPermissions();
     }
 

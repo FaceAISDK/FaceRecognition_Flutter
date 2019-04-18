@@ -50,7 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         initViews();
         loadHttp();  //在这里进行Http 的请求
 
-        HashMap<String, String> map = JniInvokeInterface.getJniHashMap();
+//        HashMap<String, String> map = JniInvokeInterface.getJniHashMap();
 //        Log.d("TAG", map.toString());
     }
 
