@@ -13,29 +13,25 @@ import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.http.result.ArticlesResult;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.base.BaseWebViewActivity;
-import com.zlb.commontips.ErrorCallback;
 import com.zlb.customview.MySwipeRefreshLayout;
 import com.zlb.dagger.scope.ActivityScope;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import es.dmoral.toasty.Toasty;
 
 /**
- * fragment contain the content lists with 2 different types of items.
- * 代码仅供阅读，不可用于任何形式的商业用途
- * <p>
- * <p>
+ * 这些Fragment 在常驻在主页面不会销毁，要实现懒加载，减少一下子就那么多的内存占用
+ *
+ *
  * 接口是没有分页的，仅仅是为了模拟分页
  * <p>
  * Created by zlb on 2018/3/23.
  */
 @ActivityScope
 public class NewsFragment extends BaseStatusFragment implements NewsContract.NewsView {
-    private static final String ARG_DATA_TYPE = "data_type";      //data type {cityguide,shop,eat}
+    private static final String ARG_DATA_TYPE = "data_type";
 
     private static final int perPageSize = 20;
     private int page = 1;      //假设我们的Page 都是从1开始
@@ -99,11 +95,7 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
         if (articlesBeans.size() == 0) {
             // should switch(code)
             Toasty.error(getContext(), message).show();
-            mBaseLoadService.showCallback(ErrorCallback.class);  //for easy
-            int a=10;
         } else {
-            Log.e("Hello", "loadMoreFail");
-
             newsAdapter.loadMoreFail(); //load more failed
         }
     }
@@ -133,7 +125,8 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
     private void refresh() {
         page = 1;
         mSwipeRefreshLayout.setRefreshing(true);
-        newsAdapter.setEnableLoadMore(false);  //这里的作用是防止下拉刷新的时候还可以上拉加载
+        //这里的作用是防止下拉刷新的时候还可以上拉加载
+        newsAdapter.setEnableLoadMore(false);
         mPresenter.getHandyLifeData(getArguments().getString(ARG_DATA_TYPE), page);
     }
 

@@ -19,23 +19,18 @@ import com.zenglb.framework.news.R;
 /**
  * 新闻的管理包装Fragment ，里面是TabLayout 包装了N个NewsFragment
  *
- * 为了组件化
+ * 为了组件化。
  *
  */
 //@ActivityScope
 public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     private ViewPager mViewPager;
-    private TabLayout mTabLayout;       //TabLayout
-    private String[] tabsTitle;         //tabs 的标题
-    private String[] tabsDataTypeTitle; //每个Tabs 请求Http 数据时候对应的类型
+    private TabLayout mTabLayout;
+    private String[] tabsTitle;
+    private String[] tabsDataTypeTitle;
 
 
-    /**
-     *
-     *
-     * @return
-     */
     public static NewsPackageFragment newInstance() {
         NewsPackageFragment fragment = new NewsPackageFragment();
         Bundle args = new Bundle();
@@ -103,8 +98,7 @@ public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSele
 
     /**
      * FragmentStatePagerAdapter ：不可见会被回收资源，也就是占用的资源少啊
-     * FragmentPagerAdapter      ：可能会导致大量的内存被占用，资源一直占用
-     *
+     * FragmentPagerAdapter      ：可能会导致大量的内存被占用，资源一直占用 （可以配合懒加载）
      *
      */
     private class SectionsPagerAdapter extends FragmentStatePagerAdapter {

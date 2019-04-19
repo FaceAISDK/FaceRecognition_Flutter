@@ -6,6 +6,7 @@ import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -31,25 +32,22 @@ import es.dmoral.toasty.Toasty;
  * APP的主控区域，跳转和分发集中在这里
  * <p>
  * <p>
- * butterKnife 不能使用，用https://plugins.jetbrains.com/plugin/8219-android-view-generator 代替吧
- * <p>
- * 官方的BottomNavi
- * <p>
- * Sadly, there isn't any way to force enable or disable this behaviour which may not work with every design.
- * It also doesn't allow populating the Bottom Navigation View with more than five items - as per the design spec
- * (it throws an IllegalArgumentException if you try to).
+ * 组件化工程 butterKnife 不能使用，
+ * 用https://plugins.jetbrains.com/plugin/8219-android-view-generator 代替吧
  * <p>
  * Created by anylife.zlb@gmail.com on 2019/2/15.
  */
 public class MainActivityBottomNavi extends BaseMVPActivity {
     private ViewPager viewPager;
     private MenuItem menuItem;
-
+    private BottomNavigationView navigation;
     @Inject
     SPDao spDao;
 
+
+    //懒加载一下子
     @Inject
-    NewsFragmentShell newsFragmentShell;  // Lazy<DemoFragment>
+    NewsFragmentShell newsFragmentShell;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,7 +55,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             int i = item.getItemId();
-
             if (i == R.id.navigation_home) {
                 viewPager.setCurrentItem(0);
                 setToolBarTitle("主页");
@@ -86,15 +83,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
         setToolBarTitle("主页");
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
     protected int getLayoutId() {
@@ -102,11 +90,13 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
     }
 
 
+
     public void initViews() {
+        //设置App 的Logo
         getToolbar().setNavigationIcon(R.drawable.ic_av_timer);
 
-        final BottomNavigationView navigation = findViewById(R.id.navigation);
-
+        //这里的icon 一般都有动画的
+        navigation = findViewById(R.id.navigation);
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigation.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {
             final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
@@ -135,11 +125,15 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
                 }
                 menuItem = navigation.getMenu().getItem(position);
                 menuItem.setChecked(true);
+                //Title 没有改变
+
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
             }
+
         });
 
 
@@ -149,6 +143,7 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
     }
 
     /**
+     * 根据业务划分组件化
      *
      * @param viewPager
      */
@@ -157,7 +152,7 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
 
         adapter.addFragment(MainFragment.newInstance());
 
-
+        //特殊的处理一下newsFragment。因为单独组件化出去了，团队专人负责，单独调试编译
         IFragmentService iFragmentService = ComponentServiceFactory.getInstance(this).getNewsFragmentService();
         //iFragmentService 是空的话说明是组件化的单独的调试啊
         if (null != iFragmentService) {
@@ -192,8 +187,14 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
         }
     }
 
+    /**
+     * 主页面不要显示返回按钮
+     *
+     * @return
+     */
     protected boolean isShowBacking() {
         return false;
     }
+
 
 }
