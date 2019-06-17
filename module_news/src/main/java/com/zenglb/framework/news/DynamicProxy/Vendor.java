@@ -1,4 +1,4 @@
-package com.zenglb.framework.module_note.test;
+package com.zenglb.framework.news.DynamicProxy;
 
 import android.util.Log;
 
@@ -7,16 +7,15 @@ import android.util.Log;
  *
  */
 public class Vendor implements Sell {
-    String Tag=Vendor.class.getSimpleName();
-
 
     @Override
     public void sell() {
-        Log.e(Tag,"in sell method");
+        Log.e("HHHH","in sell method");
     }
 
     @Override
     public void ad() {
-        Log.e(Tag,"in ad method");
+        Log.e("HHHH","in ad method");
     }
+
 }

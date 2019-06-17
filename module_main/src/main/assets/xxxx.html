@@ -1,0 +1,36 @@
+<!DOCtype html>
+<html>
+<head>
+    <title></title>
+</head>
+<body onload="whatBrowser()">
+<script>
+function whatBrowser() {
+document.Browser.Name.value=navigator.appName;
+document.Browser.Version.value=navigator.appVersion;
+document.Browser.Code.value=navigator.appCodeName;
+document.Browser.Agent.value=navigator.userAgent;
+}
+</script>
+
+<table>
+    <form name="Browser">
+        <tr>
+            <td> 浏览器名称: </td>
+            <td> <input type="txt" name="Name" size="110%"></td>
+        </tr>
+        <tr>
+            <td> 版本号:</td>
+            <td> <input type="txt" name="Version" size="110%"></td>
+        </tr>
+        <tr>
+            <td> 代码名称: </td>
+            <td> <input type="txt" name="Code" size="110%"></td>
+        </tr>
+        <tr>
+            <td> 用户代理标识:</td>
+            <td> <input type="txt" name="Agent" size="110%"></td>
+        </tr>
+    </form>
+</table>
+</body>

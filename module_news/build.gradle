@@ -67,7 +67,6 @@ android {
         }
     }
 
-
     compileOptions {
         sourceCompatibility rootProject.ext.sourceCompatibility
         targetCompatibility rootProject.ext.targetCompatibility
@@ -77,10 +76,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
 
+    testImplementation 'junit:junit:4.12'
     implementation project(':baselib')
 
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"

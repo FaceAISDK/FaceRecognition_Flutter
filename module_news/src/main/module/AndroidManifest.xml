@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme"
         tools:replace="android:label">
-
+        <activity android:name=".glidetestxxxxxxxxxx.GlideTestActivity"></activity>
         <activity
             android:name="debug.NewsLauncherActivity"
             android:theme="@style/MyAppTheme.Launcher">
@@ -22,13 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".NewsWebActivity"
             android:launchMode="singleTop" />
-
-        <activity android:name="com.zenglb.framework.news.handylife.NewsPackageActivity"/>
-
+        <activity android:name=".handylife.NewsPackageActivity" />
     </application>
 
 </manifest>

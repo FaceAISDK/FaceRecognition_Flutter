@@ -16,8 +16,6 @@ import javax.inject.Inject;
  */
 public class NewsRepository implements INewsDataSource {
 
-    static int i=0;
-
     // Get the ApiService from dagger。 用dagger 来注入 ApiService
     @Inject
     NewsApiService apiService;
@@ -45,9 +43,7 @@ public class NewsRepository implements INewsDataSource {
                     @Override
                     public void onSuccess(ArticlesResult lifeResultBeans) {
 
-                        Log.e("Thread-main",++i+"   ---  "+Thread.currentThread().getName()+Thread.currentThread().getId());
-
-
+                        //api 服务已经不可以使用了！
                         if (null != loadNewsCallback) {
                             loadNewsCallback.onHandyLifeDataSuccess(lifeResultBeans);
                         }
@@ -56,7 +52,6 @@ public class NewsRepository implements INewsDataSource {
                     @Override
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
-                        Log.e("Thread-main",++i+"   ---  "+Thread.currentThread().getName()+Thread.currentThread().getId());
 
                         if (null != loadNewsCallback) {
                             loadNewsCallback.onHandyLifeDataFailed(code, message);

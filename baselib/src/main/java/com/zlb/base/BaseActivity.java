@@ -37,7 +37,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private Toolbar mToolbar;
     public Context mContext;
 
-    public LoadService mBaseLoadService; //Http Error，empty,Loading,timeout状态管理器
+    //Http Error，empty,Loading,timeout状态管理器
+    public LoadService mBaseLoadService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         View rootView = customContentView(View.inflate(this, R.layout.activity_base, null));
         setContentView(rootView);
-
         initViews();
-        loadHttp();  //在这里进行Http 的请求
+
+        //在这里进行Http 的请求
+        loadHttp();
 
 //        HashMap<String, String> map = JniInvokeInterface.getJniHashMap();
 //        Log.d("TAG", map.toString());
@@ -73,7 +75,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT);
-
             flContent.addView(content, params);
 
 //            ButterKnife.bind(this, rootView);   //组件化后 ButterKnife 很不好使用，改用Android View Generator
@@ -83,7 +84,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
         return rootView;
     }
-
 
     /**
      * 点击按钮的监听
@@ -111,27 +111,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     protected abstract void initViews();
 
-    /*
-     * Activity的跳转，太简单了
-     *
-     */
-    public final void startActivity(Class<?> cla) {
-        Intent intent = new Intent();
-        intent.setClass(this, cla);
-        startActivity(intent);
-    }
-
-
-    /**
-     * Activity -> webview Activity的跳转-带参数
-     *
-     * @param link
-     */
-    public final void goWebView(String link) {
-//        Intent intent = new Intent(this, WebActivity.class);
-//        intent.putExtra(BaseWebViewActivity.URL, link);
-//        startActivity(intent);
-    }
 
     public final Context getContext() {
         return mContext;
@@ -165,7 +144,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public final void setToolBarVisible(int visible) {
         getToolbar().setVisibility(visible);
         setSupportActionBar(getToolbar());
-
         mToolbar = null;
     }
 
@@ -189,7 +167,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         return true;
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -197,7 +174,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             showBack();
         }
     }
-
 
     /**
      * 防止内存泄漏需要：
@@ -214,11 +190,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         HttpUiTips.dismissDialog(mContext);  // 非常的重要呢！！
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
+
 
 
 }

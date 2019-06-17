@@ -1,4 +1,4 @@
-package com.zenglb.framework.module_note.test;
+package com.zenglb.framework.news.DynamicProxy;
 
 
 /**

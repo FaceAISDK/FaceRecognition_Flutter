@@ -8,7 +8,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 /**
- *
+ * 这个是直接拷贝系统的源码，《东莞狮龙路项目》
  *
  */
 public class SntpClient

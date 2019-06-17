@@ -39,6 +39,10 @@ public class NewsGlobalModule {
     @Singleton
     public NewsApiService provideApiService(SPDao spDao, Context mContext) {
         //Retrofit 的create 真是精华所在啊！
+        //retrofit.create(Api.class) 动态代理
+
+        //Return 的api对象其实是一个动态代理对象，并不是一个真正的NewsApiService接口的implements产生的对象
+
         return HttpRetrofit.getRetrofit(spDao, mContext).create(NewsApiService.class);
     }
 

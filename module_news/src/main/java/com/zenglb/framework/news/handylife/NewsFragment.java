@@ -13,6 +13,7 @@ import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.http.result.ArticlesResult;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.base.BaseWebViewActivity;
+import com.zlb.commontips.EmptyCallback;
 import com.zlb.customview.MySwipeRefreshLayout;
 import com.zlb.dagger.scope.ActivityScope;
 
@@ -31,10 +32,15 @@ import es.dmoral.toasty.Toasty;
  */
 @ActivityScope
 public class NewsFragment extends BaseStatusFragment implements NewsContract.NewsView {
-    private static final String ARG_DATA_TYPE = "data_type";
+    //一般的没有必要实现懒加载
+    protected boolean isViewInitiated;
+    protected boolean isVisibleToUser;
+    protected boolean isDataInitiated;
 
+    private static final String ARG_DATA_TYPE = "data_type";
     private static final int perPageSize = 20;
-    private int page = 1;      //假设我们的Page 都是从1开始
+    //假设我们的Page 都是从1开始
+    private int page = 1;
 
     private RecyclerView mRecyclerView = null;
     private NewsAdapter newsAdapter;
@@ -49,6 +55,41 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
 
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isViewInitiated = true;
+        prepareFetchData(false);
+    }
+
+    /**
+     * 会先于onCreate 和onCreateView 执行
+     *
+     * @param isVisibleToUser
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
+        prepareFetchData(false);
+    }
+
+//    public abstract void fetchData();
+//    public boolean prepareFetchData() {
+//        return prepareFetchData(false);
+//    }
+
+    public boolean prepareFetchData(boolean forceUpdate) {
+        if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
+
+            getNewsData();
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * 显示数据
      *
@@ -60,18 +101,29 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
         if (page == 1) {
             articlesBeans.clear();
         }
-        page++; //next page for simple
-        mBaseLoadService.showSuccess();      // successful case -> show the data, eg RecyclerView,
+        page++;
         articlesBeans.addAll(tabsResultBeansTemp.getArticles());
-        newsAdapter.notifyDataSetChanged(); // update ui
 
-        newsAdapter.setEnableLoadMore(true); //can load more
-        mSwipeRefreshLayout.setRefreshing(false); //as u see
+        //可以加载更多数据
+        newsAdapter.setEnableLoadMore(true);
+        //停止刷新数据
+        mSwipeRefreshLayout.setRefreshing(false);
 
-        if (tabsResultBeansTemp.getArticles().size() > perPageSize - 1) {
-            newsAdapter.loadMoreComplete();
-        } else {
-            newsAdapter.loadMoreEnd();  //no more data
+        if (articlesBeans.size() == 0) {
+            //Api 要是标准的话就自定义转换吧
+            mBaseLoadService.showCallback(EmptyCallback.class);
+
+        } else{
+
+            mBaseLoadService.showSuccess();      // successful case -> show the data, eg RecyclerView,
+            newsAdapter.notifyDataSetChanged();
+
+            if (tabsResultBeansTemp.getArticles().size() > perPageSize - 1) {
+                isDataInitiated = true;
+                newsAdapter.loadMoreComplete();
+            } else {
+                newsAdapter.loadMoreEnd();
+            }
         }
 
     }
@@ -87,16 +139,17 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
     public void getHandyLifeDataFailed(int code, String message) {
         if (page == 1) {
             articlesBeans.clear();
-            newsAdapter.notifyDataSetChanged();  //data clear ,then update ui
+            newsAdapter.notifyDataSetChanged();
         }
         newsAdapter.setEnableLoadMore(true);
         mSwipeRefreshLayout.setRefreshing(false);
 
         if (articlesBeans.size() == 0) {
             // should switch(code)
-            Toasty.error(getContext(), message).show();
+//            Toasty.error(getContext(), message).show();
+            mBaseLoadService.showCallback(EmptyCallback.class);
         } else {
-            newsAdapter.loadMoreFail(); //load more failed
+            newsAdapter.loadMoreFail();
         }
     }
 
@@ -122,7 +175,7 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
     /**
      * refresh data
      */
-    private void refresh() {
+    private void getNewsData() {
         page = 1;
         mSwipeRefreshLayout.setRefreshing(true);
         //这里的作用是防止下拉刷新的时候还可以上拉加载
@@ -138,7 +191,7 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
      */
     @Override
     protected void onHttpReload(View v) {
-        refresh();
+        getNewsData();
     }
 
     /**
@@ -172,7 +225,7 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
         newsAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         mSwipeRefreshLayout = rootView.findViewById(R.id.swipeLayout);
         mSwipeRefreshLayout.setTag("tag" + getArguments().getString(ARG_DATA_TYPE));
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refresh());
+        mSwipeRefreshLayout.setOnRefreshListener(() -> getNewsData());
 
         newsAdapter.setOnItemClickListener((adapter, view, position) -> {
 
@@ -182,8 +235,9 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
             startActivity(intent);
         });
 
-        refresh();
+//        refresh();
     }
+
 
     @Override
     public void onResume() {

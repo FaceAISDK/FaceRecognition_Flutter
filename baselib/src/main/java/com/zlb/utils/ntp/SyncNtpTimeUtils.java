@@ -18,14 +18,15 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * 时间校准Utils.可以自由配置多个外部的NTP 服务器
- *
- *
  */
-public class NtpUtils {
+public class SyncNtpTimeUtils {
 
     @Inject
     SPDao spDao;
 
+    /**
+     * NTP 服务器的地址自己找稳定的配置在这里；
+     */
     private String[] ntpServerHost = new String[]{
             "time.apple.com",
             "ntp3.aliyun.com",
@@ -33,7 +34,7 @@ public class NtpUtils {
     };
 
     @Inject
-    public NtpUtils() {
+    public SyncNtpTimeUtils() {
     }
 
     /**
@@ -51,7 +52,7 @@ public class NtpUtils {
     /**
      * 多个通道一起
      */
-    public void initTimeDif2() {
+    public void syncNTPTime() {
 
         Observable.create((ObservableOnSubscribe<Long>) emitter -> {
             for (int i = 0; i < ntpServerHost.length; i++) {
@@ -84,7 +85,7 @@ public class NtpUtils {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("TIME", e.toString() + "---");
-                        Toasty.info(BaseApplication.getAppContext(), "very time error"+e.toString()).show();
+                        Toasty.info(BaseApplication.getAppContext(), "very time error" + e.toString()).show();
                     }
 
                     @Override

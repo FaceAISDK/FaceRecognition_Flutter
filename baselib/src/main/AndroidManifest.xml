@@ -22,7 +22,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/MyAppTheme">
 
-
         <!-- https://developers.google.com/admob/android/quick-start -->
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
 

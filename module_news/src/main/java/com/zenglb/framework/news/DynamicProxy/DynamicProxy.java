@@ -1,4 +1,4 @@
-package com.zenglb.framework.module_note.test;
+package com.zenglb.framework.news.DynamicProxy;
 
 import android.util.Log;
 
@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
 
 /**
  * 动态代理类
- *
  *
  *
  */
@@ -24,9 +23,9 @@ public class DynamicProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Log.e(Tag,"Before");
+        Log.e("HHHH 111","Before111");
         Object result = method.invoke(obj, args);
-        Log.e(Tag,"After");
+        Log.e("HHHH 111","After111");
         return result;
     }
 

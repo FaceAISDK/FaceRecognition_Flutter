@@ -26,6 +26,16 @@ import retrofit2.http.Query;
  */
 public interface NewsApiService {
 
+    /**
+     * FBI WARMING ,DEMO 中的所有API 都仅供参考交流，他用产后的后果将追究法律责任
+     *
+     *
+     * @param tabType
+     * @return
+     */
+    @GET("https://q.qnmlgb.tech/w/api/articles")
+    Observable<HttpResponse<ArticlesResult>> getArticles2222222222(@Query("_sub_tab") String tabType);
+
 
     /**
      * FBI WARMING ,DEMO 中的所有API 都仅供参考交流，他用产后的后果将追究法律责任

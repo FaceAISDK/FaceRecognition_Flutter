@@ -1,6 +1,7 @@
 package com.anylife.module_main.business.navigation;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
@@ -19,6 +20,8 @@ import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.VideoListFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
+import com.zenglb.downloadinstaller.DownloadInstaller;
+import com.zenglb.downloadinstaller.DownloadProgressCallBack;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseMVPActivity;
 
@@ -30,17 +33,18 @@ import es.dmoral.toasty.Toasty;
 
 /**
  * APP的主控区域，跳转和分发集中在这里
- * <p>
- * <p>
+ *
  * 组件化工程 butterKnife 不能使用，
  * 用https://plugins.jetbrains.com/plugin/8219-android-view-generator 代替吧
- * <p>
+ *
+ * 
  * Created by anylife.zlb@gmail.com on 2019/2/15.
  */
 public class MainActivityBottomNavi extends BaseMVPActivity {
     private ViewPager viewPager;
     private MenuItem menuItem;
     private BottomNavigationView navigation;
+
     @Inject
     SPDao spDao;
 
@@ -126,8 +130,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
                 menuItem = navigation.getMenu().getItem(position);
                 menuItem.setChecked(true);
                 //Title 没有改变
-
-
             }
 
             @Override
@@ -136,11 +138,13 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
 
         });
 
-
         viewPager.setOnTouchListener((v, event) -> false); //禁止ViewPager滑动
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(3);
     }
+
+
+
 
     /**
      * 根据业务划分组件化
@@ -166,6 +170,8 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
 
         viewPager.setAdapter(adapter);
     }
+
+
 
     /**
      * 快速按2次退出

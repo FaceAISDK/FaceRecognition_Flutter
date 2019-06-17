@@ -158,6 +158,7 @@ public final class MyHttpInterceptor implements Interceptor {
     /**
      * 拦截并Log Http 请求的返回 & 重复请求标记完成移除
      *
+     *
      * @param chain
      * @return
      * @throws IOException
@@ -242,7 +243,7 @@ public final class MyHttpInterceptor implements Interceptor {
             response = chain.proceed(request);
         } catch (Exception e) {
             logger.log("<-- HTTP FAILED: " + e);
-            //在这里移除异常的请求登记
+            //异常的返回也是完成Http请求。在这里移除请求登记
             requestIdsMap.remove(requestKey);
             throw e;
         }

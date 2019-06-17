@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -21,7 +20,7 @@ import com.zlb.commontips.ErrorCallback;
 import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
 import com.zlb.jniInterface.JniInvokeInterface;
-import com.zlb.utils.ntp.NtpUtils;
+import com.zlb.utils.ntp.SyncNtpTimeUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -73,7 +72,7 @@ public abstract class BaseApplication extends Application implements HasActivity
     private static Context appContext;
 
     @Inject
-    NtpUtils ntpUtils;
+    SyncNtpTimeUtils syncNTPTime;
 
     @Override
     public void onCreate() {
@@ -86,7 +85,7 @@ public abstract class BaseApplication extends Application implements HasActivity
         initLeakCanary();
 
         //时间校准
-        ntpUtils.initTimeDif2();
+        syncNTPTime.syncNTPTime();
 
         //UI 状态提示页面，全局的，不用每个页面都添加
         LoadSir.beginBuilder()
@@ -100,7 +99,6 @@ public abstract class BaseApplication extends Application implements HasActivity
 
         //测试环境下数据库可视化调试
         showDebugDBAddressLogToast(this);
-
     }
 
     public static Context getAppContext() {

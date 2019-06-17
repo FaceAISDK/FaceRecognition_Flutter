@@ -26,24 +26,38 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SwitchSchedulers {
 
+
+    /**
+     *
+     *
+     * @param disposable
+     */
     public static void unsubscribe(Disposable disposable) {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
     }
 
+
+
+    /**
+     * 在IO 线程请求，Main 处理结果
+     *
+     * @param <T>
+     * @return
+     */
     public static <T> ObservableTransformer<T, T> applySchedulers() {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(@NonNull Observable<T> observable) {
-
 //                Log.e("Thread-io",Thread.currentThread().getName());
-
                 return observable.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
     }
+
+
 
     public static <T> MaybeTransformer<T, T> applyMaybeSchedulers() {
         return new MaybeTransformer<T, T>() {
@@ -55,6 +69,8 @@ public class SwitchSchedulers {
         };
     }
 
+
+
     public static <T> SingleTransformer<T, T> applySingleSchedulers() {
         return new SingleTransformer<T, T>() {
             @Override
@@ -65,6 +81,8 @@ public class SwitchSchedulers {
         };
     }
 
+
+
     public static <T> FlowableTransformer<T, T> applyFlowableSchedulers() {
         return new FlowableTransformer<T, T>() {
             @Override
@@ -74,71 +92,6 @@ public class SwitchSchedulers {
             }
         };
     }
-
-
-
-    /**
-     *  切换到Main 线程
-     */
-    public static <T> ObservableTransformer<T, T> toMainThread22222222() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> upstream) {
-                return upstream
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
-
-
-    /**
-     *  还是在IO线程
-     */
-    public static <T> ObservableTransformer<T, T> toIoThread2222222222() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<T> upstream) {
-                return upstream
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(Schedulers.io());
-            }
-        };
-    }
-
-
-//    /**
-//     * 有进度Schedulers
-//     */
-//    public static <T> ObservableTransformer<T, T> applySchedulers(@NonNull final Dialog dialog) {
-//        return new ObservableTransformer<T, T>() {
-//            @Override
-//            public ObservableSource<T> apply(@NonNull Observable<T> upstream) {
-//                return upstream
-//                        .delay(1, TimeUnit.SECONDS)
-//                        .subscribeOn(Schedulers.io())
-//                        .doOnSubscribe(new Consumer<Disposable>() {
-//                            @Override
-//                            public void accept(@NonNull final Disposable disposable) throws Exception {
-//                                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                    @Override
-//                                    public void onCancel(DialogInterface dialog) {
-//                                        disposable.dispose();
-//                                    }
-//                                });
-//                                dialog.show();
-//                            }
-//                        })
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .doOnTerminate(new Action() {
-//                            @Override
-//                            public void run() throws Exception {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//            }
-//        };
-//    }
 
 
 }

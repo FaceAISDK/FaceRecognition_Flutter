@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--  https://blog.csdn.net/fengyuzhengfan/article/details/52876586  -->
-
-
     <!--代表外部存储区域的根目录下的文件 Environment.getExternalStorageDirectory()/DCIM/camerademo目录-->
     <external-path
         name="AppName_DCIM"

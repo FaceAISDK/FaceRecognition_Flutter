@@ -56,6 +56,8 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        System.gc();  //尽量少的减少人为的干预
+
         setTitle("Android JSBridge");
 
         topLoadingBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -75,7 +77,6 @@ public abstract class BaseWebViewActivity extends BaseActivity {
         setWebViewClient();
         setWebChromeClient();
 
-        System.gc();
     }
 
 

@@ -8,6 +8,9 @@ import android.util.Log;
 /**
  * 存储key-value 数据，支持加密
  * SharedPreferencesDao 就是操作SP
+ *
+ * 大规模的数据还是不要保存在这里，一次加载后会一直在内存中
+ *
  * Created by anylife.zlb@gmail.com on 2016/11/8.
  */
 public class SPDao {
@@ -49,8 +52,9 @@ public class SPDao {
      */
     public <T> T getData(String key, @NonNull Object defValue, @NonNull Class<T> clazz) {
         T t = null;
+        //要的数据类型和给的默认值不一样抛出异常，清醒一下头脑
         if (!defValue.getClass().getSimpleName().equals(clazz.getSimpleName())) {
-            throw new UnsupportedOperationException("defValue type does not equals whit clazz "); //转换将失败！
+            throw new UnsupportedOperationException("defValue type does not equals whit clazz ");
         }
 
         switch (clazz.getSimpleName()) {

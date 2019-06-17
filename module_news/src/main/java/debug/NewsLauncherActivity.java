@@ -5,16 +5,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.zenglb.framework.news.DynamicProxy.Sell;
+import com.zenglb.framework.news.DynamicProxy.Vendor;
 import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.handylife.NewsPackageActivity;
 import com.zlb.Sp.SPDao;
+import com.zlb.utils.antigpsfake.AntiGPSFake;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
 import javax.inject.Inject;
 
 
@@ -51,7 +58,6 @@ public class NewsLauncherActivity extends AppCompatActivity {
                     //没有登陆过就去指导页面（Guide Page）
                     Intent i1 = new Intent();
                     i1.setClass(NewsLauncherActivity.this, NewsPackageActivity.class);
-//                    i1.setClass(NewsLauncherActivity.this, NewsActivity.class);
                     startActivity(i1);
                     NewsLauncherActivity.this.finish();
 
@@ -68,6 +74,14 @@ public class NewsLauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_layout);
 
+
+
+        AntiGPSFake.areThereMockPermissionApps(this);
+        AntiGPSFake.isMockSettingsON(this);
+
+        Log.e("AntiGPSFake",AntiGPSFake.isMockSettingsON(this)+"  "+AntiGPSFake.areThereMockPermissionApps(this));
+
+
         // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
         MobileAds.initialize(this, "ca-app-pub-8621230724267558~7770389405");
 
@@ -75,43 +89,40 @@ public class NewsLauncherActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-                int a=1;
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-                int a=ERROR_CODE_INTERNAL_ERROR;
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-                int a=1;
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-                int a=1;
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-                int a=1;
-            }
-
-        });
-
         //
         UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 000);    //测试内存泄漏,只为测试.
+
+
+
+
+        Sell sell = (Sell) Proxy.newProxyInstance(Sell.class.getClassLoader(), new Class<?>[]{Sell.class}, new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                Log.e("HHHH", "Before");
+                Object object = method.invoke(new Vendor(), args);
+                Log.e("HHHH", "After");
+                return object;
+            }
+        });
+
+        sell.ad();
+
+
+
+        //==========================
+
+        Sell sell1=(Sell) Proxy.newProxyInstance(Sell.class.getClassLoader(), new Class<?>[]{Sell.class}, new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                Log.e("HHHH", "Before");
+                Object object = method.invoke(new Vendor(), args);
+                Log.e("HHHH", "After");
+                return object;
+            }
+        });
+
+
+
 
     }
 

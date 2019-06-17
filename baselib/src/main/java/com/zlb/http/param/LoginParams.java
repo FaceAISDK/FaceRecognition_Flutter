@@ -7,7 +7,7 @@ import com.zlb.jniInterface.JniInvokeInterface;
  * Created by zenglb on 2016/7/4.
  */
 public class LoginParams {
-    // FBI WARMING ！！！
+    // FBI WARMING !
     private String grant_type="password";
     private String client_id=JniInvokeInterface.getJniHashMap().get("clientId");
     private String client_secret= JniInvokeInterface.getJniHashMap().get("clientSecret");

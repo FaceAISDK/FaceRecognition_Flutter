@@ -32,9 +32,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HttpRetrofit {
     private static final String TAG = HttpRetrofit.class.getSimpleName() + "OKHTTP";
-    private static final String baseUrl = "http://t1.int.owl1024.com/";  // WARMING-just for test !
+    private static final String baseUrl = "http://t1" + ".int." + "owl1" + "024.com/";  // WARMING-just for test !
 
-    public static final String CUSTOM_REPEAT_REQ_PROTOCOL = "MY_CUSTOM_REPEAT_REQ_PROTOCOL";  // WARMING-just for test !
+    //throw a custom IOException("Unexpected protocol: " + protocol)
+    public static final String CUSTOM_REPEAT_REQ_PROTOCOL = "MY_CUSTOM_REPEAT_REQ_PROTOCOL";
 
     /**
      * 下面apiService对象其实是一个动态代理对象，并不是一个真正的ApiService接口的implements产生的对象，
@@ -49,7 +50,8 @@ public class HttpRetrofit {
         TOKEN = token;
     }
 
-    public static Map<String, Long> requestIdsMap = new HashMap<>();//Value 里面保存的是时间，我们实际业务是有用的
+    //Value 里面保存的是时间，我们实际业务是有用的
+    public static Map<String, Long> requestIdsMap = new HashMap<>();
 
     /**
      * @param spDao
@@ -66,6 +68,8 @@ public class HttpRetrofit {
                         // If both the original call and the call with refreshed token failed,it will probably keep failing, so don't try again.
                         return null;
                     }
+                    //如果发现Token过去了，可以使用refreshToken刷新获取新的Token ，根据自己的业务情况进行吧，为了简单说明，删除了
+
 //                    refreshToken();
                     return response.request().newBuilder()
                             .header("Authorization", TOKEN)
@@ -101,18 +105,17 @@ public class HttpRetrofit {
                     Request authorisedRequest = originalRequest.newBuilder()
                             .header("Authorization", TOKEN)
                             .header("Connection", "Keep-Alive")  //新添加，time-out默认是多少呢？
-                            .header("Content-Encoding", "gzip")  //使用GZIP 压缩内容，接收不用设置啥吧
+                            .header("Content-Encoding", "gzip")  //使用GZIP 压缩内容
                             .build();
 
-
-                    //拦截处理重复的HTTP 请求,假如你们的业务有需求部分请求不去重可以自己处理啊
+                    //拦截处理重复的HTTP 请求,类似 防止快速点击按钮去重 可以不去处理了，全局统一处理
                     String requestKey = MD5Util.getUpperMD5Str(authorisedRequest.toString());
 
                     if (null == requestIdsMap.get(requestKey)) {
                         requestIdsMap.put(requestKey, System.currentTimeMillis());
                         Log.e("REPEAT REQUEST", "Add Request:" + requestKey);
                     } else {
-
+                        //如果是重复的请求，跑出一个自定义的错误，这个错误大家根据自己的业务定义吧
                         Log.i("REPEAT REQUEST", "-------:" + requestKey);
                         return new Response.Builder()
                                 .protocol(Protocol.get(CUSTOM_REPEAT_REQ_PROTOCOL))
@@ -152,8 +155,8 @@ public class HttpRetrofit {
 
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)     //Set the Api Base URL
-                    .client(okHttpClient) //The HTTP client used for requests.
+                    .baseUrl(baseUrl)       //Set the Api Base URL
+                    .client(okHttpClient)   //The HTTP client used for requests.
                     .addConverterFactory(GsonConverterFactory.create())
                     //CallAdapter用于对原始Call进行再次封装，如Call<R>到Observable<R>
                     //把response封装成rxjava的Observeble，然后进行流式操作

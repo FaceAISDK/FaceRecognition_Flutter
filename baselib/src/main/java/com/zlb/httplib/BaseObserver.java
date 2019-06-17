@@ -64,6 +64,8 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
     }
 
     /**
+     * 很多的http 请求可以不需要用户感知到在请求，showProgress=false
+     *
      * @param mCtx
      * @param showProgress 默认需要显示进程，不要的话请传 false
      */
@@ -81,8 +83,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
 
     @Override
     public final void onNext(HttpResponse<T> response) {
-
-        Log.e("Thread-io", Thread.currentThread().getName());  //
+        Log.e("Thread-io", Thread.currentThread().getName());
 
         HttpUiTips.dismissDialog(mContext);
 
@@ -90,8 +91,9 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
             disposable.dispose();
         }
 
+        //这里根据具体的业务情况自己定义吧
         if (response.getCode() == RESPONSE_CODE_OK || response.getCode() == 200) {
-            //response.getCode() == 200 GOOD LIFE  的API真够奇怪的
+            // response.getCode() == 200  Module News的API真够奇怪的
             // 这里拦截一下使用测试
             onSuccess(response.getResult());
         } else {
@@ -109,7 +111,20 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
     public final void onError(Throwable t) {
         Log.e("okhttp", "Throwable t:" + t.toString());  //打印出异常信息
 
+        //根据throwable 获取错位code和msg
+        getErrorMessage(t);
+
         HttpUiTips.dismissDialog(mContext);
+        onFailure(errorCode, errorMsg);
+    }
+
+
+    /**
+     * 处理Throwable 获取对用的error msg&code
+     *
+     * @param t TH
+     */
+    private void getErrorMessage(Throwable t){
         if (t instanceof HttpException) {
             HttpException httpException = (HttpException) t;
             errorCode = httpException.code();
@@ -146,9 +161,10 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
             errorCode = RESPONSE_FATAL_EOR;
             errorMsg = "运行时错误" + t.toString();
         }
-
-        onFailure(errorCode, errorMsg);
     }
+
+
+
 
 
     /**
@@ -199,7 +215,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
                 break;
         }
 
-        if (mContext != null && Thread.currentThread().getName().toString().equals(Thread_Main)) {
+        if (mContext != null && Thread.currentThread().getName().equals(Thread_Main)) {
             Toasty.error(mContext.getApplicationContext(), message + "   code=" + code, Toast.LENGTH_SHORT).show();
         }
 

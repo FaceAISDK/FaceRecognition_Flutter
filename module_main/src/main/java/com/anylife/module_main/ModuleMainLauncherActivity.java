@@ -30,7 +30,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 /**
  *
  *
- * <p>
  * Created by anylife.zlb@gmail.com on 2017/1/11.
  */
 public class ModuleMainLauncherActivity extends BaseMVPActivity implements EasyPermissions.PermissionCallbacks {
@@ -134,7 +133,6 @@ public class ModuleMainLauncherActivity extends BaseMVPActivity implements EasyP
 
     @Override
     protected void initViews() {
-
 
     }
 

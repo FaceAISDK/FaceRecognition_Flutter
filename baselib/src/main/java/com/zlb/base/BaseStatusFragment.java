@@ -30,6 +30,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Created by zenglb on 2017/1/5.
  */
 public abstract class BaseStatusFragment extends RxFragment implements HasSupportFragmentInjector {
+
     //保证Fragment即使在onDetach后，仍持有Activity的引用（有引起内存泄露的风险，但是相比空指针闪退，这种做法“安全”些）
     protected Activity mActivity;            //防止getActivity()== null
     protected LoadService mBaseLoadService;  //基础的页面状态显示器
@@ -53,7 +54,6 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
 
         //返回全局的加载反馈页面 ！
         return mBaseLoadService.getLoadLayout();
-//        return rootView;
     }
 
     protected abstract int onCreateFragmentView();
@@ -62,26 +62,13 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        loadHttp();
-
-    }
-
-
-
-    /**
-     * 会先于onCreate 和onCreateView 执行
-     *
-     * @param isVisibleToUser
-     */
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
     }
 
 
     public  abstract void initView(View rootView);
 
     /**
-     * Http 请求的重新加载,这个干啥
+     * Http 请求的重新加载,这个干啥 ！！！！
      *
      */
     protected void onHttpReload(View v) {
@@ -120,7 +107,5 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
         super.onDestroy();
         HttpUiTips.dismissDialog(getActivity());
     }
-
-
 
 }
