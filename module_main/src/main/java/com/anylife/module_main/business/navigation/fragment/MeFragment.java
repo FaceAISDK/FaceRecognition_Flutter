@@ -15,7 +15,7 @@ import com.zlb.base.BaseStatusFragment;
 import com.zlb.dagger.scope.ActivityScope;
 import com.zlb.httplib.BaseObserver;
 import com.zlb.httplib.rxUtils.SwitchSchedulers;
-import com.zlb.utils.ntp.NtpUtils;
+import com.zlb.utils.ntp.SyncNtpTimeUtils;
 
 import javax.inject.Inject;
 
@@ -88,7 +88,7 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
     }
 
     @Inject
-    NtpUtils ntpUtils;
+    SyncNtpTimeUtils ntpUtils;
 
     @Override
     public void onClick(View view) {

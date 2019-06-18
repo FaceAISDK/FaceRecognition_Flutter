@@ -3,7 +3,7 @@
 ---
 ![image.png](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ---
-但还是熟悉配方和味道，欢迎交流👏
+但还是熟悉配方和味道，欢迎交流 👏
 
 # 教训：自由的世界也是有规则的
 

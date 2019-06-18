@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'org.greenrobot.greendao'  //for greenDao
+apply plugin: 'org.greenrobot.greendao'
+
+////准备Java，kotlin 混合开发
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
 
@@ -57,6 +62,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.ext.kotlin_version"
 
     api "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:design:$rootProject.ext.supportLibraryVersion"
