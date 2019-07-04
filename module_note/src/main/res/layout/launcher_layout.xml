@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/bg"
         android:background="@drawable/bg"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"

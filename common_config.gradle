@@ -20,7 +20,9 @@ rootProject.ext {
     //4.support Lib Version ,最好全部使用同一个版本号
     supportLibraryVersion = '28.0.0'
 
+    //等kotlin 到2.0 版本的时候再大规模使用
     kotlin_version= '1.3.31'
+    object_box= '2.3.4'
 
     daggerVersion = '2.21'
     dexmakerVersion = '1.2'

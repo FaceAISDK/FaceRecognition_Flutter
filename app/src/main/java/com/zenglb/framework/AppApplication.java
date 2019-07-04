@@ -35,7 +35,6 @@ public class AppApplication extends BaseApplication  {
         super.onCreate();
         initApplication();
 
-
         //集成模式还要帮子NewsModule 初始化数据,Fragment 组件化下沉
         ComponentServiceFactory.getInstance(this)
                 .setNewsFragmentService(new NewsFragmentService());
@@ -67,8 +66,6 @@ public class AppApplication extends BaseApplication  {
             }
         }.start();
     }
-
-
 
 
 //    /**

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
+import com.zlb.base.BaseApplication;
 import com.zlb.httplib.MyHttpInterceptor;
 import com.zlb.utils.MD5Util;
 
@@ -145,12 +147,14 @@ public class HttpRetrofit {
             //这里仍然需要指定是因为参数，行为的设置等
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .retryOnConnectionFailure(true)  //是否在网络差的时候重试
-                    .connectTimeout(7, TimeUnit.SECONDS)
-                    .readTimeout(6, TimeUnit.SECONDS)
-                    .writeTimeout(7, TimeUnit.SECONDS)
+                    .connectTimeout(77, TimeUnit.SECONDS)
+                    .readTimeout(76, TimeUnit.SECONDS)
+                    .writeTimeout(77, TimeUnit.SECONDS)
                     .addNetworkInterceptor(mRequestInterceptor)
                     .authenticator(mAuthenticator2)
                     .addInterceptor(myHttpInterceptor)
+                    .addInterceptor(new ChuckInterceptor(BaseApplication.getAppContext()))
+
                     .build();
 
 

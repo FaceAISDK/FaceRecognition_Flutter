@@ -3,21 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zenglb.framework.module_note">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="debug.NoteApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme"
-        tools:replace="android:theme"
-        android:supportsRtl="true">
-        <activity android:name=".TestActivity">
+        android:supportsRtl="true"
+        android:theme="@style/MyAppTheme"
+        tools:replace="android:theme">
+
+
+        <activity android:name=".NoteEditActivity" />
+
+
+        <activity
+            android:name=".NoteMainActivity"
+            android:label="@string/note_title_activity_note_main" />
+
+
+        <activity
+            android:name=".debug.NoteLauncherActivity"
+            android:label="@string/note_title_activity_note_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>

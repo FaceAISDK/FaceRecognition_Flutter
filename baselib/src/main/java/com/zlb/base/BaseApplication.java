@@ -36,6 +36,9 @@ import dagger.android.HasActivityInjector;
 import dagger.android.HasServiceInjector;
 
 /**
+ * 使用Kotlin 混合开发的module
+ *
+ *
  * 参考{@link dagger.android.DaggerApplication}Beta 项目，项目组没有3个以上的Android 开发不建议使用Dagger XXX
  * <p>
  * BaseApplication，初始化必然初始化的一些配置

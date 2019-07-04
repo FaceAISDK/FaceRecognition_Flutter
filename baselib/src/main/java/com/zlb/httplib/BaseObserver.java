@@ -3,6 +3,7 @@ package com.zlb.httplib;
 import android.content.Context;
 import android.os.NetworkOnMainThreadException;
 import android.support.annotation.CallSuper;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -52,7 +53,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      *
      * @param t
      */
-    public abstract void onSuccess(T t);
+    public abstract void onSuccess(@Nullable T t);
 
 
     /**

@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">module_note</string>
+    <string name="note_app_name">module_note</string>
+    <string name="note_title_activity_note_main">K混合开发</string>
+    <string name="note_navigation_drawer_open">Open navigation drawer</string>
+    <string name="note_navigation_drawer_close">Close navigation drawer</string>
+    <string name="note_nav_header_title">Android Studio</string>
+    <string name="note_nav_header_subtitle">android.studio@android.com</string>
+    <string name="note_nav_header_desc">Navigation header</string>
+    <string name="note_action_settings">Settings</string>
+
+    <string name="note_menu_home">Home</string>
+    <string name="note_menu_gallery">Gallery</string>
+    <string name="note_menu_slideshow">Slideshow</string>
+    <string name="note_menu_tools">Tools</string>
+    <string name="note_menu_share">Share</string>
+    <string name="note_menu_send">Send</string>
+
 </resources>

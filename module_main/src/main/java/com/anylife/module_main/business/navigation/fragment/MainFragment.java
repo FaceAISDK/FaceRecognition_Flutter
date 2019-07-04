@@ -60,5 +60,4 @@ public class MainFragment extends BaseStatusFragment {
         super.onAttach(context);
     }
 
-
 }

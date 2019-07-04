@@ -1,9 +1,18 @@
 apply plugin: 'com.android.application'
 
+//准备Java，kotlin 混合开发
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+//使用kotlin要使用objectBox 要添加这个
+apply plugin: 'kotlin-kapt'
+
+//放到最后一行，否则会报错
+//apply plugin: 'io.objectbox'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    resourcePrefix "note" //防止资源冲突
-
+    resourcePrefix "note_" //防止资源冲突
 
     defaultConfig {
         applicationId "com.zenglb.framework.module_note"
@@ -13,25 +22,31 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //设置支持的SO abi库架构支持
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+
     }
 
     buildTypes {
 
-            debug {
-                minifyEnabled true		//打开混淆
-                shrinkResources true	//打开资源压缩
+        debug {
+            minifyEnabled true      //打开混淆
+            shrinkResources true    //打开资源压缩
 
-                //设置混淆文件的路径，第一部分为系统已经预先设置的混淆文件，第二部分是我们自己的混淆文件
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            }
-
+            //设置混淆文件的路径，第一部分为系统已经预先设置的混淆文件，第二部分是我们自己的混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
 
         release {
             minifyEnabled false
-            minifyEnabled true		//打开混淆
-            shrinkResources true	//打开资源压缩
+            minifyEnabled true      //打开混淆
+            shrinkResources true    //打开资源压缩
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 
     compileOptions {
@@ -52,4 +67,31 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(path: ':baselib')
 
+    //项目引入Kotlin 的支持,目前只是在Note Module
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.ext.kotlin_version"
+
+
+    //objectBox 相关的引入 在浏览器查看数据
+    debugImplementation  "io.objectbox:objectbox-android-objectbrowser:$rootProject.ext.object_box"
+
+    annotationProcessor "io.objectbox:objectbox-processor:$rootProject.ext.object_box"
+    releaseImplementation  "io.objectbox:objectbox-android:$rootProject.ext.object_box"
+    api "io.objectbox:objectbox-rxjava:$rootProject.ext.object_box"
+    api "io.objectbox:objectbox-kotlin:$rootProject.ext.object_box"
+    kapt "io.objectbox:objectbox-processor:$rootProject.ext.object_box"  //object for kotlin 的支持
+
+
+
+    //Dagger for kotlin
+    kapt 'com.google.dagger:dagger-compiler:2.21' // Dagger 2 注解处理
+    kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
+
+
+
+
+
+
 }
+
+//放到最后一行否则会报错
+apply plugin: 'io.objectbox'

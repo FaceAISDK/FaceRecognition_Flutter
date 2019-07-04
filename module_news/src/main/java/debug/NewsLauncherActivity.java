@@ -7,10 +7,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.zenglb.framework.news.DynamicProxy.Sell;
 import com.zenglb.framework.news.DynamicProxy.Vendor;
 import com.zenglb.framework.news.R;
@@ -25,7 +21,6 @@ import java.lang.reflect.Proxy;
 import javax.inject.Inject;
 
 
-import static com.google.android.gms.ads.AdRequest.ERROR_CODE_INTERNAL_ERROR;
 
 /**
  * 单独的Module 也需要Launcher
@@ -36,7 +31,6 @@ public class NewsLauncherActivity extends AppCompatActivity {
     private static final int FINISH_LAUNCHER = 0;
     private Handler UiHandler = new MyHandler();
 
-    private AdView mAdView;
 
 
     @Inject
@@ -75,25 +69,13 @@ public class NewsLauncherActivity extends AppCompatActivity {
         setContentView(R.layout.launcher_layout);
 
 
-
         AntiGPSFake.areThereMockPermissionApps(this);
         AntiGPSFake.isMockSettingsON(this);
 
         Log.e("AntiGPSFake",AntiGPSFake.isMockSettingsON(this)+"  "+AntiGPSFake.areThereMockPermissionApps(this));
 
-
-        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
-        MobileAds.initialize(this, "ca-app-pub-8621230724267558~7770389405");
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         //
         UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 000);    //测试内存泄漏,只为测试.
-
-
-
 
         Sell sell = (Sell) Proxy.newProxyInstance(Sell.class.getClassLoader(), new Class<?>[]{Sell.class}, new InvocationHandler() {
             @Override
@@ -120,9 +102,6 @@ public class NewsLauncherActivity extends AppCompatActivity {
                 return object;
             }
         });
-
-
-
 
     }
 

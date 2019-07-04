@@ -1,18 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
 
-////准备Java，kotlin 混合开发
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-
 
 android {
-
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
         //配置使用ARouter
         javaCompileOptions {
             annotationProcessorOptions {
@@ -37,12 +33,10 @@ android {
 
 
     buildTypes {
-
         debug {
             debuggable true
             resValue("string", "PORT_NUMBER", "8765")  //数据库调试
         }
-
     }
 
 
@@ -63,17 +57,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.ext.kotlin_version"
+
+
 
     api "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:design:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
-
-//    api 'com.google.android.gms:play-services-ads:17.1.1'  // ！！！
-
-    api 'com.google.firebase:firebase-ads:17.1.3'  //所有的东西都集中到了FireBase
 
     api 'com.squareup.retrofit2:retrofit:2.5.0'     //为了更好的研究Retrofit 改用源码的方式
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
@@ -83,7 +74,7 @@ dependencies {
 
     //RxJava
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.2'
+    api 'io.reactivex.rxjava2:rxjava:2.2.7'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     //Router
@@ -149,7 +140,7 @@ dependencies {
 
 //    debugImplementation project(':library') //debug 版本直接引用本地项目
 //    releaseImplementation '远程库地址'   //release 版本引用远程版本用来最终测试发现问题
-//    implementation fileTree(include: ['*.aar'], dir: 'libs/xxx')  //gradle 在编译前就会自动进到 xxx 目录下面，遍历并引用所有 aar 文件
+//    implementation fileTree(include: ['*.aar'], dir: 'libs/xxx')  //gradle 在编译前就会自动进到 xxx  目录下面，遍历并引用所有 aar 文件
 
 
 }
