@@ -23,6 +23,12 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //配置使用ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
         //设置支持的SO abi库架构支持
         ndk {
             abiFilters 'armeabi-v7a'
@@ -41,7 +47,6 @@ android {
         }
 
         release {
-            minifyEnabled false
             minifyEnabled true      //打开混淆
             shrinkResources true    //打开资源压缩
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -81,13 +86,9 @@ dependencies {
     kapt "io.objectbox:objectbox-processor:$rootProject.ext.object_box"  //object for kotlin 的支持
 
 
-
     //Dagger for kotlin
     kapt 'com.google.dagger:dagger-compiler:2.21' // Dagger 2 注解处理
     kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
-
-
-
 
 
 

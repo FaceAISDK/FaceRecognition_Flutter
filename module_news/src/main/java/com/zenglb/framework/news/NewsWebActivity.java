@@ -2,6 +2,8 @@
 package com.zenglb.framework.news;
 
 import android.os.Bundle;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zlb.base.BaseWebViewActivity;
 
 /**
@@ -9,6 +11,7 @@ import com.zlb.base.BaseWebViewActivity;
  * <p>
  * 验证 JSBridge
  */
+@Route(path = "/news/webActivity")
 public class NewsWebActivity extends BaseWebViewActivity {
 
     @Override

@@ -16,14 +16,13 @@ import javax.inject.Inject;
 
 /**
  * 这里只是新闻资讯 Fragment 的壳Shell。主体在ModuleNews 中
+ * 组件化开发的时候占位一下
  *
  * @author zenglb 2018.10.24
  */
 @ActivityScope
 public class NewsFragmentShell extends Fragment {
 
-    @Inject
-    DaoSession daoSession;
 
     @Inject
     public NewsFragmentShell() {
@@ -50,11 +49,7 @@ public class NewsFragmentShell extends Fragment {
      * @param
      */
     private void viewsInit(View rootView) {
-//        IFragmentService iFragmentService = ComponentServiceFactory.getInstance(getActivity()).getNewsFragmentService();
-//        //iFragmentService 是空的话说明是组件化的单独的调试啊
-//        if (null != iFragmentService) {
-////            iFragmentService.newFragment(getActivity(), R.id.content, getActivity().getSupportFragmentManager(), null, null);
-//        }
+
     }
 
 }

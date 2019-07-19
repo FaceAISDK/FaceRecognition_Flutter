@@ -93,7 +93,11 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.httpReq) {
-//            getMeProfile();
+            for (int i=0;i<222;i++) {
+                getMeProfile();
+            }
+
+//            ARouter.getInstance().build("/news/webActivity").navigation();
 
             ntpUtils.syncNTPTime();
 

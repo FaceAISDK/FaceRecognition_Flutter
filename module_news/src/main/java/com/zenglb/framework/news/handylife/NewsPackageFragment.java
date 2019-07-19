@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.zenglb.framework.news.R;
 
 
@@ -23,6 +25,7 @@ import com.zenglb.framework.news.R;
  *
  */
 //@ActivityScope
+@Route(path = "/news/packageFragment")
 public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     private ViewPager mViewPager;
@@ -30,10 +33,11 @@ public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSele
     private String[] tabsTitle;
     private String[] tabsDataTypeTitle;
 
-
     public static NewsPackageFragment newInstance() {
         NewsPackageFragment fragment = new NewsPackageFragment();
         Bundle args = new Bundle();
+
+        // 构建标准的路由请求，startActivityForResult
 
         fragment.setArguments(args);
         return fragment;

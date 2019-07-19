@@ -1,7 +1,6 @@
 package com.zenglb.framework;
 
 import com.kingja.loadsir.core.LoadSir;
-import com.zenglb.framework.news.FragmentService.NewsFragmentService;
 import com.zlb.base.BaseApplication;
 import com.zlb.commontips.CustomCallback;
 import com.zlb.commontips.EmptyCallback;
@@ -9,9 +8,6 @@ import com.zlb.commontips.ErrorCallback;
 import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
 import com.zlb.dagger.module.BaseGlobalModule;
-import com.zlb.utils.ntp.NtpUtils;
-
-import component.android.com.component_base.ComponentServiceFactory;
 
 /**
  * 组件化开发模式 集成打包的壳工程的Application，其他组件Module模块工程在开发的时候配置Debug目录中的Application
@@ -34,10 +30,6 @@ public class AppApplication extends BaseApplication  {
     public void onCreate() {
         super.onCreate();
         initApplication();
-
-        //集成模式还要帮子NewsModule 初始化数据,Fragment 组件化下沉
-        ComponentServiceFactory.getInstance(this)
-                .setNewsFragmentService(new NewsFragmentService());
 
     }
 

@@ -18,7 +18,7 @@ android {
         //配置使用ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -94,6 +94,7 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
         implementation project(':module_news')
+//        implementation project(':module_note')
 
     }
 

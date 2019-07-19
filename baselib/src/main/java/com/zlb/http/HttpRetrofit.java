@@ -115,16 +115,15 @@ public class HttpRetrofit {
 
                     if (null == requestIdsMap.get(requestKey)) {
                         requestIdsMap.put(requestKey, System.currentTimeMillis());
-                        Log.e("REPEAT REQUEST", "Add Request:" + requestKey);
+                        Log.e("REPEAT-REQUEST", "注册请求:" + requestKey+" ----  "+Thread.currentThread().getName());
                     } else {
-                        //如果是重复的请求，跑出一个自定义的错误，这个错误大家根据自己的业务定义吧
-                        Log.i("REPEAT REQUEST", "-------:" + requestKey);
+                        //如果是重复的请求，抛出一个自定义的错误，这个错误大家根据自己的业务定义吧
+                        Log.i("REPEAT-REQUEST", "重复请求" + requestKey+"  ---------------重复请求 ----"+Thread.currentThread().getName());
                         return new Response.Builder()
                                 .protocol(Protocol.get(CUSTOM_REPEAT_REQ_PROTOCOL))
                                 .request(authorisedRequest) //multi thread
                                 .build();
                     }
-
 
                     Response originalResponse = chain.proceed(authorisedRequest);
                     //把统一拦截的header 打印出来

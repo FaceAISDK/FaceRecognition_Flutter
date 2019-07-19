@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
@@ -37,7 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = BaseActivity.this;
-
+        ARouter.getInstance().inject(this);
         View rootView = customContentView(View.inflate(this, R.layout.activity_base, null));
         setContentView(rootView);
         initViews();
@@ -139,7 +140,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
 
     /**
-     * 是否显示后退按钮,默认显示,可在子类重写该方法.
+     * 是否显示后退按钮,默认显示
+     * 主页面重写该方法不需要显示
      *
      * @return
      */

@@ -25,7 +25,7 @@
    
 
 # Error,empty,Loading,timeout等通用的场景处理，一处Root注入，处处可用
-   项目中的toolbar几乎每个页面都要使用，每个Layout 都写？NONONO
+   项目中的toolbar几乎每个页面都要使用，每个Layout 都写？
    进行网络请求时候的Error，empty,Loading,timeout等通用场景也是必须要处理的，Demo中一处Root注入，处处可用(Power by Loadsir）
 
 # 关于Http网络请求 (Rxjava2+Retrofit2)

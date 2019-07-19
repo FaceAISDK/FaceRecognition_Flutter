@@ -15,10 +15,16 @@ buildscript {
 
         classpath "io.objectbox:objectbox-gradle-plugin:2.3.4"
 
+
+        classpath "com.alibaba:arouter-register:1.0.2"  //必须的吗
+
+
         //警告：不要在这配置应用级别的依赖，你应该在独立的build.gradle 文件中配置
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+
     }
 
 }

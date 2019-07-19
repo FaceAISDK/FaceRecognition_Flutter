@@ -1,5 +1,6 @@
 package com.zlb.httplib;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.zlb.utils.MD5Util;
@@ -23,6 +24,7 @@ import okhttp3.internal.platform.Platform;
 import okio.Buffer;
 import okio.BufferedSource;
 
+import static com.zlb.http.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
 import static com.zlb.http.HttpRetrofit.requestIdsMap;
 import static okhttp3.internal.platform.Platform.INFO;
 
@@ -244,11 +246,17 @@ public final class MyHttpInterceptor implements Interceptor {
         } catch (Exception e) {
             logger.log("<-- HTTP FAILED: " + e);
             //异常的返回也是完成Http请求。在这里移除请求登记
-            requestIdsMap.remove(requestKey);
+            if(!TextUtils.isEmpty(e.toString())&&e.toString().contains(CUSTOM_REPEAT_REQ_PROTOCOL)){
+                Log.i("REPEAT-REQUEST", "remove(requestKey)1     "+Thread.currentThread().getName());
+            }else{
+                requestIdsMap.remove(requestKey);
+            }
             throw e;
         }
 
         requestIdsMap.remove(requestKey);  //在这里移除正常的请求登记
+        Log.i("REPEAT-REQUEST", "remove(requestKey)2     "+Thread.currentThread().getName());
+
 
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
         ResponseBody responseBody = response.body();

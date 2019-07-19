@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
 import android.support.design.widget.NavigationView
 import android.support.v7.widget.Toolbar
+import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.View
@@ -26,7 +27,7 @@ import javax.inject.Inject
 /**
  * 练习使用Kotlin 的使用,混合Java 开发
  *
- * kotlin+dagger+objectbox
+ * kotlin+dagger+objectBox
  *
  */
 class NoteMainActivity : BaseMVPActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -135,7 +136,8 @@ class NoteMainActivity : BaseMVPActivity(), NavigationView.OnNavigationItemSelec
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            getLocalModuleTest()
+//            getLocalModuleTest()
+
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }

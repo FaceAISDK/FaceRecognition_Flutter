@@ -3,13 +3,10 @@ package com.zenglb.framework.news.handylife;
 import android.os.Bundle;
 import android.view.View;
 import com.zenglb.framework.news.R;
-import com.zlb.base.BaseActivity;
 import com.zlb.base.BaseMVPActivity;
 
 import javax.inject.Inject;
 
-import component.android.com.component_base.ComponentServiceFactory;
-import component.android.com.component_base.base.IFragmentService;
 
 
 /**
@@ -36,13 +33,6 @@ public class NewsPackageActivity extends BaseMVPActivity {
 
     @Override
     protected void initViews() {
-
-        IFragmentService iFragmentService = ComponentServiceFactory.getInstance(this).getNewsFragmentService();
-
-        //iFragmentService 是空的话说明是组件化的单独的调试啊
-        if (null != iFragmentService) {
-            iFragmentService.newFragment(this, R.id.fragment_container, getSupportFragmentManager(), null, null);
-        }
 
     }
 }

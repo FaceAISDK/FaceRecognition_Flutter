@@ -23,7 +23,7 @@ android {
         //配置使用ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -84,7 +84,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
 
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    //A
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
 
 

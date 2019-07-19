@@ -1,43 +1,39 @@
 package com.anylife.module_main.business.navigation;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.anylife.module_main.R;
 import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.VideoListFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
-import com.zenglb.downloadinstaller.DownloadInstaller;
-import com.zenglb.downloadinstaller.DownloadProgressCallBack;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseMVPActivity;
+import com.zlb.httplib.BuildConfig;
 
 import javax.inject.Inject;
 
-import component.android.com.component_base.ComponentServiceFactory;
-import component.android.com.component_base.base.IFragmentService;
 import es.dmoral.toasty.Toasty;
 
 /**
  * APP的主控区域，跳转和分发集中在这里
- *
+ * <p>
  * 组件化工程 butterKnife 不能使用，
- * 用https://plugins.jetbrains.com/plugin/8219-android-view-generator 代替吧
- *
- * 
+ * 用 https://plugins.jetbrains.com/plugin/8219-android-view-generator 代替吧
+ * <p>
+ * <p>
  * Created by anylife.zlb@gmail.com on 2019/2/15.
  */
 public class MainActivityBottomNavi extends BaseMVPActivity {
@@ -48,8 +44,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
     @Inject
     SPDao spDao;
 
-
-    //懒加载一下子
     @Inject
     NewsFragmentShell newsFragmentShell;
 
@@ -84,7 +78,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolBarTitle("主页");
     }
 
 
@@ -94,10 +87,10 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
     }
 
 
-
     public void initViews() {
+        setToolBarTitle("主页");
         //设置App 的Logo
-        getToolbar().setNavigationIcon(R.drawable.ic_av_timer);
+        getToolbar().setNavigationIcon(null);
 
         //这里的icon 一般都有动画的
         navigation = findViewById(R.id.navigation);
@@ -118,6 +111,7 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
@@ -144,8 +138,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
     }
 
 
-
-
     /**
      * 根据业务划分组件化
      *
@@ -156,13 +148,12 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
 
         adapter.addFragment(MainFragment.newInstance());
 
-        //特殊的处理一下newsFragment。因为单独组件化出去了，团队专人负责，单独调试编译
-        IFragmentService iFragmentService = ComponentServiceFactory.getInstance(this).getNewsFragmentService();
-        //iFragmentService 是空的话说明是组件化的单独的调试啊
-        if (null != iFragmentService) {
-            adapter.addFragment(iFragmentService.getFragment(null));
-        } else {
+
+        if (BuildConfig.isModule) {
             adapter.addFragment(newsFragmentShell);
+        } else {
+            //Fragment 单独组件化出去了
+            adapter.addFragment((Fragment) ARouter.getInstance().build("/news/packageFragment").navigation());
         }
 
         adapter.addFragment(VideoListFragment.newInstance());
@@ -170,7 +161,6 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
 
         viewPager.setAdapter(adapter);
     }
-
 
 
     /**
@@ -193,14 +183,10 @@ public class MainActivityBottomNavi extends BaseMVPActivity {
         }
     }
 
-    /**
-     * 主页面不要显示返回按钮
-     *
-     * @return
-     */
-    protected boolean isShowBacking() {
+
+    @Override
+    protected boolean isShowBackIcon() {
         return false;
     }
-
 
 }
