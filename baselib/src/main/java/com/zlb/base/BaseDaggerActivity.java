@@ -12,12 +12,14 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 /**
+ * 感觉这里命名为 BaseDaggerActivity 会好一点吧
+ *
  * 需要依赖注入extends this ，其实可以不要这么多Base, 在
  * Application 中完成所有的就好了，是不是 ！～
  * <p>
  * Created by zlb on 2017/8/20.
  */
-public abstract class BaseMVPActivity extends BaseActivity implements HasSupportFragmentInjector {
+public abstract class BaseDaggerActivity extends BaseActivity implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> supportFragmentInjector;
@@ -27,8 +29,6 @@ public abstract class BaseMVPActivity extends BaseActivity implements HasSupport
 
         /**
          * 一处注入就好了，处处使用。
-         *
-         *
          */
         AndroidInjection.inject(this);
 

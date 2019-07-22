@@ -19,7 +19,7 @@ import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
-import com.zlb.base.BaseMVPActivity;
+import com.zlb.base.BaseDaggerActivity;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  *
  * Created by anylife.zlb@gmail.com on 2017/1/11.
  */
-public class ModuleMainLauncherActivity extends BaseMVPActivity implements EasyPermissions.PermissionCallbacks {
+public class ModuleMainLauncherActivity extends BaseDaggerActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final int FINISH_LAUNCHER = 0;
     private Handler UiHandler = new MyHandler();

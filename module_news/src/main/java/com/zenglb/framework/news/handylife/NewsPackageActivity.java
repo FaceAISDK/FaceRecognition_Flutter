@@ -3,7 +3,7 @@ package com.zenglb.framework.news.handylife;
 import android.os.Bundle;
 import android.view.View;
 import com.zenglb.framework.news.R;
-import com.zlb.base.BaseMVPActivity;
+import com.zlb.base.BaseDaggerActivity;
 
 import javax.inject.Inject;
 
@@ -14,7 +14,7 @@ import javax.inject.Inject;
  *
  *
  */
-public class NewsPackageActivity extends BaseMVPActivity {
+public class NewsPackageActivity extends BaseDaggerActivity {
 
     @Inject
     String testNameStr;

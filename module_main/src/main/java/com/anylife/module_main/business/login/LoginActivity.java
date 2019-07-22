@@ -2,11 +2,9 @@ package com.anylife.module_main.business.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +17,7 @@ import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.anylife.module_main.http.MainModuleApiService;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
-import com.zlb.base.BaseMVPActivity;
+import com.zlb.base.BaseDaggerActivity;
 import com.zlb.http.HttpRetrofit;
 import com.zlb.http.param.LoginParams;
 import com.zlb.httplib.BaseObserver;
@@ -38,7 +36,7 @@ import static com.zlb.base.BaseApplication.globalJniMap;
  * Created by anylife.zlb@gmail.com on 2018/1/11.
  */
 @Route(path = "/login/activity")
-public class LoginActivity extends BaseMVPActivity {
+public class LoginActivity extends BaseDaggerActivity {
     EditText etUsername;
     EditText etPassword;
     Button loginBtn;

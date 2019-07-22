@@ -3,17 +3,12 @@ package com.zenglb.framework.module_note;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.zenglb.framework.module_note.http.NoteApiService;
-import com.zlb.Sp.SPDao;
-import com.zlb.base.BaseActivity;
-import com.zlb.base.BaseMVPActivity;
-
-import javax.inject.Inject;
+import com.zlb.base.BaseDaggerActivity;
 
 /**
  * java 代码里调用Kotlin TestBean,优雅的处理NULL 判断处理.
  */
-public class NoteEditActivity extends BaseMVPActivity {
+public class NoteEditActivity extends BaseDaggerActivity {
 
 
 

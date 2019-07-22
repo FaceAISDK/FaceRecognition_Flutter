@@ -56,12 +56,13 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+
         System.gc();  //尽量少的减少人为的干预
 
         setTitle("Android JSBridge");
 
-        topLoadingBar = (ProgressBar) findViewById(R.id.progress_bar);
-        mWebView = (WebView) findViewById(R.id.webview);
+        topLoadingBar = findViewById(R.id.progress_bar);
+        mWebView = findViewById(R.id.webview);
         mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
         //Android 4.4 开始，默认的浏览器已经是 chrome 了，所以 webview 也是 chrome 了，这就给了 webview 远程调试的能力。

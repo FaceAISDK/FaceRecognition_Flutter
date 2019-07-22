@@ -20,7 +20,7 @@ import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.VideoListFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
 import com.zlb.Sp.SPDao;
-import com.zlb.base.BaseMVPActivity;
+import com.zlb.base.BaseDaggerActivity;
 import com.zlb.httplib.BuildConfig;
 
 import javax.inject.Inject;
@@ -36,7 +36,7 @@ import es.dmoral.toasty.Toasty;
  * <p>
  * Created by anylife.zlb@gmail.com on 2019/2/15.
  */
-public class MainActivityBottomNavi extends BaseMVPActivity {
+public class MainActivityBottomNavi extends BaseDaggerActivity {
     private ViewPager viewPager;
     private MenuItem menuItem;
     private BottomNavigationView navigation;

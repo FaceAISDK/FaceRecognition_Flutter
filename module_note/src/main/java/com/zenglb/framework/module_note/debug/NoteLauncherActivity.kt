@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.View
 import com.zenglb.framework.module_note.NoteMainActivity
 import com.zenglb.framework.module_note.R
-import com.zlb.base.BaseMVPActivity
+import com.zlb.base.BaseDaggerActivity
 
 /**
  * 单独的Module 也需要Launcher
  *
  */
-class NoteLauncherActivity : BaseMVPActivity() {
+class NoteLauncherActivity : BaseDaggerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.MyAppTheme)

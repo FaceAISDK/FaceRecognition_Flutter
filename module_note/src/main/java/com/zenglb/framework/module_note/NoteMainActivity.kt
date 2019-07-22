@@ -9,15 +9,13 @@ import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
 import android.support.design.widget.NavigationView
 import android.support.v7.widget.Toolbar
-import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import com.zenglb.framework.module_note.http.NoteApiService
 import com.zenglb.framework.module_note.objectbox.ObjectBox.boxStore
-import com.zlb.base.BaseMVPActivity
+import com.zlb.base.BaseDaggerActivity
 import com.zlb.httplib.BaseObserver
-import com.zlb.httplib.HttpResponse
 import com.zlb.httplib.rxUtils.SwitchSchedulers
 import io.objectbox.android.AndroidScheduler
 
@@ -30,7 +28,7 @@ import javax.inject.Inject
  * kotlin+dagger+objectBox
  *
  */
-class NoteMainActivity : BaseMVPActivity(), NavigationView.OnNavigationItemSelectedListener {
+class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     lateinit var apiService: NoteApiService

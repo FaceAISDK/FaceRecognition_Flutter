@@ -52,12 +52,10 @@ public class MainFragment extends BaseStatusFragment {
     public void initView(View rootView) {
         webview = rootView.findViewById(R.id.webview);
         webview.loadUrl("https://github.com/AnyLifeZLB/MVP-Dagger2-Rxjava2");
+//        webview.loadUrl("https://www.baidu.com");
+
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
 
 }
