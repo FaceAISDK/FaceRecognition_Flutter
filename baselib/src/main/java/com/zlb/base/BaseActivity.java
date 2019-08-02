@@ -27,7 +27,7 @@ import com.zlb.httplib.R;
  * @author anylife.zlb@gmail.com 20170301
  */
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
-public abstract class BaseActivityCopy extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar mToolbar;
     public Context mContext;
 
@@ -37,7 +37,7 @@ public abstract class BaseActivityCopy extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = BaseActivityCopy.this;
+        mContext = BaseActivity.this;
         ARouter.getInstance().inject(this);
         View rootView = customContentView(View.inflate(this, R.layout.activity_base, null));
         setContentView(rootView);
@@ -75,7 +75,7 @@ public abstract class BaseActivityCopy extends AppCompatActivity implements View
             mBaseLoadService = LoadSir.getDefault().register(contentView, new Callback.OnReloadListener() {
                 @Override
                 public void onReload(View v) {
-                    BaseActivityCopy.this.onHttpReload(v);
+                    BaseActivity.this.onHttpReload(v);
                 }
             });
 

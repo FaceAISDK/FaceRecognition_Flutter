@@ -42,15 +42,15 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
 
 
         //类型后面加?表示可为空
-         var age: String? = null
+         var age: String? = "34567"
         //抛出空指针异常
-//        val ages = age!!.toInt()
+        val ages = age!!.toInt()
         //不做处理返回 null
         val ages1 = age?.toInt() ?: 1111
         //age为空返回-1
         val ages2 = age?.toInt() ?: -1
 
-        Log.e("HHH","value: "+parseInt("3234a232"))
+        Log.e("HHH","value: "+parseInt("3234232"))
 
         var a=1
     }

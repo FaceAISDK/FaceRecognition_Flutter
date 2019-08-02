@@ -7,8 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 //使用kotlin要使用objectBox 要添加这个
 apply plugin: 'kotlin-kapt'
 
-//放到最后一行，否则会报错
-//apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

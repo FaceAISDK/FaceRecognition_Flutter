@@ -28,7 +28,7 @@ import com.zlb.httplib.R
  * @author anylife.zlb@gmail.com 20170301
  */
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
-abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
+abstract class BaseActivityCopy : AppCompatActivity(), View.OnClickListener {
     private var mToolbar: Toolbar? = null
     var context: Context?=null
 
@@ -59,7 +59,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        context = this@BaseActivity
+        context = this@BaseActivityCopy
         ARouter.getInstance().inject(this)
         val rootView = customContentView(View.inflate(this, R.layout.activity_base, null))
         setContentView(rootView)
@@ -97,7 +97,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
             //增加Error，empty,Loading,timeout,等通用的场景处理,这个需要重新的组织一下
 //            mBaseLoadService = LoadSir.getDefault().register(contentView, { v -> onHttpReload(v) } as Callback.OnReloadListener)
 
-            mBaseLoadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivity.onHttpReload(v) }
+            mBaseLoadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivityCopy.onHttpReload(v) }
 
         }
         return rootView
@@ -122,7 +122,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * Http 请求的重新加载
      */
-    private fun onHttpReload(v: View) {}
+    public fun onHttpReload(v: View) {}
 
     protected abstract fun initViews()
 
