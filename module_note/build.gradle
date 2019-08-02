@@ -75,7 +75,6 @@ dependencies {
     //项目引入Kotlin 的支持,目前只是在Note Module
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.ext.kotlin_version"
 
-
     //objectBox 相关的引入 在浏览器查看数据
     debugImplementation  "io.objectbox:objectbox-android-objectbrowser:$rootProject.ext.object_box"
 
@@ -85,10 +84,13 @@ dependencies {
     api "io.objectbox:objectbox-kotlin:$rootProject.ext.object_box"
     kapt "io.objectbox:objectbox-processor:$rootProject.ext.object_box"  //object for kotlin 的支持
 
-
     //Dagger for kotlin
     kapt 'com.google.dagger:dagger-compiler:2.21' // Dagger 2 注解处理
     kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
+
+////  这个相机估计是稳定不了吧，哈哈哈哈
+//    implementation "androidx.camera:camera-core:1.0.0-alpha02"
+//    implementation "androidx.camera:camera-camera2:1.0.0-alpha02"
 
 
 

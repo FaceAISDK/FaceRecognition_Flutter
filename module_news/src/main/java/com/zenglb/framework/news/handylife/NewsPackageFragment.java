@@ -24,7 +24,6 @@ import com.zenglb.framework.news.R;
  * 为了组件化。
  *
  */
-//@ActivityScope
 @Route(path = "/news/packageFragment")
 public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
@@ -33,12 +32,16 @@ public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSele
     private String[] tabsTitle;
     private String[] tabsDataTypeTitle;
 
+    /**
+     * ARouter 提供实例化了，暂时没有用
+     *
+     * @return
+     */
     public static NewsPackageFragment newInstance() {
         NewsPackageFragment fragment = new NewsPackageFragment();
         Bundle args = new Bundle();
 
         // 构建标准的路由请求，startActivityForResult
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -97,6 +100,7 @@ public class NewsPackageFragment extends Fragment implements TabLayout.OnTabSele
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
+
     }
 
 

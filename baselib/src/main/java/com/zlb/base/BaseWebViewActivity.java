@@ -93,7 +93,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 String message = "SSL证书错误";
                 switch (error.getPrimaryError()) {
                     case SslError.SSL_UNTRUSTED:

@@ -73,11 +73,6 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
                     @Override
                     public void onSuccess(MeProfileResult meProfileResult) {
                         meProfile.setText(meProfileResult.toString());
-
-                        for (int i=0;i<2222;i++){
-                            String testVanke="hello kitty"+i;
-                        }
-
                     }
 
                     @Override
@@ -93,9 +88,9 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.httpReq) {
-            for (int i=0;i<222;i++) {
-                getMeProfile();
-            }
+//            for (int i=0;i<222;i++) {
+//                getMeProfile();
+//            }
 
 //            ARouter.getInstance().build("/news/webActivity").navigation();
 
@@ -115,7 +110,6 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
         meProfile = (TextView) rootView.findViewById(R.id.meProfile);
         logout = (Button) rootView.findViewById(R.id.logout);
         logout.setOnClickListener(MeFragment.this);
-
     }
 
 }

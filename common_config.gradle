@@ -36,8 +36,9 @@ rootProject.ext {
     runnerVersion = '1.0.1'
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.1'
-    
 
 }
+
+
 
 

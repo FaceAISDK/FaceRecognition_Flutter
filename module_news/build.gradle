@@ -73,7 +73,7 @@ android {
     }
 
 }
-
+//
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
@@ -84,10 +84,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
 
-    //A
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
-
-
 
 }

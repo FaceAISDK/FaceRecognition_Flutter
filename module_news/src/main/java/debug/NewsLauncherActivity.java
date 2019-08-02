@@ -75,7 +75,12 @@ public class NewsLauncherActivity extends AppCompatActivity {
         Log.e("AntiGPSFake",AntiGPSFake.isMockSettingsON(this)+"  "+AntiGPSFake.areThereMockPermissionApps(this));
 
         //
-        UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 000);    //测试内存泄漏,只为测试.
+        UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 2000);    //测试内存泄漏,只为测试.
+
+
+
+
+
 
         Sell sell = (Sell) Proxy.newProxyInstance(Sell.class.getClassLoader(), new Class<?>[]{Sell.class}, new InvocationHandler() {
             @Override

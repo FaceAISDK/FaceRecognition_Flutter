@@ -39,7 +39,31 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         testObjectBox()
 
 //        getLocalModuleTest()
+
+
+        //类型后面加?表示可为空
+         var age: String? = null
+        //抛出空指针异常
+//        val ages = age!!.toInt()
+        //不做处理返回 null
+        val ages1 = age?.toInt() ?: 1111
+        //age为空返回-1
+        val ages2 = age?.toInt() ?: -1
+
+        Log.e("HHH","value: "+parseInt("3234a232"))
+
+        var a=1
     }
+
+
+    /**
+     * 解析Int
+     *
+     */
+    private fun parseInt(str: String): Int? {
+        return str.toInt()
+    }
+
 
     /**
      * 配合Spring 项目进行开发测试
@@ -49,7 +73,7 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         apiService.getPropertyStr()
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
-                .subscribe(object : BaseObserver<String>(mContext) {
+                .subscribe(object : BaseObserver<String>(context) {
                     override fun onSuccess(userBean: String?) {
                         userBean.toString()
                     }
@@ -65,7 +89,7 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         apiService.getUsers()
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
-                .subscribe(object : BaseObserver<List<UserObjectTestBean>>(mContext) {
+                .subscribe(object : BaseObserver<List<UserObjectTestBean>>(context) {
                     override fun onSuccess(userBean: List<UserObjectTestBean>?) {
                         userBean.toString()
                     }
@@ -134,7 +158,7 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-//            getLocalModuleTest()
+            //            getLocalModuleTest()
 
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()

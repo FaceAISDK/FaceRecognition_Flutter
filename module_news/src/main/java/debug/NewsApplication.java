@@ -1,11 +1,9 @@
 package debug;
 
-import com.zenglb.framework.news.FragmentService.NewsFragmentService;
 import com.zenglb.framework.news.dagger.DaggerNewsModuleComponent;
 import com.zlb.base.BaseApplication;
 import com.zlb.dagger.module.BaseGlobalModule;
 
-import component.android.com.component_base.ComponentServiceFactory;
 
 /**
  * NewsApplication 只是单独调试的时候使用，合并到壳App 不需要，但是这里初始化的数据和服务要在AppApplication
@@ -17,9 +15,6 @@ public class NewsApplication extends BaseApplication {
         super.onCreate();
         login();
 
-        //Fragment 组件化注册®️
-        ComponentServiceFactory.getInstance(this)
-                .setNewsFragmentService(new NewsFragmentService());
 
     }
 

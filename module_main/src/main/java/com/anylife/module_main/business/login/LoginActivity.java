@@ -142,7 +142,7 @@ public class LoginActivity extends BaseDaggerActivity {
         //外网暂不支持访问
         mainModuleApiService.goLogin(globalJniMap.get("oauthPath"),loginParams)
                 .compose(SwitchSchedulers.applySchedulers())
-                .subscribe(new BaseObserver<LoginResult>(mContext){
+                .subscribe(new BaseObserver<LoginResult>(getContext()){
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         loginSuccess(loginResult);

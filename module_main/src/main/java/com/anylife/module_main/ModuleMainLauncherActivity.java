@@ -63,7 +63,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
                     if (TextUtils.isEmpty(accessToken)) {
                         Intent i1 = new Intent();
                         i1.putExtra("isFromLaunch", true);
-                        i1.setClass(mContext, LoginActivity.class);
+                        i1.setClass(getContext(), LoginActivity.class);
 
                         startActivity(i1);
                         ModuleMainLauncherActivity.this.finish();

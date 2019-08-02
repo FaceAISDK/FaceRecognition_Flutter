@@ -27,7 +27,7 @@ import com.zlb.httplib.R;
  * @author anylife.zlb@gmail.com 20170301
  */
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivityCopy extends AppCompatActivity implements View.OnClickListener {
     private Toolbar mToolbar;
     public Context mContext;
 
@@ -37,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = BaseActivity.this;
+        mContext = BaseActivityCopy.this;
         ARouter.getInstance().inject(this);
         View rootView = customContentView(View.inflate(this, R.layout.activity_base, null));
         setContentView(rootView);
@@ -72,7 +72,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 //            ButterKnife.bind(this, rootView);   //组件化后 ButterKnife 很不好使用，改用Android View Generator
 
             //增加Error，empty,Loading,timeout,等通用的场景处理,这个需要重新的组织一下
-            mBaseLoadService = LoadSir.getDefault().register(contentView, (Callback.OnReloadListener) v -> onHttpReload(v));
+            mBaseLoadService = LoadSir.getDefault().register(contentView, new Callback.OnReloadListener() {
+                @Override
+                public void onReload(View v) {
+                    BaseActivityCopy.this.onHttpReload(v);
+                }
+            });
+
         }
         return rootView;
     }
@@ -145,7 +151,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @return
      */
-    protected boolean isShowBackIcon() {
+    private boolean isShowBackIcon() {
         return true;
     }
 
@@ -188,13 +194,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         HttpUiTips.dismissDialog(mContext);  // 非常的重要呢！！
     }
 
-    /**
-     *
-     */
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//    /**
+//     *
+//     */
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 
 
 }
