@@ -12,7 +12,7 @@ import dagger.Provides;
  * @ContributesAndroidInjector(modules = DefaultActivityModule.class)
  * abstract LoginActivity contributeMainActivitytInjector();
  *
- * 就好了 ！
+ *
  *
  * Created by anylife.zlb@gmail.com on 2018/1/11.
  */

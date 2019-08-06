@@ -143,11 +143,13 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         data.toString()
     }
 
+    override val layoutId: Int
+        get() = R.layout.activity_note_main
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_note_main
-    }
 
+    //    override var layoutId: Int
+//        get() = R.layout.activity_note_main
+//        set(value) {}
 
     /**
      * 视图的初始化等

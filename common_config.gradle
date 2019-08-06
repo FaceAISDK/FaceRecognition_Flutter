@@ -13,6 +13,7 @@ rootProject.ext {
     //2.关于Debug和Release 的不同配置
 
 
+
     //3.指定Java version
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8

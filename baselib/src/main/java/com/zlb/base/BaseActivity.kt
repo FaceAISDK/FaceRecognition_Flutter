@@ -17,9 +17,6 @@ import com.zlb.httplib.R
  * [FBI WARMING] 不要为了方便，只有某几个Activity 才会用的（定位，Wi-Fi 数据收集啊，写在Base里面，那还abstract什么）
  * 基类就只做基类的事情,不要把业务层面的代码写到这里来
  *
- *
- *
- *
  * 1.toolbar 的处理封装
  * 2.增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
  * 3.有些简单的页面真的没有必要弄 MVP 了，可以分别的继承BaseActivity 和 BaseMVPActivity
@@ -28,14 +25,14 @@ import com.zlb.httplib.R
  * @author anylife.zlb@gmail.com 20170301
  */
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
-abstract class BaseActivityCopy : AppCompatActivity(), View.OnClickListener {
+abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     private var mToolbar: Toolbar? = null
     var context: Context?=null
 
     //Http Error，empty,Loading,timeout状态管理器
     private var mBaseLoadService: LoadService<*> ?=null
 
-    protected abstract val layoutId: Int //获取相应的布局啊
+    abstract val layoutId: Int //获取相应的布局啊
 
     /**
      * Get toolbar
@@ -52,14 +49,13 @@ abstract class BaseActivityCopy : AppCompatActivity(), View.OnClickListener {
      *
      * @return
      */
-    private val isShowBackIcon: Boolean
-        get() = true
+   open var isShowBackIcon: Boolean = true
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        context = this@BaseActivityCopy
+        context = this@BaseActivity
         ARouter.getInstance().inject(this)
         val rootView = customContentView(View.inflate(this, R.layout.activity_base, null))
         setContentView(rootView)
@@ -67,7 +63,6 @@ abstract class BaseActivityCopy : AppCompatActivity(), View.OnClickListener {
 
         //在这里进行Http 的请求
         loadHttp()
-
     }
 
 
@@ -97,8 +92,7 @@ abstract class BaseActivityCopy : AppCompatActivity(), View.OnClickListener {
             //增加Error，empty,Loading,timeout,等通用的场景处理,这个需要重新的组织一下
 //            mBaseLoadService = LoadSir.getDefault().register(contentView, { v -> onHttpReload(v) } as Callback.OnReloadListener)
 
-            mBaseLoadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivityCopy.onHttpReload(v) }
-
+            mBaseLoadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivity.onHttpReload(v) }
         }
         return rootView
     }
@@ -185,13 +179,6 @@ abstract class BaseActivityCopy : AppCompatActivity(), View.OnClickListener {
         //强制的取消显示
         HttpUiTips.dismissDialog(context)
     }
-
-//    /**
-//     *
-//     */
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//    }
 
 
 }

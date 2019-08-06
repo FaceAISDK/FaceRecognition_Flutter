@@ -82,7 +82,7 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_main_bottom_navi;
     }
 
@@ -185,8 +185,12 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
 
 
     @Override
-    protected boolean isShowBackIcon() {
+    public boolean isShowBackIcon() {
         return false;
     }
+
+
+
+
 
 }

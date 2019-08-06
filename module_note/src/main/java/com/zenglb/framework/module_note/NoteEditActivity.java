@@ -21,7 +21,7 @@ public class NoteEditActivity extends BaseDaggerActivity {
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_note_edit;
     }
 

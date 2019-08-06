@@ -16,7 +16,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  *
  * 需要依赖注入extends this ，其实可以不要这么多Base, 在
  * Application 中完成所有的就好了，是不是 ！～
- * <p>
+ *
  * Created by zlb on 2017/8/20.
  */
 public abstract class BaseDaggerActivity extends BaseActivity implements HasSupportFragmentInjector {

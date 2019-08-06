@@ -66,9 +66,7 @@ public abstract class BaseApplication extends Application implements HasActivity
 
     /**
      * 敏感的配置全部以HashMap 的方式保存在JNI 层的SO 库里面。
-     *
-     * HashMap --> ArrayMap  是专门为移动设备而定制的。
-     *
+     * 其实这里只是为了防止GitHub 代码被Track ！
      */
     public static HashMap<String, String> globalJniMap = JniInvokeInterface.getJniHashMap();
 
@@ -185,7 +183,7 @@ public abstract class BaseApplication extends Application implements HasActivity
     }
 
     /**
-     * 数据库调试，在浏览器中输入地址后可以方便的操作SQLITE数据库
+     * 数据库调试，在浏览器中输入地址后可以方便的操作数据库
      *
      * @param context
      */
@@ -220,7 +218,6 @@ public abstract class BaseApplication extends Application implements HasActivity
      * @return
      */
     public String getMyProcessName() {
-
         try {
             File file = new File("/proc/" + android.os.Process.myPid() + "/" + "cmdline");
             BufferedReader mBufferedReader = new BufferedReader(new FileReader(file));

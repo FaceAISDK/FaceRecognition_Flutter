@@ -15,7 +15,7 @@ import com.zlb.base.BaseWebViewActivity;
 public class NewsWebActivity extends BaseWebViewActivity {
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_news_webview;
     }
 

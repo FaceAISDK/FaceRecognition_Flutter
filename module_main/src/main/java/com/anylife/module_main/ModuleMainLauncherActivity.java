@@ -127,7 +127,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_module_main_launcher;
     }
 

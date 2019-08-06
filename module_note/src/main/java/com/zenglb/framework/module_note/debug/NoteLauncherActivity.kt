@@ -7,6 +7,7 @@ import com.zenglb.framework.module_note.NoteMainActivity
 import com.zenglb.framework.module_note.R
 import com.zlb.base.BaseDaggerActivity
 
+
 /**
  * 单独的Module 也需要Launcher
  *
@@ -22,19 +23,16 @@ class NoteLauncherActivity : BaseDaggerActivity() {
         i1.setClass(this@NoteLauncherActivity, NoteMainActivity::class.java)
         startActivity(i1)
         this@NoteLauncherActivity.finish()
-
     }
 
 
-    override fun getLayoutId(): Int {
-        return R.layout.launcher_layout
-    }
+    override val layoutId: Int
+        get() = R.layout.launcher_layout
 
 
     override fun initViews() {
         setToolBarVisible(View.GONE)
     }
-
 
 
 }

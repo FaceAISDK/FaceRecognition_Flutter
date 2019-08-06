@@ -80,7 +80,7 @@ public class LoginActivity extends BaseDaggerActivity {
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_login;
     }
 

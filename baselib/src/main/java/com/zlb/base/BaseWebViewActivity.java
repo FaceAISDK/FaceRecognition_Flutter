@@ -50,7 +50,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_webview;
     }
 

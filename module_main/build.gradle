@@ -83,7 +83,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
 
-    //自定义相机,Maybe not good
+    //自定义相机,Maybe cameraX better
     implementation([
             'com.camerakit:camerakit:1.0.0-beta3.10',
             'com.camerakit:jpegkit:0.1.0',
