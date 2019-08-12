@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.zenglb.framework.module_note.NoteMainActivity
 import com.zenglb.framework.module_note.R
+import com.zenglb.framework.module_note.cameraX.CameraXActivity
 import com.zlb.base.BaseDaggerActivity
 
 

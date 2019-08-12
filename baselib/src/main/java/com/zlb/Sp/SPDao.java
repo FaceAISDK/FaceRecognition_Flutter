@@ -2,8 +2,9 @@ package com.zlb.Sp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 /**
  * 存储key-value 数据，支持加密

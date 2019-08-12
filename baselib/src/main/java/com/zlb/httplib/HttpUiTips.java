@@ -3,7 +3,9 @@ package com.zlb.httplib;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
+
 import com.zlb.httplib.dialog.ProgressDialogUtil;
 import java.lang.ref.WeakReference;
 

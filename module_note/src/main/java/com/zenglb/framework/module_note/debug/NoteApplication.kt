@@ -20,7 +20,7 @@ class NoteApplication : BaseApplication() {
      */
     override fun onCreate() {
         super.onCreate()
-        ObjectBox.init(this)
+//        ObjectBox.init(this)
     }
 
 

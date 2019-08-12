@@ -1,18 +1,13 @@
 package com.anylife.module_main.business.navigation.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.fragment.app.Fragment;
 import com.anylife.module_main.R;
-
 import com.zlb.dagger.scope.ActivityScope;
-import com.zlb.persistence.dbmaster.DaoSession;
-
 import javax.inject.Inject;
-
 
 /**
  * 这里只是新闻资讯 Fragment 的壳Shell。主体在ModuleNews 中

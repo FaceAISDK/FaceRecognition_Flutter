@@ -7,7 +7,7 @@
     android:background="@color/black_overlay"
     tools:context=".business.login.LoginActivity">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="320dp"
@@ -52,7 +52,7 @@
                 android:paddingStart="50dp"
                 android:paddingEnd="30dp">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="#c5c5c5">
@@ -68,7 +68,7 @@
                         android:textColor="#2fa881"
                         android:textCursorDrawable="@drawable/bg_input_cursor"
                         android:textSize="15sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +78,7 @@
                 android:paddingStart="50dp"
                 android:paddingEnd="30dp">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="#c5c5c5">
@@ -94,7 +94,7 @@
                         android:textColor="#2fa881"
                         android:textCursorDrawable="@drawable/bg_input_cursor"
                         android:textSize="15sp" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <RelativeLayout
@@ -124,19 +124,8 @@
                 android:textColor="#9a9a9a"
                 android:textSize="12sp" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/fab_btn"-->
-    <!--android:layout_width="45dp"-->
-    <!--android:layout_height="45dp"-->
-    <!--android:layout_alignEnd="@id/cardview"-->
-    <!--android:layout_alignTop="@id/cardview"-->
-    <!--android:layout_marginEnd="-18dp"-->
-    <!--android:layout_marginTop="15dp"-->
-    <!--android:src="@drawable/plus"-->
-    <!--android:transitionName="loginFab"-->
-    <!--app:fabSize="normal" />-->
 
 
 </RelativeLayout>

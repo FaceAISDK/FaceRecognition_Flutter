@@ -5,6 +5,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Declare features -->
+    <uses-feature android:name="android.hardware.camera" />
+
+    <!-- Declare permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:name="debug.NoteApplication"
         android:allowBackup="true"
@@ -14,27 +21,22 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme"
         tools:replace="android:theme">
-
+        <activity android:name=".cameraX.CameraXActivity"></activity>
 
         <activity android:name=".NoteEditActivity" />
-
-
         <activity
             android:name=".NoteMainActivity"
             android:label="@string/note_title_activity_note_main" />
-
-
         <activity
             android:name=".debug.NoteLauncherActivity"
             android:label="@string/note_title_activity_note_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>

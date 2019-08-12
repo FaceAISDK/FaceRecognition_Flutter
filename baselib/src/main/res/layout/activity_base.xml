@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <!--默认都是需要Toolbar 的，如果不需要就设置为不可见就好了-->
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -16,7 +16,7 @@
         app:navigationIcon="@drawable/ic_back_copy"
         app:subtitleTextColor="@color/light_white"
         app:titleTextColor="@android:color/white">
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <!-- 不同的页面实际的内容展示插到这里来-->
     <FrameLayout

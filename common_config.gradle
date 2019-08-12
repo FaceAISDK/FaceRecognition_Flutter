@@ -29,7 +29,7 @@ rootProject.ext {
     dexmakerVersion = '1.2'
     roomVersion = "1.0.0"
 
-    // UNIT TEST dependencies
+    //UNIT TEST dependencies
     junitVersion = '4.12'
     mockitoVersion = '1.10.19'
     powerMockito = '1.6.2'

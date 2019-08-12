@@ -6,10 +6,11 @@ import android.app.Service;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+
+import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;

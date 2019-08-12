@@ -5,11 +5,8 @@ import android.content.DialogInterface;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.JsPromptResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -17,7 +14,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.zlb.base.BaseActivity;
+import androidx.appcompat.app.AlertDialog;
+
 import com.zlb.httplib.R;
 
 

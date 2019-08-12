@@ -2,10 +2,10 @@ package com.zlb.base
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kingja.loadsir.core.LoadService
@@ -27,17 +27,16 @@ import com.zlb.httplib.R
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
 abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     private var mToolbar: Toolbar? = null
-    var context: Context?=null
+    var context: Context? = null
 
     //Http Error，empty,Loading,timeout状态管理器
-    private var mBaseLoadService: LoadService<*> ?=null
+    private var mBaseLoadService: LoadService<*>? = null
 
     abstract val layoutId: Int //获取相应的布局啊
 
     /**
      * Get toolbar
      *
-     * @return support.v7.widget.Toolbar.
      */
     val toolbar: Toolbar?
         get() = findViewById<View>(R.id.toolbar) as Toolbar
@@ -49,8 +48,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
      *
      * @return
      */
-   open var isShowBackIcon: Boolean = true
-
+    open var isShowBackIcon: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,7 +154,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         if (null != toolbar) {
             if (isShowBackIcon) {
                 toolbar!!.setNavigationIcon(R.drawable.ic_back_copy)
-                toolbar!!.setNavigationOnClickListener { v -> onBackPressed() }
+                toolbar!!.setNavigationOnClickListener { onBackPressed() }
             } else {
                 toolbar!!.navigationIcon = null
                 toolbar!!.titleMarginStart = 66 //转为DP

@@ -15,7 +15,6 @@ public class NewsApplication extends BaseApplication {
         super.onCreate();
         login();
 
-
     }
 
 

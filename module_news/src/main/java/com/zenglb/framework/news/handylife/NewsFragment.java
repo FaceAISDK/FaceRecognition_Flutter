@@ -2,9 +2,10 @@ package com.zenglb.framework.news.handylife;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -82,7 +83,6 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
 
     public boolean prepareFetchData(boolean forceUpdate) {
         if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
-
             getNewsData();
             return true;
         }
@@ -112,10 +112,8 @@ public class NewsFragment extends BaseStatusFragment implements NewsContract.New
         if (articlesBeans.size() == 0) {
             //Api 要是标准的话就自定义转换吧
             mBaseLoadService.showCallback(EmptyCallback.class);
-
         } else{
-
-            mBaseLoadService.showSuccess();      // successful case -> show the data, eg RecyclerView,
+            mBaseLoadService.showSuccess();  // successful case -> show the data, eg RecyclerView,
             newsAdapter.notifyDataSetChanged();
 
             if (tabsResultBeansTemp.getArticles().size() > perPageSize - 1) {

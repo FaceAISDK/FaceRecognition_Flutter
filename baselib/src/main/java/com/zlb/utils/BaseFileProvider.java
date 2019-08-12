@@ -1,9 +1,8 @@
 package com.zlb.utils;
 
-import android.support.v4.content.FileProvider;
 
+import androidx.core.content.FileProvider;
 
-
-public class BaseFileProvider extends FileProvider{
+public class BaseFileProvider extends FileProvider {
 
 }

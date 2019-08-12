@@ -2,8 +2,9 @@ package com.zlb.persistence.dbupdate;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.database.Database;

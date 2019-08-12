@@ -9,11 +9,13 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
@@ -173,7 +175,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
             // Ask for both permissions
             EasyPermissions.requestPermissions(
                     this,
-                    "你，给我这些权限玩玩",
+                    "你，给我这些权限好不好！",
                     RC_LOCATION_CONTACTS_PERM,
                     PERMISSION_LIST);
         }

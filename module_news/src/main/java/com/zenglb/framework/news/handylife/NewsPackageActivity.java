@@ -1,6 +1,7 @@
 package com.zenglb.framework.news.handylife;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zenglb.framework.news.R;
 import com.zlb.base.BaseDaggerActivity;

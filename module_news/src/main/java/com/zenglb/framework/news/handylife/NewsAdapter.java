@@ -2,12 +2,10 @@ package com.zenglb.framework.news.handylife;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.widget.ImageView;
-
+import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -15,7 +13,6 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.http.result.ArticlesResult;
-
 import java.util.List;
 
 /**

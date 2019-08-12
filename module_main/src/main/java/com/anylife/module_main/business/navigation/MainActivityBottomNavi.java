@@ -1,11 +1,6 @@
 package com.anylife.module_main.business.navigation;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -13,12 +8,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.anylife.module_main.R;
 import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.VideoListFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseDaggerActivity;
 import com.zlb.httplib.BuildConfig;
@@ -96,7 +98,8 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
         navigation = findViewById(R.id.navigation);
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigation.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {
-            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+//            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+            final View iconView = menuView.getChildAt(i).findViewById(R.id.icon);
 
             final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -183,14 +186,10 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
         }
     }
 
-
     @Override
     public boolean isShowBackIcon() {
         return false;
     }
-
-
-
 
 
 }

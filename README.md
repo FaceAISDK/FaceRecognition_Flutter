@@ -7,19 +7,6 @@
 
 # 教训：自由的世界也是有规则的
 
-
-// java&Kotlin 混合开发，jetpack 组件
-
-
-
-
-
-
-
-
-
-
-
 # 关于本Demo-组件化的工程架构With MVP，Dagger2.android,RXjava2
 
   一直在纠结在何种开发模式之中，重构希望能把关注点集中到代码结构、整体架构、可测试性、可维护性这四个方面
@@ -89,7 +76,7 @@
 - 进行网络请求时候的Error，empty,Loading,timeout等通用场景处理，Demo中一处Root注入，处处可用
 - 通用的BaseActivity 和BaseFragment的封装（跳转PV打点，事件打点，不放和base 无关的东西）
 - Http (Rxjava2+Retrofit2)的闭环处理
-- Proguard 混淆 打包优化
+- AndroidX 和 Kotlin 支持
 - [混淆压缩打包优化 Proguard　proguard-android-optimize　和 proguard-android 区别 ？](https://github.com/D-clock/Doc/blob/master/Android/Gradle/4_AndroidStudio%E4%B8%8BProGuard%E6%B7%B7%E6%B7%86%E6%89%93%E5%8C%85.md)
 
 

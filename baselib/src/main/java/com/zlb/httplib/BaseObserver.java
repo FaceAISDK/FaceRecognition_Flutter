@@ -2,11 +2,13 @@ package com.zlb.httplib;
 
 import android.content.Context;
 import android.os.NetworkOnMainThreadException;
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;

@@ -1,10 +1,11 @@
 package com.zlb.customview;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * 我的滑动刷新Layout

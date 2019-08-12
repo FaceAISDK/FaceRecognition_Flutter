@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newsRecyclerView"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_common"
         android:scrollbarStyle="insideInset"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </com.zlb.customview.MySwipeRefreshLayout>

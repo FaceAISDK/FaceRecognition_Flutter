@@ -2,7 +2,6 @@ package com.anylife.module_main.business.navigation.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -10,7 +9,6 @@ import com.anylife.module_main.R;
 import com.zlb.base.BaseStatusFragment;
 
 /**
- * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * interface
  * to handle interaction events.
