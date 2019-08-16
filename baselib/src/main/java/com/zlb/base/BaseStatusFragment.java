@@ -54,6 +54,8 @@ public abstract class BaseStatusFragment extends RxFragment implements HasSuppor
         return mBaseLoadService.getLoadLayout();
     }
 
+
+
     protected abstract int onCreateFragmentView();
 
     @Override

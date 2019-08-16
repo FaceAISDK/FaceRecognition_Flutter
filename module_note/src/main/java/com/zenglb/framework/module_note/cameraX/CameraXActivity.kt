@@ -83,7 +83,7 @@ class CameraXActivity : AppCompatActivity(), LifecycleOwner {
         // Set up the view finder use case to display camera preview
         // 解决设置前置摄像头，不能设置摄像头的问题。华为P20 就不能设置前摄像头
         val previewConfig = PreviewConfig.Builder().apply {
-            setLensFacing(CameraX.LensFacing.FRONT)
+            setLensFacing(CameraX.LensFacing.BACK)
             // We request aspect ratio but no resolution to let CameraX optimize our use cases
             setTargetAspectRatio(screenAspectRatio)
             // Set initial target rotation, we will have to call this again if rotation changes

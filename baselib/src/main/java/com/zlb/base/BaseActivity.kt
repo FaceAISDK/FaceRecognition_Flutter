@@ -24,32 +24,18 @@ import com.zlb.httplib.R
  *
  * @author anylife.zlb@gmail.com 20170301
  */
-// TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关
+// TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关文件
 abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
-    private var mToolbar: Toolbar? = null
-    var context: Context? = null
+    var context: Context? =null
 
-    //Http Error，empty,Loading,timeout状态管理器
     private var mBaseLoadService: LoadService<*>? = null
 
     abstract val layoutId: Int //获取相应的布局啊
 
-    /**
-     * Get toolbar
-     *
-     */
     val toolbar: Toolbar?
         get() = findViewById<View>(R.id.toolbar) as Toolbar
 
-
-    /**
-     * 是否显示后退按钮,默认显示
-     * 主页面重写该方法不需要显示
-     *
-     * @return
-     */
     open var isShowBackIcon: Boolean = true
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,10 +58,6 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
      * 组件化以后 R2 资源问题。ButterKnife 不能使用了，考虑使用 其他自动生成FindViewById 工具
      */
     private fun customContentView(rootView: View): View {
-        mToolbar = findViewById(R.id.toolbar)
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar)
-        }
 
         val contentView = View.inflate(this, layoutId, null)
         if (contentView != null) {
@@ -124,7 +106,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
      * @param title
      */
     fun setToolBarTitle(title: CharSequence) {
-        toolbar!!.title = title
+        toolbar?.title = title
         setSupportActionBar(toolbar)
     }
 
@@ -135,9 +117,8 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
      * @param visible
      */
     fun setToolBarVisible(visible: Int) {
-        toolbar!!.visibility = visible
+        toolbar?.visibility = visible
         setSupportActionBar(toolbar)
-        mToolbar = null
     }
 
     override fun onStart() {
@@ -151,14 +132,12 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
      *
      */
     fun setToolbar() {
-        if (null != toolbar) {
-            if (isShowBackIcon) {
-                toolbar!!.setNavigationIcon(R.drawable.ic_back_copy)
-                toolbar!!.setNavigationOnClickListener { onBackPressed() }
-            } else {
-                toolbar!!.navigationIcon = null
-                toolbar!!.titleMarginStart = 66 //转为DP
-            }
+        if (isShowBackIcon) {
+            toolbar?.setNavigationIcon(R.drawable.ic_back_copy)
+            toolbar?.setNavigationOnClickListener { onBackPressed() }
+        } else {
+            toolbar?.navigationIcon = null
+            toolbar?.titleMarginStart = 66 //转为DP
         }
     }
 

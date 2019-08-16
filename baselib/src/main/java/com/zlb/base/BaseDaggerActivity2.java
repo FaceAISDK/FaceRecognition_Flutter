@@ -6,8 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import javax.inject.Inject;
-import dagger.android.AndroidInjection;
 
+import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
@@ -20,7 +20,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  *
  * Created by zlb on 2017/8/20.
  */
-public abstract class BaseDaggerActivity extends BaseActivity implements HasSupportFragmentInjector {
+public abstract class BaseDaggerActivity2 extends BaseActivity implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> supportFragmentInjector;
@@ -41,14 +41,5 @@ public abstract class BaseDaggerActivity extends BaseActivity implements HasSupp
         return supportFragmentInjector;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
 
 }

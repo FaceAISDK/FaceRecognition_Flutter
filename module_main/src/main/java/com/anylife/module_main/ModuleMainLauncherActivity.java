@@ -9,24 +9,18 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-
 import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseDaggerActivity;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -46,6 +40,8 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
 
     @Inject
     SPDao spDao;
+
+
 
     /**
      * 接受消息，处理消息 ，此Handler会与当前主线程一块运行
@@ -84,6 +80,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
         }
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -94,7 +91,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        if (hasAllPermissions()) {
+        if (EasyPermissions.hasPermissions(this, PERMISSION_LIST)) {
             UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 2500);  //测试内存泄漏,只为测试.
         }
     }
@@ -150,12 +147,14 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
         hideBottomUIMenu();
     }
 
+
     /**
      * 隐藏虚拟按键，并且全屏
+     *
      */
     protected void hideBottomUIMenu() {
         //隐藏虚拟按键，并且全屏
-        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
             View v = this.getWindow().getDecorView();
             v.setSystemUiVisibility(View.GONE);
         } else if (Build.VERSION.SDK_INT >= 19) {
@@ -169,7 +168,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
 
 
     public void requestAllPermissions() {
-        if (hasAllPermissions()) {
+        if (EasyPermissions.hasPermissions(this, PERMISSION_LIST)) {
             UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 1500);  //测试内存泄漏,只为测试.
         } else {
             // Ask for both permissions
@@ -179,11 +178,6 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
                     RC_LOCATION_CONTACTS_PERM,
                     PERMISSION_LIST);
         }
-    }
-
-
-    private boolean hasAllPermissions() {
-        return EasyPermissions.hasPermissions(this, PERMISSION_LIST);
     }
 
 

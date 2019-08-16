@@ -152,6 +152,8 @@ dependencies {
     kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
 
 
+    implementation 'org.jetbrains.anko:anko-common:0.9'
+
 }
 repositories {
     mavenCentral()
