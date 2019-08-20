@@ -1,17 +1,12 @@
 package com.zlb.base;
 
-import android.app.Activity;
 import android.app.Application;
-import android.app.Service;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.widget.Toast;
-
-
 import androidx.multidex.MultiDex;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
 import com.squareup.leakcanary.LeakCanary;
@@ -22,59 +17,46 @@ import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
 import com.zlb.jniInterface.JniInvokeInterface;
 import com.zlb.utils.ntp.SyncNtpTimeUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-
 import javax.inject.Inject;
-
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-import dagger.android.HasServiceInjector;
+import dagger.android.HasAndroidInjector;
 
 /**
- * 使用Kotlin 混合开发的module
+ * Core
  *
+ * May you do good and not evil
+ * May you find forgiveness for yourself and forgive others
+ * May you share freely,never taking more than you give
  *
- * 参考{@link dagger.android.DaggerApplication}Beta 项目，项目组没有3个以上的Android 开发不建议使用Dagger XXX
- * <p>
- * BaseApplication，初始化必然初始化的一些配置
  */
-public abstract class BaseApplication extends Application implements HasActivityInjector, HasServiceInjector {
-    public static final String TAG = BaseApplication.class.getSimpleName();
+public abstract class BaseApplication extends Application implements HasAndroidInjector {
     public boolean isDebug = false;  //App 是否是调试模式，默认不是，不要把调试信息加进去
 
-    //Activity ，Service 中的依赖注入。Fragment ---》BaseStatusFragment
     @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
-
-    @Inject
-    DispatchingAndroidInjector<Service> dispatchingServiceInjector;
+    DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
 
     @Override
-    public AndroidInjector<Activity> activityInjector() {
+    public AndroidInjector<Object> androidInjector() {
         return dispatchingAndroidInjector;
     }
 
-    @Override
-    public AndroidInjector<Service> serviceInjector() {
-        return dispatchingServiceInjector;
-    }
 
     /**
      * 敏感的配置全部以HashMap 的方式保存在JNI 层的SO 库里面。
-     * 其实这里只是为了防止GitHub 代码被Track ！
+     * 这里只是为了防止GitHub 代码被Track ！
      */
     public static HashMap<String, String> globalJniMap = JniInvokeInterface.getJniHashMap();
 
     private static Context appContext;
 
     @Inject
-    SyncNtpTimeUtils syncNTPTime;
+    SyncNtpTimeUtils syncNTPTime; //NTP 时间校准
 
     @Override
     public void onCreate() {
@@ -82,6 +64,7 @@ public abstract class BaseApplication extends Application implements HasActivity
         appContext = getApplicationContext();
 
         initARouter();
+
         initDI();
         //内存泄漏检查
         initLeakCanary();
@@ -103,6 +86,15 @@ public abstract class BaseApplication extends Application implements HasActivity
         showDebugDBAddressLogToast(this);
     }
 
+    private void initDI() {
+        injectApp();
+    }
+
+    /**
+     * 这是类库底层的injectApp代码示例，你应该在你的Module中重写该方法
+     */
+    abstract protected void injectApp();
+
     public static Context getAppContext() {
         return appContext;
     }
@@ -112,7 +104,6 @@ public abstract class BaseApplication extends Application implements HasActivity
         super.attachBaseContext(base);
         MultiDex.install(base);
     }
-
 
     /**
      * 初始化内存泄露检测
@@ -125,17 +116,6 @@ public abstract class BaseApplication extends Application implements HasActivity
         }
         LeakCanary.install(this);
     }
-
-
-    private void initDI() {
-        injectApp();
-    }
-
-    /**
-     * 这是类库底层的injectApp代码示例，你应该在你的Module中重写该方法
-     */
-    abstract protected void injectApp();
-
 
     @Override
     public void onTerminate() {
@@ -164,7 +144,6 @@ public abstract class BaseApplication extends Application implements HasActivity
         ARouter.init(this);          // 尽可能早，推荐在Application中初始化
     }
 
-
     /**
      * 判断App是否是Debug版本.
      *
@@ -182,6 +161,7 @@ public abstract class BaseApplication extends Application implements HasActivity
             return false;
         }
     }
+
 
     /**
      * 数据库调试，在浏览器中输入地址后可以方便的操作数据库

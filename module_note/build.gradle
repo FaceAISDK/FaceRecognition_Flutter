@@ -83,8 +83,8 @@ dependencies {
     kapt "io.objectbox:objectbox-processor:$rootProject.ext.object_box"  //object for kotlin 的支持
 
     //Dagger for kotlin
-    kapt 'com.google.dagger:dagger-compiler:2.21' // Dagger 2 注解处理
-    kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
+    kapt 'com.google.dagger:dagger-compiler:2.24' // Dagger 2 注解处理
+    kapt 'com.google.dagger:dagger-android-processor:2.24' // Dagger 2 注解处理 Android 支持
 
 
     //Camera

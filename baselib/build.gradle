@@ -33,6 +33,14 @@ android {
             jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
+    signingConfigs {
+        anylifezlbConfig {
+            storeFile file("NewsKeyStore")
+            storePassword "NewsKeyStore"
+            keyAlias "NewsKeyStore"
+            keyPassword "NewsKeyStore"
+        }
+    }
 
 
     buildTypes {
@@ -45,7 +53,10 @@ android {
         release {
             debuggable false
             buildConfigField("boolean", "isModule", "${isModule}")  //是不是单独的组件化开发模式
+
+            signingConfig signingConfigs.anylifezlbConfig   //加密
         }
+
     }
 
 
@@ -66,13 +77,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    api "com.android.support:design:$rootProject.ext.supportLibraryVersion"
-    api "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
-    api "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
-    api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
-
-    api 'com.squareup.retrofit2:retrofit:2.5.0'     //为了更好的研究Retrofit 改用源码的方式
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
@@ -89,25 +94,12 @@ dependencies {
 
     //数据存储 ORM DB
     api 'org.greenrobot:greendao:3.2.2' //ORM DB
-//    api 'net.zetetic:android-database-sqlcipher:3.5.7'  //数据库加密
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
-    //Toast & GSON
     api 'com.github.GrenderG:Toasty:1.4.2'
-
     api 'com.google.code.gson:gson:2.8.5'
-
     api 'com.kingja.loadsir:loadsir:1.3.6'
-
     api 'pub.devrel:easypermissions:2.0.1'        //没有其他的原因，其他的目前多少有BUG 啊
-
-    //dagger & dagger.android
-    api "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
-    api "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
-
-    //if you use the support libraries
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
 
     //For Lifecycle, LiveData, and ViewModel
     api "android.arch.lifecycle:runtime:1.1.1"
@@ -115,6 +107,7 @@ dependencies {
 
     //Http Request log
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
     api 'com.github.florent37:singledateandtimepicker:1.2.2'    //高仿IOS 时间选择
     api 'de.hdodenhof:circleimageview:2.2.0'                    //CircleImageView
@@ -147,14 +140,25 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //Dagger for kotlin
-    kapt 'com.google.dagger:dagger-compiler:2.21' // Dagger 2 注解处理
-    kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
+    //dagger & dagger.android
+    api "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
 
+    // if you use the support libraries if !!!!
+    api "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+
+    //if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
+
+    //Dagger for kotlin
+    kapt 'com.google.dagger:dagger-compiler:2.24' // Dagger 2 注解处理
+    kapt 'com.google.dagger:dagger-android-processor:2.24' // Dagger 2 注解处理 Android 支持
 
     implementation 'org.jetbrains.anko:anko-common:0.9'
 
+
 }
+
 repositories {
     mavenCentral()
 }

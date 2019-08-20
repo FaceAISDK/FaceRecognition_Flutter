@@ -3,14 +3,11 @@ package com.zlb.base;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import javax.inject.Inject;
-
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
+import dagger.android.HasAndroidInjector;
 
 /**
  * 感觉这里命名为 BaseDaggerActivity 会好一点吧
@@ -20,10 +17,10 @@ import dagger.android.support.HasSupportFragmentInjector;
  *
  * Created by zlb on 2017/8/20.
  */
-public abstract class BaseDaggerActivity2 extends BaseActivity implements HasSupportFragmentInjector {
+public abstract class BaseDaggerActivity2 extends BaseActivity implements HasAndroidInjector {
 
     @Inject
-    DispatchingAndroidInjector<Fragment> supportFragmentInjector;
+    DispatchingAndroidInjector<Object> androidInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,10 +33,9 @@ public abstract class BaseDaggerActivity2 extends BaseActivity implements HasSup
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return supportFragmentInjector;
+    public AndroidInjector<Object> androidInjector() {
+        return androidInjector;
     }
-
-
 }

@@ -1,14 +1,12 @@
 package com.zlb.base
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-
+import androidx.annotation.Nullable
 import javax.inject.Inject
 import dagger.android.AndroidInjection
-
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 
 /**
  * 感觉这里命名为 BaseDaggerActivity 会好一点吧
@@ -18,24 +16,17 @@ import dagger.android.support.HasSupportFragmentInjector
  *
  * Created by zlb on 2017/8/20.
  */
-abstract class BaseDaggerActivity : BaseActivity(), HasSupportFragmentInjector {
+abstract class BaseDaggerActivity : BaseActivity(), HasAndroidInjector {
 
-    //使用dagger2注入时变量要使用关键字lateinit修饰，就是延迟初始化的意思
     @Inject
-    lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        /**
-         * 一处注入就好了，处处使用。
-         */
+    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
-        return supportFragmentInjector
+    override fun androidInjector(): AndroidInjector<Any>? {
+        return androidInjector
     }
-
 }

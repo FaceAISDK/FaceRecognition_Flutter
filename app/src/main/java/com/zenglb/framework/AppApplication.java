@@ -9,6 +9,8 @@ import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
 import com.zlb.dagger.module.BaseGlobalModule;
 
+import dagger.android.AndroidInjector;
+
 /**
  * 组件化开发模式 集成打包的壳工程的Application，其他组件Module模块工程在开发的时候配置Debug目录中的Application
  *
@@ -30,7 +32,6 @@ public class AppApplication extends BaseApplication  {
     public void onCreate() {
         super.onCreate();
         initApplication();
-
     }
 
 
@@ -40,23 +41,6 @@ public class AppApplication extends BaseApplication  {
                 .baseGlobalModule(new BaseGlobalModule(this))
                 .build()
                 .inject(this);
-
-    }
-
-
-    /**
-     * 新开一个线程初始化第三方的服务，加快App 的启动的速度
-     *
-     */
-    private void initThirdService(){
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                //... 初始化各种第三方服务
-
-            }
-        }.start();
     }
 
 

@@ -69,9 +69,6 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
 
             //ButterKnife.bind(this, rootView);   //组件化后 ButterKnife 很不好使用，改用Android View Generator
 
-            //增加Error，empty,Loading,timeout,等通用的场景处理,这个需要重新的组织一下
-//            mBaseLoadService = LoadSir.getDefault().register(contentView, { v -> onHttpReload(v) } as Callback.OnReloadListener)
-
             mBaseLoadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivity.onHttpReload(v) }
         }
         return rootView

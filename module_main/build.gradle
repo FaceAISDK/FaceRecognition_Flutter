@@ -4,11 +4,12 @@ if (isModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+apply plugin: 'kotlin-kapt'
+
+
 //准备Java，kotlin 混合开发
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
 
 
 android {
@@ -38,7 +39,7 @@ android {
 
         //设置支持的SO abi库架构支持
         ndk {
-            abiFilters  'armeabi-v7a'
+            abiFilters 'armeabi-v7a'
         }
     }
 
@@ -58,11 +59,41 @@ android {
         }
     }
 
+    /**
+     * 添加压缩处理
+     *
+     */
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        debug {
+            //启用代码压缩，混淆，优化
+            minifyEnabled true
+
+            //启用资源压缩
+            shrinkResources true
+
+            //ProGuard规则文件
+            //https://www.jianshu.com/p/dfd3a9183ece
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro' //proguard-rules.pro文件用于添加自定义 ProGuard 规则
         }
+
+
+        release {
+            //启用代码压缩，混淆，优化
+            minifyEnabled true
+
+            //启用资源压缩
+            shrinkResources true
+
+            //ProGuard规则文件
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro' //proguard-rules.pro文件用于添加自定义 ProGuard 规则
+        }
+
+
     }
 
     compileOptions {
@@ -75,16 +106,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-
-    implementation 'com.android.support:support-v4:28.0.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(':baselib')
 
     //Dagger for kotlin
-    kapt 'com.google.dagger:dagger-compiler:2.21' // Dagger 2 注解处理
-    kapt 'com.google.dagger:dagger-android-processor:2.21' // Dagger 2 注解处理 Android 支持
+    kapt 'com.google.dagger:dagger-compiler:2.24' // Dagger 2 注解处理
+    kapt 'com.google.dagger:dagger-android-processor:2.24' // Dagger 2 注解处理 Android 支持
 
 
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'     //Platform bindings
@@ -101,10 +128,6 @@ dependencies {
 
     implementation 'anylife.downloadinstaller:downloadInstaller:1.1.1'
     implementation 'com.zhihu.android:matisse:0.4.3'  //图片视频选择，不要再用PhotoPicker 了
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
 }

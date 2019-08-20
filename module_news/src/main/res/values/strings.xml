@@ -1,6 +1,6 @@
 <resources>
     //1.这里的是正式会使用的
-    <string name="app_name">WhatApp</string>
+    <string name="app_name">module_news</string>
 
     <string-array name="tabs_title_array">
         <item>全部</item>

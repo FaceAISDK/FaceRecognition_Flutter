@@ -21,13 +21,14 @@
         android:layout_above="@id/navigation"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/common_gray"/>
+        android:background="@color/common_gray"
+        android:layout_below="@+id/navigation"/>
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/line"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_above="@id/line"/>
 
 </RelativeLayout>
