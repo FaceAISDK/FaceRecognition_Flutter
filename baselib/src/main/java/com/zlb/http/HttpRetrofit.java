@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HttpRetrofit {
     private static final String TAG = HttpRetrofit.class.getSimpleName() + "OKHTTP";
-    private static final String baseUrl = "http://t1" + ".int." + "owl1" + "024.com/";  // WARMING-just for test !
+    public static final String baseUrl = "http://t1" + ".int." + "owl1" + "024.com/";  // WARMING-just for test !
 
     //throw a custom IOException("Unexpected protocol: " + protocol)
     public static final String CUSTOM_REPEAT_REQ_PROTOCOL = "MY_CUSTOM_REPEAT_REQ_PROTOCOL";
@@ -56,6 +56,8 @@ public class HttpRetrofit {
     public static Map<String, Long> requestIdsMap = new HashMap<>();
 
     /**
+     *
+     *
      * @param spDao
      * @param mContext
      * @return
@@ -115,10 +117,10 @@ public class HttpRetrofit {
 
                     if (null == requestIdsMap.get(requestKey)) {
                         requestIdsMap.put(requestKey, System.currentTimeMillis());
-                        Log.e("REPEAT-REQUEST", "注册请求:" + requestKey+" ----  "+Thread.currentThread().getName());
+                        Log.e("REPEAT-REQUEST", "注册请求:" + requestKey + " ----  " + Thread.currentThread().getName());
                     } else {
                         //如果是重复的请求，抛出一个自定义的错误，这个错误大家根据自己的业务定义吧
-                        Log.i("REPEAT-REQUEST", "重复请求" + requestKey+"  ---------------重复请求 ----"+Thread.currentThread().getName());
+                        Log.i("REPEAT-REQUEST", "重复请求" + requestKey + "  ---------------重复请求 ----" + Thread.currentThread().getName());
                         return new Response.Builder()
                                 .protocol(Protocol.get(CUSTOM_REPEAT_REQ_PROTOCOL))
                                 .request(authorisedRequest) //multi thread

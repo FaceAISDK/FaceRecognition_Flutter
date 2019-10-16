@@ -7,6 +7,8 @@ import com.zlb.dagger.module.BaseGlobalModule;
 
 /**
  * NewsApplication 只是单独调试的时候使用，合并到壳App 不需要，但是这里初始化的数据和服务要在AppApplication
+ *
+ *
  */
 public class NewsApplication extends BaseApplication {
 
@@ -14,7 +16,6 @@ public class NewsApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         login();
-
     }
 
 
@@ -33,7 +34,7 @@ public class NewsApplication extends BaseApplication {
     @Override
     protected void injectApp() {
         DaggerNewsModuleComponent.builder()
-                .baseGlobalModule(new BaseGlobalModule(this))  //这一行是把Base中的
+                .baseGlobalModule(new BaseGlobalModule(this))  //全局的依赖配置
                 .build()
                 .inject(this);
     }

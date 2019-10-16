@@ -8,10 +8,10 @@ import dagger.android.AndroidInjector;
 
 /**
  *
- * 在 {@link BaseActivityComponent}  等中被使用
+ * 在 XXXModuleAllActivityModule 等中被使用
  * 不要在每个Activity 中建立一个ActivitySubComponent，麻烦而且重复的无聊代码
  *
- * 每一个继承BaseActivity（BaseMVPActivity）的Activity，都共享同一个SubComponent
+ * 每一个继承BaseActivity（BaseDaggerActivity）的Activity，都共享同一个SubComponent
  * 这样能减少非常多的重复的无聊的代码
  *
  * Created by anylife.zlb@gmail.com on 2018/1/11.
@@ -22,9 +22,8 @@ import dagger.android.AndroidInjector;
 
 public interface BaseActivityComponent extends AndroidInjector<BaseDaggerActivity> {
 
-    //每一个继承BaseActivity（BaseMVPActivity）的Activity，都共享同一个SubComponent
-    @Subcomponent.Builder
-    abstract class Builder extends AndroidInjector.Builder<BaseDaggerActivity> {
+    @Subcomponent.Factory
+    interface Factory extends AndroidInjector.Factory<BaseDaggerActivity> {
 
     }
 

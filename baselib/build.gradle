@@ -109,6 +109,8 @@ dependencies {
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
     api 'com.github.florent37:singledateandtimepicker:1.2.2'    //高仿IOS 时间选择
     api 'de.hdodenhof:circleimageview:2.2.0'                    //CircleImageView
     api 'com.android.support.constraint:constraint-layout:1.1.3'

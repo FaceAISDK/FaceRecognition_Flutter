@@ -37,9 +37,12 @@ import androidx.camera.core.Preview
 import androidx.camera.core.PreviewConfig
 import androidx.navigation.Navigation
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.zenglb.framework.camerax.CameraXActivity
 import com.zenglb.framework.camerax.KEY_EVENT_ACTION
 import com.zenglb.framework.camerax.KEY_EVENT_EXTRA
@@ -81,7 +84,7 @@ class CameraFragment : Fragment() {
     private lateinit var broadcastManager: LocalBroadcastManager
 
     private var displayId = -1
-    private var lensFacing = CameraX.LensFacing.BACK
+    private var lensFacing = CameraX.LensFacing.FRONT  //前后摄像头定义
     private var preview: Preview? = null
     private var imageCapture: ImageCapture? = null
     private var imageAnalyzer: ImageAnalysis? = null
@@ -108,22 +111,30 @@ class CameraFragment : Fragment() {
      */
     fun takeImage() {
 
+        //kotlin 操作符 Let  //表示object不为null的条件下，才会去执行let函数体
+
         // Get a stable reference of the modifiable image capture use case
         imageCapture?.let { imageCapture ->
 
             // Create output file to hold the image
+            // 创建输出文件接受保存拍摄到的图片
             val photoFile = createFile(outputDirectory, FILENAME, PHOTO_EXTENSION)
 
             // Setup image capture metadata
+            // 设置拍照的基础参数metadata
             val metadata = Metadata().apply {
                 // Mirror image when using the front camera
                 isReversedHorizontal = lensFacing == CameraX.LensFacing.FRONT
             }
 
+
             // Setup image capture listener which is triggered after photo has been taken
+            // 设置拍照监听器，拍完照片后会立即的触发
             imageCapture.takePicture(photoFile, imageSavedListener, metadata)
 
+
             // We can only change the foreground Drawable using API level 23+ API
+            // 无关紧要拉
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                 // Display flash animation to indicate that photo was captured
@@ -161,12 +172,14 @@ class CameraFragment : Fragment() {
             CameraX.getCameraWithLensFacing(lensFacing) //！！！！
 
             // Unbind all use cases and bind them again with the new lens facing configuration
+            //重新的初始化所以的数据
             CameraX.unbindAll()
             bindCameraUseCases()
         } catch (exc: Exception) {
             // Do nothing
         }
     }
+
 
 
     /** Internal reference of the [DisplayManager] */
@@ -180,6 +193,7 @@ class CameraFragment : Fragment() {
     private val displayListener = object : DisplayManager.DisplayListener {
         override fun onDisplayAdded(displayId: Int) = Unit
         override fun onDisplayRemoved(displayId: Int) = Unit
+
         override fun onDisplayChanged(displayId: Int) = view?.let { view ->
             if (displayId == this@CameraFragment.displayId) {
                 Log.d(TAG, "Rotation changed: ${view.display.rotation}")
@@ -189,6 +203,7 @@ class CameraFragment : Fragment() {
             }
         } ?: Unit
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -237,19 +252,19 @@ class CameraFragment : Fragment() {
      */
     private fun setGalleryThumbnail(file: File) {
         // Reference of the view that holds the gallery thumbnail
-//        val thumbnail = container.findViewById<ImageButton>(R.id.photo_view_button)
-//
-//        // Run the operations in the view's thread
-//        thumbnail.post {
-//            // Remove thumbnail padding
-//            thumbnail.setPadding(resources.getDimension(R.dimen.stroke_small).toInt())
-//
-//            // Load thumbnail into circular button using Glide
-//            Glide.with(thumbnail)
-//                    .load(file)
-//                    .apply(RequestOptions.circleCropTransform())
-//                    .into(thumbnail)
-//        }
+        val thumbnail = container.findViewById<ImageButton>(R.id.photo_view_button)
+
+        // Run the operations in the view's thread
+        thumbnail.post {
+            // Remove thumbnail padding
+            thumbnail.setPadding(resources.getDimension(R.dimen.stroke_small).toInt())
+
+            // Load thumbnail into circular button using Glide
+            Glide.with(thumbnail)
+                    .load(file)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(thumbnail)
+        }
     }
 
 
@@ -346,8 +361,8 @@ class CameraFragment : Fragment() {
      *
      */
     private fun bindCameraUseCases() {
-
         // Get screen metrics used to setup camera for full screen resolution
+        // 获取屏幕的宽高等数据
         val metrics = DisplayMetrics().also { viewFinder.display.getRealMetrics(it) }
         val screenAspectRatio = Rational(metrics.widthPixels, metrics.heightPixels)
         Log.d(TAG, "Screen metrics: ${metrics.widthPixels} x ${metrics.heightPixels}")
@@ -392,7 +407,6 @@ class CameraFragment : Fragment() {
             // during the lifecycle of this use case
             setTargetRotation(viewFinder.display.rotation)
         }.build()
-
 
 
         imageAnalyzer = ImageAnalysis(analyzerConfig).apply {

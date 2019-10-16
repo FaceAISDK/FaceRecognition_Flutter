@@ -25,13 +25,12 @@ public class ProgressDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view ;
-        TextView textView ;
         view = View.inflate(context, R.layout.custom_wait_dialog, null);
-        textView = (TextView) view.findViewById(R.id.tv_MyDialog);
 
         if (!TextUtils.isEmpty(msg)) {
-            textView.setText(msg);
+            ((TextView)view.findViewById(R.id.tv_loading_msg)).setText(msg);
         }
+
         setContentView(view);
     }
 

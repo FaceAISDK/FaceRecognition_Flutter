@@ -1,11 +1,16 @@
 package com.zenglb.framework.news.http;
 
+import androidx.annotation.NonNull;
+
 import com.zenglb.framework.news.http.result.ArticlesResult;
 import com.zlb.httplib.HttpResponse;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  *
@@ -25,6 +30,13 @@ import retrofit2.http.Query;
  * Created by zenglb on 2017/3/17.
  */
 public interface NewsApiService {
+
+    @Streaming
+    @GET
+    Observable<ResponseBody> downLoadFile(@NonNull @Url String url);
+
+
+
 
     /**
      * FBI WARMING ,DEMO 中的所有API 都仅供参考交流，他用产后的后果将追究法律责任

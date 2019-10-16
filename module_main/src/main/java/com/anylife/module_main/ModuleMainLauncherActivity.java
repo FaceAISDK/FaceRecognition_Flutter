@@ -19,6 +19,8 @@ import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseDaggerActivity;
+import com.zlb.httplib.HttpUiTips;
+
 import java.util.List;
 import javax.inject.Inject;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -40,7 +42,6 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
 
     @Inject
     SPDao spDao;
-
 
 
     /**

@@ -66,11 +66,11 @@ android {
     buildTypes {
 
         debug {
-            //启用代码压缩，混淆，优化
-            minifyEnabled true
-
-            //启用资源压缩
-            shrinkResources true
+//            //启用代码压缩，混淆，优化
+//            minifyEnabled true
+//
+//            //启用资源压缩
+//            shrinkResources true
 
             //ProGuard规则文件
             //https://www.jianshu.com/p/dfd3a9183ece
@@ -81,11 +81,11 @@ android {
 
 
         release {
-            //启用代码压缩，混淆，优化
-            minifyEnabled true
-
-            //启用资源压缩
-            shrinkResources true
+//            //启用代码压缩，混淆，优化
+//            minifyEnabled true
+//
+//            //启用资源压缩
+//            shrinkResources true
 
             //ProGuard规则文件
             proguardFiles getDefaultProguardFile(
@@ -110,24 +110,28 @@ dependencies {
     implementation project(':baselib')
 
     //Dagger for kotlin
-    kapt 'com.google.dagger:dagger-compiler:2.24' // Dagger 2 注解处理
+    kapt 'com.google.dagger:dagger-compiler:2.24'      // Dagger 2 注解处理
     kapt 'com.google.dagger:dagger-android-processor:2.24' // Dagger 2 注解处理 Android 支持
-
 
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'     //Platform bindings
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
 
-    //自定义相机,Maybe cameraX better
-    implementation([
-            'com.camerakit:camerakit:1.0.0-beta3.10',
-            'com.camerakit:jpegkit:0.1.0',
-            'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0',
-            'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
-    ])
+//    //自定义相机,Maybe cameraX better
+//    implementation([
+//            'com.camerakit:camerakit:1.0.0-beta3.10',
+//            'com.camerakit:jpegkit:0.1.0',
+//            'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0',
+//            'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
+//    ])
 
     implementation 'anylife.downloadinstaller:downloadInstaller:1.1.1'
     implementation 'com.zhihu.android:matisse:0.4.3'  //图片视频选择，不要再用PhotoPicker 了
+
+
+    implementation "android.arch.work:work-runtime:1.0.1"
+    // optional - Firebase JobDispatcher support
+//    implementation "android.arch.work:work-firebase:1.0.1"
 
 
 }

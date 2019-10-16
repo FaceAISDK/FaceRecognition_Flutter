@@ -13,7 +13,6 @@ import dagger.Provides;
  * abstract LoginActivity contributeMainActivitytInjector();
  *
  *
- *
  * Created by anylife.zlb@gmail.com on 2018/1/11.
  */
 @Module

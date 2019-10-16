@@ -4,27 +4,30 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
     android:paddingTop="12dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="9dp">
 
-    <ProgressBar
-        android:id="@+id/iv_wait"
-        style="@style/HttpProgressBar"
-        android:gravity="center"
-        android:indeterminateDrawable="@drawable/progress_rotate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/loading"
+        style="@style/SpinKitView.DoubleBounce"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/white" />
+
 
     <TextView
-        android:id="@+id/tv_MyDialog"
+        android:id="@+id/tv_loading_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="稍等..."
+        android:text="请稍候"
         android:minWidth="60dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="7dp"
         android:textColor="#fff"
         android:textSize="13sp" />
 

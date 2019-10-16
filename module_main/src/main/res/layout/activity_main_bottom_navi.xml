@@ -21,8 +21,7 @@
         android:layout_above="@id/navigation"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/common_gray"
-        android:layout_below="@+id/navigation"/>
+        android:background="@color/common_gray"/>
 
 
     <androidx.viewpager.widget.ViewPager

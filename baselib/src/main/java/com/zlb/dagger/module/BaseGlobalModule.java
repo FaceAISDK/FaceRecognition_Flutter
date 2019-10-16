@@ -65,20 +65,6 @@ public class BaseGlobalModule {
 
 
 
-//    /**
-//     * 网络访问，拆分到每个模块吧
-//     *
-//     * @return
-//     */
-//    @Provides
-//    @Singleton
-//    public ApiService provideApiService(SPDao spDao, Context mContext) {
-//        //Retrofit 的create 真是精华所在啊！
-//        return HttpRetrofit.getRetrofit(spDao, mContext).create(ApiService.class);
-//    }
-
-
-
     /**
      * 增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
      *

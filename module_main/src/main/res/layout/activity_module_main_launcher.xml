@@ -7,9 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ModuleMainLauncherActivity">
 
-    <ImageView
+    <TextView
+        android:text="Module_Main"
+        android:gravity="center"
+        android:textSize="33dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/launcher_bg" />
+        android:layout_height="match_parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

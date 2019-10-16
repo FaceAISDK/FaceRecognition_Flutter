@@ -18,8 +18,35 @@ public class HttpUiTips {
     private static AlertDialog fatalEorTips;
     private static WeakReference<Context> lastContext;
 
+
+    /**
+     * showDialog & dismissDialog 在http 请求开始的时候显示，结束的时候消失
+     * 当然不是必须需要显示的 !
+     */
+    public static void showDialog(final Context mContext, final String messageText) {
+        if (!(mContext instanceof Activity) || ((Activity) mContext).isFinishing() || ((Activity) mContext).isDestroyed())
+            return;
+
+        ((Activity) mContext).runOnUiThread(() -> ProgressDialogUtil.showWaitDialog(mContext, messageText));
+    }
+
+
+    /**
+     * Dialog 消失
+     *
+     * @param mContext
+     */
+    public static void dismissDialog(final Context mContext) {
+        if (mContext instanceof Activity) {
+            ((Activity) mContext).runOnUiThread(ProgressDialogUtil::stopWaitDialog);
+        }
+    }
+
+
+
     /**
      * http 请求遇阻提示，比如没有网络不提示，再重试也无用
+     *
      */
     public static void alertTip(Context mContext, String message, int code) {
         //只有主线程才有提示
@@ -50,29 +77,5 @@ public class HttpUiTips {
         fatalEorTips.show();
     }
 
-
-    /**
-     * showDialog & dismissDialog 在http 请求开始的时候显示，结束的时候消失
-     * 当然不是必须需要显示的 !
-     */
-    public static void showDialog(final Context mContext, final String messageText) {
-        if (!(mContext instanceof Activity) || ((Activity) mContext).isFinishing() || ((Activity) mContext).isDestroyed())
-            return;
-
-        ((Activity) mContext).runOnUiThread(() -> ProgressDialogUtil.showWaitDialog(mContext, messageText));
-    }
-
-
-
-    /**
-     * Dialog 消失
-     *
-     * @param mContext
-     */
-    public static void dismissDialog(final Context mContext) {
-        if (mContext instanceof Activity) {
-            ((Activity) mContext).runOnUiThread(ProgressDialogUtil::stopWaitDialog);
-        }
-    }
 
 }

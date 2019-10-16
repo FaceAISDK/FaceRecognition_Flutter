@@ -15,6 +15,7 @@ import com.zlb.base.BaseApplication;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.dagger.scope.ActivityScope;
 import com.zlb.httplib.BaseObserver;
+import com.zlb.httplib.HttpUiTips;
 import com.zlb.httplib.rxUtils.SwitchSchedulers;
 import com.zlb.utils.ntp.SyncNtpTimeUtils;
 
@@ -22,14 +23,13 @@ import javax.inject.Inject;
 
 /**
  * 我的Fragment
- *
  */
 @ActivityScope
 public class MeFragment extends BaseStatusFragment implements View.OnClickListener {
 
-    protected Button httpReq;
-    protected TextView meProfile;
-    protected Button logout;
+    private Button httpReq;
+    private TextView meProfile;
+    private Button logout;
 
     @Inject
     SPDao spDao;
@@ -62,15 +62,13 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
     }
 
 
-
     /**
      * 获取我的个人信息
-     *
      */
-    private void getMeProfile(){
+    private void getMeProfile() {
         mainModuleApiService.getMeProfile(BaseApplication.globalJniMap.get("meProfile"))
                 .compose(SwitchSchedulers.applySchedulers())
-                .subscribe(new BaseObserver<MeProfileResult>(getActivity()){
+                .subscribe(new BaseObserver<MeProfileResult>(getActivity()) {
                     @Override
                     public void onSuccess(MeProfileResult meProfileResult) {
                         meProfile.setText(meProfileResult.toString());
@@ -95,6 +93,10 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
 
 //            ARouter.getInstance().build("/news/webActivity").navigation();
 
+
+//            getMeProfile();
+            HttpUiTips.showDialog(getActivity(),"");
+
             ntpUtils.syncNTPTime();
 
         } else if (view.getId() == R.id.logout) {
@@ -102,7 +104,6 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
             getActivity().finish();
         }
     }
-
 
 
     public void initView(View rootView) {

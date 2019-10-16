@@ -32,14 +32,12 @@ import retrofit2.http.Path;
 public interface MainModuleApiService {
 
 
-
     /**
      * Oauth,外网暂不支持访问
      */
     @Headers("NeedOauthFlag: NeedOauthFlag")
     @POST("{OauthPath}")
     Observable<HttpResponse<LoginResult>> goLogin(@Path ("OauthPath") String url,@Body LoginParams loginParams);
-
 
 
     /**

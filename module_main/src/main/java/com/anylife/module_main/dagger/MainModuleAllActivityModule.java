@@ -15,9 +15,9 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 /**
- * 全部放在这里来统一的管理 ！
+ * 全部放在这里来统一的管理 ！(感觉要这样配置还是很麻烦，能不能一行注解就可以了呢？？？？？？)
  * 新建了一个Activity 的并且需要inject 的只需要添加两行代码
- * <p>
+ *
  * 大部分的页面都不需要再额外的提供对象的话只需要DefaultActivityModule 就好了，否则自定义XXActivityModule
  *
  *
@@ -29,9 +29,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module(subcomponents = {
         BaseActivityComponent.class   //1111111111 subComponent=BaseActivityComponent
 })
-
 public abstract class MainModuleAllActivityModule {
-
     //2222222 新建了一个Activity 的并且需要inject 的只需要添加两行代码 DefaultActivityModule 适用于只要全局Module 中的内容
 
     //要是能不声明就更好了，有点像Manifest 中的配置文件

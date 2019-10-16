@@ -1,26 +1,16 @@
-# 2018 年9月25 ，基于某些安全,licence和可能带来的不好影响，删除了原来的Repo,这是修改后的
+# 基于某些安全,licence和可能带来的不好影响，删除了原来的Repo   -- 2018.09.25
 
----
 ![image.png](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
----
-但还是熟悉配方和味道，欢迎交流 👏
 
-# 教训：自由的世界也是有规则的
+
 
 # 关于本Demo-组件化的工程架构With MVP，Dagger2.android,RXjava2
 
-  一直在纠结在何种开发模式之中，重构希望能把关注点集中到代码结构、整体架构、可测试性、可维护性这四个方面
-  Rxjava2 + retrofit2 + MVP + Drager2 +,应该是当前Android开发主流的框架 ，我们都会参考Google的官方框架https://github.com/googlesamples/android-architecture 或者 Google 的最新的项目架构组件https://github.com/googlesamples/android-architecture-components
+  根据实际项目中出现的问题，也一直在思考何种开发模式之中，重构希望能把关注点集中到代码结构、整体架构、可测试性、可维护性这四个方面。
+  不搞插件化之类的黑科技（难度和实际工程效果），首要目的是解决开发效率问题使用成熟而且稳定的组合：
+  Rxjava2 + retrofit2 + MVP + Dagger2 也参考Google的官方框架https://github.com/googlesamples/android-architecture 
+  本Demo目前已经完善了组件化架构，从Support升级到AndroidX ，也支持Kotlin 进行开发。
 
-本 Demo目前已经完善了组件化架构，解决大型项目需要按需编译，模块化，代码隔离的问题
-  
- # Android 组件化架构
-   简单的分为BaseLib(抽象出来的其他Module共用)，module_main,module_news;其中module_main 中的News_fragment组件化到了module_news。 Android 组件化架构带来的好处和副作用网络上相关文章很多，在实际的项目中实施过程如果有使用Dagger&Dager.android ,可能会遇到一些麻烦，本Demo演示了如何处理。集成模式还是组建模式可以clone完代码后自己手动通过添加修改gradle.properties 文件中 的isModule 值（这个文件不会上传git版本管理），然后Sync Project 生效 （gradle.properties 文件用来配置Gradle settings的，例如JVM参数等，我们在gradle.properties 中配置的字段都可以在build.gradle文件中直接读取出来，不用任何多余的代码）
-   
-   加上Dagger2.android 真的炒鸡解耦，某个模块外包出去也可以，还大大减少大项目的编译调试时间，加快效率
-   
-   更多介绍：https://www.jianshu.com/p/5028eff76c30
-   
 
 # Error,empty,Loading,timeout等通用的场景处理，一处Root注入，处处可用
    项目中的toolbar几乎每个页面都要使用，每个Layout 都写？
@@ -34,7 +24,7 @@
   BaseObserver 中getErrorMsg(HttpException httpException) 方法中的处理和我们的Api  结构有关，请知悉。可以在Activity，fragment，service，broadcast 等发起http请求。
 
 
-# UI架构模型-MVP (结合rxjava&dagger2)
+# UI架构模型-MVP
   Android应用的UI架构模型经历了MVC,MVP 和 MVVM 的演变过程。MVC中View 层（Activity，Fragment/自定义的View）
   可能代码会随着业务的复杂变得很大，里面不但要处理界面，还要处理很多业务逻辑里面承载了太多的东西，试试MVP吧，
   已经是很流行的UI架构模型了。
@@ -74,11 +64,9 @@
 - Dagger.android 大大的优化Dagger 在android 中的使用，
 - BaseActivity 中Toolbar 的处理
 - 进行网络请求时候的Error，empty,Loading,timeout等通用场景处理，Demo中一处Root注入，处处可用
-- 通用的BaseActivity 和BaseFragment的封装（跳转PV打点，事件打点，不放和base 无关的东西）
 - Http (Rxjava2+Retrofit2)的闭环处理
 - AndroidX 和 Kotlin 支持
-- [混淆压缩打包优化 Proguard　proguard-android-optimize　和 proguard-android 区别 ？](https://github.com/D-clock/Doc/blob/master/Android/Gradle/4_AndroidStudio%E4%B8%8BProGuard%E6%B7%B7%E6%B7%86%E6%89%93%E5%8C%85.md)
-
+- 
 
 
 

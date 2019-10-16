@@ -10,10 +10,14 @@ import androidx.appcompat.widget.Toolbar
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.zlb.httplib.HttpUiTips
 import com.zlb.httplib.R
 
 /**
+ * RxAppCompatActivity 竟然是android.support.v7.app.AppCompatActivity
+ *
+ *
  * [FBI WARMING] 不要为了方便，只有某几个Activity 才会用的（定位，Wi-Fi 数据收集啊，写在Base里面，那还abstract什么）
  * 基类就只做基类的事情,不要把业务层面的代码写到这里来
  *
@@ -25,12 +29,12 @@ import com.zlb.httplib.R
  * @author anylife.zlb@gmail.com 20170301
  */
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关文件
-abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
+abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
     var context: Context? =null
 
     private var mBaseLoadService: LoadService<*>? = null
 
-    abstract val layoutId: Int //获取相应的布局啊
+    abstract val layoutId: Int
 
     val toolbar: Toolbar?
         get() = findViewById<View>(R.id.toolbar) as Toolbar
@@ -147,6 +151,10 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
      * 3.停止异步任务
      * 4.静态的变量置 null
      * 5.
+     *
+     *
+     * String url = "https://down.szhtxx.cn/downPdf/440301999999980/2019/08/15/c8630cee58664229a0b7a87eb6a07f27.pdf";
+     *
      */
     override fun onDestroy() {
         super.onDestroy()

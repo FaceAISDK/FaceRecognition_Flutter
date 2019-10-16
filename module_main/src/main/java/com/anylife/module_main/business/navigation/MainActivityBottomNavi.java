@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseDaggerActivity;
 import com.zlb.httplib.BuildConfig;
+import com.zlb.httplib.HttpUiTips;
 
 import javax.inject.Inject;
 
@@ -94,6 +95,8 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
         //设置App 的Logo
         getToolbar().setNavigationIcon(null);
 
+        HttpUiTips.showDialog(this,"");
+
         //这里的icon 一般都有动画的
         navigation = findViewById(R.id.navigation);
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigation.getChildAt(0);
@@ -126,7 +129,6 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
                 }
                 menuItem = navigation.getMenu().getItem(position);
                 menuItem.setChecked(true);
-                //Title 没有改变
             }
 
             @Override
@@ -151,8 +153,8 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
 
         adapter.addFragment(MainFragment.newInstance());
 
-
         if (BuildConfig.isModule) {
+            //组件化开发模式这里添加的空的 newsFragmentShell
             adapter.addFragment(newsFragmentShell);
         } else {
             //Fragment 单独组件化出去了

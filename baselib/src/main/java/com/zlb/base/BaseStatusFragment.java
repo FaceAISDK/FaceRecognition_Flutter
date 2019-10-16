@@ -11,6 +11,8 @@ import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.zlb.httplib.HttpUiTips;
+
+import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -66,7 +68,7 @@ public abstract class BaseStatusFragment extends RxFragment  {
     }
 
     /**
-     * 如果没有重写，说明那个页面不需要Http 请求，直接是成功
+     * 如果没有重写，说明那个页面不需要Http 请求，直接是成功  HelloKitty7
      */
     protected void loadHttp() {
         mBaseLoadService.showSuccess();
@@ -75,8 +77,9 @@ public abstract class BaseStatusFragment extends RxFragment  {
 
     @Override
     public void onAttach(Activity activity) {
-//        //使用的Fragment 是V4 包中的，不然就是AndroidInjection.inject(this)
         AndroidSupportInjection.inject(this);
+
+//        AndroidInjection.inject(activity);
         super.onAttach(activity);
     }
 
