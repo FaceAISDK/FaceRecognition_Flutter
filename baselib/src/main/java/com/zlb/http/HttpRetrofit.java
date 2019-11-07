@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HttpRetrofit {
     private static final String TAG = HttpRetrofit.class.getSimpleName() + "OKHTTP";
-    public static final String baseUrl = "http://t1" + ".int." + "owl1" + "024.com/";  // WARMING-just for test !
+    public static final String baseUrl = "https://www.apiopen.top/";  // WARMING-just for test !
 
     //throw a custom IOException("Unexpected protocol: " + protocol)
     public static final String CUSTOM_REPEAT_REQ_PROTOCOL = "MY_CUSTOM_REPEAT_REQ_PROTOCOL";
@@ -155,7 +155,6 @@ public class HttpRetrofit {
                     .authenticator(mAuthenticator2)
                     .addInterceptor(myHttpInterceptor)
                     .addInterceptor(new ChuckInterceptor(BaseApplication.getAppContext()))
-
                     .build();
 
 

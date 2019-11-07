@@ -1,66 +1,99 @@
 package com.anylife.module_main.business.login;
 
-/**
- * 这一类的entity 的定义就直接的放在一个包里面就行了。
- *
- * Created by anylife.zlb@gmail.com on 2016/7/11.
- */
 public class LoginResult {
-        private String access_token;
-        private String token_type;
-        private String refresh_token;
-        private String scope;
-        private int expires;//access_token过期时间
 
-        public String getAccessToken() {
-            return access_token;
-        }
 
-        public void setAccessToken(String access_token) {
-            this.access_token = access_token;
-        }
+    /**
+     * key : 00d91e8e0cca2b76f515926a36db68f5
+     * phone : 13594347817
+     * name : peakchao
+     * passwd : 123456
+     * text : 这是我的签名。
+     * img : https://res.apiopen.top/2018031820405521.key.png
+     * other : 这是我的备注信息1
+     * other2 : 这是我的备注信息2
+     * createTime : 2018-03-18 20:40:55
+     */
 
-        public String getTokenType() {
-            return token_type;
-        }
+    private String key;
+    private String phone;
+    private String name;
+    private String passwd;
+    private String text;
+    private String img;
+    private String other;
+    private String other2;
+    private String createTime;
 
-        public void setTokenType(String token_type) {
-            this.token_type = token_type;
-        }
+    public String getKey() {
+        return key;
+    }
 
-        public String getRefreshToken() {
-            return refresh_token;
-        }
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-        public void setRefreshToken(String refresh_token) {
-            this.refresh_token = refresh_token;
-        }
+    public String getPhone() {
+        return phone;
+    }
 
-        public String getScope() {
-            return scope;
-        }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-        public void setScope(String scope) {
-            this.scope = scope;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public int getExpires() {
-            return expires;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setExpires(int expires) {
-            this.expires = expires;
-        }
+    public String getPasswd() {
+        return passwd;
+    }
 
-        @Override
-        public String toString() {
-            return "Result{" +
-                    "access_token='" + access_token + '\'' +
-                    ", token_type='" + token_type + '\'' +
-                    ", refresh_token='" + refresh_token + '\'' +
-                    ", scope='" + scope + '\'' +
-                    ", expires=" + expires +
-                    '}';
-        }
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public String getOther2() {
+        return other2;
+    }
+
+    public void setOther2(String other2) {
+        this.other2 = other2;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 }

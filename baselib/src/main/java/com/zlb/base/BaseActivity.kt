@@ -13,6 +13,13 @@ import com.kingja.loadsir.core.LoadSir
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.zlb.httplib.HttpUiTips
 import com.zlb.httplib.R
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.functions.Action
+import io.reactivex.internal.operators.observable.ObservableBlockingSubscribe.subscribe
+import java.util.concurrent.TimeUnit
+
 
 /**
  * RxAppCompatActivity 竟然是android.support.v7.app.AppCompatActivity
@@ -30,7 +37,7 @@ import com.zlb.httplib.R
  */
 // TODO: 2019/1/30    MVP 要写的代码太多了，准备搞一套自动代码生成工具，填入业务名称自动生成 MVP 相关文件
 abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
-    var context: Context? =null
+    var context: Context? = null
 
     private var mBaseLoadService: LoadService<*>? = null
 
@@ -100,6 +107,34 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
     public fun onHttpReload(v: View) {}
 
     protected abstract fun initViews()
+
+    /**
+     * 接收处理消息的空方法定义，有需要的自己重写
+     */
+    open fun msgManagement(what: Int) {}
+
+
+    /**
+     * 发送带有时间延迟的消息处理
+     *
+     */
+    public fun sendMsg(what: Int, delayMillis: Long) {
+        Observable.timer(delayMillis, TimeUnit.MILLISECONDS)
+                .observeOn(mainThread())
+                .doOnComplete { msgManagement(what) }
+                .subscribe()
+    }
+
+
+    /**
+     * 发送不用延时的消息
+     */
+    public fun sendMsg(what: Int) {
+        Observable.empty<Void>().observeOn(mainThread())
+                .doOnComplete { msgManagement(what) }
+                .subscribe()
+    }
+
 
     /**
      * 设置头部标题

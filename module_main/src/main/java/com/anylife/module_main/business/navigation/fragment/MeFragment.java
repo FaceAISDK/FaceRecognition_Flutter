@@ -14,6 +14,7 @@ import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseApplication;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.dagger.scope.ActivityScope;
+import com.zlb.http.result.NulResult;
 import com.zlb.httplib.BaseObserver;
 import com.zlb.httplib.HttpUiTips;
 import com.zlb.httplib.rxUtils.SwitchSchedulers;
@@ -66,11 +67,11 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
      * 获取我的个人信息
      */
     private void getMeProfile() {
-        mainModuleApiService.getMeProfile(BaseApplication.globalJniMap.get("meProfile"))
+        mainModuleApiService.getMeProfile()
                 .compose(SwitchSchedulers.applySchedulers())
-                .subscribe(new BaseObserver<MeProfileResult>(getActivity()) {
+                .subscribe(new BaseObserver<NulResult>(getActivity()) {
                     @Override
-                    public void onSuccess(MeProfileResult meProfileResult) {
+                    public void onSuccess(NulResult meProfileResult) {
                         meProfile.setText(meProfileResult.toString());
                     }
 
@@ -79,6 +80,7 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
                         super.onFailure(code, message);
                     }
                 });
+
     }
 
     @Inject
@@ -92,7 +94,6 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
 //            }
 
 //            ARouter.getInstance().build("/news/webActivity").navigation();
-
 
 //            getMeProfile();
             HttpUiTips.showDialog(getActivity(),"");

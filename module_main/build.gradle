@@ -117,6 +117,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
 
+
+
 //    //自定义相机,Maybe cameraX better
 //    implementation([
 //            'com.camerakit:camerakit:1.0.0-beta3.10',
@@ -129,9 +131,16 @@ dependencies {
     implementation 'com.zhihu.android:matisse:0.4.3'  //图片视频选择，不要再用PhotoPicker 了
 
 
-    implementation "android.arch.work:work-runtime:1.0.1"
-    // optional - Firebase JobDispatcher support
-//    implementation "android.arch.work:work-firebase:1.0.1"
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    // optional - RxJava2 support
+    implementation "androidx.work:work-rxjava2:$work_version"
+    // optional - GCMNetworkManager support
+    implementation "androidx.work:work-gcm:$work_version"
+    // optional - Test helpers
+    androidTestImplementation "androidx.work:work-testing:$work_version"
 
 
 }

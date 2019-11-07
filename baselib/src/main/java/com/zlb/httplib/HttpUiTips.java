@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference;
  * Created by zenglb on 2017/3/24.
  */
 public class HttpUiTips {
+
     private static AlertDialog fatalEorTips;
     private static WeakReference<Context> lastContext;
 

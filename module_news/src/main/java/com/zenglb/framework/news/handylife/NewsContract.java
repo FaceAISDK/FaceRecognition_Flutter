@@ -26,7 +26,7 @@ public class NewsContract {
      *
      */
     public interface NewsPresenter extends BasePresenter<NewsView> {
-        void getHandyLifeData(String type, int page);
+        void getHandyLifeData();
     }
 
 }

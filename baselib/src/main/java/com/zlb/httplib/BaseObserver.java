@@ -98,9 +98,9 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         if (response.getCode() == RESPONSE_CODE_OK || response.getCode() == 200) {
             // response.getCode() == 200  Module News的API真够奇怪的
             // 这里拦截一下使用测试
-            onSuccess(response.getResult());
+            onSuccess(response.getData());
         } else {
-            onFailure(response.getCode(), response.getError());
+            onFailure(response.getCode(), response.getMsg());
         }
 
     }
@@ -166,10 +166,6 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         }
     }
 
-
-
-
-
     /**
      * 简单的把Dialog 处理掉
      */
@@ -178,7 +174,6 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         int complete = 11;
         //        HttpUiTips.dismissDialog(mContext);
     }
-
 
     /**
      * Default error dispose!
@@ -247,7 +242,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
             HttpResponse errorResponse = gson.fromJson(errorBodyStr, HttpResponse.class);
             if (null != errorResponse) {
                 errorCode = errorResponse.getCode();
-                errorMsg = errorResponse.getError();
+                errorMsg = errorResponse.getMsg();
             }
         } catch (Exception jsonException) {
             jsonException.printStackTrace();

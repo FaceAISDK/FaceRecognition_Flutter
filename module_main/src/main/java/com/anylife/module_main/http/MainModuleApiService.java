@@ -1,16 +1,15 @@
 package com.anylife.module_main.http;
 
+import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.login.LoginResult;
 import com.anylife.module_main.business.navigation.fragment.MeProfileResult;
-import com.zlb.http.param.LoginParams;
+import com.zlb.http.result.NulResult;
 import com.zlb.httplib.HttpResponse;
+import java.util.HashMap;
 import io.reactivex.Observable;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
-
+import retrofit2.http.QueryMap;
 
 /**
  * API 列表，https://cloud.youku.com/docs?id=43
@@ -35,17 +34,16 @@ public interface MainModuleApiService {
     /**
      * Oauth,外网暂不支持访问
      */
-    @Headers("NeedOauthFlag: NeedOauthFlag")
-    @POST("{OauthPath}")
-    Observable<HttpResponse<LoginResult>> goLogin(@Path ("OauthPath") String url,@Body LoginParams loginParams);
+    @GET("login")
+    Observable<HttpResponse<LoginResult>> goLogin(@QueryMap HashMap<String,String>  loginParam);
 
 
     /**
      * MeProfile, 外网暂不支持访问
      *
      */
-    @GET("{MeProfilePath}")
-    Observable<HttpResponse<MeProfileResult>> getMeProfile(@Path ("MeProfilePath") String url);
+    @GET("musicBroadcasting")
+    Observable<HttpResponse<NulResult>> getMeProfile();
 
 
 }

@@ -12,7 +12,8 @@ import com.zenglb.framework.news.http.result.ArticlesResult;
  */
 public interface INewsDataSource {
 
-    void getHandyLifeData(String type, int page, LoadNewsDataCallback loadNewsDataCallback) ;
+
+    void getHandyLifeData( LoadNewsDataCallback loadNewsDataCallback) ;
 
 
     /**

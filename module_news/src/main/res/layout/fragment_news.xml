@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zlb.customview.MySwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipeLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/newsRecyclerView"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_common"
+    android:scrollbarStyle="insideInset"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/newsRecyclerView"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_common"
-        android:scrollbarStyle="insideInset"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-</com.zlb.customview.MySwipeRefreshLayout>

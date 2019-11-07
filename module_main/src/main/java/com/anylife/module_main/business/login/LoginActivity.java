@@ -21,14 +21,13 @@ import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseDaggerActivity;
 import com.zlb.http.HttpRetrofit;
-import com.zlb.http.param.LoginParams;
 import com.zlb.httplib.BaseObserver;
 import com.zlb.httplib.rxUtils.SwitchSchedulers;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 import es.dmoral.toasty.Toasty;
-
-import static com.zlb.base.BaseApplication.globalJniMap;
 
 /**
  * 简单的登录页面，简单的MVP 和Dagger demo
@@ -106,8 +105,8 @@ public class LoginActivity extends BaseDaggerActivity {
         cardview = findViewById(R.id.cardview);
 
         //FBI WARMING ,账号仅用于分享交流，他用将追究法律责任
-        etUsername.setText(globalJniMap.get("account"));
-        etPassword.setText(globalJniMap.get("password")+"secret");
+        etUsername.setText("13594347817");
+        etPassword.setText("123456");
 
 
         findViewById(R.id.AITest).setOnClickListener(v -> {
@@ -134,15 +133,17 @@ public class LoginActivity extends BaseDaggerActivity {
             return;
         }
 
-        //1.需要改进
-        LoginParams loginParams = new LoginParams();
-        loginParams.setUsername(userName);
-        loginParams.setPassword(globalJniMap.get("password")); //
+        //https://www.apiopen.top/login?key=00d91e8e0cca2b76f515926a36db68f5&phone=13594347817&passwd=123456
+        //https://api.apiopen.top/login?phone=13594347817&passwd=123456&key=00d91e8e0cca2b76f515926a36db68f5
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("key","00d91e8e0cca2b76f515926a36db68f5");
+        hashMap.put("phone","13594347817");
+        hashMap.put("passwd","123456");
 
 
         //外网暂不支持访问
         //外网暂不支持访问
-        mainModuleApiService.goLogin(globalJniMap.get("oauthPath"),loginParams)
+        mainModuleApiService.goLogin(hashMap)
                 .compose(SwitchSchedulers.applySchedulers())
                 .subscribe(new BaseObserver<LoginResult>(getContext()){
                     @Override
@@ -154,10 +155,10 @@ public class LoginActivity extends BaseDaggerActivity {
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
 
-                        //外网暂不支持访问 ,但是里面的新闻接口是没有限制的
-                        Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
-                        startActivity(i2);
-                        LoginActivity.this.finish();
+//                        //外网暂不支持访问 ,但是里面的新闻接口是没有限制的
+//                        Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
+//                        startActivity(i2);
+//                        LoginActivity.this.finish();
 
                     }
                 });
@@ -172,10 +173,10 @@ public class LoginActivity extends BaseDaggerActivity {
      */
     public void loginSuccess(LoginResult loginResult) {
         //切换DB
-        spDao.saveData(SPKey.KEY_ACCESS_TOKEN, "Bearer " + loginResult.getAccessToken());
-        spDao.saveData(SPKey.KEY_REFRESH_TOKEN, loginResult.getRefreshToken());
         spDao.saveData(SPKey.KEY_LAST_ACCOUNT, etUsername.getText().toString().trim());
-        HttpRetrofit.setToken(spDao.getData(SPKey.KEY_ACCESS_TOKEN, "", String.class));
+//        HttpRetrofit.setToken(spDao.getData(SPKey.KEY_ACCESS_TOKEN, "", String.class));
+//        spDao.saveData(SPKey.KEY_ACCESS_TOKEN, "Bearer " + loginResult.getAccessToken());
+//        spDao.saveData(SPKey.KEY_REFRESH_TOKEN, loginResult.getRefreshToken());
 
         if (isFromLaunch) {
             Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);

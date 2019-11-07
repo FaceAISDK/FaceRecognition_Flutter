@@ -12,28 +12,34 @@ import android.provider.Settings;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
+import com.anylife.module_main.workmanger.UploadWorker;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseDaggerActivity;
 import com.zlb.httplib.HttpUiTips;
 
 import java.util.List;
+
 import javax.inject.Inject;
+
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
- *
- *
  * Created by anylife.zlb@gmail.com on 2017/1/11.
  */
 public class ModuleMainLauncherActivity extends BaseDaggerActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final int FINISH_LAUNCHER = 0;
-    private Handler UiHandler = new MyHandler();
 
     private static final String[] PERMISSION_LIST =
             {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -44,40 +50,22 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
     SPDao spDao;
 
 
-    /**
-     * 接受消息，处理消息 ，此Handler会与当前主线程一块运行
-     */
-    class MyHandler extends Handler {
+    @Override
+    public void msgManagement(int what) {
+        String accessToken = spDao.getData(SPKey.KEY_ACCESS_TOKEN, "", String.class);
+        //没有登陆过就去指导页面（Guide Page）
+        if (TextUtils.isEmpty(accessToken)) {
+            Intent i1 = new Intent();
+            i1.putExtra("isFromLaunch", true);
+            i1.setClass(getContext(), LoginActivity.class);
 
-        public MyHandler() {
-
-        }
-
-        // 子类必须重写此方法，接受数据
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case FINISH_LAUNCHER:
-                    String accessToken = spDao.getData(SPKey.KEY_ACCESS_TOKEN, "", String.class);
-                    //没有登陆过就去指导页面（Guide Page）
-                    if (TextUtils.isEmpty(accessToken)) {
-                        Intent i1 = new Intent();
-                        i1.putExtra("isFromLaunch", true);
-                        i1.setClass(getContext(), LoginActivity.class);
-
-                        startActivity(i1);
-                        ModuleMainLauncherActivity.this.finish();
-                    } else {
-                        Intent i1 = new Intent();
-                        i1.setClass(ModuleMainLauncherActivity.this, MainActivityBottomNavi.class);
-                        startActivity(i1);
-                        ModuleMainLauncherActivity.this.finish();
-                    }
-                    break;
-
-                default:
-
-                    break;
-            }
+            startActivity(i1);
+            ModuleMainLauncherActivity.this.finish();
+        } else {
+            Intent i1 = new Intent();
+            i1.setClass(ModuleMainLauncherActivity.this, MainActivityBottomNavi.class);
+            startActivity(i1);
+            ModuleMainLauncherActivity.this.finish();
         }
     }
 
@@ -93,7 +81,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
         if (EasyPermissions.hasPermissions(this, PERMISSION_LIST)) {
-            UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 2500);  //测试内存泄漏,只为测试.
+            sendMsg(FINISH_LAUNCHER, 2500);
         }
     }
 
@@ -123,6 +111,22 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
         super.onCreate(savedInstanceState);
         setToolBarVisible(View.GONE);  //这里是不需要Base 中的Toolbar,不要的情况毕竟是少数
         requestAllPermissions();
+
+        // Create charging constraint
+        Constraints constraints = new Constraints.Builder()
+//                .setRequiresCharging(true)
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        //a WorkRequest defines how and when work should be run. Tasks may be one-off or periodic
+        //测试使用WorkManger
+        OneTimeWorkRequest uploadWorkRequest = new OneTimeWorkRequest
+                .Builder(UploadWorker.class)
+                .setConstraints(constraints) // This adds the Constraints
+                .build();
+
+        //you can now schedule it with WorkManager using the enqueue() method.
+        WorkManager.getInstance(this).enqueue(uploadWorkRequest);
     }
 
 
@@ -139,7 +143,6 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        UiHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -148,10 +151,8 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
         hideBottomUIMenu();
     }
 
-
     /**
      * 隐藏虚拟按键，并且全屏
-     *
      */
     protected void hideBottomUIMenu() {
         //隐藏虚拟按键，并且全屏
@@ -167,10 +168,9 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
         }
     }
 
-
     public void requestAllPermissions() {
         if (EasyPermissions.hasPermissions(this, PERMISSION_LIST)) {
-            UiHandler.sendEmptyMessageDelayed(FINISH_LAUNCHER, 1500);  //测试内存泄漏,只为测试.
+            sendMsg(FINISH_LAUNCHER, 2500);
         } else {
             // Ask for both permissions
             EasyPermissions.requestPermissions(
@@ -180,6 +180,5 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
                     PERMISSION_LIST);
         }
     }
-
 
 }

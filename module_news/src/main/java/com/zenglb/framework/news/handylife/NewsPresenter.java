@@ -19,16 +19,14 @@ public class NewsPresenter implements NewsContract.NewsPresenter {
         this.mNewsRepository = mNewsRepository;
     }
 
-    /**
-     * 获取HandyLife data
-     *
-     * @param type 数据类型，{city guide,shop,eat}
-     * @param page page index
-     */
-    @Override
-    public void getHandyLifeData(String type, int page) {
 
-        mNewsRepository.getHandyLifeData(type, page, new INewsDataSource.LoadNewsDataCallback() {
+    @Override
+    public void getHandyLifeData() {
+
+
+
+
+        mNewsRepository.getHandyLifeData( new INewsDataSource.LoadNewsDataCallback() {
             @Override
             public void onHandyLifeDataSuccess(ArticlesResult handyLifeResultBeans) {
                 if (null != mNewsView) {

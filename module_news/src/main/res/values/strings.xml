@@ -3,7 +3,6 @@
     <string name="app_name">module_news</string>
 
     <string-array name="tabs_title_array">
-        <item>全部</item>
         <item>时事</item>
         <item>科技</item>
         <item>时尚</item>
@@ -14,15 +13,14 @@
     </string-array>
 
     <string-array name="tabs_data_type_array">
-        <item>all</item>
-        <item>news</item>
-        <item>tech</item>
-        <item>fashion</item>
-        <item>news</item>
-        <item>finance</item>
-        <item>read</item>
-        <item>fun</item>
-        <item>food</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

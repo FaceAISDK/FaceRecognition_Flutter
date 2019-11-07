@@ -25,16 +25,17 @@ public class NewsRepository implements INewsDataSource {
 
 
     /**
+     * 最好加一层数据库缓存
+     *
+     *
      * getHandyLifeData from http server
      *
-     * @param type                      数据类型，{city guide,shop,eat}
-     * @param page                      page index
      * @param loadNewsCallback the callBack
      */
     @Override
-    public void getHandyLifeData(String type, int page, LoadNewsDataCallback loadNewsCallback) {
+    public void getHandyLifeData(LoadNewsDataCallback loadNewsCallback) {
 
-        apiService.getArticles(type)
+        apiService.getArticles()
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
                 .subscribe(new BaseObserver<ArticlesResult>(null) {

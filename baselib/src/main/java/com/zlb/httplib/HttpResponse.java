@@ -8,47 +8,43 @@ package com.zlb.httplib;
  */
 public class HttpResponse<T> {
 	private int code;
-	private String error;
-	private T result;    //result T
+	private String msg;
+//	private T result;    //result T
+	private T data;      //data T
 
 	public int getCode() {
 		return code;
-	}
-
-	public boolean isSuccess() {
-		if(code==0){
-			return true;
-		}else {
-			return false;
-		}
 	}
 
 	public void setCode(int code) {
 		this.code = code;
 	}
 
-	public String getError() {
-		return error;
+	public String getMsg() {
+		return msg;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
-	public T getResult() {
-		return result;
+	public T getData() {
+		return data;
 	}
 
-	public void setResult(T result) {
-		this.result = result;
+	public void setData(T data) {
+		this.data = data;
 	}
+
 
 	@Override
 	public String toString() {
-		return "httpResponse{" +
+		return "HttpResponse{" +
 				"code=" + code +
-				", error='" + error + '\'' +
-				", result=" + result +
+				", msg='" + msg + '\'' +
+				", data=" + data +
 				'}';
 	}
+
+
 }
