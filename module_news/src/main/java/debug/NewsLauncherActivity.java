@@ -2,40 +2,22 @@ package debug;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.zenglb.framework.news.DynamicProxy.Sell;
 import com.zenglb.framework.news.DynamicProxy.Vendor;
 import com.zenglb.framework.news.R;
-import com.zenglb.framework.news.fileDownLoad.FileDownLoadObserver;
 import com.zenglb.framework.news.handylife.NewsPackageActivity;
-import com.zenglb.framework.news.http.NewsApiService;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseActivity;
-import com.zlb.http.HttpRetrofit;
 import com.zlb.utils.antigpsfake.AntiGPSFake;
 
-import java.io.File;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import javax.inject.Inject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -53,6 +35,7 @@ public class NewsLauncherActivity extends BaseActivity {
         //没有登陆过就去指导页面（Guide Page）
         Intent i1 = new Intent();
         i1.setClass(NewsLauncherActivity.this, NewsPackageActivity.class);
+
         startActivity(i1);
         NewsLauncherActivity.this.finish();
     }

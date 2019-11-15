@@ -23,9 +23,6 @@ public class NewsPresenter implements NewsContract.NewsPresenter {
     @Override
     public void getHandyLifeData() {
 
-
-
-
         mNewsRepository.getHandyLifeData( new INewsDataSource.LoadNewsDataCallback() {
             @Override
             public void onHandyLifeDataSuccess(ArticlesResult handyLifeResultBeans) {

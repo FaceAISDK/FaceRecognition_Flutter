@@ -20,13 +20,14 @@ import com.anylife.module_main.http.MainModuleApiService;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseDaggerActivity;
-import com.zlb.http.HttpRetrofit;
-import com.zlb.httplib.BaseObserver;
-import com.zlb.httplib.rxUtils.SwitchSchedulers;
+import com.zlb.httplib.HttpRetrofit;
+import com.zlb.httplib.DefaultObserver;
+import com.zlb.httplib.scheduler.SwitchSchedulers;
 
 import java.util.HashMap;
 
 import javax.inject.Inject;
+
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -62,6 +63,7 @@ public class LoginActivity extends BaseDaggerActivity {
         if (!isFromLaunch) {
             logoutCustomComponent();
         }
+
     }
 
     /**
@@ -72,6 +74,7 @@ public class LoginActivity extends BaseDaggerActivity {
         HttpRetrofit.setToken("");
     }
 
+
     /**
      * 集成的IM 等第三方系统需要单独的退出来,因为账号体系不能联动的
      */
@@ -80,11 +83,11 @@ public class LoginActivity extends BaseDaggerActivity {
 //        Clear Oautoken,在web 页面的时候怎么退出来
     }
 
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
     }
-
 
 
     @Override
@@ -117,12 +120,10 @@ public class LoginActivity extends BaseDaggerActivity {
     }
 
 
-
     /**
      * Login ,普通的登录和使用Rxjava 的方式都可以
-     *
+     * <p>
      * 外网暂不支持访问
-     *
      */
     public void goLogin() {
         String userName = etUsername.getText().toString().trim();
@@ -133,19 +134,17 @@ public class LoginActivity extends BaseDaggerActivity {
             return;
         }
 
-        //https://www.apiopen.top/login?key=00d91e8e0cca2b76f515926a36db68f5&phone=13594347817&passwd=123456
-        //https://api.apiopen.top/login?phone=13594347817&passwd=123456&key=00d91e8e0cca2b76f515926a36db68f5
-        HashMap<String,String> hashMap=new HashMap<>();
-        hashMap.put("key","00d91e8e0cca2b76f515926a36db68f5");
-        hashMap.put("phone","13594347817");
-        hashMap.put("passwd","123456");
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("phone", "18826562075");
+        hashMap.put("passwd", "12345678");
 
 
         //外网暂不支持访问
         //外网暂不支持访问
         mainModuleApiService.goLogin(hashMap)
                 .compose(SwitchSchedulers.applySchedulers())
-                .subscribe(new BaseObserver<LoginResult>(getContext()){
+                .subscribe(new DefaultObserver<LoginResult>(getContext()) {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         loginSuccess(loginResult);
@@ -155,10 +154,10 @@ public class LoginActivity extends BaseDaggerActivity {
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
 
-//                        //外网暂不支持访问 ,但是里面的新闻接口是没有限制的
-//                        Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
-//                        startActivity(i2);
-//                        LoginActivity.this.finish();
+                        //外网暂不支持访问 ,但是里面的新闻接口是没有限制的
+                        Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
+                        startActivity(i2);
+                        LoginActivity.this.finish();
 
                     }
                 });

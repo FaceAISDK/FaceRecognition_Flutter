@@ -17,8 +17,8 @@ import com.zenglb.framework.module_note.cameraX.CameraXActivity
 import com.zenglb.framework.module_note.http.NoteApiService
 import com.zenglb.framework.module_note.objectbox.ObjectBox.boxStore
 import com.zlb.base.BaseDaggerActivity
-import com.zlb.httplib.BaseObserver
-import com.zlb.httplib.rxUtils.SwitchSchedulers
+import com.zlb.httplib.DefaultObserver
+import com.zlb.httplib.scheduler.SwitchSchedulers
 import io.objectbox.android.AndroidScheduler
 
 import kotlinx.android.synthetic.main.app_bar_note_main.*
@@ -74,7 +74,7 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         apiService.getPropertyStr()
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
-                .subscribe(object : BaseObserver<String>(context) {
+                .subscribe(object : DefaultObserver<String>(context) {
                     override fun onSuccess(userBean: String?) {
                         userBean.toString()
                     }
@@ -90,7 +90,7 @@ class NoteMainActivity : BaseDaggerActivity(), NavigationView.OnNavigationItemSe
         apiService.getUsers()
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
-                .subscribe(object : BaseObserver<List<UserObjectTestBean>>(context) {
+                .subscribe(object : DefaultObserver<List<UserObjectTestBean>>(context) {
                     override fun onSuccess(userBean: List<UserObjectTestBean>?) {
                         userBean.toString()
                     }

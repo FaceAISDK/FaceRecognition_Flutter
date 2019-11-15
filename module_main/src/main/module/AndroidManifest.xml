@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:label">
-
-
+        <activity android:name=".thirdpartyAPI.ui.BlogListActivity"></activity>
         <activity
             android:name=".ModuleMainLauncherActivity"
             android:theme="@style/FullscreenTheme">
@@ -23,17 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".business.login.LoginActivity"
             android:launchMode="singleTop"
             android:theme="@style/FullscreenTheme" />
-
         <activity
             android:name=".business.navigation.MainActivityBottomNavi"
             android:launchMode="singleTask" />
-
-
     </application>
 
 </manifest>

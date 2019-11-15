@@ -12,6 +12,9 @@ import com.zlb.dagger.module.BaseGlobalModule;
 import dagger.android.AndroidInjector;
 
 /**
+ * https://easy-mock.com/login
+ * MockData   anylife.zlb   mockdata
+ *
  * 组件化开发模式 集成打包的壳工程的Application，其他组件Module模块工程在开发的时候配置Debug目录中的Application
  *
  * 在集成打包的时候其他组件Module模块工程下的Debug 目录下的 XXApplication 都配置会被expect

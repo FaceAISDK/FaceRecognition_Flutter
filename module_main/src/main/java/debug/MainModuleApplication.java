@@ -17,7 +17,6 @@ public class MainModuleApplication extends BaseApplication {
     public static final String MAIN_PROCESS_NAME = "com.zenglb.framework.module_main";
     public static final String WEB_PROCESS_NAME = "ccom.anylife.module_main:webprocessXXXXXXXX";
 
-
     @Override
     public void onCreate() {
         super.onCreate();

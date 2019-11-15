@@ -17,14 +17,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.anylife.module_main.R;
 import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
-import com.anylife.module_main.business.navigation.fragment.VideoListFragment;
+import com.anylife.module_main.thirdpartyAPI.ui.BlogListFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseDaggerActivity;
 import com.zlb.httplib.BuildConfig;
-import com.zlb.httplib.HttpUiTips;
+import com.zlb.httplib.dialog.HttpUiTips;
 
 import javax.inject.Inject;
 
@@ -37,11 +37,13 @@ import es.dmoral.toasty.Toasty;
  * 用 https://plugins.jetbrains.com/plugin/8219-android-view-generator 代替吧
  * <p>
  * <p>
+ * 应用架构指南：https://developer.android.google.cn/jetpack/docs/guide
+ * <p>
  * Created by anylife.zlb@gmail.com on 2019/2/15.
  */
 public class MainActivityBottomNavi extends BaseDaggerActivity {
     private ViewPager viewPager;
-    private MenuItem menuItem;
+    //    private MenuItem menuItem;
     private BottomNavigationView navigation;
 
     @Inject
@@ -50,60 +52,29 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
     @Inject
     NewsFragmentShell newsFragmentShell;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            int i = item.getItemId();
-            if (i == R.id.navigation_home) {
-                viewPager.setCurrentItem(0);
-                setToolBarTitle("主页");
-                return true;
-            } else if (i == R.id.navigation_dashboard) {
-                viewPager.setCurrentItem(1);
-                setToolBarTitle("新闻资讯");
-                return true;
-            } else if (i == R.id.navigation_notifications) {
-                viewPager.setCurrentItem(2);
-                setToolBarTitle("私密记事");
-                return true;
-            } else if (i == R.id.navigation_set) {
-                viewPager.setCurrentItem(3);
-                setToolBarTitle("设置");
-                return true;
-            }
-            return false;
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_main_bottom_navi;
     }
 
-
     public void initViews() {
-        setToolBarTitle("主页");
+        setActivityTitle("主页");
         //设置App 的Logo
         getToolbar().setNavigationIcon(null);
+        HttpUiTips.showDialog(this, "");
 
-        HttpUiTips.showDialog(this,"");
-
+        viewPager = findViewById(R.id.viewpager);
         //这里的icon 一般都有动画的
         navigation = findViewById(R.id.navigation);
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigation.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {
-//            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
             final View iconView = menuView.getChildAt(i).findViewById(R.id.icon);
-
             final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, displayMetrics);
@@ -111,9 +82,13 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
             iconView.setLayoutParams(layoutParams);
         }
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setOnNavigationItemSelectedListener(menuItem -> {
+            viewPager.setCurrentItem(menuItem.getOrder(),false);
+            setActivityTitle(menuItem.getTitle());
+            return true;
+        });
 
-        viewPager = findViewById(R.id.viewpager);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -122,13 +97,9 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (menuItem != null) {
-                    menuItem.setChecked(false);
-                } else {
-                    navigation.getMenu().getItem(0).setChecked(false);
-                }
-                menuItem = navigation.getMenu().getItem(position);
+                MenuItem menuItem = navigation.getMenu().getItem(position);
                 menuItem.setChecked(true);
+                setActivityTitle(menuItem.getTitle());
             }
 
             @Override
@@ -153,6 +124,9 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
 
         adapter.addFragment(MainFragment.newInstance());
 
+        adapter.addFragment(BlogListFragment.newInstance());
+
+
         if (BuildConfig.isModule) {
             //组件化开发模式这里添加的空的 newsFragmentShell
             adapter.addFragment(newsFragmentShell);
@@ -161,7 +135,6 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
             adapter.addFragment((Fragment) ARouter.getInstance().build("/news/packageFragment").navigation());
         }
 
-        adapter.addFragment(VideoListFragment.newInstance());
         adapter.addFragment(MeFragment.newInstance());
 
         viewPager.setAdapter(adapter);

@@ -1,10 +1,9 @@
 package com.zenglb.framework.news.dagger;
 
 import android.content.Context;
-
 import com.zenglb.framework.news.http.NewsApiService;
 import com.zlb.Sp.SPDao;
-import com.zlb.http.HttpRetrofit;
+import com.zlb.httplib.HttpRetrofit;
 
 import javax.inject.Singleton;
 
@@ -45,8 +44,5 @@ public class NewsGlobalModule {
 
         return HttpRetrofit.getRetrofit(spDao, mContext).create(NewsApiService.class);
     }
-
-
-
 
 }

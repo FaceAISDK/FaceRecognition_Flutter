@@ -1,4 +1,4 @@
-package com.zlb.httplib;
+package com.zlb.httplib.utils;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -8,6 +8,8 @@ import com.zlb.utils.MD5Util;
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Connection;
@@ -24,8 +26,8 @@ import okhttp3.internal.platform.Platform;
 import okio.Buffer;
 import okio.BufferedSource;
 
-import static com.zlb.http.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
-import static com.zlb.http.HttpRetrofit.requestIdsMap;
+import static com.zlb.httplib.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
+import static com.zlb.httplib.HttpRetrofit.requestIdsMap;
 import static okhttp3.internal.platform.Platform.INFO;
 
 /**
@@ -110,8 +112,13 @@ public final class MyHttpInterceptor implements Interceptor {
         };
     }
 
-    public MyHttpInterceptor() {
+
+    public  Map<String, Long> requestIdsMap = new HashMap<>();
+
+    public MyHttpInterceptor( Map<String, Long> requestIdsMap) {
         this(MyHttpInterceptor.Logger.DEFAULT);
+        this.requestIdsMap=requestIdsMap;
+
     }
 
     public MyHttpInterceptor(MyHttpInterceptor.Logger logger) {
@@ -135,26 +142,6 @@ public final class MyHttpInterceptor implements Interceptor {
         return level;
     }
 
-
-    /**
-     * 打印全局统一拦截添加的Http Headers
-     * <p>
-     * 全局拦截的http 没法在配置中直接打印处理，因为先http 请求然后打印然后拦截添加的
-     *
-     * @param request
-     */
-    public void logRequestHeaders(Request request) {
-        Log.w("OKhttp ", "  开始打印HTTP请求  Headers \n");
-        Headers headers = request.headers();
-        for (int i = 0, count = headers.size(); i < count; i++) {
-            String name = headers.name(i);
-            // Skip headers from the request body as they are explicitly logged above.
-            if (!"Content-Type".equalsIgnoreCase(name) && !"Content-Length".equalsIgnoreCase(name)) {
-                Log.i("OKhttp: " + i + " ", name + ": " + headers.value(i));
-            }
-        }
-        Log.w("OKhttp ", "  打印HTTP请求完成  Headers \n");
-    }
 
 
     /**

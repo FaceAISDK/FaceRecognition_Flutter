@@ -5,7 +5,7 @@ import android.content.Context
 
 import com.zenglb.framework.module_note.http.NoteApiService
 import com.zlb.Sp.SPDao
-import com.zlb.http.HttpRetrofit
+import com.zlb.httplib.HttpRetrofit
 
 import javax.inject.Singleton
 

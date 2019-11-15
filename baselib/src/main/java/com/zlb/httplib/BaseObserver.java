@@ -2,7 +2,6 @@ package com.zlb.httplib;
 
 import android.content.Context;
 import android.os.NetworkOnMainThreadException;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -12,7 +11,8 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
-import com.zlb.httplib.rxUtils.TextConvertUtils;
+import com.zlb.httplib.dialog.HttpUiTips;
+import com.zlb.httplib.utils.TextConvertUtils;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -25,37 +25,35 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
-import static com.zlb.http.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
+import static com.zlb.httplib.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
 
 /**
- * Base Observer 的封装处理
- * <p>
- * 注意内存泄漏：https://github.com/trello/RxLifecycle/tree/2.x
- * <p>
+ * 应对聚合型的App可能有多个Host和不同的返回Response 情况，需要再抽象一层
+ *
+ * 还需要再抽象一层，毕竟不同的域名HttpResponse 字段不太一样，处理逻辑也会有一点不一样
+ *
+ *
+ *
  * Created by zenglb on 2017/4/14.
  */
-public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
-    private final String TAG = BaseObserver.class.getSimpleName();
-    public final static String Thread_Main = "main";
+public abstract class BaseObserver<K> implements Observer<K> {
+    public final static String Thread_Main = "main"; //防止非主线程异常
 
-    private final int RESPONSE_CODE_OK = 0;       //自定义的业务逻辑，成功返回积极数据
-    private final int RESPONSE_FATAL_EOR = -1;    //返回数据失败,严重的错误
-    private final int CUSTOM_REPEAT_REQ_ERROR = -2; //同样的一个请求并且还是重复的话返回错误
-
-    private Context mContext;
-    private static Gson gson = new Gson();
+    public final int RESPONSE_FATAL_EOR = -1;       //返回数据失败,严重的错误
+    public final int CUSTOM_REPEAT_REQ_ERROR = -2;  //同样的一个请求并且还是重复的话返回错误
+    public Context mContext;
 
     private int errorCode = -1111;
     private String errorMsg = "未知的错误！";
 
     private Disposable disposable;
 
-    /**
-     * 根据具体的Api 业务逻辑去重写 onSuccess 方法！Error 是选择重写，but 必须Super ！
-     *
-     * @param t
-     */
-    public abstract void onSuccess(@Nullable T t);
+//    /**
+//     * 根据具体的Api 业务逻辑去重写 onSuccess 方法！Error 是选择重写，but 必须Super ！
+//     *
+//     * @param t
+//     */
+//    public abstract void onSuccess(@Nullable T t);
 
 
     /**
@@ -84,26 +82,29 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         disposable = d;
     }
 
+
+    /**
+     * 需要根据逻辑重写
+     *
+     * @param response
+     */
     @Override
-    public final void onNext(HttpResponse<T> response) {
-        Log.e("Thread-io", Thread.currentThread().getName());
-
+    public  void onNext(K response) {
         HttpUiTips.dismissDialog(mContext);
-
         if (!disposable.isDisposed()) {
             disposable.dispose();
         }
 
-        //这里根据具体的业务情况自己定义吧
-        if (response.getCode() == RESPONSE_CODE_OK || response.getCode() == 200) {
-            // response.getCode() == 200  Module News的API真够奇怪的
-            // 这里拦截一下使用测试
-            onSuccess(response.getData());
-        } else {
-            onFailure(response.getCode(), response.getMsg());
-        }
+//        //这里根据具体的业务情况自己定义吧
+//        if (response.getCode() == RESPONSE_CODE_OK) {
+//            // 这里拦截一下使用测试
+//            onSuccess(response.getData());
+//        } else {
+//            onFailure(response.getCode(), response.getMsg());
+//        }
 
     }
+
 
     /**
      * 通用异常错误的处理，不能弹出一样的东西出来
@@ -112,8 +113,6 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      */
     @Override
     public final void onError(Throwable t) {
-        Log.e("okhttp", "Throwable t:" + t.toString());  //打印出异常信息
-
         //根据throwable 获取错位code和msg
         getErrorMessage(t);
 
@@ -128,11 +127,11 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      * @param t TH
      */
     private void getErrorMessage(Throwable t){
+        //把里面的东西分离出来
         if (t instanceof HttpException) {
             HttpException httpException = (HttpException) t;
             errorCode = httpException.code();
             errorMsg = httpException.getMessage();
-            getErrorMsg(httpException);
         } else if (t instanceof SocketTimeoutException) {  //VPN open
             errorCode = RESPONSE_FATAL_EOR;
             errorMsg = "服务器响应超时";
@@ -154,7 +153,6 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
                 errorCode = RESPONSE_FATAL_EOR;
                 errorMsg = "读取网络数据失败";
             }
-
         } else if (t instanceof NetworkOnMainThreadException) {
             //主线程不能网络请求，这个很容易发现
             errorCode = RESPONSE_FATAL_EOR;
@@ -171,8 +169,7 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
      */
     @Override
     public final void onComplete() {
-        int complete = 11;
-        //        HttpUiTips.dismissDialog(mContext);
+
     }
 
     /**
@@ -216,38 +213,8 @@ public abstract class BaseObserver<T> implements Observer<HttpResponse<T>> {
         if (mContext != null && Thread.currentThread().getName().equals(Thread_Main)) {
             Toasty.error(mContext.getApplicationContext(), message + "   code=" + code, Toast.LENGTH_SHORT).show();
         }
-
     }
 
 
-    /**
-     * 获取详细的错误的信息 errorCode,errorMsg
-     * <p>
-     * 以登录的时候的Grant_type 故意写错为例子,这个时候的http 应该是直接的返回401=httpException.code()
-     * 但是是怎么导致401的？我们的服务器会在response.errorBody 中的content 中说明
-     */
-    private final void getErrorMsg(HttpException httpException) {
-        String errorBodyStr = "";
-        try {      //我们的项目需要的UniCode转码 ,!!!!!!!!!!!!!!
-            errorBodyStr = TextConvertUtils.convertUnicode(httpException.response().errorBody().string());
-        } catch (IOException ioe) {
-            Log.e("errorBodyStr ioe:", ioe.toString());
-        }
-
-        if (TextUtils.isEmpty(errorBodyStr)) {
-            return;
-        }
-
-        try {
-            HttpResponse errorResponse = gson.fromJson(errorBodyStr, HttpResponse.class);
-            if (null != errorResponse) {
-                errorCode = errorResponse.getCode();
-                errorMsg = errorResponse.getMsg();
-            }
-        } catch (Exception jsonException) {
-            jsonException.printStackTrace();
-        }
-
-    }
 
 }

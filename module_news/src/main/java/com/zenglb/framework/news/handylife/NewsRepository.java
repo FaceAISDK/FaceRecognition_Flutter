@@ -2,8 +2,8 @@ package com.zenglb.framework.news.handylife;
 
 import com.zenglb.framework.news.http.NewsApiService;
 import com.zenglb.framework.news.http.result.ArticlesResult;
-import com.zlb.httplib.BaseObserver;
-import com.zlb.httplib.rxUtils.SwitchSchedulers;
+import com.zlb.httplib.DefaultObserver;
+import com.zlb.httplib.scheduler.SwitchSchedulers;
 
 import javax.inject.Inject;
 
@@ -38,7 +38,7 @@ public class NewsRepository implements INewsDataSource {
         apiService.getArticles()
                 .compose(SwitchSchedulers.applySchedulers())
                 //BaseObserver 参数问题优化，如果不传参数context 的话，依赖context 的功能就要改
-                .subscribe(new BaseObserver<ArticlesResult>(null) {
+                .subscribe(new DefaultObserver<ArticlesResult>(null) {
                     @Override
                     public void onSuccess(ArticlesResult lifeResultBeans) {
 

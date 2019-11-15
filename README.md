@@ -3,6 +3,7 @@
 ![image.png](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
+https://developer.android.google.cn/jetpack/docs/guide#common-principles
 
 # 关于本Demo-组件化的工程架构With MVP，Dagger2.android,RXjava2
 
@@ -66,7 +67,7 @@
 - 进行网络请求时候的Error，empty,Loading,timeout等通用场景处理，Demo中一处Root注入，处处可用
 - Http (Rxjava2+Retrofit2)的闭环处理
 - AndroidX 和 Kotlin 支持
-- 
+- 聚合型API处理（从不同的系统获取数据，返回的API 结构不同，详细见thirdParty 包下的处理）
 
 
 

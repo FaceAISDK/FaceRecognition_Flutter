@@ -4,20 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
-import com.zlb.httplib.HttpUiTips
+import com.zlb.httplib.dialog.HttpUiTips
 import com.zlb.httplib.R
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
-import io.reactivex.functions.Action
-import io.reactivex.internal.operators.observable.ObservableBlockingSubscribe.subscribe
 import java.util.concurrent.TimeUnit
 
 
@@ -141,7 +137,7 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
      *
      * @param title
      */
-    fun setToolBarTitle(title: CharSequence) {
+    fun setActivityTitle(title: CharSequence) {
         toolbar?.title = title
         setSupportActionBar(toolbar)
     }
@@ -187,8 +183,6 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
      * 4.静态的变量置 null
      * 5.
      *
-     *
-     * String url = "https://down.szhtxx.cn/downPdf/440301999999980/2019/08/15/c8630cee58664229a0b7a87eb6a07f27.pdf";
      *
      */
     override fun onDestroy() {

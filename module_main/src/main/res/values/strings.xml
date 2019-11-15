@@ -2,8 +2,6 @@
     <string name="app_name">Module_main</string>
 
 
-
-
     <string name="title_activity_login">Sign in</string>
 
     <string name="login_success">login success</string>

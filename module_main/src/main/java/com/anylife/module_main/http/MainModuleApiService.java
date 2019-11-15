@@ -2,7 +2,7 @@ package com.anylife.module_main.http;
 
 import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.login.LoginResult;
-import com.anylife.module_main.business.navigation.fragment.MeProfileResult;
+import com.anylife.module_main.http.result.MeProfile;
 import com.zlb.http.result.NulResult;
 import com.zlb.httplib.HttpResponse;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public interface MainModuleApiService {
 
 
     /**
-     * Oauth,外网暂不支持访问
+     *
      */
     @GET("login")
     Observable<HttpResponse<LoginResult>> goLogin(@QueryMap HashMap<String,String>  loginParam);
@@ -42,8 +42,8 @@ public interface MainModuleApiService {
      * MeProfile, 外网暂不支持访问
      *
      */
-    @GET("musicBroadcasting")
-    Observable<HttpResponse<NulResult>> getMeProfile();
+    @GET("meProfile")
+    Observable<HttpResponse<MeProfile>> getMeProfile();
 
 
 }

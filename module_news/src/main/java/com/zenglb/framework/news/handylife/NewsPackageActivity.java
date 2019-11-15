@@ -27,7 +27,7 @@ public class NewsPackageActivity extends BaseDaggerActivity {
 
     @Override
     protected void initViews() {
-        setToolBarTitle("News 模块组件化调试");
+        setActivityTitle("News 模块组件化调试");
 
         getSupportFragmentManager()
                 .beginTransaction()

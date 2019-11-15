@@ -6,7 +6,7 @@ import android.util.Log;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseApplication;
-import com.zlb.httplib.rxUtils.SwitchSchedulers;
+import com.zlb.httplib.scheduler.SwitchSchedulers;
 
 import javax.inject.Inject;
 

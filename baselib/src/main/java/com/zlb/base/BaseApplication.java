@@ -66,8 +66,9 @@ public abstract class BaseApplication extends Application implements HasAndroidI
         initARouter();
 
         initDI();
-        //内存泄漏检查
-        initLeakCanary();
+
+//        //内存泄漏检查
+//        initLeakCanary();
 
         //时间校准
         syncNTPTime.syncNTPTime();

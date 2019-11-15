@@ -1,5 +1,6 @@
 package com.anylife.module_main.business.navigation.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +11,15 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.anylife.module_main.R;
 import com.anylife.module_main.http.MainModuleApiService;
+import com.anylife.module_main.http.result.MeProfile;
+import com.anylife.module_main.thirdpartyAPI.ui.BlogListActivity;
 import com.zlb.Sp.SPDao;
-import com.zlb.base.BaseApplication;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.dagger.scope.ActivityScope;
 import com.zlb.http.result.NulResult;
-import com.zlb.httplib.BaseObserver;
-import com.zlb.httplib.HttpUiTips;
-import com.zlb.httplib.rxUtils.SwitchSchedulers;
+import com.zlb.httplib.DefaultObserver;
+import com.zlb.httplib.dialog.HttpUiTips;
+import com.zlb.httplib.scheduler.SwitchSchedulers;
 import com.zlb.utils.ntp.SyncNtpTimeUtils;
 
 import javax.inject.Inject;
@@ -28,7 +30,7 @@ import javax.inject.Inject;
 @ActivityScope
 public class MeFragment extends BaseStatusFragment implements View.OnClickListener {
 
-    private Button httpReq;
+    private Button httpReq,jetPack;
     private TextView meProfile;
     private Button logout;
 
@@ -69,9 +71,9 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
     private void getMeProfile() {
         mainModuleApiService.getMeProfile()
                 .compose(SwitchSchedulers.applySchedulers())
-                .subscribe(new BaseObserver<NulResult>(getActivity()) {
+                .subscribe(new DefaultObserver<MeProfile>(getActivity()) {
                     @Override
-                    public void onSuccess(NulResult meProfileResult) {
+                    public void onSuccess(MeProfile meProfileResult) {
                         meProfile.setText(meProfileResult.toString());
                     }
 
@@ -92,23 +94,27 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
 //            for (int i=0;i<222;i++) {
 //                getMeProfile();
 //            }
-
 //            ARouter.getInstance().build("/news/webActivity").navigation();
-
 //            getMeProfile();
-            HttpUiTips.showDialog(getActivity(),"");
 
+            HttpUiTips.showDialog(getActivity(), "");
             ntpUtils.syncNTPTime();
-
         } else if (view.getId() == R.id.logout) {
             ARouter.getInstance().build("/login/activity").navigation();
             getActivity().finish();
+        }else if (view.getId() == R.id.jetpack) {
+//            ARouter.getInstance().build("/jetpack/activity").navigation();
+
+            startActivity(new Intent(getContext(), BlogListActivity.class));
         }
     }
 
 
     public void initView(View rootView) {
         httpReq = (Button) rootView.findViewById(R.id.httpReq);
+        jetPack = (Button) rootView.findViewById(R.id.jetpack);
+        jetPack.setOnClickListener(MeFragment.this);
+
         httpReq.setOnClickListener(MeFragment.this);
         meProfile = (TextView) rootView.findViewById(R.id.meProfile);
         logout = (Button) rootView.findViewById(R.id.logout);

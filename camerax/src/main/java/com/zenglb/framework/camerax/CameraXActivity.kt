@@ -16,8 +16,11 @@ const val KEY_EVENT_EXTRA = "key_event_extra"
 private const val IMMERSIVE_FLAG_TIMEOUT = 500L
 
 /**
- * Main entry point into our app. This app follows the single-activity pattern,
- * and all functionality is implemented in the form of fragments.
+ * 自定义的水印相机和人脸识别放到这里吧
+ *
+ *
+ * 自定义相机和图像数据分析的时候还是很有用的
+ *
  *
  * 看看能否把拍照，切换摄像头，到相册等控制分离处理
  *
@@ -26,7 +29,7 @@ private const val IMMERSIVE_FLAG_TIMEOUT = 500L
  * https://codelabs.developers.google.com/codelabs/camerax-getting-started/#7
  *
  */
-class CameraXActivity : AppCompatActivity(){
+class CameraXActivity : AppCompatActivity() {
     private lateinit var container: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,7 @@ class CameraXActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
         container = findViewById(R.id.fragment_container)
 
-        container.setOnClickListener { Toast.makeText(this,"点击预览",Toast.LENGTH_LONG).show() }
+        container.setOnClickListener { Toast.makeText(this, "点击预览", Toast.LENGTH_LONG).show() }
     }
 
     override fun onResume() {
@@ -72,7 +75,8 @@ class CameraXActivity : AppCompatActivity(){
         fun getOutputDirectory(context: Context): File {
             val appContext = context.applicationContext
             val mediaDir = context.externalMediaDirs.firstOrNull()?.let {
-                File(it, appContext.resources.getString(R.string.app_name)).apply { mkdirs() } }
+                File(it, appContext.resources.getString(R.string.app_name)).apply { mkdirs() }
+            }
             return if (mediaDir != null && mediaDir.exists())
                 mediaDir else appContext.filesDir
         }

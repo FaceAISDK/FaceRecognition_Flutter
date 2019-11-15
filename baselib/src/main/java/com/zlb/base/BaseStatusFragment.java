@@ -10,9 +10,8 @@ import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.trello.rxlifecycle2.components.support.RxFragment;
-import com.zlb.httplib.HttpUiTips;
+import com.zlb.httplib.dialog.HttpUiTips;
 
-import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 
 /**

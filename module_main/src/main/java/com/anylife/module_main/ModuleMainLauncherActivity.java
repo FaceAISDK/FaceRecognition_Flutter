@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.Settings;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +24,6 @@ import com.anylife.module_main.workmanger.UploadWorker;
 import com.zlb.Sp.SPDao;
 import com.zlb.Sp.SPKey;
 import com.zlb.base.BaseDaggerActivity;
-import com.zlb.httplib.HttpUiTips;
 
 import java.util.List;
 
@@ -35,6 +32,8 @@ import javax.inject.Inject;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
+ *
+ *
  * Created by anylife.zlb@gmail.com on 2017/1/11.
  */
 public class ModuleMainLauncherActivity extends BaseDaggerActivity implements EasyPermissions.PermissionCallbacks {

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.anylife.module_main.http.MainModuleApiService;
 import com.zlb.Sp.SPDao;
-import com.zlb.http.HttpRetrofit;
+import com.zlb.httplib.HttpRetrofit;
 
 import javax.inject.Singleton;
 

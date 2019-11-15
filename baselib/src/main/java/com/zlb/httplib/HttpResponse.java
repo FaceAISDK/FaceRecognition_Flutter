@@ -9,8 +9,7 @@ package com.zlb.httplib;
 public class HttpResponse<T> {
 	private int code;
 	private String msg;
-//	private T result;    //result T
-	private T data;      //data T
+	private T data;
 
 	public int getCode() {
 		return code;
@@ -22,10 +21,6 @@ public class HttpResponse<T> {
 
 	public String getMsg() {
 		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
 	}
 
 	public T getData() {
@@ -45,6 +40,5 @@ public class HttpResponse<T> {
 				", data=" + data +
 				'}';
 	}
-
 
 }

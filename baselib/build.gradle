@@ -70,7 +70,6 @@ android {
         targetGenDir 'src/main/java'     //表示greenDAO生成的DAOMaster和DaoSession的位置
         daoPackage 'com.zlb.persistence.dbmaster' //我觉得最好放在Entity 下面的目录！！！
     }
-
 }
 
 
@@ -85,7 +84,7 @@ dependencies {
 
     //RxJava
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.7'
+    api 'io.reactivex.rxjava2:rxjava:2.2.9'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     //Router
@@ -103,10 +102,10 @@ dependencies {
 
     //For Lifecycle, LiveData, and ViewModel
     api "android.arch.lifecycle:runtime:1.1.1"
-    api "android.arch.lifecycle:extensions:1.1.1"
+    api "android.arch.lifecycle:extensions:1.1.1" //包含LiveData 和 ViewModel
 
     //Http Request log
-    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    debugApi 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'

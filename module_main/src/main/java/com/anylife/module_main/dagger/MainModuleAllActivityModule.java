@@ -6,7 +6,7 @@ import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
-import com.anylife.module_main.business.navigation.fragment.VideoListFragment;
+import com.anylife.module_main.thirdpartyAPI.ui.BlogListFragment;
 import com.zlb.dagger.component.BaseActivityComponent;
 import com.zlb.dagger.module.DefaultActivityModule;
 import com.zlb.dagger.scope.ActivityScope;
@@ -43,7 +43,7 @@ public abstract class MainModuleAllActivityModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = DefaultActivityModule.class)
-    abstract VideoListFragment videoListFragmentInjector();
+    abstract BlogListFragment videoListFragmentInjector();
 
     @ActivityScope
     @ContributesAndroidInjector(modules = DefaultActivityModule.class)

@@ -8,6 +8,9 @@ import com.anylife.module_main.R;
 import com.zlb.base.BaseStatusFragment;
 
 /**
+ * https://easy-mock.com/login
+ * MockData anylife.zlb mockdata
+ *
  * Activities that contain this fragment must implement the
  * interface
  * to handle interaction events.
