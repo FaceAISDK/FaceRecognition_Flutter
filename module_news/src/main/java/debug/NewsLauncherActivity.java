@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.zenglb.framework.news.DynamicProxy.Sell;
-import com.zenglb.framework.news.DynamicProxy.Vendor;
+import com.zenglb.framework.news.test.DynamicProxy.Sell;
+import com.zenglb.framework.news.test.DynamicProxy.Vendor;
 import com.zenglb.framework.news.R;
-import com.zenglb.framework.news.handylife.NewsPackageActivity;
+import com.zenglb.framework.news.news.NewsPackageActivity;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseActivity;
 import com.zlb.utils.antigpsfake.AntiGPSFake;
@@ -17,6 +17,7 @@ import com.zlb.utils.antigpsfake.AntiGPSFake;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+
 import javax.inject.Inject;
 
 
@@ -53,11 +54,24 @@ public class NewsLauncherActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        setTheme(R.style.MyAppTheme);
         super.onCreate(savedInstanceState);
         setToolBarVisible(View.GONE);  //这里是不需要Base 中的Toolbar,不要的情况毕竟是少数
 
-//        setContentView(R.layout.launcher_layout);
+//        Http3Retrofit.getRetrofit().create(NewsApiService.class).getNews()
+//                .compose(SwitchSchedulers.applySchedulers())
+//                .subscribe(new Http3Observer<HotNewsResult>() {
+//                    @Override
+//                    public void onSuccess(HotNewsResult blogList) {
+//
+//                        Log.e("TAG","test");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int code, String message) {
+//                        super.onFailure(code, message);
+//                    }
+//                });
+
 
         AntiGPSFake.areThereMockPermissionApps(this);
         AntiGPSFake.isMockSettingsON(this);

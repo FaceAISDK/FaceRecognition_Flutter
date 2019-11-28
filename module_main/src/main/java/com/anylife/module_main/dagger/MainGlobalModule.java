@@ -2,6 +2,8 @@ package com.anylife.module_main.dagger;
 
 import android.content.Context;
 
+import com.anylife.module_main.blog.BlogHttpService.BlogApiService;
+import com.anylife.module_main.blog.BlogHttpService.BlogHttpRetrofit;
 import com.anylife.module_main.http.MainModuleApiService;
 import com.zlb.Sp.SPDao;
 import com.zlb.httplib.HttpRetrofit;
@@ -21,6 +23,10 @@ import dagger.Provides;
 public class MainGlobalModule {
 
     /**
+     * 这是我们的主ApiService,当然也有其他的系统Api
+     *
+     *
+     *
      *
      * @param spDao      这个参数在BaseGlobal Module 中已经被依赖注入了
      * @param mContext   同理，没有显式的传入。
@@ -43,6 +49,17 @@ public class MainGlobalModule {
     }
 
 
+    /**
+     * 我们的App会遇到有多个Host，也就是有多个系统提供数据的情况
+     * 这里Blog 的数据就是从第三方系统获取的，返回的数据格式也不一样
+     *
+     */
+    @Provides
+    @Singleton
+    public BlogApiService provideBlogApiService() {
+        //Retrofit 的create 真是精华所在啊！
+        return BlogHttpRetrofit.getRetrofit().create(BlogApiService.class);
+    }
 
 
 }

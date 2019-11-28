@@ -15,13 +15,11 @@ import com.zlb.commontips.EmptyCallback;
 import com.zlb.commontips.ErrorCallback;
 import com.zlb.commontips.LoadingCallback;
 import com.zlb.commontips.TimeoutCallback;
-import com.zlb.jniInterface.JniInvokeInterface;
 import com.zlb.utils.ntp.SyncNtpTimeUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -46,12 +44,6 @@ public abstract class BaseApplication extends Application implements HasAndroidI
         return dispatchingAndroidInjector;
     }
 
-
-    /**
-     * 敏感的配置全部以HashMap 的方式保存在JNI 层的SO 库里面。
-     * 这里只是为了防止GitHub 代码被Track ！
-     */
-    public static HashMap<String, String> globalJniMap = JniInvokeInterface.getJniHashMap();
 
     private static Context appContext;
 

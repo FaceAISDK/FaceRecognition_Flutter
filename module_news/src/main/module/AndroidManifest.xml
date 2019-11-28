@@ -27,7 +27,7 @@
             android:name=".NewsWebActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".handylife.NewsPackageActivity" />
+        <activity android:name=".news.NewsPackageActivity" />
 
         <activity
             android:name=".livedataexample.ui.LiveDataActivity"

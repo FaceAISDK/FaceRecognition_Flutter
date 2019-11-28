@@ -15,9 +15,6 @@
             android:name=".NewsWebActivity"
             android:launchMode="singleTop" />
 
-        <activity
-            android:name=".livedataexample.ui.LiveDataActivity"
-            android:launchMode="singleTop" />
 
     </application>
 

@@ -69,8 +69,18 @@ public abstract class BaseWebViewActivity extends BaseActivity {
         }
 
         WebSettings settings = mWebView.getSettings();
-
         settings.setJavaScriptEnabled(true);
+
+        // 设置可以支持缩放
+        settings.setSupportZoom(true);
+        // 设置出现缩放工具
+        settings.setBuiltInZoomControls(false);
+        //扩大比例的缩放
+        settings.setUseWideViewPort(true);
+        //自适应屏幕
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setLoadWithOverviewMode(true);
+
         //手动设置UA,让运营商劫持DNS的浏览器广告不生效 http://my.oschina.net/zxcholmes/blog/596192
         settings.setUserAgentString("suijishu" + "#" + settings.getUserAgentString() + "01234560");
         setWebViewClient();

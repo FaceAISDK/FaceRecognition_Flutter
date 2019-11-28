@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#f2f2f2"
     android:padding="8dp"
-    tools:context=".thirdpartyAPI.ui.LiveDataActivity">
+    tools:context=".blog.ui.LiveDataActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"

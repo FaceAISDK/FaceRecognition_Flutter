@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:label">
-        <activity android:name=".thirdpartyAPI.ui.BlogListActivity"></activity>
+        <activity android:name=".blog.ui.BlogListActivity"></activity>
         <activity
             android:name=".ModuleMainLauncherActivity"
             android:theme="@style/FullscreenTheme">

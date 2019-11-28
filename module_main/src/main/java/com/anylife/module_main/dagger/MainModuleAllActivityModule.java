@@ -1,18 +1,25 @@
 package com.anylife.module_main.dagger;
 
+import androidx.lifecycle.ViewModel;
+
 import com.anylife.module_main.ModuleMainLauncherActivity;
+import com.anylife.module_main.blog.viewmodel.BlogViewModel;
 import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
-import com.anylife.module_main.thirdpartyAPI.ui.BlogListFragment;
+import com.anylife.module_main.blog.ui.BlogListFragment;
+import com.zlb.dagger.viewmodel.MyViewModelFactory;
+import com.zlb.dagger.viewmodel.ViewModelKey;
 import com.zlb.dagger.component.BaseActivityComponent;
 import com.zlb.dagger.module.DefaultActivityModule;
 import com.zlb.dagger.scope.ActivityScope;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import dagger.multibindings.IntoMap;
 
 /**
  * 全部放在这里来统一的管理 ！(感觉要这样配置还是很麻烦，能不能一行注解就可以了呢？？？？？？)
@@ -41,9 +48,6 @@ public abstract class MainModuleAllActivityModule {
     @ContributesAndroidInjector(modules = DefaultActivityModule.class)
     abstract MainActivityBottomNavi mainActivityBottomNavi();
 
-    @ActivityScope
-    @ContributesAndroidInjector(modules = DefaultActivityModule.class)
-    abstract BlogListFragment videoListFragmentInjector();
 
     @ActivityScope
     @ContributesAndroidInjector(modules = DefaultActivityModule.class)
@@ -60,6 +64,25 @@ public abstract class MainModuleAllActivityModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = DefaultActivityModule.class)
     abstract NewsFragmentShell meFragmentxxInjector();
+
+
+    /**
+     *
+     *
+     * @return
+     */
+    @ActivityScope
+    @ContributesAndroidInjector(modules = DefaultActivityModule.class)
+    abstract BlogListFragment mBlogInjector();
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BlogViewModel.class)
+    abstract ViewModel bindBlogViewModel(BlogViewModel blogViewModel);
+
+
+
 
 
 //    More：https://google.github.io/dagger//android.html

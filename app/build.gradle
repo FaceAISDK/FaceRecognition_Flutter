@@ -25,9 +25,9 @@ android {
         }
 
         //设置支持的SO abi库架构支持
-        ndk {
-            abiFilters 'armeabi-v7a'
-        }
+//        ndk {
+//            abiFilters 'armeabi-v7a'
+//        }
 
     }
 
@@ -42,12 +42,7 @@ android {
     buildTypes {
 
         release {
-//            minifyEnabled false
-//            zipAlignEnabled true  // Zipalign优化
-//            shrinkResources true  // 移除无用的resource文件,必须和minifyEnabled 一起使用
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            debuggable false
-//            signingConfig signingConfigs.MyConfig
             manifestPlaceholders = [IS_DEBUG: "no", APP_ICON: "@mipmap/ic_launcher", APP_NAME: "FrameWork"]
         }
 
@@ -95,7 +90,7 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
         implementation project(':module_news')
-//        implementation project(':module_note')
+//        implementation project(':module_test')
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

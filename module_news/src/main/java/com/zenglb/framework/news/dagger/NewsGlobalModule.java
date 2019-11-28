@@ -1,9 +1,10 @@
 package com.zenglb.framework.news.dagger;
 
 import android.content.Context;
-import com.zenglb.framework.news.http.NewsApiService;
+
+import com.zenglb.framework.news.http.NewsHttpService.NewsHttpRetrofit;
+import com.zenglb.framework.news.http.NewsHttpService.NewsApiService;
 import com.zlb.Sp.SPDao;
-import com.zlb.httplib.HttpRetrofit;
 
 import javax.inject.Singleton;
 
@@ -42,7 +43,7 @@ public class NewsGlobalModule {
 
         //Return 的api对象其实是一个动态代理对象，并不是一个真正的NewsApiService接口的implements产生的对象
 
-        return HttpRetrofit.getRetrofit(spDao, mContext).create(NewsApiService.class);
+        return NewsHttpRetrofit.getRetrofit().create(NewsApiService.class);
     }
 
 }

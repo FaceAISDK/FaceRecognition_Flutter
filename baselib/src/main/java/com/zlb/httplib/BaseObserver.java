@@ -28,11 +28,15 @@ import retrofit2.HttpException;
 import static com.zlb.httplib.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
 
 /**
+ * 去除一切的关于UI层面的操作
+ *
+ *
  * 应对聚合型的App可能有多个Host和不同的返回Response 情况，需要再抽象一层
  *
  * 还需要再抽象一层，毕竟不同的域名HttpResponse 字段不太一样，处理逻辑也会有一点不一样
  *
- *
+ * Context 的引入是为了方便Loading 和 全局的Toast的默认处理，为了更好的进行自动化测试还是不要引入了吧
+ * 改用其他的方式
  *
  * Created by zenglb on 2017/4/14.
  */
@@ -41,6 +45,9 @@ public abstract class BaseObserver<K> implements Observer<K> {
 
     public final int RESPONSE_FATAL_EOR = -1;       //返回数据失败,严重的错误
     public final int CUSTOM_REPEAT_REQ_ERROR = -2;  //同样的一个请求并且还是重复的话返回错误
+
+    public final int SOCKET_TIMEOUT_EOR = -3;       //服务器响应超时
+    public final int ConnectException_EOR= -4;      //网络连接异常
     public Context mContext;
 
     private int errorCode = -1111;
@@ -48,15 +55,18 @@ public abstract class BaseObserver<K> implements Observer<K> {
 
     private Disposable disposable;
 
-//    /**
-//     * 根据具体的Api 业务逻辑去重写 onSuccess 方法！Error 是选择重写，but 必须Super ！
-//     *
-//     * @param t
-//     */
-//    public abstract void onSuccess(@Nullable T t);
+
+    /**
+     * Default
+     */
+    public BaseObserver() {
+
+    }
 
 
     /**
+     * 严格的分层设计是不允许这里有UI相关的操作的
+     *
      * @param mCtx
      */
     public BaseObserver(Context mCtx) {
@@ -65,6 +75,8 @@ public abstract class BaseObserver<K> implements Observer<K> {
     }
 
     /**
+     * 严格的分层设计是不允许这里有UI相关的操作的
+     *
      * 很多的http 请求可以不需要用户感知到在请求，showProgress=false
      *
      * @param mCtx
@@ -76,6 +88,7 @@ public abstract class BaseObserver<K> implements Observer<K> {
             HttpUiTips.showDialog(mContext, null);
         }
     }
+
 
     @Override
     public final void onSubscribe(Disposable d) {
@@ -133,10 +146,10 @@ public abstract class BaseObserver<K> implements Observer<K> {
             errorCode = httpException.code();
             errorMsg = httpException.getMessage();
         } else if (t instanceof SocketTimeoutException) {  //VPN open
-            errorCode = RESPONSE_FATAL_EOR;
+            errorCode = SOCKET_TIMEOUT_EOR;
             errorMsg = "服务器响应超时";
         } else if (t instanceof ConnectException) {
-            errorCode = RESPONSE_FATAL_EOR;
+            errorCode = ConnectException_EOR;
             errorMsg = "网络连接异常，请检查网络";
         } else if (t instanceof UnknownHostException) {
             errorCode = RESPONSE_FATAL_EOR;
@@ -210,9 +223,11 @@ public abstract class BaseObserver<K> implements Observer<K> {
                 break;
         }
 
+        //如果要严格的分层设计，这里是不允许有UI 相关的操作的
         if (mContext != null && Thread.currentThread().getName().equals(Thread_Main)) {
             Toasty.error(mContext.getApplicationContext(), message + "   code=" + code, Toast.LENGTH_SHORT).show();
         }
+
     }
 
 

@@ -21,8 +21,7 @@ import dagger.Provides;
 /**
  * 在这里提供全局的并且是唯一的东西，SharedPreferences,DB,HTTP,etc
  *
- * https://blog.csdn.net/mq2553299/article/details/77485800
- * <p>
+ *
  * Created by anylife.zlb@gmail.com on 2018/1/11.
  */
 @Module
@@ -30,6 +29,9 @@ public class BaseGlobalModule {
 
     public static final boolean ENCRYPTED = false;
     public Application mContext;
+
+
+
 
     /**
      * Module  带有构造方法并且参数被使用的情况下所产生的Component 是没有Create方法的
@@ -64,7 +66,6 @@ public class BaseGlobalModule {
     }
 
 
-
     /**
      * 增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用
      *
@@ -81,6 +82,7 @@ public class BaseGlobalModule {
                 .build();
     }
 
+
     /**
      * 数据库访问的DaoSession,因为是分账号分库，那么切换账号后怎么更换DaoSession链接的数据库DB呢？，不要Singleton 修饰了
      *
@@ -94,7 +96,6 @@ public class BaseGlobalModule {
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         return new DaoMaster(db).newSession();
     }
-
 
 
 }

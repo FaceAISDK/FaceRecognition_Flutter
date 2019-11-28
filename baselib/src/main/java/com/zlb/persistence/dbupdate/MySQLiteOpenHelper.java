@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.zlb.persistence.dbmaster.BlogDao;
 import com.zlb.persistence.dbmaster.DaoMaster;
 import com.zlb.persistence.dbmaster.SysAlertMess2Dao;
 import com.zlb.persistence.dbmaster.SysAlertMessDao;
@@ -30,7 +31,7 @@ public class MySQLiteOpenHelper extends DaoMaster.OpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         MigrationHelper.migrate(db,
-
+                BlogDao.class,
                 SysAlertMess2Dao.class,
                 SysAlertMessDao.class
         );  //升级

@@ -9,7 +9,6 @@ android {
 //    resourcePrefix "module_news" //防止资源冲突
 
     defaultConfig {
-
         if (isModule.toBoolean()) {
             applicationId "com.zenglb.framework.news"  //制定 applicationId
         }
@@ -28,9 +27,9 @@ android {
         }
 
         //设置支持的SO abi库架构支持
-        ndk {
-            abiFilters 'armeabi-v7a'
-        }
+//        ndk {
+//            abiFilters 'armeabi-v7a'
+//        }
 
     }
 
@@ -73,7 +72,7 @@ android {
     }
 
 }
-//
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

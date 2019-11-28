@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -17,7 +16,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.anylife.module_main.R;
 import com.anylife.module_main.business.navigation.fragment.MainFragment;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
-import com.anylife.module_main.thirdpartyAPI.ui.BlogListFragment;
+import com.anylife.module_main.blog.ui.BlogListFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -88,7 +87,6 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
             return true;
         });
 
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -123,9 +121,7 @@ public class MainActivityBottomNavi extends BaseDaggerActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(MainFragment.newInstance());
-
         adapter.addFragment(BlogListFragment.newInstance());
-
 
         if (BuildConfig.isModule) {
             //组件化开发模式这里添加的空的 newsFragmentShell

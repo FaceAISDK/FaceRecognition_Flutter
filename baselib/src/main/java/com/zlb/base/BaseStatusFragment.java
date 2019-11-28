@@ -77,8 +77,6 @@ public abstract class BaseStatusFragment extends RxFragment  {
     @Override
     public void onAttach(Activity activity) {
         AndroidSupportInjection.inject(this);
-
-//        AndroidInjection.inject(activity);
         super.onAttach(activity);
     }
 

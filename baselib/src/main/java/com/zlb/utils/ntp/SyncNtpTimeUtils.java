@@ -18,7 +18,6 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * 时间校准Utils.可以自由配置多个外部的NTP 服务器
- * 
  */
 public class SyncNtpTimeUtils {
 

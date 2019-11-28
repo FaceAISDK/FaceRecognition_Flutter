@@ -4,7 +4,6 @@ import com.zenglb.framework.news.dagger.DaggerNewsModuleComponent;
 import com.zlb.base.BaseApplication;
 import com.zlb.dagger.module.BaseGlobalModule;
 
-
 /**
  * NewsApplication 只是单独调试的时候使用，合并到壳App 不需要，但是这里初始化的数据和服务要在AppApplication
  *

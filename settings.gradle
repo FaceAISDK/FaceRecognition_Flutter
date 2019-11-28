@@ -1,1 +1,1 @@
-include ':app', ':baselib', ':module_main', ':module_note', ':camerax' , 'module_news','component-base'
+include ':app', ':baselib', ':module_main', ':module_test', ':camerax' , 'module_news','component-base'

@@ -2,7 +2,6 @@ package com.anylife.module_main.business.login;
 
 public class LoginResult {
 
-
     /**
      * key : 00d91e8e0cca2b76f515926a36db68f5
      * phone : 13594347817

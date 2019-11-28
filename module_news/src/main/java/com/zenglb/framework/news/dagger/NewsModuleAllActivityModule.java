@@ -1,14 +1,21 @@
 package com.zenglb.framework.news.dagger;
 
-import com.zenglb.framework.news.handylife.NewsFragment;
-import com.zenglb.framework.news.handylife.NewsPackageActivity;
-import com.zenglb.framework.news.handylife.NewsPackageFragment;
+import androidx.lifecycle.ViewModel;
+
+import com.zenglb.framework.news.news.NewsFragment;
+import com.zenglb.framework.news.news.NewsPackageActivity;
+import com.zenglb.framework.news.news.NewsPackageFragment;
+import com.zenglb.framework.news.news.NewsViewModel;
+import com.zlb.dagger.viewmodel.MyViewModelFactory;
+import com.zlb.dagger.viewmodel.ViewModelKey;
 import com.zlb.dagger.component.BaseActivityComponent;
 import com.zlb.dagger.module.DefaultActivityModule;
 import com.zlb.dagger.scope.ActivityScope;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import dagger.multibindings.IntoMap;
 
 /**
  * 可不可以不要这样配置，直接的加一个注解就好的那种不是更好
@@ -30,6 +37,17 @@ import dagger.android.ContributesAndroidInjector;
         BaseActivityComponent.class  //1111111111 subComponent=BaseActivityComponent
 })
 public abstract class NewsModuleAllActivityModule {
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsViewModel.class)
+    abstract ViewModel bindBlogViewModel(NewsViewModel newsViewModel);
+
+
+
+
+
 
     //2222222 新建了一个Activity 的并且需要inject 的只需要添加两行代码 DefaultActivityModule 适用于只要全局Module 中的内容
     @ActivityScope

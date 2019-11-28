@@ -12,14 +12,14 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.anylife.module_main.R;
 import com.anylife.module_main.http.MainModuleApiService;
 import com.anylife.module_main.http.result.MeProfile;
-import com.anylife.module_main.thirdpartyAPI.ui.BlogListActivity;
+import com.anylife.module_main.blog.ui.BlogListActivity;
 import com.zlb.Sp.SPDao;
 import com.zlb.base.BaseStatusFragment;
 import com.zlb.dagger.scope.ActivityScope;
-import com.zlb.http.result.NulResult;
 import com.zlb.httplib.DefaultObserver;
 import com.zlb.httplib.dialog.HttpUiTips;
 import com.zlb.httplib.scheduler.SwitchSchedulers;
+import com.zlb.persistence.dbmaster.DaoSession;
 import com.zlb.utils.ntp.SyncNtpTimeUtils;
 
 import javax.inject.Inject;
@@ -36,6 +36,9 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
 
     @Inject
     SPDao spDao;
+
+    @Inject
+    DaoSession daoSession;
 
     @Inject
     MainModuleApiService mainModuleApiService;

@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="10dp">
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="140dp"
-        android:layout_height="103dp"
-        android:layout_alignParentLeft="true"
-        android:scaleType="centerCrop"
-        android:background="@drawable/ic_launcher"
-        android:layout_centerVertical="true" />
+    android:layout_margin="15dp">
 
     <TextView
         android:id="@+id/topic"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="1px"
-        android:layout_toEndOf="@+id/image"
-        android:maxLines="2"
-        tools:text="It is topic"
-        android:textStyle="bold"
+        android:maxLines="1"
         android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="It is topic" />
+
+    <TextView
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_marginLeft="22dp"
+        app:layout_constraintStart_toEndOf="@+id/topic"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="It is time" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topic"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_toEndOf="@+id/image"
-        android:maxLines="6"
+        android:maxLines="7"
+        android:layout_marginTop="@dimen/dp_10"
         android:textColor="@color/common_gray"
-        tools:textSize="13sp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topic"
+        tools:layout_editor_absoluteX="10dp"
+        tools:text="It is description"
+        tools:textSize="16sp" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
