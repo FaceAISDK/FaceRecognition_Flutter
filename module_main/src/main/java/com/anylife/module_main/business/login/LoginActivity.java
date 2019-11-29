@@ -108,7 +108,7 @@ public class LoginActivity extends BaseDaggerActivity {
         cardview = findViewById(R.id.cardview);
 
         //FBI WARMING ,账号仅用于分享交流，他用将追究法律责任
-        etUsername.setText("13594347817");
+        etUsername.setText("18826562075");
         etPassword.setText("123456");
 
 
@@ -140,8 +140,6 @@ public class LoginActivity extends BaseDaggerActivity {
         hashMap.put("passwd", "12345678");
 
 
-        //外网暂不支持访问
-        //外网暂不支持访问
         mainModuleApiService.goLogin(hashMap)
                 .compose(SwitchSchedulers.applySchedulers())
                 .subscribe(new DefaultObserver<LoginResult>(getContext()) {
@@ -166,7 +164,7 @@ public class LoginActivity extends BaseDaggerActivity {
 
 
     /**
-     * 登录成功
+     * 登录成功  Demo 不提供Oauth认证了；就模拟数据吧"
      *
      * @param loginResult
      */
@@ -174,7 +172,7 @@ public class LoginActivity extends BaseDaggerActivity {
         //切换DB
         spDao.saveData(SPKey.KEY_LAST_ACCOUNT, etUsername.getText().toString().trim());
 //        HttpRetrofit.setToken(spDao.getData(SPKey.KEY_ACCESS_TOKEN, "", String.class));
-//        spDao.saveData(SPKey.KEY_ACCESS_TOKEN, "Bearer " + loginResult.getAccessToken());
+        spDao.saveData(SPKey.KEY_ACCESS_TOKEN, "Bearer " + "34254235432543242");
 //        spDao.saveData(SPKey.KEY_REFRESH_TOKEN, loginResult.getRefreshToken());
 
         if (isFromLaunch) {
@@ -183,8 +181,8 @@ public class LoginActivity extends BaseDaggerActivity {
             LoginActivity.this.finish();
         } else {//是来自Launcher启动的就跳转到主页面，否则从哪里来就到那里去
 
-            Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
-            startActivity(i2);
+//            Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
+//            startActivity(i2);
             LoginActivity.this.finish();
         }
     }

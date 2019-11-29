@@ -104,7 +104,7 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
             ntpUtils.syncNTPTime();
         } else if (view.getId() == R.id.logout) {
             ARouter.getInstance().build("/login/activity").navigation();
-            getActivity().finish();
+//            getActivity().finish();
         }else if (view.getId() == R.id.jetpack) {
 //            ARouter.getInstance().build("/jetpack/activity").navigation();
 

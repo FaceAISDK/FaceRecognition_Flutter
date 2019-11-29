@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.anylife.module_main.R;
+import com.zlb.dagger.viewmodel.MyViewModelFactory;
 import com.zlb.statelivedata.StateData;
 import com.zlb.commontips.TimeoutCallback;
 import com.zlb.persistence.entity.Blog;
@@ -41,7 +42,7 @@ public class BlogListFragment extends BaseStatusFragment {
     private BlogViewModel blogViewModel;
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    MyViewModelFactory viewModelFactory;
 
     @Inject
     SPDao spDao;
@@ -103,11 +104,11 @@ public class BlogListFragment extends BaseStatusFragment {
 
         blogViewModel.getAllBlog().observe(this, new Observer<StateData<List<Blog>>>() {
             @Override
-            public void onChanged(StateData<List<Blog>> listStateData) {
-                switch (listStateData.getStatus()) {
+            public void onChanged(StateData<List<Blog>> stateData) {
+                switch (stateData.getStatus()) {
                     case SUCCESS:
                         swipeRefresh.setRefreshing(false);
-                        prepareRecyclerView(listStateData.getData());
+                        prepareRecyclerView(stateData.getData());
                         break;
                     case ERROR:
                         swipeRefresh.setRefreshing(false);

@@ -6,7 +6,6 @@ import com.zenglb.framework.news.news.NewsFragment;
 import com.zenglb.framework.news.news.NewsPackageActivity;
 import com.zenglb.framework.news.news.NewsPackageFragment;
 import com.zenglb.framework.news.news.NewsViewModel;
-import com.zlb.dagger.viewmodel.MyViewModelFactory;
 import com.zlb.dagger.viewmodel.ViewModelKey;
 import com.zlb.dagger.component.BaseActivityComponent;
 import com.zlb.dagger.module.DefaultActivityModule;

@@ -30,9 +30,15 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         //配置使用ARouter
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
+
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments = [moduleName: project.getName()]
             }
         }
 
@@ -58,15 +64,11 @@ android {
         }
     }
 
-    /**
-     * 添加压缩处理
-     *
-     */
+
     buildTypes {
 
         debug {
-            proguardFiles getDefaultProguardFile(
-                    'proguard-android-optimize.txt'),
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro' //proguard-rules.pro文件用于添加自定义 ProGuard 规则
         }
 
