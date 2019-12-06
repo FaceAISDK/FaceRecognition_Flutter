@@ -19,12 +19,12 @@ android {
             }
         }
 
-        //multiDexEnabled true
+        multiDexEnabled true
 
-//        //设置支持的SO abi库架构支持
-//        ndk {
-//            abiFilters "armeabi-v7a"
-//        }
+        //设置支持的SO abi库架构支持
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
 
     }
 
@@ -127,7 +127,7 @@ dependencies {
 
     api 'com.journeyapps:zxing-android-embedded:3.6.0'  //只是为了简单
 
-    api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人 ------
+    api 'org.greenrobot:eventbus:3.1.1' //本来不像引用太多第三方，但是目前的通信实在烦人
 
     api project(':component-base')
 
@@ -157,7 +157,7 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.24' // Dagger 2 注解处理
     kapt 'com.google.dagger:dagger-android-processor:2.24' // Dagger 2 注解处理 Android 支持
 
-//    implementation 'org.jetbrains.anko:anko-common:0.9'
+    api 'com.tencent.bugly:crashreport:2.2.0'
 
 }
 

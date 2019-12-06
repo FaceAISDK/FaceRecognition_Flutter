@@ -8,7 +8,13 @@ import dagger.Module;
 
 
 /**
- * Jetpack 的View Model 的注入
+ * Jetpack 的ViewModel 的注入
+ *
+ *
+ *  May you do good and not evil
+ *  May you find forgiveness for yourself and forgive others
+ *  May you share freely,never taking more than you give
+ *
  */
 @Module(subcomponents = {
         BaseActivityComponent.class

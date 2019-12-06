@@ -111,7 +111,6 @@ public class LoginActivity extends BaseDaggerActivity {
         etUsername.setText("18826562075");
         etPassword.setText("123456");
 
-
         findViewById(R.id.AITest).setOnClickListener(v -> {
             // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
             ARouter.getInstance().build("/ai/RegisterAndRecognize").navigation();
@@ -134,11 +133,9 @@ public class LoginActivity extends BaseDaggerActivity {
             return;
         }
 
-
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("phone", "18826562075");
         hashMap.put("passwd", "12345678");
-
 
         mainModuleApiService.goLogin(hashMap)
                 .compose(SwitchSchedulers.applySchedulers())
@@ -180,7 +177,6 @@ public class LoginActivity extends BaseDaggerActivity {
             startActivity(i2);
             LoginActivity.this.finish();
         } else {//是来自Launcher启动的就跳转到主页面，否则从哪里来就到那里去
-
 //            Intent i2 = new Intent(LoginActivity.this, MainActivityBottomNavi.class);
 //            startActivity(i2);
             LoginActivity.this.finish();
@@ -209,5 +205,6 @@ public class LoginActivity extends BaseDaggerActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }

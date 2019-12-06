@@ -25,9 +25,9 @@
         <!-- https://developers.google.com/admob/android/quick-start -->
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8621230724267558~7770389405"/>
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--            android:value="ca-app-pub-8621230724267558~7770389405"/>-->
 
 
         <!--  fileprovider 都是在这里提供的配置的   -->

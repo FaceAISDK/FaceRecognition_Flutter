@@ -33,7 +33,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  *
- *
  * Created by anylife.zlb@gmail.com on 2017/1/11.
  */
 public class ModuleMainLauncherActivity extends BaseDaggerActivity implements EasyPermissions.PermissionCallbacks {
@@ -56,7 +55,7 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
         if (TextUtils.isEmpty(accessToken)) {
             Intent i1 = new Intent();
             i1.putExtra("isFromLaunch", true);
-            i1.setClass(getContext(), LoginActivity.class);
+            i1.setClass(this, LoginActivity.class);
 
             startActivity(i1);
             ModuleMainLauncherActivity.this.finish();

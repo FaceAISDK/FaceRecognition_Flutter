@@ -10,6 +10,7 @@ import androidx.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.zlb.commontips.CustomCallback;
 import com.zlb.commontips.EmptyCallback;
 import com.zlb.commontips.ErrorCallback;
@@ -26,7 +27,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasAndroidInjector;
 
 /**
- * Core
+ * Core，核心就是
  *
  * May you do good and not evil
  * May you find forgiveness for yourself and forgive others
@@ -77,6 +78,9 @@ public abstract class BaseApplication extends Application implements HasAndroidI
 
         //测试环境下数据库可视化调试
         showDebugDBAddressLogToast(this);
+
+        CrashReport.initCrashReport(getApplicationContext(), "900025400", false);
+
     }
 
     private void initDI() {

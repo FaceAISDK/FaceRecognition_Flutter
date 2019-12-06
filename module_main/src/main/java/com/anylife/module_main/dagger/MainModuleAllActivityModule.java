@@ -10,7 +10,6 @@ import com.anylife.module_main.business.navigation.MainActivityBottomNavi;
 import com.anylife.module_main.business.navigation.fragment.MeFragment;
 import com.anylife.module_main.business.navigation.fragment.NewsFragmentShell;
 import com.anylife.module_main.blog.ui.BlogListFragment;
-import com.zlb.dagger.viewmodel.MyViewModelFactory;
 import com.zlb.dagger.viewmodel.ViewModelKey;
 import com.zlb.dagger.component.BaseActivityComponent;
 import com.zlb.dagger.module.DefaultActivityModule;

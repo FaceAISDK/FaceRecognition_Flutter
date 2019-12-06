@@ -57,28 +57,15 @@ public class NewsLauncherActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolBarVisible(View.GONE);  //这里是不需要Base 中的Toolbar,不要的情况毕竟是少数
 
-//        Http3Retrofit.getRetrofit().create(NewsApiService.class).getNews()
-//                .compose(SwitchSchedulers.applySchedulers())
-//                .subscribe(new Http3Observer<HotNewsResult>() {
-//                    @Override
-//                    public void onSuccess(HotNewsResult blogList) {
-//
-//                        Log.e("TAG","test");
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int code, String message) {
-//                        super.onFailure(code, message);
-//                    }
-//                });
-
-
         AntiGPSFake.areThereMockPermissionApps(this);
         AntiGPSFake.isMockSettingsON(this);
 
         Log.e("AntiGPSFake",AntiGPSFake.isMockSettingsON(this)+"  "+AntiGPSFake.areThereMockPermissionApps(this));
 
         sendMsg(FINISH_LAUNCHER, 2500);
+
+        //查看一下CPU 的内核数NUMBER_OF_CORES
+        final int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
 
 
         //动态代理测试

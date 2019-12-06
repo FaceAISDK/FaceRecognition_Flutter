@@ -57,7 +57,7 @@ public class BlogListFragment extends BaseStatusFragment {
         swipeRefresh = view.findViewById(R.id.swiperefresh);
         mRecyclerView = view.findViewById(R.id.blogRecyclerView);
 
-        //ViewModel 就相当于MVP 的P了；好像没法和Dagger 结合起来使用的啊
+        //
 
         //当Activity重建的时候，虽然 onCreate() 方法会重新走一遍，但是这个mainViewModel实例，
         //仍然是第一次创建的那个实例，在ViewModelProviders.of(this).get(***.class)中的get方法中进行了缓存
@@ -102,6 +102,7 @@ public class BlogListFragment extends BaseStatusFragment {
     public void getPopularBlog() {
         swipeRefresh.setRefreshing(true);
 
+
         blogViewModel.getAllBlog().observe(this, new Observer<StateData<List<Blog>>>() {
             @Override
             public void onChanged(StateData<List<Blog>> stateData) {
@@ -110,6 +111,7 @@ public class BlogListFragment extends BaseStatusFragment {
                         swipeRefresh.setRefreshing(false);
                         prepareRecyclerView(stateData.getData());
                         break;
+
                     case ERROR:
                         swipeRefresh.setRefreshing(false);
 

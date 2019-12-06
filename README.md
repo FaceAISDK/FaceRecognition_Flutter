@@ -1,6 +1,6 @@
-## 基于可能出现的安全,licence和不好的影响，删除原来的Repo。
+## 由于licence，可能出现的安全问题和不好的影响等，删除原来的Repo。
 
-![请2年前clone过老项目的同学也删除](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1024)
+![请clone过老项目的同学也删除](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1024)
 
 [新Repo代码GitHub链接点这里](https://github.com/AnyLifeZLB/MVP-Dagger2-Rxjava2)
 
@@ -40,6 +40,31 @@ ViewModel和LiveData 官方Jetpack组件重要组成部分。
                     break;
             }
         });
+```
+![权侵删](https://upload-images.jianshu.io/upload_images/2376786-e0ad051dac85fa05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+而使用Retrofit请求网络业务层的写法也是非常的精简
+
+```
+    public StateLiveData<HotNewsResult> getStateLiveData() {
+        //1.异步加载网络请求数据
+        newsApiService.getNews()
+                .compose(SwitchSchedulers.applyScheduler2())//rxjava 切换线程
+                .subscribe(new HttpObserver<NewsResult>() {
+                    @Override
+                    public void onSuccess(NewsResult newsResult) {
+                        stateLiveData.postSuccess(newsResult);
+                    }
+
+                    @Override
+                    public void onFailure(int code, String message) {
+                        super.onFailure(code, message);
+                        //把错误信息告知给UI操作层面
+                        stateLiveData.postFailure(message + code);
+                    }
+                });
+        return stateLiveData;
+    }
 ```
 
 ### Dagger 和ViewModel 结合遇到的问题

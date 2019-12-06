@@ -24,4 +24,5 @@ public class NulResult {
                 "helloWord='" + helloWord + '\'' +
                 '}';
     }
+
 }

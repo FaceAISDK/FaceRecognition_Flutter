@@ -1,9 +1,6 @@
 package com.anylife.module_main.blog.BlogHttpService;
 
-import android.content.Context;
-
 import androidx.annotation.Nullable;
-
 import com.zlb.httplib.BaseObserver;
 
 /**
@@ -22,7 +19,6 @@ public abstract class BlogHttpObserver<T> extends BaseObserver<BlogHttpResponse<
     public BlogHttpObserver() {
         super();
     }
-
 
 
     /**

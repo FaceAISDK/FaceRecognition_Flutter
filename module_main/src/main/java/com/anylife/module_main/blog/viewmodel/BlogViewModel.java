@@ -9,11 +9,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
+ * 理论情况下，ViewModel 不需要知道任何关于 Android 的东西。
+ * 这提供了可测试性，防止内存泄漏和模块化的好处。
+ * 一条基本规制是确保在你的 ViewModels 类中没有任何 android.* 的类导入（android.arch.* 例外）
  *
- * ViewModel 和Dagger 结合有点难过！
  *
- *
- * 初始化ViewModel，既然 ViewModel 与 UI Controller 无关，当然可以用作 MVP 的 Presenter 层提供 LiveData 给 View 层，因为 LiveData 绑定了 Lifecycle，所以不存* 在内存泄露的问题。除此之外，ViewModel 也可以用做 MVVM 模式的 VM 层，利用 Data Binding 直接把 ViewModel 的 LiveData 属性绑定到 xml 元素上，xml *中声明式的写法避免了很多样板代码，数据驱动 UI 的最后一步，我们只需要关注数据的变化即可，UI 的状态会自动发生变化。
  */
 public class BlogViewModel extends ViewModel {
 

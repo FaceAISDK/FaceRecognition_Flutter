@@ -1,10 +1,10 @@
-
 package com.zlb.base;
 
-import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -20,11 +20,8 @@ import com.zlb.httplib.R;
 
 
 /**
- * 单独出来成为一个Module
+ * BaseWebViewActivity
  *
- *
- * <p>
- * 包含JSBridge 的WebView,不要写没有通用性的业务代码在这里
  */
 public abstract class BaseWebViewActivity extends BaseActivity {
     public static final String WEB_ACTION = "my.intent.action.GOTOWEB";
@@ -92,13 +89,57 @@ public abstract class BaseWebViewActivity extends BaseActivity {
     /**
      * @param url
      */
-
     public void setURL(String url) {
         mWebView.loadUrl(url);
     }
 
+
+    //处理物理按键返回键的处理
+    private boolean isGoBack = false;  //是不是有按下物理返回键的操作？
+    private long goBackTime = 0;       //记录一下按下物理返回键的时间
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+            isGoBack = true;
+            goBackTime = System.currentTimeMillis();
+            mWebView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    private String startUrl=null; //加载一个URL开始的时候的（记录重定向的）
+
     private void setWebViewClient() {
         mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                if (!TextUtils.isEmpty(startUrl) && !startUrl.equals(url) && isGoBack && System.currentTimeMillis() - goBackTime < 600) {
+                    isGoBack = false;
+                    if (mWebView.canGoBack()) {
+                        mWebView.goBack();
+                    } else {
+                        finish(); //现在都是单进程
+                    }
+                } else {
+                    view.loadUrl(url);
+                    isGoBack = false;
+                    return true;
+                }
+
+                return false;
+
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+
             @Override
             public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -120,26 +161,12 @@ public abstract class BaseWebViewActivity extends BaseActivity {
                 message += " 你想要继续吗？";
                 builder.setTitle("SSL证书错误");
                 builder.setMessage(message);
-                builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        handler.proceed();
-                    }
-                });
-                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        handler.cancel();
-                    }
-                });
+                builder.setPositiveButton("continue", (dialog, which) -> handler.proceed());
+                builder.setNegativeButton("cancel", (dialog, which) -> handler.cancel());
                 final AlertDialog dialog = builder.create();
                 dialog.show();
             }
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-            }
         });
 
     }
@@ -193,31 +220,6 @@ public abstract class BaseWebViewActivity extends BaseActivity {
                 super.onProgressChanged(view, newProgress);
             }
         });
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        getToolbar().setSubtitle(mWebView.getUrl());
-    }
-
-
-    /**
-     * 允许webview 内部返回
-     *
-     * @param keyCode
-     * @param event
-     * @return
-     */
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-            mWebView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
 

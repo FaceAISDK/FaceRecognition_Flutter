@@ -32,7 +32,7 @@ public interface MainModuleApiService {
 
 
     /**
-     *
+     * 登录接口
      */
     @GET("login")
     Observable<HttpResponse<LoginResult>> goLogin(@QueryMap HashMap<String,String>  loginParam);
