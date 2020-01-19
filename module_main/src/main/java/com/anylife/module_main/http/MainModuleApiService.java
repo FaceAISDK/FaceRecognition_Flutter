@@ -1,14 +1,11 @@
 package com.anylife.module_main.http;
 
-import com.anylife.module_main.business.login.LoginActivity;
 import com.anylife.module_main.business.login.LoginResult;
 import com.anylife.module_main.http.result.MeProfile;
-import com.zlb.http.result.NulResult;
 import com.zlb.httplib.HttpResponse;
 import java.util.HashMap;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 /**

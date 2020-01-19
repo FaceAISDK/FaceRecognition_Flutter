@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 /**
  * 三星白兰地 五月黄梅天
+ *
  * Module
  */
 public class BlogRepository {
@@ -27,16 +28,10 @@ public class BlogRepository {
 
     }
 
-
     //MutableLiveData 是有生命周期感知能力的
     private StateLiveData<List<Blog>> stateLiveData = new StateLiveData<>();
 
     public StateLiveData<List<Blog>> getStateLiveData() {
-        //其实放在UI 的请求开始也是可以的，没有必要一定放在这里
-        stateLiveData.postLoading();
-
-        //1.异步加载网络请求数据
-//        BlogHttpRetrofit.getRetrofit().create(BlogApiService.class) //使用Dagger可以省很多代码
         blogApiService.getPopularBlog()
                 .compose(SwitchSchedulers.applyScheduler2())
                 .subscribe(new BlogHttpObserver<List<Blog>>() {
@@ -45,7 +40,7 @@ public class BlogRepository {
                         //更新为网络数据
                         stateLiveData.postSuccess(blogList);
 
-                        //缓存数据
+                        //缓存数据到DB
                         daoSession.getBlogDao().deleteAll();
                         daoSession.getBlogDao().insertInTx(blogList);
                     }
@@ -54,7 +49,7 @@ public class BlogRepository {
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
                         //把错误信息告知给UI操作层面
-                        stateLiveData.postFailure(message + code);
+                        stateLiveData.postFailure(code,message);
                     }
                 });
 

@@ -11,10 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:label">
-        <activity android:name=".blog.ui.BlogListActivity"></activity>
+
+        <activity android:name=".blog.ui.BlogListActivity"/>
+
         <activity
             android:name=".ModuleMainLauncherActivity"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/LaunchTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

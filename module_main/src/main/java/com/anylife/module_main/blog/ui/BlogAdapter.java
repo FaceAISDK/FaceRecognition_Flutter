@@ -19,7 +19,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 /**
- *
  * Created by zlb on 2018/3/23.
  */
 public class BlogAdapter extends BaseQuickAdapter<Blog, BaseViewHolder> {
@@ -40,7 +39,8 @@ public class BlogAdapter extends BaseQuickAdapter<Blog, BaseViewHolder> {
         helper.setText(R.id.tvDescription, item.getDescription());
 
         if (item.getThumbnail() != null && !TextUtils.isEmpty(item.getThumbnail())) {
-            String url = item.getThumbnail();
+//            String url = item.getThumbnail();
+            String url="https://androidwave.com/wp-content/uploads/2019/02/working-with-livedata.jpg";
             helper.getView(R.id.ivThumbnail).setTag(R.id.ivThumbnail, url);
             Glide.with(mContext)
                     .load(url)

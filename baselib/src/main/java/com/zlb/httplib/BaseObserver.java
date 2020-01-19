@@ -43,11 +43,11 @@ import static com.zlb.httplib.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
 public abstract class BaseObserver<K> implements Observer<K> {
     public final static String Thread_Main = "main"; //防止非主线程异常
 
-    public final int RESPONSE_FATAL_EOR = -1;       //返回数据失败,严重的错误
-    public final int CUSTOM_REPEAT_REQ_ERROR = -2;  //同样的一个请求并且还是重复的话返回错误
+    public final static int RESPONSE_FATAL_EOR = -1;       //返回数据失败,严重的错误
+    public final static int CUSTOM_REPEAT_REQ_ERROR = -2;  //同样的一个请求并且还是重复的话返回错误
 
-    public final int SOCKET_TIMEOUT_EOR = -3;       //服务器响应超时
-    public final int ConnectException_EOR= -4;      //网络连接异常
+    public final static int SOCKET_TIMEOUT_EOR = -3;       //服务器响应超时
+    public final static int ConnectException_EOR= -4;      //网络连接异常
     public Context mContext;
 
     private int errorCode = -1111;
@@ -150,10 +150,10 @@ public abstract class BaseObserver<K> implements Observer<K> {
             errorMsg = "服务器响应超时";
         } else if (t instanceof ConnectException) {
             errorCode = ConnectException_EOR;
-            errorMsg = "网络连接异常，请检查网络";
+            errorMsg = "无网络，请检查网络";
         } else if (t instanceof UnknownHostException) {
             errorCode = RESPONSE_FATAL_EOR;
-            errorMsg = "无法解析主机，请检查网络连接";
+            errorMsg = "无网络，请检查网络";
         } else if (t instanceof UnknownServiceException) {
             errorCode = RESPONSE_FATAL_EOR;
             errorMsg = "未知的服务器错误";
@@ -227,9 +227,6 @@ public abstract class BaseObserver<K> implements Observer<K> {
         if (mContext != null && Thread.currentThread().getName().equals(Thread_Main)) {
             Toasty.error(mContext.getApplicationContext(), message + "   code=" + code, Toast.LENGTH_SHORT).show();
         }
-
     }
-
-
 
 }

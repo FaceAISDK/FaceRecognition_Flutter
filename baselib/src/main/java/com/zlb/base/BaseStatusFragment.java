@@ -1,10 +1,13 @@
 package com.zlb.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
@@ -13,6 +16,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.zlb.httplib.dialog.HttpUiTips;
 
 import dagger.android.support.AndroidSupportInjection;
+import es.dmoral.toasty.Toasty;
 
 /**
  * Base Fragment , Dagger fragment ok
@@ -44,6 +48,8 @@ public abstract class BaseStatusFragment extends RxFragment  {
         //返回全局的加载反馈页面 ！
         return mBaseLoadService.getLoadLayout();
     }
+
+
 
 
 

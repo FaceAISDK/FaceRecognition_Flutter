@@ -64,9 +64,6 @@ public class NewsLauncherActivity extends BaseActivity {
 
         sendMsg(FINISH_LAUNCHER, 2500);
 
-        //查看一下CPU 的内核数NUMBER_OF_CORES
-        final int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
-
 
         //动态代理测试
         Sell sell = (Sell) Proxy.newProxyInstance(Sell.class.getClassLoader(), new Class<?>[]{Sell.class}, new InvocationHandler() {
@@ -80,7 +77,6 @@ public class NewsLauncherActivity extends BaseActivity {
         });
 
         sell.ad();
-
 
 
         //==========================

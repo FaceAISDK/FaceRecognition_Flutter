@@ -106,13 +106,16 @@ public class ModuleMainLauncherActivity extends BaseDaggerActivity implements Ea
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.FullscreenTheme);
+
         super.onCreate(savedInstanceState);
+
         setToolBarVisible(View.GONE);  //这里是不需要Base 中的Toolbar,不要的情况毕竟是少数
         requestAllPermissions();
 
         // Create charging constraint
         Constraints constraints = new Constraints.Builder()
-//                .setRequiresCharging(true)
+                .setRequiresCharging(true)
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build();
 

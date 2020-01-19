@@ -24,12 +24,12 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * 其实是可以复用的，大同小异
+ * 其实是可以复用的，大同小异 http://yapi.demo.qunar.com/mock/33822/androiddemo/hotnews
  *
  * Created by Anylife.zlb@gmail.com on 2019/11/12.
  */
 public class BlogHttpRetrofit {
-    public static final String baseUrl = "https://androidwave.com/api/";
+    public static final String baseUrl = "http://yapi.demo.qunar.com/mock/33822/androiddemo/";
 
     //throw a custom IOException("Unexpected protocol: " + protocol)
     public static final String CUSTOM_REPEAT_REQ_PROTOCOL = "MY_CUSTOM_REPEAT_REQ_PROTOCOL";

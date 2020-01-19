@@ -1,8 +1,8 @@
 package com.zenglb.framework.news.news;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -10,20 +10,22 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
 import com.zenglb.framework.news.R;
 import com.zenglb.framework.news.http.result.AppBean;
 import com.zenglb.framework.news.http.result.HotNewsResult;
+import com.zlb.base.BaseDispose;
 import com.zlb.statelivedata.StateData;
 import com.zlb.base.BaseStatusFragment;
-import com.zlb.commontips.TimeoutCallback;
 import com.zlb.httplib.dialog.HttpUiTips;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
 
 /**
@@ -32,7 +34,7 @@ import javax.inject.Inject;
  * 为了组件化。
  */
 @Route(path = "/news/packageFragment")
-public class NewsPackageFragment extends BaseStatusFragment implements TabLayout.OnTabSelectedListener{
+public class NewsPackageFragment extends BaseStatusFragment implements TabLayout.OnTabSelectedListener {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
@@ -94,11 +96,13 @@ public class NewsPackageFragment extends BaseStatusFragment implements TabLayout
      */
     @Override
     protected void onHttpReload(View v) {
+        HttpUiTips.showDialog(getActivity(), "请求中...");
         newsViewModel.getNews();
+//        getNews(); //不能这样子，会被观察很多次
     }
 
 
-    private void disposeData(HotNewsResult hotNewsResult){
+    private void disposeData(HotNewsResult hotNewsResult) {
         List<String> tabsTitle = new ArrayList<>();
 
         Field[] fields = hotNewsResult.getClass().getDeclaredFields();
@@ -123,26 +127,22 @@ public class NewsPackageFragment extends BaseStatusFragment implements TabLayout
 
     /**
      * 去获取数据
-     *
      */
     public void getNews() {
+        HttpUiTips.showDialog(getActivity(), "请求中...");
 
         newsViewModel.getNews().observe(this, new Observer<StateData<HotNewsResult>>() {
             @Override
-            public void onChanged(StateData<HotNewsResult> hotNewsResultStateData) {
-                switch (hotNewsResultStateData.getStatus()) {
+            public void onChanged(StateData<HotNewsResult> stateData) {
+                int a = 11;
+
+                switch (stateData.getStatus()) {
                     case SUCCESS:
-                        disposeData(hotNewsResultStateData.getData());
-                        HttpUiTips.dismissDialog(getActivity());
+                        disposeData(stateData.getData());
                         break;
                     case ERROR:
                         //这里可以根据ErrorCode进行封装统一处理
-                        mBaseLoadService.showCallback(TimeoutCallback.class);//其他回调
-                        HttpUiTips.dismissDialog(getActivity());
-                        break;
-                    case LOADING:
-                        HttpUiTips.showDialog(getActivity(),"请求中");
-                        Log.e("TTT","显示Loading UI ");
+                        BaseDispose.errorDispose(mBaseLoadService, getActivity(), stateData.getMsg(), stateData.getCode());
                         break;
                 }
             }
@@ -203,7 +203,7 @@ public class NewsPackageFragment extends BaseStatusFragment implements TabLayout
         public Fragment getItem(int i) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a TabsFragment that load tabsDataTypeTitle[position] type data
-            return NewsFragment.newInstance(tabsTitle.get(i), (ArrayList<AppBean>)getValue(tabsTitle.get(i)));
+            return NewsFragment.newInstance(tabsTitle.get(i), (ArrayList<AppBean>) getValue(tabsTitle.get(i)));
         }
 
         @Override

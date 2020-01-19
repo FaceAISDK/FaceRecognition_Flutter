@@ -4,14 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
-import com.zlb.httplib.dialog.HttpUiTips
 import com.zlb.httplib.R
+import com.zlb.httplib.dialog.HttpUiTips
+import es.dmoral.toasty.Toasty
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import java.util.concurrent.TimeUnit
@@ -55,8 +56,6 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
         //在这里进行Http 的请求
         loadHttp()
     }
-
-
     /**
      * 定制Custom View，Content 区域先留空，后面再动态的添加，同时
      * 增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用

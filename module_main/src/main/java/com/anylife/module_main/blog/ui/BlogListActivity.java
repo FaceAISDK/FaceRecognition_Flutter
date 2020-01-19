@@ -70,7 +70,6 @@ public class BlogListActivity extends BaseActivity {
 
         // 数据刷新获取数据
         swipeRefresh.setOnRefreshListener(() -> getPopularBlog());
-
     }
 
 
@@ -93,9 +92,7 @@ public class BlogListActivity extends BaseActivity {
 //                        Throwable e = listStateData.getError();
 
                         break;
-                    case LOADING:
-                        Log.e("TTT","Loading");
-                        break;
+
                 }
             }
         });

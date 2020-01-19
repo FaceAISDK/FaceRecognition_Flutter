@@ -15,11 +15,11 @@ import retrofit2.http.GET;
 public interface BlogApiService {
 
     /**
-     * 博客接口
+     * 博客接口 http://yapi.demo.qunar.com/mock/33822/androiddemo/hotnews
      *
      * @return
      */
-    @GET("feed.json")
+    @GET("hotnews")
     Observable<BlogHttpResponse<List<Blog>>> getPopularBlog();
 
 

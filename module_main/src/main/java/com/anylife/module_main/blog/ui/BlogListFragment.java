@@ -1,11 +1,10 @@
 package com.anylife.module_main.blog.ui;
 
 import android.content.res.Configuration;
-import android.util.Log;
 import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.anylife.module_main.R;
+import com.zlb.base.BaseDispose;
 import com.zlb.dagger.viewmodel.MyViewModelFactory;
 import com.zlb.statelivedata.StateData;
-import com.zlb.commontips.TimeoutCallback;
 import com.zlb.persistence.entity.Blog;
 import com.anylife.module_main.blog.viewmodel.BlogViewModel;
 import com.zlb.Sp.SPDao;
@@ -57,11 +56,9 @@ public class BlogListFragment extends BaseStatusFragment {
         swipeRefresh = view.findViewById(R.id.swiperefresh);
         mRecyclerView = view.findViewById(R.id.blogRecyclerView);
 
-        //
-
         //当Activity重建的时候，虽然 onCreate() 方法会重新走一遍，但是这个mainViewModel实例，
         //仍然是第一次创建的那个实例，在ViewModelProviders.of(this).get(***.class)中的get方法中进行了缓存
-        //可是和Dagger 结合起来就麻烦了，哈哈哈
+
 //        blogViewModel = ViewModelProviders.of(this).get(BlogViewModel.class);
 
         //use Dagger
@@ -69,7 +66,7 @@ public class BlogListFragment extends BaseStatusFragment {
 
 
         //ViewModel 最终消亡是在 Activity 被销毁的时候，会执行它的onCleared()进行数据的清理。
-        //去获取博客数据
+        //去获取博客数据，为了简单演示，不分页
         getPopularBlog();
 
         // 数据刷新获取数据
@@ -97,15 +94,14 @@ public class BlogListFragment extends BaseStatusFragment {
 
     /**
      * 去获取数据
-     *
      */
     public void getPopularBlog() {
         swipeRefresh.setRefreshing(true);
 
-
         blogViewModel.getAllBlog().observe(this, new Observer<StateData<List<Blog>>>() {
             @Override
             public void onChanged(StateData<List<Blog>> stateData) {
+                int a = 10;
                 switch (stateData.getStatus()) {
                     case SUCCESS:
                         swipeRefresh.setRefreshing(false);
@@ -114,15 +110,8 @@ public class BlogListFragment extends BaseStatusFragment {
 
                     case ERROR:
                         swipeRefresh.setRefreshing(false);
-
-                        //这里可以根据ErrorCode进行封装统一处理
-                        mBaseLoadService.showCallback(TimeoutCallback.class);//其他回调
-
-                        break;
-                    case LOADING:
-
-                        Log.e("TTT","显示Loading UI ");
-
+                        //这里可以根据msg,Code进行封装统一处理
+                        BaseDispose.errorDispose(mBaseLoadService, getActivity(), stateData.getMsg(), stateData.getCode());
                         break;
                 }
             }

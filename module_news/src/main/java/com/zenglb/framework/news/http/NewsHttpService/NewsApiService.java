@@ -19,11 +19,7 @@ public interface NewsApiService {
     Observable<NewsHttpResponse<HotNewsResult>> getNews();
 
 
-
-
     // 下面是各种接口
-
-
 
 
 }

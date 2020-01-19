@@ -42,7 +42,6 @@
 
 
 
-
     <style name="Translucent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">true</item>
@@ -54,6 +53,9 @@
     </style>
 
 
+    <style name="LaunchTheme" mce_bogus="1" parent="FullscreenTheme">
+        <item name="android:windowBackground">@drawable/base_launcher_bg</item>
+    </style>
 
 
     <style name="FullscreenTheme" parent="Theme.AppCompat">
@@ -62,8 +64,6 @@
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-
-
 
 
     <style name="TextLabel" parent="Theme.AppCompat.Light.NoActionBar">

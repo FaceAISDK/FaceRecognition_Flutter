@@ -5,7 +5,6 @@
     android:id="@+id/newsRecyclerView"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_common"
     android:scrollbarStyle="insideInset"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

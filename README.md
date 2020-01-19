@@ -8,7 +8,7 @@
 
 根据项目中出现的工程问题以及平衡业务需求，重构希望能把关注点集中到代码结构、整体架构、可测试性、可维护性以及快速迭代这四个方面。本次迭代除了使用Dagger,Rxjava,Retrofit,Greendao 等外，新引入了Google官方JetPack组件中的LiveData,ViewModel，LifeCycle，WorkManger等。并把工程框架变为模块化，独立的业务模块可以单独的进行调试，管理。
 
- ### 项目的框架图如下
+### 项目的框架图如下
   
 ![项目的框架图](https://upload-images.jianshu.io/upload_images/2376786-012ea22c70e01dc6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/555)
 
@@ -22,7 +22,7 @@
 
 ### ViewModel+LiveData 的封装处理
 
-ViewModel和LiveData 官方Jetpack组件重要组成部分。
+ViewModel和LiveData 官方JetPack组件重要组成部分。
 - ViewModel 当因系统配置发生改变导致 Activity 重建的时候（比如旋转屏幕，更改系统语言），能对 LiveData 进行正确的保存和恢复（当然这要配合 LiveData）。当然如果是系统资源紧张被清除是不能恢复的。
 - LiveData 的作用是在使得数据能具有生命周期感知能力，在 Activity 等变为活跃状态的时候，自动回调观察者中的回调方法，也就是说对数据的变化进行实时监听。这样就不会出现异步请求数据成功后UI不活跃的时候出现空指针异常，也可以很好的避免内存泄露
 
@@ -36,7 +36,8 @@ ViewModel和LiveData 官方Jetpack组件重要组成部分。
                     disposeSuccessData(stateData.getData());
                     break;
                 case ERROR:
-                    disposeErrorMsg(stateData.getMsg())
+                    //全局统一的错误处理，http 提示和UI 空页面，错误页面提示等
+                    BaseDispose.errorDispose(mBaseLoadService, getActivity(), stateData.getMsg(), stateData.getCode());
                     break;
             }
         });
@@ -89,7 +90,7 @@ ViewModel和LiveData 官方Jetpack组件重要组成部分。
 ## 项目中包含的基本的通用模块
 - Dagger.android 大大的优化Dagger 在android 中的使用，
 - BaseActivity 中Toolbar 的处理
-- 进行网络请求时候的Error，empty,Loading,timeout等通用场景处理，Demo中一处Root注入，处处可用
+- 进行网络请求时候的Error,empty,Loading,timeout等通用场景处理，Demo中一处Root注入，处处可用
 - Http (Rxjava2+Retrofit2)的闭环处理
 - 聚合型API处理（从不同的系统获取数据，返回的API 结构不同，详细见thirdParty 包下的处理）
 - 封装StateLiveData 以便处理失败和业务异常
@@ -102,7 +103,7 @@ ViewModel和LiveData 官方Jetpack组件重要组成部分。
 - [1]. Google 应用架构指南
 - [2]. LiveData ViewModel Overview
 - [3]. Dagger - A fast dependency injector for Android and Java
-- [4]. Android Jetpack 使用入门
+- [4]. Android JetPack 使用入门
 ... ...
 
 

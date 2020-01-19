@@ -38,4 +38,14 @@ public class BlogViewModel extends ViewModel {
         return blogRepository.getStateLiveData();
     }
 
+
+    /**
+     * 也可以有getTags 等等
+     *
+     * @return
+     */
+    public StateLiveData<List<Blog>> getTags(){
+        return blogRepository.getStateLiveData();
+    }
+
 }
