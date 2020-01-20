@@ -40,7 +40,8 @@ public class BlogAdapter extends BaseQuickAdapter<Blog, BaseViewHolder> {
 
         if (item.getThumbnail() != null && !TextUtils.isEmpty(item.getThumbnail())) {
 //            String url = item.getThumbnail();
-            String url="https://androidwave.com/wp-content/uploads/2019/02/working-with-livedata.jpg";
+
+            String url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1579515876569&di=120afb87aa274663dc4e4668095e8160&imgtype=0&src=http%3A%2F%2Fimg.jk51.com%2Fimg_jk51%2F72819169.jpeg";
             helper.getView(R.id.ivThumbnail).setTag(R.id.ivThumbnail, url);
             Glide.with(mContext)
                     .load(url)

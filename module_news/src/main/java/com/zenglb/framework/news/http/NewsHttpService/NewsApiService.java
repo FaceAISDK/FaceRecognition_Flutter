@@ -1,7 +1,6 @@
 package com.zenglb.framework.news.http.NewsHttpService;
 
 import com.zenglb.framework.news.http.result.HotNewsResult;
-
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 
@@ -19,7 +18,6 @@ public interface NewsApiService {
     Observable<NewsHttpResponse<HotNewsResult>> getNews();
 
 
-    // 下面是各种接口
 
 
 }

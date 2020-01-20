@@ -134,15 +134,13 @@ public class NewsPackageFragment extends BaseStatusFragment implements TabLayout
         newsViewModel.getNews().observe(this, new Observer<StateData<HotNewsResult>>() {
             @Override
             public void onChanged(StateData<HotNewsResult> stateData) {
-                int a = 11;
-
                 switch (stateData.getStatus()) {
                     case SUCCESS:
                         disposeData(stateData.getData());
                         break;
                     case ERROR:
                         //这里可以根据ErrorCode进行封装统一处理
-                        BaseDispose.errorDispose(mBaseLoadService, getActivity(), stateData.getMsg(), stateData.getCode());
+                        BaseDispose.errorDispose(loadService, getActivity(), stateData.getMsg(), stateData.getCode());
                         break;
                 }
             }

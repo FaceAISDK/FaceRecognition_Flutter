@@ -108,7 +108,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/my_dialog_bg</item>
         <!--是否模糊-->
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>  <!-- 半透明 -->
     </style>

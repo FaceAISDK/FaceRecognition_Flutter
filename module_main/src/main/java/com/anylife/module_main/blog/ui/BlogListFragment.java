@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.anylife.module_main.R;
 import com.zlb.base.BaseDispose;
 import com.zlb.dagger.viewmodel.MyViewModelFactory;
+import com.zlb.httplib.dialog.HttpUiTips;
 import com.zlb.statelivedata.StateData;
 import com.zlb.persistence.entity.Blog;
 import com.anylife.module_main.blog.viewmodel.BlogViewModel;
@@ -64,7 +65,6 @@ public class BlogListFragment extends BaseStatusFragment {
         //use Dagger
         blogViewModel = ViewModelProviders.of(this, viewModelFactory).get(BlogViewModel.class);
 
-
         //ViewModel 最终消亡是在 Activity 被销毁的时候，会执行它的onCleared()进行数据的清理。
         //去获取博客数据，为了简单演示，不分页
         getPopularBlog();
@@ -88,6 +88,7 @@ public class BlogListFragment extends BaseStatusFragment {
      */
     @Override
     protected void onHttpReload(View v) {
+        HttpUiTips.showDialog(getContext(), "请求中");
         blogViewModel.getAllBlog();
     }
 
@@ -101,7 +102,7 @@ public class BlogListFragment extends BaseStatusFragment {
         blogViewModel.getAllBlog().observe(this, new Observer<StateData<List<Blog>>>() {
             @Override
             public void onChanged(StateData<List<Blog>> stateData) {
-                int a = 10;
+                HttpUiTips.dismissDialog(getContext());
                 switch (stateData.getStatus()) {
                     case SUCCESS:
                         swipeRefresh.setRefreshing(false);
@@ -111,7 +112,7 @@ public class BlogListFragment extends BaseStatusFragment {
                     case ERROR:
                         swipeRefresh.setRefreshing(false);
                         //这里可以根据msg,Code进行封装统一处理
-                        BaseDispose.errorDispose(mBaseLoadService, getActivity(), stateData.getMsg(), stateData.getCode());
+                        BaseDispose.errorDispose(loadService, getActivity(), stateData.getMsg(), stateData.getCode());
                         break;
                 }
             }

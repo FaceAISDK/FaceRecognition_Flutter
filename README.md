@@ -36,7 +36,7 @@ ViewModel和LiveData 官方JetPack组件重要组成部分。
                     disposeSuccessData(stateData.getData());
                     break;
                 case ERROR:
-                    //全局统一的错误处理，http 提示和UI 空页面，错误页面提示等
+                    //全局统一的错误处理，http 提示和UI 空页面，错误页面提示等. 静默请求是不需要的
                     BaseDispose.errorDispose(mBaseLoadService, getActivity(), stateData.getMsg(), stateData.getCode());
                     break;
             }
@@ -60,7 +60,7 @@ ViewModel和LiveData 官方JetPack组件重要组成部分。
                     @Override
                     public void onFailure(int code, String message) {
                         super.onFailure(code, message);
-                        //把错误信息告知给UI操作层面
+                        //把错误信息告知给UI操作层面，好全局处理
                         stateLiveData.postFailure(message + code);
                     }
                 });
@@ -105,6 +105,7 @@ ViewModel和LiveData 官方JetPack组件重要组成部分。
 - [3]. Dagger - A fast dependency injector for Android and Java
 - [4]. Android JetPack 使用入门
 ... ...
+
 
 
 

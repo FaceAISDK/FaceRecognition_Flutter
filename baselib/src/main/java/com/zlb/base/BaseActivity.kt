@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kingja.loadsir.core.LoadService
@@ -12,7 +11,6 @@ import com.kingja.loadsir.core.LoadSir
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.zlb.httplib.R
 import com.zlb.httplib.dialog.HttpUiTips
-import es.dmoral.toasty.Toasty
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import java.util.concurrent.TimeUnit
@@ -36,7 +34,7 @@ import java.util.concurrent.TimeUnit
 abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
     var context: Context? = null
 
-    private var mBaseLoadService: LoadService<*>? = null
+    private var loadService: LoadService<*>? = null
 
     abstract val layoutId: Int
 
@@ -75,7 +73,7 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
 
             //ButterKnife.bind(this, rootView);   //组件化后 ButterKnife 很不好使用，改用Android View Generator
 
-            mBaseLoadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivity.onHttpReload(v) }
+            loadService = LoadSir.getDefault().register(contentView) { v -> this@BaseActivity.onHttpReload(v) }
         }
         return rootView
     }
@@ -93,7 +91,7 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
      * 如果没有重写，说明那个页面不需要Http 请求，直接是成功
      */
     protected fun loadHttp() {
-        mBaseLoadService?.showSuccess()
+        loadService?.showSuccess()
     }
 
     /**

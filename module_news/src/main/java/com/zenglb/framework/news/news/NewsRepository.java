@@ -12,6 +12,7 @@ import javax.inject.Inject;
 /**
  * 三星白兰地 五月黄梅天
  * Module
+ *
  */
 public class NewsRepository {
     @Inject

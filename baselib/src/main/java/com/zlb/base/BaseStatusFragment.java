@@ -1,12 +1,10 @@
 package com.zlb.base;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import com.kingja.loadsir.callback.Callback;
@@ -16,7 +14,6 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.zlb.httplib.dialog.HttpUiTips;
 
 import dagger.android.support.AndroidSupportInjection;
-import es.dmoral.toasty.Toasty;
 
 /**
  * Base Fragment , Dagger fragment ok
@@ -26,7 +23,7 @@ import es.dmoral.toasty.Toasty;
 public abstract class BaseStatusFragment extends RxFragment  {
 
     //保证Fragment即使在onDetach后，仍持有Activity的引用（有引起内存泄露的风险，但是相比空指针闪退，这种做法“安全”些）
-    protected LoadService mBaseLoadService;  //基础的页面状态显示器
+    protected LoadService loadService;  //基础的页面状态显示器
 
     @Nullable
     @Override
@@ -34,7 +31,7 @@ public abstract class BaseStatusFragment extends RxFragment  {
             savedInstanceState) {
         View rootView = View.inflate(getActivity(), onCreateFragmentView(), null);
 
-        mBaseLoadService = LoadSir.getDefault().register(rootView, new Callback.OnReloadListener() {
+        loadService = LoadSir.getDefault().register(rootView, new Callback.OnReloadListener() {
             @Override
             public void onReload(View v) {
                 onHttpReload(v);
@@ -46,7 +43,7 @@ public abstract class BaseStatusFragment extends RxFragment  {
         loadHttp();
 
         //返回全局的加载反馈页面 ！
-        return mBaseLoadService.getLoadLayout();
+        return loadService.getLoadLayout();
     }
 
 
@@ -76,7 +73,7 @@ public abstract class BaseStatusFragment extends RxFragment  {
      * 如果没有重写，说明那个页面不需要Http 请求，直接是成功  HelloKitty7
      */
     protected void loadHttp() {
-        mBaseLoadService.showSuccess();
+        loadService.showSuccess();
     }
 
 
