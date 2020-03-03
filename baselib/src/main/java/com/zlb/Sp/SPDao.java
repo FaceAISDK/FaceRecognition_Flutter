@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
  */
 public class SPDao {
     private static final String TAG = SPDao.class.getSimpleName();
-    private static final String SharedPreferencesName = "AAAAAAA-Vanke";
+    private static final String SharedPreferencesName = "AAAAAAA-Vv";
 
     private SharedPreferences sharedPreferences;
 
