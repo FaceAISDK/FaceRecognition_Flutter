@@ -31,13 +31,16 @@ import static com.zlb.httplib.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
 /**
  * 默认的Http Observer 的处理
  *
+ * 我们不同业务后台的差异是HttpResponse<T> 不同
+ * 和code=0,200 标示成功不同而已
+ *
+ * 不同的业务后台extends BaseObserver 修改就好了
  *
  * Created by zenglb on 2019/11/11.
  */
 public abstract class DefaultObserver<T> extends BaseObserver<HttpResponse<T>> {
 
     public final int RESPONSE_CODE_OK = 0;  //这里返回的CODE=0 表示成功，其他的看后台定义
-
 
 
     /**
@@ -91,14 +94,6 @@ public abstract class DefaultObserver<T> extends BaseObserver<HttpResponse<T>> {
     public void onFailure(int code, String message) {
         super.onFailure(code,message);
         //同样的逻辑
-
-//        if (code == RESPONSE_FATAL_EOR && mContext != null) {
-//            HttpUiTips.alertTip(mContext, message, code);
-//        } else if (code == CUSTOM_REPEAT_REQ_ERROR) {
-//            Log.i("Repeat http Req ", "onFailure: " + message);
-//        } else {
-//            disposeEorCode(message, code);
-//        }
     }
 
 
@@ -127,38 +122,5 @@ public abstract class DefaultObserver<T> extends BaseObserver<HttpResponse<T>> {
 
     }
 
-
-//    /**
-//     * 特殊情况不要放这里
-//     *
-//     *
-//     * 获取详细的错误的信息 errorCode,errorMsg
-//     *
-//     * 以登录的时候的Grant_type 故意写错为例子,这个时候的http 应该是直接的返回401=httpException.code()
-//     * 但是是怎么导致401的？我们的服务器会在response.errorBody 中的content 中说明
-//     */
-//    private final void getErrorMsg(HttpException httpException) {
-//        String errorBodyStr = "";
-//        try {      //我们的项目需要的UniCode转码 ,!!!!!!!!!!!!!!
-//            errorBodyStr = TextConvertUtils.convertUnicode(httpException.response().errorBody().string());
-//        } catch (IOException ioe) {
-//            Log.e("errorBodyStr ioe:", ioe.toString());
-//        }
-//
-//        if (TextUtils.isEmpty(errorBodyStr)) {
-//            return;
-//        }
-//
-//        try {
-//            HttpResponse errorResponse = new Gson().fromJson(errorBodyStr, HttpResponse.class);
-//            if (null != errorResponse) {
-//                errorCode = errorResponse.getCode();
-//                errorMsg = errorResponse.getMsg();
-//            }
-//        } catch (Exception jsonException) {
-//            jsonException.printStackTrace();
-//        }
-//
-//    }
 
 }

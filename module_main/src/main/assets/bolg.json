@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "error":false,
+  "message":"AndroidWave RSS feed found",
+  "data": [
+    {
+      "title": "Background Limitations Android Oreo",
+      "pubDate": "2019-02-09 11:22:31",
+      "link": "https://android.com/background-limitations-android-oreo/",
+      "author": "admin",
+      "thumbnail": "http://35.197.65.22/wp-content/uploads/2019/02/background-limitations-android-oreo-370x247.png",
+      "description": "If you are looking at what exactly limitations are applied in background service in Android in Oreo. You are in right place."
+    },
+    {
+      "title": "ViewModel Android Example",
+      "pubDate": "2019-02-09 11:22:31",
+      "link": "https://android.com/viewmodel-android-example/",
+      "author": "admin",
+      "thumbnail": "http://35.197.65.22/wp-content/uploads/2019/02/viewmodel-android-example-370x247.png",
+      "description": "When you are developing professional-level android application, one of the most common things we need the consider is configuration changes."
+    },
+    {
+      "title": "Working with JobIntentService",
+      "pubDate": "2019-02-09 11:22:31",
+      "link": "https://android.com/working-with-jobintentservice/",
+      "author": "admin",
+      "thumbnail": "http://35.197.65.22/wp-content/uploads/2019/02/working-with-job-intent-service-370x247.png",
+      "description": "In our previous article, I have explained the limitation of using the IntentService in Android Oreo devices. To overcome this problem android introduced JobIntentService"
+    }]
+}

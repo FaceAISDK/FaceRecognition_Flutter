@@ -29,15 +29,15 @@ import static com.zlb.httplib.HttpRetrofit.CUSTOM_REPEAT_REQ_PROTOCOL;
 
 /**
  * 去除一切的关于UI层面的操作
- *
- *
+ * <p>
+ * <p>
  * 应对聚合型的App可能有多个Host和不同的返回Response 情况，需要再抽象一层
- *
+ * <p>
  * 还需要再抽象一层，毕竟不同的域名HttpResponse 字段不太一样，处理逻辑也会有一点不一样
- *
+ * <p>
  * Context 的引入是为了方便Loading 和 全局的Toast的默认处理，为了更好的进行自动化测试还是不要引入了吧
  * 改用其他的方式
- *
+ * <p>
  * Created by zenglb on 2017/4/14.
  */
 public abstract class BaseObserver<K> implements Observer<K> {
@@ -47,7 +47,7 @@ public abstract class BaseObserver<K> implements Observer<K> {
     public final static int CUSTOM_REPEAT_REQ_ERROR = -2;  //同样的一个请求并且还是重复的话返回错误
 
     public final static int SOCKET_TIMEOUT_EOR = -3;       //服务器响应超时
-    public final static int ConnectException_EOR= -4;      //网络连接异常
+    public final static int ConnectException_EOR = -4;      //网络连接异常
     public Context mContext;
 
     private int errorCode = -1111;
@@ -76,7 +76,7 @@ public abstract class BaseObserver<K> implements Observer<K> {
 
     /**
      * 严格的分层设计是不允许这里有UI相关的操作的
-     *
+     * <p>
      * 很多的http 请求可以不需要用户感知到在请求，showProgress=false
      *
      * @param mCtx
@@ -102,19 +102,11 @@ public abstract class BaseObserver<K> implements Observer<K> {
      * @param response
      */
     @Override
-    public  void onNext(K response) {
+    public void onNext(K response) {
         HttpUiTips.dismissDialog(mContext);
         if (!disposable.isDisposed()) {
             disposable.dispose();
         }
-
-//        //这里根据具体的业务情况自己定义吧
-//        if (response.getCode() == RESPONSE_CODE_OK) {
-//            // 这里拦截一下使用测试
-//            onSuccess(response.getData());
-//        } else {
-//            onFailure(response.getCode(), response.getMsg());
-//        }
 
     }
 
@@ -139,7 +131,7 @@ public abstract class BaseObserver<K> implements Observer<K> {
      *
      * @param t TH
      */
-    private void getErrorMessage(Throwable t){
+    private void getErrorMessage(Throwable t) {
         //把里面的东西分离出来
         if (t instanceof HttpException) {
             HttpException httpException = (HttpException) t;
@@ -153,7 +145,7 @@ public abstract class BaseObserver<K> implements Observer<K> {
             errorMsg = "无网络，请检查网络";
         } else if (t instanceof UnknownHostException) {
             errorCode = RESPONSE_FATAL_EOR;
-            errorMsg = "无网络，请检查网络";
+            errorMsg = "无法解析的服务器域名";
         } else if (t instanceof UnknownServiceException) {
             errorCode = RESPONSE_FATAL_EOR;
             errorMsg = "未知的服务器错误";

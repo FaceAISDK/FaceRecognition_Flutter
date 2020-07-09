@@ -1,5 +1,7 @@
 package com.zenglb.framework.news.news;
 
+import androidx.lifecycle.Observer;
+
 import com.zenglb.framework.news.http.NewsHttpService.NewsApiService;
 import com.zenglb.framework.news.http.NewsHttpService.NewsHttpObserver;
 import com.zenglb.framework.news.http.result.HotNewsResult;

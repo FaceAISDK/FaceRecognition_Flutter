@@ -1,5 +1,7 @@
 package com.zenglb.framework.news.http.NewsHttpService;
 
+import androidx.lifecycle.LiveData;
+
 import com.zenglb.framework.news.http.result.HotNewsResult;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -12,12 +14,20 @@ public interface NewsApiService {
 
     /**
      *
+     *
      * @return
      */
     @GET("today")
     Observable<NewsHttpResponse<HotNewsResult>> getNews();
 
 
+    /**
+     * 直接返回LiveData
+     *
+     * @return
+     */
+    @GET("today")
+    LiveData<NewsHttpResponse<HotNewsResult>> getNewsLiveData();
 
 
 }

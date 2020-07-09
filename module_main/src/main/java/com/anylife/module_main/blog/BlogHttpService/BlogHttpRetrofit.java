@@ -128,6 +128,7 @@ public class BlogHttpRetrofit {
                     .baseUrl(baseUrl)       //Set the Api Base URL
                     .client(okHttpClient)   //The HTTP client used for requests.
                     .addConverterFactory(GsonConverterFactory.create())
+                    //现在很多都用LiveData 封装了
                     //把response封装成rxjava的Observeble，然后进行流式操作
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();

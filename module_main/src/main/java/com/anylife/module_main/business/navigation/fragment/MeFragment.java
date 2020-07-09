@@ -1,6 +1,7 @@
 package com.anylife.module_main.business.navigation.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -88,20 +89,30 @@ public class MeFragment extends BaseStatusFragment implements View.OnClickListen
 
     }
 
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
+
+
     @Inject
     SyncNtpTimeUtils ntpUtils;
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.httpReq) {
-//            for (int i=0;i<222;i++) {
-//                getMeProfile();
-//            }
-//            ARouter.getInstance().build("/news/webActivity").navigation();
-//            getMeProfile();
+            callPhone("10086");
 
-            HttpUiTips.showDialog(getActivity(), "");
-            ntpUtils.syncNTPTime();
+//            HttpUiTips.showDialog(getActivity(), "");
+//            ntpUtils.syncNTPTime();
         } else if (view.getId() == R.id.logout) {
             ARouter.getInstance().build("/login/activity").navigation();
 //            getActivity().finish();

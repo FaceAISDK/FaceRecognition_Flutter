@@ -81,7 +81,7 @@ public class NewsPackageFragment extends BaseStatusFragment implements TabLayout
 
         mTabLayout.addOnTabSelectedListener(this);
 
-        //use Dagger
+        //这个有点繁琐啊
         newsViewModel = ViewModelProviders.of(this, viewModelFactory).get(NewsViewModel.class);
 
         //ViewModel 最终消亡是在 Activity 被销毁的时候，会执行它的onCleared()进行数据的清理。

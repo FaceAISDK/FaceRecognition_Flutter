@@ -45,12 +45,13 @@ ViewModel和LiveData 官方JetPack组件重要组成部分。
 ![权侵删](https://upload-images.jianshu.io/upload_images/2376786-e0ad051dac85fa05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 而使用Retrofit请求网络业务层的写法也是非常的精简
+其中演示对接了2个不同的业务系统，返回数据json 结构不同的处理
 
 ```
     public StateLiveData<HotNewsResult> getStateLiveData() {
         //1.异步加载网络请求数据
         newsApiService.getNews()
-                .compose(SwitchSchedulers.applyScheduler2())//rxjava 切换线程
+                .compose(SwitchSchedulers.applyScheduler2()) //rxjava 切换线程
                 .subscribe(new HttpObserver<NewsResult>() {
                     @Override
                     public void onSuccess(NewsResult newsResult) {
@@ -95,6 +96,7 @@ ViewModel和LiveData 官方JetPack组件重要组成部分。
 - 聚合型API处理（从不同的系统获取数据，返回的API 结构不同，详细见thirdParty 包下的处理）
 - 封装StateLiveData 以便处理失败和业务异常
 - dagger 和ViewModel 的结合处理
+- http 请求对接多个后台返回数据json 结构不同的处理
 
 希望大家会喜欢，并在[GitHub](https://github.com/AnyLifeZLB/MVP-Dagger2-Rxjava2)提出宝贵意见
 
@@ -104,6 +106,8 @@ ViewModel和LiveData 官方JetPack组件重要组成部分。
 - [2]. LiveData ViewModel Overview
 - [3]. Dagger - A fast dependency injector for Android and Java
 - [4]. Android JetPack 使用入门
+
+
 ... ...
 
 

@@ -1,69 +1,83 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:customAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/dp_10"
     tools:context="com.anylife.module_main.business.navigation.fragment.BlankFragment">
 
-    <anylife.scrolltextview.ScrollTextView
-        android:id="@+id/scrollText2"
-        customAttr:clickEnable="true"
-        customAttr:isHorizontal="true"
-        customAttr:speed="4"
-        customAttr:text="中华人民共和国万岁，世界人民大团结万岁；1234567890AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-        customAttr:text_color="@android:color/white"
-        customAttr:text_size="22sp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:background="#99224433"
-        android:singleLine="true" />
-
-    <Button
-        android:id="@+id/httpReq"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/dp_40"
-        android:gravity="center"
-        android:padding="@dimen/dp_10"
-        android:text="Magic 请求测试"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/sp_16" />
-
-
-    <Button
-        android:id="@+id/jetpack"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/dp_40"
-        android:gravity="center"
-        android:padding="@dimen/dp_10"
-        android:text="JetPack 跳转"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/sp_16" />
-
-    <TextView
-        android:id="@+id/meProfile"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dp_4"
-        android:paddingTop="@dimen/dp_40"
-        android:textColor="@color/common_green" />
-
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:orientation="vertical"
         android:padding="@dimen/dp_10"
-        android:text="退出登陆"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/sp_16" />
+        tools:context="com.anylife.module_main.business.navigation.fragment.BlankFragment">
 
-</LinearLayout>
+        <anylife.scrolltextview.ScrollTextView
+            android:id="@+id/scrollText2"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:background="#99224433"
+            android:singleLine="true"
+            customAttr:clickEnable="true"
+            customAttr:isHorizontal="true"
+            customAttr:speed="4"
+            customAttr:text="中华人民共和国万岁，世界人民大团结万岁；1234567890AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+            customAttr:text_color="@android:color/white"
+            customAttr:text_size="22sp" />
+
+        <Button
+            android:id="@+id/httpReq"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="Magic 请求测试"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_16" />
+
+
+        <Button
+            android:id="@+id/jetpack"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="JetPack 跳转"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/meProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_40"
+            android:textColor="@color/common_green" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="555dp"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="退出登陆"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_16" />
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+

@@ -27,7 +27,5 @@ public class NewsWebActivity extends BaseWebViewActivity {
         setURL(url);
     }
 
-
-
 }
 

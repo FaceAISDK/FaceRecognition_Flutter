@@ -3,6 +3,7 @@ package com.zenglb.framework.news.http.NewsHttpService;
 import android.util.Log;
 
 import com.readystatesoftware.chuck.ChuckInterceptor;
+import com.zenglb.framework.news.http.NewsHttpService.callAdapter.LiveDataCallAdapterFactory;
 import com.zlb.base.BaseApplication;
 import com.zlb.httplib.utils.MyHttpInterceptor;
 import com.zlb.utils.MD5Util;
@@ -130,6 +131,8 @@ public class NewsHttpRetrofit {
                     .addConverterFactory(GsonConverterFactory.create())
                     //把response封装成rxjava的Observeble，然后进行流式操作
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    //LiveData Call Factory
+                    .addCallAdapterFactory(new LiveDataCallAdapterFactory())  //CallAdapter
                     .build();
 
         }

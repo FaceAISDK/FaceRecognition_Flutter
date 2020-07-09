@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by zenglb on 2017/4/20.
  */
 public class SwitchSchedulers {
+
     /**
      * 在IO 线程请求，Main 处理结果
      *

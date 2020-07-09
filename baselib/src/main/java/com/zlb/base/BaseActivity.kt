@@ -54,6 +54,7 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
         //在这里进行Http 的请求
         loadHttp()
     }
+
     /**
      * 定制Custom View，Content 区域先留空，后面再动态的添加，同时
      * 增加Error，empty,Loading,timeout,等通用的场景处理，一处Root注入，处处可用

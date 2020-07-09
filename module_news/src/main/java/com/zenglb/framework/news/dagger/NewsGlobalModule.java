@@ -14,6 +14,9 @@ import dagger.Provides;
 /**
  * News MODULE  使用的全局的东西，API Service 等
  *
+ * https://mp.weixin.qq.com/s/oE2AmgQfPnU3CRRPbI0V8A
+ * https://mp.weixin.qq.com/s/oE2AmgQfPnU3CRRPbI0V8A
+ *
  *
  * Created by anylife.zlb@gmail.com on 2018/1/11.
  */

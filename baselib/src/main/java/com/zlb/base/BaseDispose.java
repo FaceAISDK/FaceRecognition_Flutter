@@ -1,4 +1,5 @@
 package com.zlb.base;
+
 import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -22,7 +23,7 @@ public class BaseDispose {
      * @param errorMsg
      * @param errorCode
      */
-    public static void errorDispose(LoadService mBaseLoadService, Context context, String errorMsg, int errorCode){
+    public static void errorDispose(LoadService mBaseLoadService, Context context, String errorMsg, int errorCode) {
         switch (errorCode) {
             case BaseObserver.RESPONSE_FATAL_EOR:
                 mBaseLoadService.showCallback(ErrorCallback.class);
@@ -37,6 +38,7 @@ public class BaseDispose {
                 break;
 
             //下面这些Code 需要跳转到登陆页面，一般不会变动。具体含义看DOC
+            //业务Code ，不同的系统不一样的啊
             case 101:
             case 112:
             case 123:
@@ -44,13 +46,13 @@ public class BaseDispose {
                 //退回到登录页面,无感知的访问就不需要处理了
                 ARouter.getInstance().build("/login/activity").navigation();
                 if (context != null && Thread.currentThread().getName().equals("main")) {
-                    Toasty.error(context, errorMsg+" ["+errorCode+"]").show();
+                    Toasty.error(context, errorMsg + " [" + errorCode + "]").show();
                 }
                 return;
         }
 
         if (context != null && Thread.currentThread().getName().equals("main")) {
-            Toasty.error(context, errorMsg+"["+errorCode+"]").show();
+            Toasty.error(context, errorMsg + "[" + errorCode + "]").show();
         }
     }
 
