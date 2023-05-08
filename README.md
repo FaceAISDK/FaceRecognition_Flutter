@@ -1,8 +1,5 @@
-## 由于licence，可能出现的安全问题和不好的影响等，删除原来的Repo。
-
-![请clone过老项目的同学也删除](https://upload-images.jianshu.io/upload_images/2376786-f20e3d508f535fde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1024)
-
-[新Repo代码GitHub链接点这里](https://github.com/AnyLifeZLB/MVP-Dagger2-Rxjava2)
+## Histroy 老分支说明
+   Histroy分支建议于19年，目前的技术发展更新已经做出了较大的调整和改进，故废弃新建main 分支以便更新技术迭代
 
 ## 使用Dagger ,Rxjava ,LiveData,ViewModel等搭建App框架
 
