@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+
+    namespace 'com.architecture.httplib'
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 31
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+}
+
+
+dependencies {
+
+    //http log viewer
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' //已经依赖OKHTTP
+    api "com.squareup.retrofit2:converter-moshi:2.9.0"     //转换器，Gson 已经不怎么维护了，ReadMe
+    api("com.squareup.moshi:moshi-kotlin:1.14.0")          //https://github.com/square/moshi
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"  //注解解析器，编译前就会提前生成代码，运行的时候自动Build in
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1' //Log 拦截器
+
+}

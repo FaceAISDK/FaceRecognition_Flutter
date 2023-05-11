@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.architecture.demo'
+    compileSdkVersion 32
+
+    defaultConfig {
+        applicationId "com.architecture.demo"
+        minSdkVersion 21
+        targetSdkVersion 32
+        versionCode 1
+        versionName "3.1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    // Set both the Java and Kotlin compilers to target Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+
+
+
+    buildFeatures {
+        compose true   //
+        viewBinding true  //https://developer.android.com/topic/libraries/view-binding?hl=zh-cn
+    }
+
+}
+
+
+dependencies {
+    implementation project(":network")
+    implementation project(":base")
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+
+    def htextview_version = "0.1.2"
+    implementation "com.hanks:htextview-base:$htextview_version"      // base library
+    implementation "com.hanks:htextview-fade:$htextview_version"      // optional
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.4.0'
+
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.1.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0" //GSON。GO HOME
+
+}
