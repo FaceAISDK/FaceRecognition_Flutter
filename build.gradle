@@ -1,65 +1,29 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.kotlin_version = '1.3.61'
-
     repositories {
+        mavenCentral()
         google()
-        jcenter()
+        maven {
+            url "https://pkg.vankeservice.com/repository/maven-releases/"
+            // 全新的电脑上没有访问权限，需要配置私有仓库用户名和密码
+            credentials {
+                username = 'scm'
+                password = 'scm1234'
+            }
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
+        maven { url "https://www.jitpack.io" }
+        maven { url 'https://repo1.maven.org/maven2/' }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
-
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        classpath "io.objectbox:objectbox-gradle-plugin:2.3.4"
-        //objectBox和greenDao 选用一个
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
-
-        classpath "com.alibaba:arouter-register:1.0.2"
-
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.0.0"
-
-        //警告：不要在这配置应用级别的依赖，你应该在独立的build.gradle 文件中配置
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-
-}
-
-/**
- * 工程中所有的module 都将能使用common_config 中的配置
- *
- * 统一版本配置等工作
- *
- */
-subprojects {
-    apply from: "${rootProject.rootDir}/common_config.gradle"
-}
-
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-
-        maven {
-            url 'https://dl.bintray.com/zouyuhan/maven'
-        }
-
-        maven {
-            name "aliyunmaven"
-            url "http://maven.aliyun.com/nexus/content/groups/public/"
-        }
-
-        maven { url 'http://developer.huawei.com/repo/' }
-
-        maven { url "https://jitpack.io" }
-
+        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20'
     }
 }
 

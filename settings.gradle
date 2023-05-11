@@ -1,1 +1,24 @@
-include ':app', ':baselib', ':module_main', ':module_test', ':camerax' , 'module_news','component-base'
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://pkg.vankeservice.com/repository/maven-releases/"
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+        maven { url "https://www.jitpack.io" }
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
+    }
+}
+
+rootProject.name = "Android-Architecture"
+
+include ':network'
+include ':archi-test'
+include ':base'
