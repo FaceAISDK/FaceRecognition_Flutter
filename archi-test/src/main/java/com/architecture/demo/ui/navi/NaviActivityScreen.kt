@@ -32,7 +32,7 @@ fun MainActivityScreen(viewModel: NaviActivityScreenViewModel) {
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
         }, modifier = Modifier.padding(20.dp).fillMaxWidth()){
-            Text(text = "App 架构重构", fontSize = 16.sp, color = Color.Green)
+            Text(text = "App架构重构", fontSize = 16.sp, color = Color.Green)
         }
 
 
