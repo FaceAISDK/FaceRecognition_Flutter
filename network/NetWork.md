@@ -41,7 +41,7 @@ CallAdapter用于对原始Call进行再次封装，如Call<R>到Observable<R>或
 
 
 
-## 2.[协程Coroutines](https://rengwuxian.com/kotlin-coroutines-1/)
+## 2. [协程Coroutines](https://rengwuxian.com/kotlin-coroutines-1/)
 「协程 Coroutines」源自 Simula 和 Modula-2 语言，这个术语早在 1958 年就被 Melvin Edward Conway 发明并用于构建汇编程序，说明协程是一种编程思想，并不局限于特定的语言; 协程设计的初衷是为了解决并发问题，让 「协作式多任务」 实现起来更加方便。
 
  在Android中使用协程的环境分为下面五种环境：
