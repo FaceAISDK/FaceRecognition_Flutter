@@ -3,14 +3,7 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-        maven {
-            url "https://pkg.vankeservice.com/repository/maven-releases/"
-            // 全新的电脑上没有访问权限，需要配置私有仓库用户名和密码
-            credentials {
-                username = 'scm'
-                password = 'scm1234'
-            }
-        }
+
         maven {
             url 'https://maven.aliyun.com/repository/jcenter'
         }
@@ -22,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.0.1'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10'
     }
 }
