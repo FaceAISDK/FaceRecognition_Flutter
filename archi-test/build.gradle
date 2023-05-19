@@ -29,14 +29,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.3'
     }
-
-
 
     buildFeatures {
         compose true   //
@@ -69,6 +67,6 @@ dependencies {
     implementation 'androidx.compose.material:material:1.1.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0" //GSON。GO HOME
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
 
 }

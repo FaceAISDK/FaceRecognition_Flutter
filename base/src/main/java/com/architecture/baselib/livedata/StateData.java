@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 /**
  * 带有状态的HttpResult包装类
  * 后面会再精简很多东西
- *
+ * 147
  */
 public class StateData<T> {
 
