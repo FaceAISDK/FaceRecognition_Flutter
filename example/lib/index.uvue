@@ -1,0 +1,235 @@
+<template>
+	<view>
+		<button @tap="addFaceFeatureBySDKCameraDemo">SDK相机录入人脸信息</button>
+		<button @tap="faceVerifyDemo">人脸识别+活体检测</button>
+		<button @tap="livenessVerifyDemo">检测人脸是否活体</button>
+		<button @tap="getFaceFeatureDemo">查询人脸特征信息</button>
+		<button @tap="insertFaceFeatureDemo">同步人脸特征信息</button>
+		<button @tap="addFaceFeatureByImageDemo">人脸图录入人脸信息</button>
+	    <button @tap="deleteFaceFeatureDemo">删除人脸特征信息</button>
+
+	    <!-- <button @tap="switchCameraDemo">切换摄像头(仅Android)</button> -->
+	
+		<view class="result-box">
+		      <scroll-view scroll-y="true" class="scroll-view-box">
+		      <text class="text-content">{{faceSDKResult}}</text>
+		      </scroll-view>
+			  <view> Email: FaceAISDK.Service@gmail.com</view>
+		</view>
+		
+	</view>
+</template>
+
+//uniappX page
+
+<script> 
+
+	import {goNativeApp,deleteFaceFeature,switchCamera,addFaceBySDKCamera,addFaceBySDKImage,faceVerify,livenessVerify,getFaceFeature,insertFaceFeature,ResultJSON} from "@/uni_modules/FaceAISDK-Core";
+    import { base64FaceImage } from './imageData.uts';
+	export default {
+		  
+		data() {
+			return {
+				faceID: 'youFaceID', //你的业务系统定义用户唯一的字符串（手机号/身份证等）
+				motionLivenessType:'1,2,3,4,5',  //动作活体种类，见接口
+				faceFeature: 'faceFeature，1024 length', //录入的人脸提取的特征值，加密后长度1024
+				faceSDKResult: 'faceSDKResult',
+				base64FaceImage:base64FaceImage as string //640*480 人脸图需要遵守规范：https://i.postimg.cc/RCwNy0kV/add-Face.jpg
+			}
+		},
+		onLoad() {
+
+		},
+		
+		methods: {
+			
+			/**
+			* 1. 人脸识别调用SDK相机录入人脸特征值(也可以用于检测人脸后裁剪好后用于自身服务器验证)
+			* 
+			*/
+			addFaceFeatureBySDKCameraDemo: function () {
+				addFaceBySDKCamera(
+					this.faceID,
+					1,    //1.快速模式， 2.精确模式(人脸品质高)
+					true, //是否需要显示人脸确认框，强烈建议设置为true
+					 (result: ResultJSON)  => { 
+						uni.showToast({title: result.msg,icon: 'none',duration: 2000});
+						// 解析出每个字段并拼接到 this.faceSDKResult
+						this.faceSDKResult = "code: " + result.code + "\n" +
+							                 "msg: " + result.msg + "\n" +
+							                 "faceFeature: " + result.faceFeature.length+ "\n" +
+											 "faceBase64: " + result.faceBase64.length;
+							                     
+						
+						console.log("【addFaceBySDKCamera】: "+this.faceSDKResult);
+					})
+			},
+			
+
+			/**
+			 * 2. 「1:1人脸识别」+活体检测（默认都含静默活体）   校验是否当前用户
+			 * 
+			 * @param faceID 用户ID 你的业务系统定义用户唯一的字符串（手机号/身份证等）
+			 * @param threshold 阈值设置，范围限 [0.75,0.95] ,默认0.83
+			 * @param faceLivenessType  1.动作活体  2.动作+炫彩活体 3.炫彩活体(不能强光环境使用) 4.静默活体(不同摄像头效果有差异) 
+			 * @param motionLivenessTypes  "1,2,3" 动作活体种类用英文","隔开； 1.张张嘴 2.微笑 3.眨眨眼 4.摇头 5.点头
+			 * @param motionLivenessTimeOut  动作活体超时时间 [3,10]秒
+			 * @param motionLivenessSteps    动作活体步骤，1或2 个
+			 * @param callback 结果回调
+			 */
+			faceVerifyDemo: function () {	
+			
+				faceVerify(
+					this.faceID,
+					0.84,       // 阈值设置，范围限 [0.75,0.95] ,默认0.84
+					1,          // 1.动作活体  2.动作+炫彩活体 3.炫彩活体(不能强光环境使用)4.静默活体 
+					"1,2,3,4,5",//动作活体种类用英文","隔开； 1.张张嘴 2.微笑 3.眨眨眼 4.摇头 5.点头
+					7,          //动作活体超时时间 
+					2,          //动作活体步骤个数
+					true,     //ALLOW_MULTI_FACES 是否允许多人脸入镜(仅Android)
+					 (result: ResultJSON) => {
+						 
+						uni.showToast({title: result.msg,icon: 'none',duration: 2000});
+						 
+						// 解析出每个字段并拼接到 this.faceSDKResult
+						this.faceSDKResult = "code: " + result.code + "\n" +
+							                 "msg: " + result.msg + "\n" +
+							                 "similarity: " + result.similarity + "\n" +
+							                 "liveness: " + result.liveness;
+							                     
+						console.log("【faceVerify】: 返回 " + this.faceSDKResult); 
+						
+					})
+			},
+			
+			
+		   /**
+			* 3. 活体检测，包含动作+炫彩活体 。静默活体默认都包含
+		    * 
+		    * @param faceLivenessType     1.动作活体  2.动作+炫彩活体 3.炫彩活体(不能强光环境使用) 4.静默活体 (不同摄像头效果有差异) 
+		    * @param motionLivenessTypes  "1,2,3" 动作活体种类用英文","隔开； 1.张张嘴 2.微笑 3.眨眨眼 4.摇头 5.点头
+		    * @param motionLivenessTimeOut  动作活体超时时间 [3,10
+		    * @param motionLivenessSteps    动作活体步骤，1或2 个
+		    * @param callback 结果回调
+		    */
+			livenessVerifyDemo: function () {
+				livenessVerify(
+					2,         // 1.动作活体  2.动作+炫彩活体 3.炫彩活体(不能强光环境使用) 4.静默活体 
+					"1,2,3,4,5",//动作活体种类用英文","隔开； 1.张张嘴 2.微笑 3.眨眨眼 4.摇头 5.点头
+					7,         //动作活体超时时间 
+					2,         //动作活体步骤，1个
+					true,     //ALLOW_MULTI_FACES 是否允许多人脸入镜(仅Android)  
+					 (result: ResultJSON) => {
+						uni.showToast({title: result.msg,icon: 'none',duration: 2000}); 
+						// 解析出每个字段并拼接到 this.faceSDKResult 
+						this.faceSDKResult = "code: " + result.code + "\n" +
+							                 "msg: " + result.msg + "\n" +
+							                 "liveness: " + result.liveness + "\n" +
+							                 "faceBase64: " + result.faceBase64;
+						console.log("【livenessVerify】: 返回 "+ this.faceSDKResult);
+					})
+			},
+			
+			
+			/**
+			* 4. 检测本地是否有faceID对应的人脸特征值,长度为1024的加密字符串（没有就从服务端同步或录入一个）
+			*/
+			getFaceFeatureDemo: function () {
+				getFaceFeature(
+					this.faceID,
+					 (result: ResultJSON) => {
+						this.faceSDKResult ="OK："+JSON.stringify(result)		
+						console.log("【getFaceFeature】: "+ this.faceSDKResult);
+					})
+			}, 
+			
+			/**
+			* 5. 演示同步1:1人脸特征值到SDK（账号换设备需要此功能把已经录入的人脸特征同步到新设备）
+			*/
+			insertFaceFeatureDemo: function () {
+				console.log("【insertFaceFeature】: 请求开始 ");
+				
+				insertFaceFeature(
+				    this.faceID,
+					"this.faceFeature",
+					(result: ResultJSON) => {
+						this.faceSDKResult =JSON.stringify(result)
+						console.log("【insertFaceFeature】: "+ this.faceSDKResult);
+					})
+			},
+			
+			//6. 仅仅用于Android 提取人脸图片中的特征值。不建议通过此方式录入人脸特征
+			// 人脸图需要遵守规范：https://i.postimg.cc/RCwNy0kV/add-Face.jpg
+			addFaceFeatureByImageDemo: function () {
+				console.log("【addFaceBySDKImage】:  ");
+			
+				addFaceBySDKImage(
+					this.faceID,
+					this.base64FaceImage,
+					 (result: ResultJSON)  => {
+						this.faceSDKResult =JSON.stringify(result)
+						console.log("【FaceSDK Result】: " + this.faceSDKResult);
+					})
+			},
+			
+			/**
+			* 7. 切换摄像头仅仅支持Android，一般0是前置，1是后置。
+			* 但是部分Android自定义设备可能不是很标准
+			*/
+			switchCameraDemo: function () {
+				switchCamera(1)
+			},
+			
+			/**
+			* 8. 删除人脸特征信息
+			*/
+			deleteFaceFeatureDemo: function () {
+				deleteFaceFeature(this.faceID)
+			},
+			
+			/**
+			* 9. 跳转到原生App页面（仅供演示）
+			*/
+			goNativeAppDemo: function () {
+				goNativeApp()
+			},
+					
+			
+	   }			
+
+	}
+</script>
+
+<style>
+    /* 给滚动区域一个固定高度和边框 */
+    .result-box {
+        margin: 20rpx;
+    }
+    
+    .scroll-view-box {
+        height: 400rpx; /* 必须指定高度，否则无法滚动 */
+        border: 1px solid #800080;
+        border-radius: 10rpx;
+        background-color: #f8f8f8;
+        padding: 15rpx;
+        box-sizing: border-box; /* 确保padding不撑大宽高 */
+    }
+
+    .text-content {
+        font-size: 28rpx;
+        color: #800080; /* word-break: break-all; 关键：解决长JSON字符串不换行的问题 */
+        white-space: pre-wrap; /* 保留格式并自动换行 */
+    }
+</style>
+
+
+<style>
+    .gray-button {
+    	background-color: #ffffff; /* 灰色背景 */
+    	color: #800080;            /* 深灰色文字 */
+    	/* 如果需要，可以覆盖默认的边框 */
+    	border: none;
+    }
+
+</style>
+    
