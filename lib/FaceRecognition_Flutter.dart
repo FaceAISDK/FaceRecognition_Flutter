@@ -161,7 +161,7 @@ class FaceRecognitionFlutter {
     await _channel.invokeMethod('goNativeDemoNavi');
   }
 
-  static void _printResult(String method, FaceAiSdkResult result) {
+  static void _printResult(String method, FaceRecognitionResult result) {
     if (kDebugMode) {
       print('FaceRecognitionFlutter $method result: $result');
       if (result.faceBase64 != null && result.faceBase64!.length > 50) {
