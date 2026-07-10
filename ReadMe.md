@@ -104,6 +104,15 @@ Use `FaceRecognitionResultCode` to handle outcomes:
 - `allLivenessSuccess` (10): All liveness checks passed.
 - `cancel` (0): User cancelled.
 
+
+## Other SDK API Demo  
+**iOS SDK：** https://github.com/FaceAISDK/FaceAISDK_iOS  
+**Android：** https://github.com/FaceAISDK/FaceAISDK_Android  
+**uniApp UTS**  https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS
+**Flutter：**  https://github.com/FaceAISDK/FaceRecognition_Flutter
+**React Native**  https://github.com/FaceAISDK/FaceRecognition_ReactNative
+
+
 ---
 
 <a name="chinese"></a>
@@ -200,3 +209,10 @@ await FaceRecognitionFlutter.deleteFaceFeature("user_123");
 - `motionLivenessSuccess` (3): 动作活体通过。
 - `allLivenessSuccess` (10): 所有活体检测通过。
 - `cancel` (0): 用户取消操作。
+
+## Other SDK API Demo
+**iOS SDK：** https://github.com/FaceAISDK/FaceAISDK_iOS  
+**Android：** https://github.com/FaceAISDK/FaceAISDK_Android  
+**uniApp UTS**  https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS
+**Flutter：**  https://github.com/FaceAISDK/FaceRecognition_Flutter
+**React Native**  https://github.com/FaceAISDK/FaceRecognition_ReactNative
