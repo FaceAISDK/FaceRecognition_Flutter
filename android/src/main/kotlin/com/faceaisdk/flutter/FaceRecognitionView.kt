@@ -7,7 +7,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-class FaceAiSdkView(
+class FaceRecognitionView(
     context: Context,
     id: Int,
     creationParams: Map<String?, Any?>?,
@@ -15,7 +15,7 @@ class FaceAiSdkView(
 ) : PlatformView, MethodChannel.MethodCallHandler {
 
     private val placeholderView: View = View(context)
-    private val methodChannel: MethodChannel = MethodChannel(messenger, "com.faceaisdk/view_$id")
+    private val methodChannel: MethodChannel = MethodChannel(messenger, "com.facerecognition/view_$id")
 
     init {
         methodChannel.setMethodCallHandler(this)

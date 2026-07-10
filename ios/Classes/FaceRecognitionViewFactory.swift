@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 
-public class FaceAiSdkViewFactory: NSObject, FlutterPlatformViewFactory {
+public class FaceRecognitionViewFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
 
     init(messenger: FlutterBinaryMessenger) {
@@ -14,7 +14,7 @@ public class FaceAiSdkViewFactory: NSObject, FlutterPlatformViewFactory {
         viewIdentifier viewId: Int64,
         arguments args: Any?
     ) -> FlutterPlatformView {
-        return FaceAiSdkView(
+        return FaceRecognitionView(
             frame: frame,
             viewIdentifier: viewId,
             arguments: args,

@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'face_aisdk_result.dart';
+import 'FaceRecognitionResult.dart';
 
-export 'face_aisdk_view.dart';
-export 'face_aisdk_result.dart';
+export 'FaceRecognitionView.dart';
+export 'FaceRecognitionResult.dart';
 
-class FaceAiSdkFlutterPlugin {
-  FaceAiSdkFlutterPlugin._();
+class FaceRecognitionFlutter {
+  FaceRecognitionFlutter._();
 
   static const MethodChannel _channel = MethodChannel('FaceRecognition_Flutter');
 
@@ -15,7 +15,7 @@ class FaceAiSdkFlutterPlugin {
   /// [faceId] 用户唯一标识
   /// [addFacePerformanceMode] 采集模式：1: 快速模式, 2: 精确模式(人脸品质高)
   /// [needShowConfirmDialog] 是否显示确认弹窗，强烈建议设置为 true
-  static Future<FaceAiSdkResult> addFaceBySDKCamera({
+  static Future<FaceRecognitionResult> addFaceBySDKCamera({
     required String faceId,
     int addFacePerformanceMode = 1,
     bool needShowConfirmDialog = true,
@@ -25,7 +25,7 @@ class FaceAiSdkFlutterPlugin {
       'addFacePerformanceMode': addFacePerformanceMode,
       'needShowConfirmDialog': needShowConfirmDialog,
     });
-    final finalResult = FaceAiSdkResult.fromMap(result ?? {});
+    final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('addFaceBySDKCamera', finalResult);
     return finalResult;
   }
@@ -38,7 +38,7 @@ class FaceAiSdkFlutterPlugin {
   /// [motionLivenessTimeOut] 动作超时时间 [3, 10]秒，默认 7
   /// [motionLivenessSteps] 需要完成的动作步数，1 或 2 个
   /// [allowMultiFaces] 是否允许多张人脸入镜 (仅 Android)
-  static Future<FaceAiSdkResult> faceVerify({
+  static Future<FaceRecognitionResult> faceVerify({
     required String faceId,
     double threshold = 0.84,
     int livenessType = 1,
@@ -56,7 +56,7 @@ class FaceAiSdkFlutterPlugin {
       'motionLivenessSteps': motionLivenessSteps,
       'allowMultiFaces': allowMultiFaces,
     });
-    final finalResult = FaceAiSdkResult.fromMap(result ?? {});
+    final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('faceVerify', finalResult);
     return finalResult;
   }
@@ -67,7 +67,7 @@ class FaceAiSdkFlutterPlugin {
   /// [motionLivenessTimeOut] 超时时间
   /// [motionLivenessSteps] 动作步数
   /// [allowMultiFaces] 是否允许多人脸 (仅 Android)
-  static Future<FaceAiSdkResult> livenessVerify({
+  static Future<FaceRecognitionResult> livenessVerify({
     int livenessType = 2,
     String motionLivenessTypes = "1,2,3,4,5",
     int motionLivenessTimeOut = 7,
@@ -83,23 +83,23 @@ class FaceAiSdkFlutterPlugin {
       'allowMultiFaces': allowMultiFaces,
       'showResultTips': showResultTips,
     });
-    final finalResult = FaceAiSdkResult.fromMap(result ?? {});
+    final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('livenessVerify', finalResult);
     return finalResult;
   }
 
   /// 4. 检测本地是否有 faceID 对应的人脸特征值
-  static Future<FaceAiSdkResult> getFaceFeature(String faceId) async {
+  static Future<FaceRecognitionResult> getFaceFeature(String faceId) async {
     final Map? result = await _channel.invokeMethod('getFaceFeature', {
       'faceId': faceId,
     });
-    final finalResult = FaceAiSdkResult.fromMap(result ?? {});
+    final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('getFaceFeature', finalResult);
     return finalResult;
   }
 
   /// 5. 同步/插入人脸特征值
-  static Future<FaceAiSdkResult> insertFaceFeature({
+  static Future<FaceRecognitionResult> insertFaceFeature({
     required String faceId,
     required String feature,
   }) async {
@@ -107,13 +107,13 @@ class FaceAiSdkFlutterPlugin {
       'faceId': faceId,
       'feature': feature,
     });
-    final finalResult = FaceAiSdkResult.fromMap(result ?? {});
+    final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('insertFaceFeature', finalResult);
     return finalResult;
   }
 
   /// 6. 人脸图录入人脸信息
-  static Future<FaceAiSdkResult> addFaceBySDKImage({
+  static Future<FaceRecognitionResult> addFaceBySDKImage({
     required String faceId,
     required String imageBase64,
   }) async {
@@ -121,7 +121,7 @@ class FaceAiSdkFlutterPlugin {
       'faceId': faceId,
       'imageBase64': imageBase64,
     });
-    final finalResult = FaceAiSdkResult.fromMap(result ?? {});
+    final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('addFaceBySDKImage', finalResult);
     return finalResult;
   }
@@ -163,7 +163,7 @@ class FaceAiSdkFlutterPlugin {
 
   static void _printResult(String method, FaceAiSdkResult result) {
     if (kDebugMode) {
-      print('FaceAiSdkPlugin $method result: $result');
+      print('FaceRecognitionFlutter $method result: $result');
       if (result.faceBase64 != null && result.faceBase64!.length > 50) {
         print('  faceBase64: ${result.faceBase64!.substring(0, 20)}...');
       }
@@ -171,7 +171,7 @@ class FaceAiSdkFlutterPlugin {
   }
 }
 
-class FaceAiSdkResultCode {
+class FaceRecognitionResultCode {
   static const int cancel = 0;
   static const int verifySuccess = 1;
   static const int verifyFailed = 2;
