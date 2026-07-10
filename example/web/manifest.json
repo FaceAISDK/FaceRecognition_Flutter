@@ -1,6 +1,6 @@
 {
-    "name": "face_aisdk_flutter_plugin_example",
-    "short_name": "face_aisdk_flutter_plugin_example",
+    "name": "FaceRecognition_Flutter_example",
+    "short_name": "FaceRecognition_Flutter_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

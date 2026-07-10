@@ -16,9 +16,9 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
-      flutterEngine.getPlugins().add(new com.faceaisdk.flutter.FaceAiSdkPlugin());
+      flutterEngine.getPlugins().add(new com.faceaisdk.flutter.FaceRecognitionPlugin());
     } catch (Exception e) {
-      Log.e(TAG, "Error registering plugin FaceRecognition_Flutter, com.faceaisdk.flutter.FaceAiSdkPlugin", e);
+      Log.e(TAG, "Error registering plugin FaceRecognition_Flutter, com.faceaisdk.flutter.FaceRecognitionPlugin", e);
     }
   }
 }

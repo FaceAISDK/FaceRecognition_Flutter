@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:face_aisdk_flutter_plugin/face_aisdk_flutter_plugin.dart';
+import 'package:FaceRecognition_Flutter/FaceRecognition_Flutter.dart';
 
 /// Main entry point of the application.
 /// 应用程序入口。
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Updates the result display area with the SDK result.
   /// 使用 SDK 返回结果更新结果显示区域。
-  void _updateDisplay(FaceAiSdkResult result, {String? method}) {
+  void _updateDisplay(FaceRecognitionResult result, {String? method}) {
     if (method == 'faceVerify' || method == 'livenessVerify') {
        _resultDisplay = "code: ${result.code}\n"
                         "message: ${result.message}\n"
@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  * @param needShowConfirmDialog: Whether to show a confirmation dialog (highly recommended: true).
                  */
                 _buildMenuButton(t('btn_add_camera'), () async {
-                  final result = await FaceAiSdkFlutterPlugin.addFaceBySDKCamera(
+                  final result = await FaceRecognitionFlutter.addFaceBySDKCamera(
                     faceId: _testFaceId,
                     addFacePerformanceMode: 1, 
                     needShowConfirmDialog: true,
@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  * @param allowMultiFaces: Allow multiple faces in frame (Android only).
                  */
                 _buildMenuButton(t('btn_verify'), () async {
-                  final result = await FaceAiSdkFlutterPlugin.faceVerify(
+                  final result = await FaceRecognitionFlutter.faceVerify(
                     faceId: _testFaceId,
                     threshold: 0.84, 
                     livenessType: 1, 
@@ -182,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  * @param motionLivenessSteps: Actions required (1 or 2).
                  */
                 _buildMenuButton(t('btn_liveness'), () async {
-                  final result = await FaceAiSdkFlutterPlugin.livenessVerify(
+                  final result = await FaceRecognitionFlutter.livenessVerify(
                     livenessType: 2,
                     motionLivenessTypes: "1,2,3,4,5",
                     motionLivenessTimeOut: 7,
@@ -199,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  *    查询长度为 1024 的加密特征值字符串。
                  */
                 _buildMenuButton(t('btn_query'), () async {
-                  final res = await FaceAiSdkFlutterPlugin.getFaceFeature(_testFaceId);
+                  final res = await FaceRecognitionFlutter.getFaceFeature(_testFaceId);
                   _updateDisplay(res);
                 }),
 
@@ -210,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  *    账号换设备需要此功能把已经录入的人脸特征同步到新设备。
                  */
                 _buildMenuButton(t('btn_insert'), () async {
-                  final res = await FaceAiSdkFlutterPlugin.insertFaceFeature(
+                  final res = await FaceRecognitionFlutter.insertFaceFeature(
                     faceId: _testFaceId, 
                     feature: "your_1024_face_feature_string"
                   );
@@ -224,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  *    （人脸图建议遵循规范：640*480）。
                  */
                 _buildMenuButton(t('btn_add_image'), () async {
-                  final res = await FaceAiSdkFlutterPlugin.addFaceBySDKImage(
+                  final res = await FaceRecognitionFlutter.addFaceBySDKImage(
                     faceId: _testFaceId,
                     imageBase64: _testImageBase64,
                   );
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  * 7. 删除人脸特征信息。
                  */
                 _buildMenuButton(t('btn_delete'), () async {
-                  await FaceAiSdkFlutterPlugin.deleteFaceFeature(_testFaceId);
+                  await FaceRecognitionFlutter.deleteFaceFeature(_testFaceId);
                   setState(() => _resultDisplay = t('delete_done'));
                 }),
               ],

@@ -1,8 +1,8 @@
-import 'face_aisdk_flutter_plugin.dart';
+import 'FaceRecognition_Flutter.dart';
 
-/// FaceAISDK operation result.
-class FaceAiSdkResult {
-  /// Result code. See [FaceAiSdkResultCode].
+/// FaceRecognition operation result.
+class FaceRecognitionResult {
+  /// Result code. See [FaceRecognitionResultCode].
   final int code;
 
   /// Tip message or error description.
@@ -20,7 +20,7 @@ class FaceAiSdkResult {
   /// Face feature string.
   final String? faceFeature;
 
-  FaceAiSdkResult({
+  FaceRecognitionResult({
     required this.code,
     this.message,
     this.similarity,
@@ -29,8 +29,8 @@ class FaceAiSdkResult {
     this.faceFeature,
   });
 
-  factory FaceAiSdkResult.fromMap(Map map) {
-    return FaceAiSdkResult(
+  factory FaceRecognitionResult.fromMap(Map map) {
+    return FaceRecognitionResult(
       code: map['code'] as int? ?? 0,
       message: map['message'] as String?,
       similarity: (map['similarity'] as num?)?.toDouble(),
@@ -42,13 +42,13 @@ class FaceAiSdkResult {
 
   /// Whether the operation was successful.
   bool get isSuccess {
-    return code == FaceAiSdkResultCode.verifySuccess ||
-        code == FaceAiSdkResultCode.motionLivenessSuccess ||
-        code == FaceAiSdkResultCode.allLivenessSuccess;
+    return code == FaceRecognitionResultCode.verifySuccess ||
+        code == FaceRecognitionResultCode.motionLivenessSuccess ||
+        code == FaceRecognitionResultCode.allLivenessSuccess;
   }
 
   @override
   String toString() {
-    return 'FaceAiSdkResult(code: $code, message: $message, similarity: $similarity, livenessValue: $livenessValue)';
+    return 'FaceRecognitionResult(code: $code, message: $message, similarity: $similarity, livenessValue: $livenessValue)';
   }
 }

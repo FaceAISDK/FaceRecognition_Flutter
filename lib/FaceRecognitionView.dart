@@ -4,14 +4,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-typedef FaceAiSdkViewCreatedCallback = void Function(FaceAiSdkController controller);
+typedef FaceRecognitionViewCreatedCallback = void Function(FaceRecognitionController controller);
 
-class FaceAiSdkView extends StatefulWidget {
-  final FaceAiSdkViewCreatedCallback? onViewCreated;
+class FaceRecognitionView extends StatefulWidget {
+  final FaceRecognitionViewCreatedCallback? onViewCreated;
   final Map<String, dynamic>? creationParams;
   final bool needShowConfirmDialog;
 
-  const FaceAiSdkView({
+  const FaceRecognitionView({
     Key? key,
     this.onViewCreated,
     this.creationParams,
@@ -19,13 +19,13 @@ class FaceAiSdkView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<FaceAiSdkView> createState() => _FaceAiSdkViewState();
+  State<FaceRecognitionView> createState() => _FaceRecognitionViewState();
 }
 
-class _FaceAiSdkViewState extends State<FaceAiSdkView> {
+class _FaceRecognitionViewState extends State<FaceRecognitionView> {
   @override
   Widget build(BuildContext context) {
-    const String viewType = 'com.faceaisdk/view';
+    const String viewType = 'com.facerecognition/view';
 
     final Map<String, dynamic> params = widget.creationParams ?? <String, dynamic>{};
     if (!params.containsKey('needShowConfirmDialog')) {
@@ -56,7 +56,7 @@ class _FaceAiSdkViewState extends State<FaceAiSdkView> {
             ..addOnPlatformViewCreatedListener((int id) {
               params_view.onPlatformViewCreated(id);
               if (widget.onViewCreated != null) {
-                widget.onViewCreated!(FaceAiSdkController(id));
+                widget.onViewCreated!(FaceRecognitionController(id));
               }
             })
             ..create();
@@ -67,21 +67,21 @@ class _FaceAiSdkViewState extends State<FaceAiSdkView> {
         viewType: viewType,
         onPlatformViewCreated: (int id) {
           if (widget.onViewCreated != null) {
-            widget.onViewCreated!(FaceAiSdkController(id));
+            widget.onViewCreated!(FaceRecognitionController(id));
           }
         },
         creationParams: params,
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
-    return Text('$defaultTargetPlatform is not yet supported by the face_aisdk plugin');
+    return Text('$defaultTargetPlatform is not yet supported by the FaceRecognition_Flutter plugin');
   }
 }
 
-class FaceAiSdkController {
+class FaceRecognitionController {
   final MethodChannel _channel;
 
-  FaceAiSdkController(int id)
+  FaceRecognitionController(int id)
       : _channel = MethodChannel('com.faceaisdk/view_$id');
 
   Future<void> startScan() async {
