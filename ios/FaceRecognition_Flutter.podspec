@@ -14,7 +14,7 @@ A Flutter plugin for FaceAISDK offline face recognition.
 
   # 修改前
   # s.resource_bundles = {
-  #   'face_aisdk_flutter_plugin' => ['Resources/**/*']
+  #   'FaceRecognition_Flutter' => ['Resources/**/*']
   # }
 
   # Keep resources in the app main bundle so NSLocalizedString(...) can resolve

@@ -2,17 +2,17 @@ import Flutter
 import UIKit
 import FaceAISDK_Core
 
-public class FaceAiSdkPlugin: NSObject, FlutterPlugin {
+public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     // Initialize FaceAISDK
     FaceAISDK.initSDK()
 
     let channel = FlutterMethodChannel(name: "FaceRecognition_Flutter", binaryMessenger: registrar.messenger())
-    let instance = FaceAiSdkPlugin()
+    let instance = FaceRecognitionPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
 
-    let factory = FaceAiSdkViewFactory(messenger: registrar.messenger())
-    registrar.register(factory, withId: "com.faceaisdk/view")
+    let factory = FaceRecognitionViewFactory(messenger: registrar.messenger())
+    registrar.register(factory, withId: "com.facerecognition/view")
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

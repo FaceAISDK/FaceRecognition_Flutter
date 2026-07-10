@@ -4,7 +4,7 @@ import SwiftUI
 // Import FaceAISDK if needed, assuming it's available as a module
 // import FaceAISDK_Core
 
-public class FaceAiSdkView: NSObject, FlutterPlatformView {
+public class FaceRecognitionView: NSObject, FlutterPlatformView {
     private var _view: UIView
     private var _channel: FlutterMethodChannel?
 
@@ -18,7 +18,7 @@ public class FaceAiSdkView: NSObject, FlutterPlatformView {
         super.init()
 
         if let messenger = messenger {
-            _channel = FlutterMethodChannel(name: "com.faceaisdk/view_\(viewId)", binaryMessenger: messenger)
+            _channel = FlutterMethodChannel(name: "com.facerecognition/view_\(viewId)", binaryMessenger: messenger)
             _channel?.setMethodCallHandler(onMethodCall)
         }
 
@@ -55,7 +55,7 @@ public class FaceAiSdkView: NSObject, FlutterPlatformView {
 
         // Placeholder view for implementation
         let label = UILabel()
-        label.text = "FaceAISDK View"
+        label.text = "FaceRecognition View"
         label.textAlignment = .center
         label.frame = _view.bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
