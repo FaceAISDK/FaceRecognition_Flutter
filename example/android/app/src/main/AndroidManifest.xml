@@ -1,0 +1,73 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.face_aisdk_flutter_plugin_example"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="FaceRecognition"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="true"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="true"
+        tools:replace="android:label">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- SDK Activities - These use the SDK package name com.faceAI.demo -->
+        <activity
+            android:name="com.faceAI.demo.SysCamera.verify.FaceVerificationActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.FaceAISDK.Fullscreen" />
+
+        <activity
+            android:name="com.faceAI.demo.SysCamera.verify.LivenessDetectActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.FaceAISDK.Fullscreen" />
+
+        <activity
+            android:name="com.faceAI.demo.SysCamera.addFace.AddFaceFeatureActivity"
+            android:exported="false"
+            android:theme="@style/FaceAITheme" />
+
+        <activity
+            android:name="com.faceAI.demo.FaceAINaviActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:replace="android:theme" />
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>

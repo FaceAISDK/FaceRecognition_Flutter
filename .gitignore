@@ -1,0 +1,65 @@
+# https://dart.dev/guides/libraries/private-files#pubspeclock
+/pubspec.lock
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+.claude/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code related
+.vscode/
+
+# Flutter/Dart related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+**/build/
+/coverage/
+
+# Android related
+**/android/local.properties
+**/android/**/generated/
+**/android/.gradle/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+*.keystore
+*.jks
+*.ap_
+*.apk
+*.aab
+
+# iOS/macOS related
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/App.framework
+**/ios/Flutter/App.podspec
+**/macos/Flutter/ephemeral/
+**/ios/.last_build_id
+**/Podfile.lock
+**/Pods/
+**/*.xcuserstate
+
+# Symbolication/Obfuscation related
+app.*.symbols
+app.*.map.json
