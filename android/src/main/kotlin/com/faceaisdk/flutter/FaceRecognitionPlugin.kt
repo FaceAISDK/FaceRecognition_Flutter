@@ -20,7 +20,7 @@ import com.faceAI.demo.SysCamera.verify.FaceVerificationActivity
 import com.faceAI.demo.SysCamera.addFace.AddFaceFeatureActivity
 import com.faceAI.demo.SysCamera.verify.LivenessDetectActivity
 
-class FaceAiSdkPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, PluginRegistry.ActivityResultListener {
+class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, PluginRegistry.ActivityResultListener {
   private lateinit var channel : MethodChannel
   private lateinit var context: android.content.Context
   private var activity: Activity? = null
@@ -36,14 +36,14 @@ class FaceAiSdkPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, ActivityA
     channel.setMethodCallHandler(this)
 
     flutterPluginBinding.platformViewRegistry.registerViewFactory(
-      "com.faceaisdk/view",
-      FaceAiSdkViewFactory(flutterPluginBinding.binaryMessenger)
+      "com.facerecognition/view",
+      FaceRecognitionViewFactory(flutterPluginBinding.binaryMessenger)
     )
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
     activity?.let { FaceSDKConfig.init(it) }
-    android.util.Log.d("FaceAiSdkPlugin", "onMethodCall: ${call.method}, arguments: ${call.arguments}")
+    android.util.Log.d("FaceRecognitionPlugin", "onMethodCall: ${call.method}, arguments: ${call.arguments}")
 
     when (call.method) {
       "addFaceBySDKCamera" -> {

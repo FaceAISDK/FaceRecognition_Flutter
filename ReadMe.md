@@ -33,14 +33,14 @@ A Flutter plugin for FaceAISDK offline face recognition. Supports Platform View 
 ## Usage
 
 ### 1. Platform View (Built-in UI)
-Use `FaceAiSdkView` to show a camera preview with built-in face recognition UI.
+Use `FaceRecognitionView` to show a camera preview with built-in face recognition UI.
 
 ```dart
 import 'package:FaceRecognition_Flutter/FaceRecognition_Flutter.dart';
 
-FaceAiSdkView(
+FaceRecognitionView(
   needShowConfirmDialog: true, // Default is true
-  onViewCreated: (FaceAiSdkController controller) {
+  onViewCreated: (FaceRecognitionController controller) {
     // You can use the controller to start or stop scanning
     // controller.startScan();
   },
@@ -51,25 +51,25 @@ FaceAiSdkView(
 ```
 
 ### 2. Direct API Calls
-The `FaceAiSdkFlutterPlugin` class provides several static methods for face operations.
+The `FaceRecognitionFlutter` class provides several static methods for face operations.
 
 #### Face Verification (1:1 + Liveness)
 ```dart
-final result = await FaceAiSdkFlutterPlugin.faceVerify(
+final result = await FaceRecognitionFlutter.faceVerify(
   faceId: "user_123",
   threshold: 0.84,
   livenessType: 1, // 1: Action, 2: Action+Color, 3: Color, 4: Silent
   motionLivenessTypes: "1,2,3,4,5", // 1: Mouth, 2: Smile, 3: Blink, 4: Shake, 5: Nod
 );
 
-if (result.code == FaceAiSdkResultCode.verifySuccess) {
+if (result.code == FaceRecognitionResultCode.verifySuccess) {
   print("Face verified successfully. Similarity: ${result.similarity}");
 }
 ```
 
 #### Face Registration (via Camera)
 ```dart
-final result = await FaceAiSdkFlutterPlugin.addFaceBySDKCamera(
+final result = await FaceRecognitionFlutter.addFaceBySDKCamera(
   faceId: "new_user_456",
   addFacePerformanceMode: 1, // 1: Fast, 2: Precise
   needShowConfirmDialog: true, // Show confirmation dialog after capture
@@ -78,7 +78,7 @@ final result = await FaceAiSdkFlutterPlugin.addFaceBySDKCamera(
 
 #### Face Registration (via Image Base64)
 ```dart
-final result = await FaceAiSdkFlutterPlugin.addFaceBySDKImage(
+final result = await FaceRecognitionFlutter.addFaceBySDKImage(
   faceId: "user_123",
   imageBase64: "data:image/jpeg;base64,...",
 );
@@ -87,17 +87,17 @@ final result = await FaceAiSdkFlutterPlugin.addFaceBySDKImage(
 #### Face Management
 ```dart
 // Check if face exists
-bool exists = await FaceAiSdkFlutterPlugin.isFaceExist("user_123");
+bool exists = await FaceRecognitionFlutter.isFaceExist("user_123");
 
 // Get face feature (1024-bit string)
-final result = await FaceAiSdkFlutterPlugin.getFaceFeature("user_123");
+final result = await FaceRecognitionFlutter.getFaceFeature("user_123");
 
 // Delete face
-await FaceAiSdkFlutterPlugin.deleteFaceFeature("user_123");
+await FaceRecognitionFlutter.deleteFaceFeature("user_123");
 ```
 
 ## Result Codes
-Use `FaceAiSdkResultCode` to handle outcomes:
+Use `FaceRecognitionResultCode` to handle outcomes:
 - `verifySuccess` (1): Verification passed.
 - `verifyFailed` (2): Verification failed.
 - `motionLivenessSuccess` (3): Action liveness passed.
@@ -139,14 +139,14 @@ Use `FaceAiSdkResultCode` to handle outcomes:
 ## 使用示例
 
 ### 1. Platform View (内置 UI 模式)
-使用 `FaceAiSdkView` 组件在 Flutter 中嵌入带有引导 UI 的相机界面。
+使用 `FaceRecognitionView` 组件在 Flutter 中嵌入带有引导 UI 的相机界面。
 
 ```dart
 import 'package:FaceRecognition_Flutter/FaceRecognition_Flutter.dart';
 
-FaceAiSdkView(
+FaceRecognitionView(
   needShowConfirmDialog: true, // 录入成功后是否显示确认弹窗，默认为 true
-  onViewCreated: (FaceAiSdkController controller) {
+  onViewCreated: (FaceRecognitionController controller) {
     // 可以通过控制器手动开始或停止扫描
     // controller.startScan();
   },
@@ -157,25 +157,25 @@ FaceAiSdkView(
 ```
 
 ### 2. API 调用模式
-通过 `FaceAiSdkFlutterPlugin` 类直接调用功能接口。
+通过 `FaceRecognitionFlutter` 类直接调用功能接口。
 
 #### 人脸核验 (1:1 + 活体检测)
 ```dart
-final result = await FaceAiSdkFlutterPlugin.faceVerify(
+final result = await FaceRecognitionFlutter.faceVerify(
   faceId: "user_123",
   threshold: 0.84,
   livenessType: 1, // 1: 动作, 2: 动作+炫彩, 3: 炫彩, 4: 静默
   motionLivenessTypes: "1,2,3,4,5", // 1: 张嘴, 2: 微笑, 3: 眨眼, 4: 摇头, 5: 点头
 );
 
-if (result.code == FaceAiSdkResultCode.verifySuccess) {
+if (result.code == FaceRecognitionResultCode.verifySuccess) {
   print("人脸核验成功，相似度: ${result.similarity}");
 }
 ```
 
 #### 人脸采集注册 (通过图片 Base64)
 ```dart
-final result = await FaceAiSdkFlutterPlugin.addFaceBySDKImage(
+final result = await FaceRecognitionFlutter.addFaceBySDKImage(
   faceId: "user_123",
   imageBase64: "data:image/jpeg;base64,...",
 );
@@ -184,17 +184,17 @@ final result = await FaceAiSdkFlutterPlugin.addFaceBySDKImage(
 #### 人脸管理
 ```dart
 // 检查人脸是否存在
-bool exists = await FaceAiSdkFlutterPlugin.isFaceExist("user_123");
+bool exists = await FaceRecognitionFlutter.isFaceExist("user_123");
 
 // 获取 1024 位人脸特征字符串
-final result = await FaceAiSdkFlutterPlugin.getFaceFeature("user_123");
+final result = await FaceRecognitionFlutter.getFaceFeature("user_123");
 
 // 删除人脸信息
-await FaceAiSdkFlutterPlugin.deleteFaceFeature("user_123");
+await FaceRecognitionFlutter.deleteFaceFeature("user_123");
 ```
 
 ## 结果状态码
-使用 `FaceAiSdkResultCode` 处理不同的返回结果：
+使用 `FaceRecognitionResultCode` 处理不同的返回结果：
 - `verifySuccess` (1): 核验成功。
 - `verifyFailed` (2): 核验失败。
 - `motionLivenessSuccess` (3): 动作活体通过。

@@ -31,6 +31,6 @@ flutter:
     platforms:
       android:
         package: com.faceaisdk.flutter
-        pluginClass: FaceAiSdkPlugin
+        pluginClass: FaceRecognitionPlugin
       ios:
-        pluginClass: FaceAiSdkPlugin
+        pluginClass: FaceRecognitionPlugin
