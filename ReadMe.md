@@ -213,6 +213,6 @@ await FaceRecognitionFlutter.deleteFaceFeature("user_123");
 ## Other SDK API Demo
 **iOS SDK：** https://github.com/FaceAISDK/FaceAISDK_iOS  
 **Android：** https://github.com/FaceAISDK/FaceAISDK_Android  
-**uniApp UTS**  https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS
-**Flutter：**  https://github.com/FaceAISDK/FaceRecognition_Flutter
-**React Native**  https://github.com/FaceAISDK/FaceRecognition_ReactNative
+**uniApp：**  https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS  
+**Flutter：**  https://github.com/FaceAISDK/FaceRecognition_Flutter  
+**React Native**  https://github.com/FaceAISDK/FaceRecognition_ReactNative  
