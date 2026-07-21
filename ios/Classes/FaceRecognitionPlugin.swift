@@ -53,8 +53,8 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
       let motionLivenessSteps = args?["motionLivenessSteps"] as? NSNumber ?? 2
       FaceSDKSwiftManager.showFaceVerify(faceId, threshold, livenessType, motionLivenessTypes, motionLivenessTimeOut, motionLivenessSteps) { code, similarity, liveness, message in
           var faceBase64 = ""
-          if code.intValue == 1 {
-              faceBase64 = FaceSDKSwiftManager.getFaceImageBase64("verifyBitmap")
+          if code.intValue == 1 || code.intValue == 10{
+              faceBase64 = FaceSDKSwiftManager.getFaceImageBase64(faceId)
           }
           let res: [String: Any] = [
               "code": code,
@@ -74,8 +74,8 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
       let motionLivenessSteps = args?["motionLivenessSteps"] as? NSNumber ?? 2
       FaceSDKSwiftManager.showLivenessVerify(livenessType, motionLivenessTypes, motionLivenessTimeOut, motionLivenessSteps) { code, liveness, message in
           var faceBase64 = ""
-          if code.intValue == 10 {
-              faceBase64 = FaceSDKSwiftManager.getFaceImageBase64("liveBitmap")
+          if code.intValue == 10 || code.intValue == 1{
+              faceBase64 = FaceSDKSwiftManager.getFaceImageBase64("Liveness")
           }
           let res: [String: Any] = [
               "code": code,
