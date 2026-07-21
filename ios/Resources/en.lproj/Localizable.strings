@@ -1,4 +1,3 @@
-/* English localizations for NSLocalizedString lookups from Bundle.main. */
 "About us" = "About us";
 "Add Face By Camera" = "Add Face By Camera";
 "Add Face From Album" = "Add Face From Album";
@@ -6,7 +5,7 @@
 "Confirm Add Face" = "Confirm Add Face";
 "Ensure face is clear" = "Ensure face is clear";
 "Face Verify & Liveness" = "Face Verify & Liveness";
-"Face_Tips_Code_-1" = "FaceSDK Version Too Old";
+"Face_Tips_Code_-1" = "SDK Version Too Old";
 "Face_Tips_Code_(code)" = "error";
 "Face_Tips_Code_0" = "Keep Face Frontal";
 "Face_Tips_Code_1" = "No Face Detected";
@@ -20,7 +19,7 @@
 "Face_Tips_Code_9" = "Turn Face Up";
 "Face_Tips_Code_10" = "Turn Face Down";
 "Face_Tips_Code_11" = "Confirm  Add Face";
-"Face_Tips_Code_12" = " ";
+"Face_Tips_Code_12" = "";
 "Face_Tips_Code_13" = "Too Small Face";
 "Face_Tips_Code_31" = "Face Image Not Found ";
 "Face_Tips_Code_32" = "Face Image Dispose Failed";
@@ -37,17 +36,15 @@
 "Face_Tips_Code_51" = "Color Flash Success";
 "Face_Tips_Code_52" = "Color Flash Failed";
 "Face_Tips_Code_53" = "Detection failed: Too bright.Please avoid direct light as below and use in a softly lit indoor environment";
-"Face_Tips_Code_58" = "Excessive light, avoid strong light exposure.";
-"Face_Tips_Code_60" = "Liveness check failed. Please ensure soft lighting conditions.";
+"Face_Tips_Code_58" = "Excessive light, avoid strong light exposure";
+"Face_Tips_Code_60" = "Verification failed. Please ensure even lighting and a suitable environment";
 "Face_Tips_Code_61" = "Face Liveness Success";
 "Face_Tips_Code_62" = "Face Verify Success";
 "Face_Tips_Code_63" = "Face Verify Failed";
 "I Know" = "I Know";
-"Is Face Feature Exist" = "Is Face Feature Exist";
 "ONLY Liveness Detection" = "ONLY Liveness Detection";
 "Retry" = "Retry";
 "Save Face Feature" = "Save Face Feature";
 "Select from album" = "Select from album";
 "Select Image" = "Select Image";
 "Verify Two Face Similarity" = "Verify Two Face Similarity";
-

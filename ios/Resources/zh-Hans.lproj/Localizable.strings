@@ -1,4 +1,3 @@
-/* Simplified Chinese localizations for NSLocalizedString lookups from Bundle.main. */
 "About us" = "关于我们";
 "Add Face By Camera" = "SDK相机添加人脸";
 "Add Face From Album" = "从相册添加一人脸";
@@ -20,7 +19,7 @@
 "Face_Tips_Code_9" = "向上摆正头部";
 "Face_Tips_Code_10" = "向下摆正头部";
 "Face_Tips_Code_11" = "人脸采集确认";
-"Face_Tips_Code_12" = " ";
+"Face_Tips_Code_12" = "";
 "Face_Tips_Code_13" = "人脸太小了";
 "Face_Tips_Code_31" = "没有找到对应的人脸底片";
 "Face_Tips_Code_32" = "人脸底片处理失败";
@@ -38,7 +37,7 @@
 "Face_Tips_Code_52" = "炫彩活体失败";
 "Face_Tips_Code_53" = "炫彩活体检测失败,光线亮度过高;如图遮挡高亮光源或室内光线柔和环境使用";
 "Face_Tips_Code_58" = "光线过强,避免强光照射";
-"Face_Tips_Code_60" = "活体检测失败,请确认光线环境柔和";
+"Face_Tips_Code_60" = "验证失败,请确认光线柔和环境适宜";
 "Face_Tips_Code_61" = "活体检测完成";
 "Face_Tips_Code_62" = "识别成功";
 "Face_Tips_Code_63" = "识别失败,相似度低";
@@ -50,4 +49,3 @@
 "Select from album" = "从相册选择";
 "Select Image" = "选择图片";
 "Verify Two Face Similarity" = "静态人脸相似度对比";
-
