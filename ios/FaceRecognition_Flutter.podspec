@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FaceRecognition_Flutter'
-  s.version          = '0.2.0'
+  s.version          = '1.0.0'
   s.summary          = 'A Flutter plugin for FaceAISDK offline face recognition.'
   s.description      = <<-DESC
 A Flutter plugin for FaceAISDK offline face recognition.
@@ -24,7 +24,7 @@ A Flutter plugin for FaceAISDK offline face recognition.
 
   s.vendored_frameworks = 'Frameworks/*.framework'
   s.dependency 'Flutter'
-  s.dependency 'FaceAISDK_Core', '2026.07.22'
+  s.dependency 'FaceAISDK_Core', '2026.07.23'
   s.dependency 'TensorFlowLiteSwift'
   s.platform = :ios, '15.5'
 
