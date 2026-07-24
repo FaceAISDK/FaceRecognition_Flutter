@@ -37,7 +37,7 @@
 "Face_Tips_Code_52" = "Color Flash Failed";
 "Face_Tips_Code_53" = "Detection failed: Too bright.Please avoid direct light as below and use in a softly lit indoor environment";
 "Face_Tips_Code_58" = "Excessive light, avoid strong light exposure";
-"Face_Tips_Code_60" = "Verification failed. Please ensure even lighting and a suitable environment";
+"Face_Tips_Code_60" = "Avoid strong backlighting and busy backgrounds. Please move and try again";
 "Face_Tips_Code_61" = "Face Liveness Success";
 "Face_Tips_Code_62" = "Face Verify Success";
 "Face_Tips_Code_63" = "Face Verify Failed";
