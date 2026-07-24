@@ -37,7 +37,7 @@
 "Face_Tips_Code_52" = "炫彩活体失败";
 "Face_Tips_Code_53" = "炫彩活体检测失败,光线亮度过高;如图遮挡高亮光源或室内光线柔和环境使用";
 "Face_Tips_Code_58" = "光线过强,避免强光照射";
-"Face_Tips_Code_60" = "验证失败,请确认光线柔和环境适宜";
+"Face_Tips_Code_60" = "请避开强逆光与杂乱背景，换个地方重试";
 "Face_Tips_Code_61" = "活体检测完成";
 "Face_Tips_Code_62" = "识别成功";
 "Face_Tips_Code_63" = "识别失败,相似度低";

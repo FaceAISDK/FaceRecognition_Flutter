@@ -24,7 +24,7 @@ A Flutter plugin for FaceAISDK offline face recognition.
 
   s.vendored_frameworks = 'Frameworks/*.framework'
   s.dependency 'Flutter'
-  s.dependency 'FaceAISDK_Core', '2026.07.16.beta2'
+  s.dependency 'FaceAISDK_Core', '2026.07.22'
   s.dependency 'TensorFlowLiteSwift'
   s.platform = :ios, '15.5'
 
