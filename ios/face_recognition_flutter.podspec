@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'face_recognition_flutter'
-  s.version          = '0.2.0'
-  s.summary          = 'A Flutter plugin for FaceAISDK offline face recognition.'
+  s.version          = '1.0.0'
+  s.summary          = 'Offline face recognition and liveness detection for Flutter.'
   s.description      = <<-DESC
-A Flutter plugin for FaceAISDK offline face recognition.
+Offline face recognition and liveness detection Flutter plugin for Android and iOS.
                        DESC
   s.homepage         = 'https://github.com/FaceAISDK/FaceAISDK_Flutter_Plugin'
   s.license          = { :file => '../LICENSE' }

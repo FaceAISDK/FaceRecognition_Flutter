@@ -1,3 +1,10 @@
 .run/
+.dart_tool/
+build/
+local.properties
 gradle/gradle-daemon-jvm.properties
+example/.dart_tool/
+example/build/
+example/ios/Podfile.lock
+example/ios/Pods/
 example/lib/index.uvue
