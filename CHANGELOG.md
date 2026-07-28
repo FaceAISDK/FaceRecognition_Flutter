@@ -1,8 +1,7 @@
-## 0.1.0(20260726)
+## 0.2.0(20260726)
 * Refactor iOS code
 
 ## 0.0.2
-
 * Performance improvements and bug fixes for iOS.
 * Updated project structure and multi-language support.
 
