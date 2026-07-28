@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:FaceRecognition_Flutter/FaceRecognition_Flutter.dart';
+import 'package:face_recognition_flutter/face_recognition_flutter.dart';
 
 /// Main entry point of the application.
 /// 应用程序入口。

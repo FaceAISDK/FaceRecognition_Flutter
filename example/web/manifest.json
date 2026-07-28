@@ -1,6 +1,6 @@
 {
-    "name": "FaceRecognition_Flutter_example",
-    "short_name": "FaceRecognition_Flutter_example",
+    "name": "face_recognition_flutter_example",
+    "short_name": "face_recognition_flutter_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

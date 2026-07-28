@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'FaceRecognitionResult.dart';
+import 'face_recognition_result.dart';
 
-export 'FaceRecognitionView.dart';
-export 'FaceRecognitionResult.dart';
+export 'face_recognition_view.dart';
+export 'face_recognition_result.dart';
 
 class FaceRecognitionFlutter {
   FaceRecognitionFlutter._();

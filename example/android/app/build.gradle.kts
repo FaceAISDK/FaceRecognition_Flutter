@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.FaceRecognition_Flutter_example"
+    namespace = "com.example.face_recognition_flutter_example"
     compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.FaceRecognition_Flutter_example"
+        applicationId = "com.example.face_recognition_flutter_example"
         minSdk = flutter.minSdkVersion
         targetSdk = 34
         versionCode = flutter.versionCode

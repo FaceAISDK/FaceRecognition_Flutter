@@ -1,0 +1,3 @@
+.run/
+gradle/gradle-daemon-jvm.properties
+example/lib/index.uvue

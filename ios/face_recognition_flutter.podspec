@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-  s.name             = 'FaceRecognition_Flutter'
-  s.version          = '1.0.0'
+  s.name             = 'face_recognition_flutter'
+  s.version          = '0.2.0'
   s.summary          = 'A Flutter plugin for FaceAISDK offline face recognition.'
   s.description      = <<-DESC
 A Flutter plugin for FaceAISDK offline face recognition.
@@ -14,7 +14,7 @@ A Flutter plugin for FaceAISDK offline face recognition.
 
   # 修改前
   # s.resource_bundles = {
-  #   'FaceRecognition_Flutter' => ['Resources/**/*']
+  #   'face_recognition_flutter' => ['Resources/**/*']
   # }
 
   # Keep resources in the app main bundle so NSLocalizedString(...) can resolve

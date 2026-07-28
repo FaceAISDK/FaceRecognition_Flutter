@@ -1,4 +1,4 @@
-# FaceRecognition_Flutter
+# face_recognition_flutter
 
 [English](#english) | [简体中文](#chinese)
 
@@ -36,7 +36,7 @@ A Flutter plugin for FaceAISDK offline face recognition. Supports Platform View 
 Use `FaceRecognitionView` to show a camera preview with built-in face recognition UI.
 
 ```dart
-import 'package:FaceRecognition_Flutter/FaceRecognition_Flutter.dart';
+import 'package:face_recognition_flutter/face_recognition_flutter.dart';
 
 FaceRecognitionView(
   needShowConfirmDialog: true, // Default is true
@@ -109,14 +109,14 @@ Use `FaceRecognitionResultCode` to handle outcomes:
 **iOS SDK：** https://github.com/FaceAISDK/FaceAISDK_iOS  
 **Android：** https://github.com/FaceAISDK/FaceAISDK_Android  
 **uniApp UTS**  https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS
-**Flutter：**  https://github.com/FaceAISDK/FaceRecognition_Flutter
+**Flutter：**  https://github.com/FaceAISDK/face_recognition_flutter
 **React Native**  https://github.com/FaceAISDK/FaceRecognition_ReactNative
 
 
 ---
 
 <a name="chinese"></a>
-# FaceRecognition_Flutter (简体中文)
+# face_recognition_flutter (简体中文)
 
 适用于 FaceAISDK 离线人脸识别的 Flutter 插件。支持 Platform View（内置 UI 模式）和直接 API 调用。
 
@@ -151,7 +151,7 @@ Use `FaceRecognitionResultCode` to handle outcomes:
 使用 `FaceRecognitionView` 组件在 Flutter 中嵌入带有引导 UI 的相机界面。
 
 ```dart
-import 'package:FaceRecognition_Flutter/FaceRecognition_Flutter.dart';
+import 'package:face_recognition_flutter/face_recognition_flutter.dart';
 
 FaceRecognitionView(
   needShowConfirmDialog: true, // 录入成功后是否显示确认弹窗，默认为 true
@@ -214,5 +214,5 @@ await FaceRecognitionFlutter.deleteFaceFeature("user_123");
 **iOS SDK：** https://github.com/FaceAISDK/FaceAISDK_iOS  
 **Android：** https://github.com/FaceAISDK/FaceAISDK_Android  
 **uniApp：**  https://github.com/FaceAISDK/FaceAISDK_uniapp_UTS  
-**Flutter：**  https://github.com/FaceAISDK/FaceRecognition_Flutter  
+**Flutter：**  https://github.com/FaceAISDK/face_recognition_flutter  
 **React Native**  https://github.com/FaceAISDK/FaceRecognition_ReactNative  

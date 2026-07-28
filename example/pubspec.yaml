@@ -1,5 +1,5 @@
-name: FaceRecognition_Flutter_example
-description: Demonstrates how to use the FaceRecognition_Flutter plugin.
+name: face_recognition_flutter_example
+description: Demonstrates how to use the face_recognition_flutter plugin.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  FaceRecognition_Flutter:
+  face_recognition_flutter:
     path: ../
 
 dev_dependencies:

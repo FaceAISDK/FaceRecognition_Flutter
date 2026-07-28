@@ -1,4 +1,4 @@
-import 'FaceRecognition_Flutter.dart';
+import 'face_recognition_flutter.dart';
 
 /// FaceRecognition operation result.
 class FaceRecognitionResult {

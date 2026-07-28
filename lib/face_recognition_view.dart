@@ -74,7 +74,7 @@ class _FaceRecognitionViewState extends State<FaceRecognitionView> {
         creationParamsCodec: const StandardMessageCodec(),
       );
     }
-    return Text('$defaultTargetPlatform is not yet supported by the FaceRecognition_Flutter plugin');
+    return Text('$defaultTargetPlatform is not yet supported by the face_recognition_flutter plugin');
   }
 }
 
