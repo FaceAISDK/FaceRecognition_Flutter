@@ -68,7 +68,7 @@ class FaceRecognitionFlutter {
   /// [motionLivenessSteps] 动作步数
   /// [allowMultiFaces] 是否允许多人脸 (仅 Android)
   static Future<FaceRecognitionResult> livenessVerify({
-    int livenessType = 2,
+    int livenessType = 1,
     String motionLivenessTypes = "1,2,3,4,5",
     int motionLivenessTimeOut = 7,
     int motionLivenessSteps = 2,
