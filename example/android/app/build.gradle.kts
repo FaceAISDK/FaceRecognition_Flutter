@@ -36,7 +36,7 @@ android {
 
 dependencies {
     implementation(files("../../../android/libs/FaceSDKLib-release.aar"))
-    implementation("io.github.faceaisdk:Android:2026.06.25")
+    implementation("io.github.faceaisdk:Android:2026.07.31")
     implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.1")
     implementation("com.tencent:mmkv:1.3.14")
     implementation("com.airbnb.android:lottie:6.5.2")

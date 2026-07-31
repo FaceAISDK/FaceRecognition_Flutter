@@ -24,7 +24,7 @@ Offline face recognition and liveness detection Flutter plugin for Android and i
 
   s.vendored_frameworks = 'Frameworks/*.framework'
   s.dependency 'Flutter'
-  s.dependency 'FaceAISDK_Core', '2026.07.27'
+  s.dependency 'FaceAISDK_Core', '2026.07.31'
   s.dependency 'TensorFlowLiteSwift'
   s.platform = :ios, '15.5'
 
