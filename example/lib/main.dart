@@ -183,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  */
                 _buildMenuButton(t('btn_liveness'), () async {
                   final result = await FaceRecognitionFlutter.livenessVerify(
-                    livenessType: 2,
+                    livenessType: 1,
                     motionLivenessTypes: "1,2,3,4,5",
                     motionLivenessTimeOut: 7,
                     motionLivenessSteps: 2,
