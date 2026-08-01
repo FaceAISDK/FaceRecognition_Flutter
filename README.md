@@ -15,6 +15,8 @@ Offline face recognition and liveness detection Flutter plugin for Android and i
 - Local face feature query, insert, delete, and face image export.
 - Built-in native UI plus direct Flutter API calls.
 
+Silent liveness threshold (iOS/Android): 0.85–0.95. Actual performance varies with camera and lighting—adjust based on scenario
+
 ## Platform Support
 
 | Platform | Minimum Version | Camera Enrollment | Image Enrollment | Face Verify | Liveness |
@@ -148,6 +150,8 @@ flutter run -t example/lib/main.dart
 - 支持 1:1 人脸识别 + 活体检测。
 - 支持查询、同步、删除本地人脸特征值。
 - 支持原生内置 UI 和 Flutter API 直接调用。
+
+  iOS Android 静默活体通过阈值范围0.85到0.95，注意实际表现和摄像头&环境有关
 
 ## 平台支持
 
