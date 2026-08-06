@@ -1,3 +1,10 @@
+## 1.2.0
+- Initial adaptation for iOS 27，Android 17
+- Silent liveness threshold (iOS/Android): 0.85–0.95
+- Reduce SDK size
+- Brief Translation
+- fix iOS duplicate symbols
+
 ## 1.0.0
 
 ### Added
@@ -14,11 +21,6 @@
 ### Fixed
 - Fixed iOS example source inclusion after CocoaPods regeneration.
 - Fixed publish dry-run warnings for package name, README naming, and excluded generated files.
-
-## 0.2.0
-
-- Refactored iOS code.
-- Updated localization resources.
 
 ## 0.0.2
 
