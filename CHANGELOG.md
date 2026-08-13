@@ -1,3 +1,7 @@
+## 2.0.0
+- iOS: Made face size detection threshold more lenient for better user experience.
+- Android: Redesigned and polished the "Add Face" dialog UI.
+
 ## 1.2.0
 - Initial adaptation for iOS 27，Android 17
 - Silent liveness threshold (iOS/Android): 0.85–0.95
