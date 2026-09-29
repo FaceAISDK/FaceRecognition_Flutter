@@ -1,28 +1,34 @@
 # face_recognition_flutter
 
+<p align="center">
+  <strong>English</strong> | <a href="README.zh-CN.md">简体中文</a>
+</p>
+
 [![pub package](https://img.shields.io/pub/v/face_recognition_flutter.svg)](https://pub.dev/packages/face_recognition_flutter)
 [![platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue)](#platform-support)
 
-Offline face recognition and liveness detection Flutter plugin for Android and iOS. Built for FaceAISDK, it supports face enrollment, 1:1 face verification, liveness detection, and local face feature management.
+FaceAISDK's offline face recognition and liveness detection plugin for Flutter. It supports enrollment, 1:1 verification, local feature management, and native camera UI on Android and iOS.
 
 ![FaceAISDK Flutter demo](FaceAISDK.png)
 
 ## Features
 
-- Offline face enrollment from SDK camera or Base64 image.
-- 1:1 face verification with action, color, and silent liveness detection.
-- Liveness-only detection for real-person checks.
-- Local face feature query, insert, delete, and face image export.
-- Built-in native UI plus direct Flutter API calls.
-
-Silent liveness threshold (iOS/Android): 0.85–0.95. Actual performance varies with camera and lighting—adjust based on scenario
+- On-device face processing without a network connection.
+- Face enrollment using the SDK camera or a Base64-encoded image.
+- 1:1 face verification with a configurable similarity threshold.
+- Motion, motion + color, color, and silent liveness detection.
+- Local face feature query, insertion, deletion, existence checks, and image export.
+- Built-in native camera UI and an embeddable Flutter platform view.
+- Native UI resources in English and Simplified Chinese.
 
 ## Platform Support
 
-| Platform | Minimum Version | Camera Enrollment | Image Enrollment | Face Verify | Liveness |
-| --- | --- | --- | --- | --- | --- |
-| Android | minSdk 21 | Yes | Yes | Yes | Yes |
-| iOS | 15.5 | Yes | Yes | Yes | Yes |
+| Platform | Minimum version | Additional requirements |
+| --- | --- | --- |
+| Android | API 21 | `compileSdk` 34 or later; Java 17 |
+| iOS | 15.5 | CocoaPods; Swift 5.9 |
+
+> Swift Package Manager is not currently supported. Use CocoaPods for iOS integration.
 
 ## Installation
 
@@ -32,205 +38,284 @@ flutter pub add face_recognition_flutter
 
 ### Android
 
-Add camera permission:
+Add camera permission to `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-Make sure `minSdkVersion` is at least `21`.
+Make sure the application uses `minSdk` 21 or later and Java 17:
+
+```kotlin
+android {
+    defaultConfig {
+        minSdk = 21
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+```
 
 ### iOS
 
-Add camera usage text to `Info.plist`:
+Set the minimum deployment target in `ios/Podfile`:
+
+```ruby
+platform :ios, '15.5'
+```
+
+Add the FaceAISDK Core source inside the `Runner` target. Its tag must match the version required by the plugin podspec:
+
+```ruby
+target 'Runner' do
+  use_frameworks!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  pod 'FaceAISDK_Core',
+      :git => 'https://github.com/FaceAISDK/FaceAISDK_Core.git',
+      :tag => '2026.09.22'
+end
+```
+
+Add camera usage text to `ios/Runner/Info.plist`:
 
 ```xml
 <key>NSCameraUsageDescription</key>
 <string>FaceAISDK needs camera access for face enrollment and liveness verification.</string>
 ```
 
-Make sure the iOS deployment target is at least `15.5`.
+Localize this permission message in your app as needed.
+
+Install the pods:
+
+```bash
+cd ios
+pod install
+```
 
 ## Quick Start
+
+### 1. Enroll a face
 
 ```dart
 import 'package:face_recognition_flutter/face_recognition_flutter.dart';
 
-final result = await FaceRecognitionFlutter.faceVerify(
+final enrollment = await FaceRecognitionFlutter.addFaceBySDKCamera(
   faceId: 'user_001',
-  threshold: 0.84,
-  livenessType: 1,
-  motionLivenessTypes: '1,2,3,4,5',
 );
 
-if (result.isSuccess) {
-  print('Verified: ${result.similarity}');
+if (!enrollment.isSuccess) {
+  print('Enrollment failed: ${enrollment.message}');
 }
 ```
 
-## Common APIs
+### 2. Verify the enrolled face
 
 ```dart
-// Enroll by SDK camera.
-await FaceRecognitionFlutter.addFaceBySDKCamera(faceId: 'user_001');
-
-// Enroll by Base64 image.
-await FaceRecognitionFlutter.addFaceBySDKImage(
+final result = await FaceRecognitionFlutter.faceVerify(
   faceId: 'user_001',
-  imageBase64: 'data:image/jpeg;base64,...',
 );
 
-// Liveness only.
-await FaceRecognitionFlutter.livenessVerify(livenessType: 2);
-
-// Face feature management.
-await FaceRecognitionFlutter.getFaceFeature('user_001');
-await FaceRecognitionFlutter.insertFaceFeature(faceId: 'user_001', feature: '...');
-await FaceRecognitionFlutter.deleteFaceFeature('user_001');
+if (result.isSuccess) {
+  print('Verified. Similarity: ${result.similarity}');
+} else {
+  print('Verification failed: ${result.message}');
+}
 ```
 
-## Run the Example
+## Liveness Detection
 
-This is a Flutter plugin. Run the demo from the `example` app:
+### Liveness modes
 
-```bash
-cd example
-flutter run
+| Value | Mode | Description |
+| --- | --- | --- |
+| `1` | Motion | Completes one or more requested facial actions |
+| `2` | Motion + color | Combines motion and screen-color liveness checks |
+| `3` | Color | Uses screen-color changes; avoid very bright environments |
+| `4` | Silent | Performs passive liveness detection without user actions |
+
+### Motion actions
+
+Pass action values as a comma-separated string, for example `"1,2,3,4,5"`.
+
+| Value | Action |
+| --- | --- |
+| `1` | Open mouth |
+| `2` | Smile |
+| `3` | Blink |
+| `4` | Shake head |
+| `5` | Nod |
+
+Validate thresholds and liveness behavior on devices used in your deployment.
+
+Run liveness detection without 1:1 face comparison:
+
+```dart
+final result = await FaceRecognitionFlutter.livenessVerify(
+  livenessType: 4,
+);
 ```
 
-If you run from the plugin root, specify the target:
+## API Reference
 
-```bash
-flutter run -t example/lib/main.dart
+All methods are asynchronous. Optional parameters and platform differences are documented in the Dart API.
+
+| API | Description | Result |
+| --- | --- | --- |
+| `addFaceBySDKCamera` | Enrolls a face using the native SDK camera | `FaceRecognitionResult` |
+| `addFaceBySDKImage` | Enrolls a face from a Base64-encoded image | `FaceRecognitionResult` |
+| `faceVerify` | Runs 1:1 face verification and liveness detection | `FaceRecognitionResult` |
+| `livenessVerify` | Runs liveness detection without face comparison | `FaceRecognitionResult` |
+| `getFaceFeature` | Gets the locally stored feature for a face ID | `FaceRecognitionResult` |
+| `insertFaceFeature` | Inserts or synchronizes a face feature | `FaceRecognitionResult` |
+| `deleteFaceFeature` | Deletes a local face feature | `void` |
+| `isFaceExist` | Checks whether a face ID exists locally | `bool` |
+| `getFaceImageBase64` | Exports the stored face image as Base64 | `String?` |
+| `switchCamera` | Switches the camera on Android | `void` |
+| `goNativeDemoNavi` | Opens the native FaceAISDK demo screen | `void` |
+
+### Enroll from an image
+
+```dart
+final result = await FaceRecognitionFlutter.addFaceBySDKImage(
+  faceId: 'user_001',
+  imageBase64: imageBase64,
+);
 ```
+
+### Manage face features
+
+```dart
+final featureResult = await FaceRecognitionFlutter.getFaceFeature('user_001');
+final feature = featureResult.faceFeature;
+if (feature != null) {
+  await FaceRecognitionFlutter.insertFaceFeature(
+    faceId: 'user_002',
+    feature: feature,
+  );
+}
+
+final exists = await FaceRecognitionFlutter.isFaceExist('user_002');
+final image = await FaceRecognitionFlutter.getFaceImageBase64('user_001');
+
+await FaceRecognitionFlutter.deleteFaceFeature('user_002');
+```
+
+Feature insertion does not create a face image. The image call above uses the camera-enrolled ID.
+
+## Embedded Native View
+
+Use `FaceRecognitionView` when the native camera view needs to be embedded in a Flutter layout:
+
+```dart
+FaceRecognitionView(
+  creationParams: const <String, dynamic>{
+    'needShowConfirmDialog': true,
+  },
+  onViewCreated: (controller) async {
+    await controller.startScan();
+  },
+)
+```
+
+The controller provides `startScan()` and `stopScan()`.
+
+## Result Object
+
+`FaceRecognitionResult` contains:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `code` | `int` | Operation result code |
+| `message` | `String?` | Native status or error message |
+| `similarity` | `double?` | Face similarity score from `0.0` to `1.0` |
+| `livenessValue` | `double?` | Liveness detection score |
+| `faceBase64` | `String?` | Captured face image encoded as Base64 |
+| `faceFeature` | `String?` | Extracted face feature string |
+| `isSuccess` | `bool` | True for result codes `1`, `3`, and `10` |
 
 ## Result Codes
 
 | Code | Constant | Meaning |
 | --- | --- | --- |
-| 0 | `DEFAULT` | Initial state; the flow has not started yet |
-| 1 | `VERIFY_SUCCESS` | 1:1 face verification passed; similarity is higher than the configured threshold |
-| 2 | `VERIFY_FAILED` | 1:1 face verification failed; similarity is lower than the configured threshold |
-| 3 | `MOTION_LIVENESS_SUCCESS` | Motion liveness passed; the SDK may continue to the next step automatically |
-| 4 | `MOTION_LIVENESS_TIMEOUT` | Motion liveness timed out |
-| 5 | `NO_FACE_MULTI` | Face detection failed several times in a row |
-| 6 | `NO_FACE_FEATURE` | No valid face feature was detected or extracted |
-| 7 | `COLOR_LIVENESS_SUCCESS` | Color liveness passed |
-| 8 | `COLOR_LIVENESS_FAILED` | Color liveness failed |
-| 9 | `COLOR_LIVENESS_LIGHT_TOO_HIGH` | Color liveness failed because ambient light is too bright |
-| 10 | `ALL_LIVENESS_SUCCESS` | All liveness steps passed, including motion and color liveness |
-| 11 | `SILENT_LIVENESS_FAILED` | Silent liveness failed |
-| 12 | `NO_BASE_FACE_FEATURE` | No registered base face feature exists locally |
-| 13 | `NOT_ALLOW_MULTI_FACES` | Multiple faces appeared in the camera frame |
+| `0` | `cancel` | Initial or cancelled state |
+| `1` | `verifySuccess` | 1:1 face verification passed |
+| `2` | `verifyFailed` | 1:1 face verification failed |
+| `3` | `motionLivenessSuccess` | Motion liveness passed |
+| `4` | `motionLivenessTimeout` | Motion liveness timed out |
+| `5` | `noFaceMulti` | Face detection failed repeatedly |
+| `6` | `noFaceFeature` | No valid face feature was detected or extracted |
+| `7` | `colorLivenessSuccess` | Color liveness passed |
+| `8` | `colorLivenessFailed` | Color liveness failed |
+| `9` | `colorLivenessLightTooHigh` | Ambient light is too bright for color liveness |
+| `10` | `allLivenessSuccess` | All configured liveness checks passed |
+| `11` | `silentLivenessFailed` | Silent liveness failed |
+| `12` | `noBaseFaceFeature` | No enrolled base face feature exists locally |
+| `13` | `notAllowMultiFaces` | Multiple faces were detected when not allowed |
+
+## Run the Example
+
+```bash
+cd example
+flutter pub get
+flutter run
+```
+
+To select a device explicitly:
+
+```bash
+flutter devices
+flutter run -d <device-id>
+```
+
+To run a release build on a physical device, use `flutter run --release` from `example`.
 
 ## Troubleshooting
 
-- `Target file "lib/main.dart" not found`: run `cd example && flutter run`.
-- iOS cannot find Swift demo views: run `cd example/ios && pod install`.
-- Android Studio shows no devices while CLI works: restart adb with `adb kill-server && adb start-server`, then restart Android Studio.
-- iOS simulator arm64 warnings may come from transitive MLKit/TensorFlowLite dependencies; use a real iOS device when needed.
+### `Target file "lib/main.dart" not found`
 
-## Related SDKs
-
-- [FaceAISDK iOS](https://github.com/FaceAISDK/FaceAISDK_iOS)
-- [FaceAISDK Android](https://github.com/FaceAISDK/FaceAISDK_Android)
-- [FaceAISDK Flutter](https://github.com/FaceAISDK/face_recognition_flutter)
-- [FaceAISDK React Native](https://github.com/FaceAISDK/FaceRecognition_ReactNative)
-
----
-
-# face_recognition_flutter 中文说明
-
-适用于 Android 和 iOS 的 FaceAISDK 离线人脸识别 Flutter 插件，支持人脸录入、1:1 人脸核验、活体检测和本地人脸特征管理。
-
-## 功能
-
-- 通过 SDK 相机或 Base64 图片录入人脸。
-- 支持动作、炫彩、静默活体检测。
-- 支持 1:1 人脸识别 + 活体检测。
-- 支持查询、同步、删除本地人脸特征值。
-- 支持原生内置 UI 和 Flutter API 直接调用。
-
-  iOS Android 静默活体通过阈值范围0.85到0.95，注意实际表现和摄像头&环境有关
-
-## 平台支持
-
-| 平台 | 最低版本 | 相机录入 | 图片录入 | 人脸核验 | 活体检测 |
-| --- | --- | --- | --- | --- | --- |
-| Android | minSdk 21 | 支持 | 支持 | 支持 | 支持 |
-| iOS | 15.5 | 支持 | 支持 | 支持 | 支持 |
-
-## 安装
-
-```bash
-flutter pub add face_recognition_flutter
-```
-
-Android 添加相机权限：
-
-```xml
-<uses-permission android:name="android.permission.CAMERA" />
-```
-
-iOS 在 `Info.plist` 添加：
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>FaceAISDK needs camera access for face enrollment and liveness verification.</string>
-```
-
-## 快速使用
-
-```dart
-import 'package:face_recognition_flutter/face_recognition_flutter.dart';
-
-final result = await FaceRecognitionFlutter.faceVerify(
-  faceId: 'user_001',
-  threshold: 0.84,
-  livenessType: 1,
-  motionLivenessTypes: '1,2,3,4,5',
-);
-
-if (result.isSuccess) {
-  print('核验成功: ${result.similarity}');
-}
-```
-
-## 运行示例
+Run the example application instead of the plugin package root:
 
 ```bash
 cd example
 flutter run
 ```
 
-如果在插件根目录运行：
+### CocoaPods reports incompatible `FaceAISDK_Core` versions
+
+Make sure the explicit `FaceAISDK_Core` tag in the application `Podfile` matches the version required by `ios/face_recognition_flutter.podspec`, then run:
 
 ```bash
-flutter run -t example/lib/main.dart
+cd ios
+pod update FaceAISDK_Core
 ```
 
-## 结果状态码
+### iOS simulator architecture warnings
 
-| 状态码 | 常量名 | 详细描述 |
-| --- | --- | --- |
-| 0 | `DEFAULT` | 初始化状态，流程尚未开始 |
-| 1 | `VERIFY_SUCCESS` | 1:1 人脸比对成功，相似度高于设置的阈值 |
-| 2 | `VERIFY_FAILED` | 1:1 人脸比对失败，相似度低于设置的阈值 |
-| 3 | `MOTION_LIVENESS_SUCCESS` | 动作活体检测成功，通常会自动进入后续流程 |
-| 4 | `MOTION_LIVENESS_TIMEOUT` | 动作活体检测超时 |
-| 5 | `NO_FACE_MULTI` | 连续多次未能成功检测到人脸 |
-| 6 | `NO_FACE_FEATURE` | 未检测到或无法提取有效的人脸特征值 |
-| 7 | `COLOR_LIVENESS_SUCCESS` | 炫彩活体检测通过 |
-| 8 | `COLOR_LIVENESS_FAILED` | 炫彩活体检测失败 |
-| 9 | `COLOR_LIVENESS_LIGHT_TOO_HIGH` | 炫彩活体检测失败，环境光线亮度过高 |
-| 10 | `ALL_LIVENESS_SUCCESS` | 所有活体检测环节全部完成，包含动作与炫彩 |
-| 11 | `SILENT_LIVENESS_FAILED` | 静默活体检测失败 |
-| 12 | `NO_BASE_FACE_FEATURE` | 本地未注册或未录入基准人脸信息 |
-| 13 | `NOT_ALLOW_MULTI_FACES` | 摄像头画面中出现多张人脸 |
+Some transitive MLKit and TensorFlow Lite dependencies may not provide every simulator architecture. Use a physical iOS device for final verification.
 
-## 常见问题
+### Android Studio cannot find a connected device
 
-- `Target file "lib/main.dart" not found`：请进入 `example` 目录运行。
-- iOS 找不到 Swift 示例页面：执行 `cd example/ios && pod install`。
-- Android Studio 看不到设备：重启 adb 和 Android Studio。
-- iOS 模拟器依赖架构警告：建议使用真机验证。
+Confirm that `flutter devices` lists it. For Android, restart adb if necessary:
+
+```bash
+adb kill-server
+adb start-server
+```
+
+## Privacy
+
+Face recognition and liveness processing run locally on the device. Your application remains responsible for obtaining user consent and protecting any face images or biometric features it stores, transfers, or synchronizes.
+
+## Related SDKs
+
+- [FaceAISDK iOS](https://github.com/FaceAISDK/FaceAISDK_iOS)
+- [FaceAISDK Android](https://github.com/FaceAISDK/FaceAISDK_Android)
+- [FaceAISDK Flutter](https://github.com/FaceAISDK/FaceAISDK_Flutter_Plugin)
+- [FaceAISDK React Native](https://github.com/FaceAISDK/FaceRecognition_ReactNative)
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.

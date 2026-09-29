@@ -9,12 +9,13 @@ export 'face_recognition_result.dart';
 class FaceRecognitionFlutter {
   FaceRecognitionFlutter._();
 
-  static const MethodChannel _channel = MethodChannel('FaceRecognition_Flutter');
+  static const MethodChannel _channel =
+      MethodChannel('FaceRecognition_Flutter');
 
-  /// 1. 摄像头采集人脸特征并保存
-  /// [faceId] 用户唯一标识
-  /// [addFacePerformanceMode] 采集模式：1: 快速模式, 2: 精确模式(人脸品质高)
-  /// [needShowConfirmDialog] 是否显示确认弹窗，强烈建议设置为 true
+  /// Enrolls [faceId] with the native camera.
+  ///
+  /// [addFacePerformanceMode] selects fast (1) or quality (2) capture on iOS;
+  /// Android currently ignores it. [needShowConfirmDialog] shows a review step.
   static Future<FaceRecognitionResult> addFaceBySDKCamera({
     required String faceId,
     int addFacePerformanceMode = 1,
@@ -30,14 +31,14 @@ class FaceRecognitionFlutter {
     return finalResult;
   }
 
-  /// 2. 人脸识别 (1:1) + 活体检测
-  /// [faceId] 待比对的用户ID
-  /// [threshold] 相似度阈值 [0.75, 0.95]，默认 0.84
-  /// [livenessType] 活体类型：1: 动作活体, 2: 动作+炫彩活体, 3: 炫彩活体, 4: 静默活体
-  /// [motionLivenessTypes] 动作类型用英文","隔开：1.张嘴 2.微笑 3.眨眼 4.摇头 5.点头
-  /// [motionLivenessTimeOut] 动作超时时间 [3, 10]秒，默认 7
-  /// [motionLivenessSteps] 需要完成的动作步数，1 或 2 个
-  /// [allowMultiFaces] 是否允许多张人脸入镜 (仅 Android)
+  /// Verifies [faceId] against a new capture with liveness detection.
+  ///
+  /// [threshold] defaults to 0.84. [livenessType] selects motion (1),
+  /// motion + color (2), color (3), or silent (4) detection.
+  /// [motionLivenessTypes] is a comma-separated list: open mouth (1), smile
+  /// (2), blink (3), shake head (4), or nod (5).
+  /// [motionLivenessTimeOut] is in seconds; [motionLivenessSteps] is the number
+  /// of actions. [allowMultiFaces] applies only on Android.
   static Future<FaceRecognitionResult> faceVerify({
     required String faceId,
     double threshold = 0.84,
@@ -61,12 +62,10 @@ class FaceRecognitionFlutter {
     return finalResult;
   }
 
-  /// 3. 活体检测
-  /// [livenessType] 1.动作活体 2.动作+炫彩活体 3.炫彩活体 4.静默活体
-  /// [motionLivenessTypes] 动作类型：1.张嘴 2.微笑 3.眨眼 4.摇头 5.点头
-  /// [motionLivenessTimeOut] 超时时间
-  /// [motionLivenessSteps] 动作步数
-  /// [allowMultiFaces] 是否允许多人脸 (仅 Android)
+  /// Runs liveness detection without matching an enrolled face.
+  ///
+  /// Liveness options match [faceVerify]. [allowMultiFaces] applies only on
+  /// Android. [showResultTips] is currently ignored by the native SDK screens.
   static Future<FaceRecognitionResult> livenessVerify({
     int livenessType = 1,
     String motionLivenessTypes = "1,2,3,4,5",
@@ -88,7 +87,7 @@ class FaceRecognitionFlutter {
     return finalResult;
   }
 
-  /// 4. 检测本地是否有 faceID 对应的人脸特征值
+  /// Returns the locally stored feature for [faceId], if present.
   static Future<FaceRecognitionResult> getFaceFeature(String faceId) async {
     final Map? result = await _channel.invokeMethod('getFaceFeature', {
       'faceId': faceId,
@@ -98,7 +97,7 @@ class FaceRecognitionFlutter {
     return finalResult;
   }
 
-  /// 5. 同步/插入人脸特征值
+  /// Stores a 1024-character [feature] for [faceId].
   static Future<FaceRecognitionResult> insertFaceFeature({
     required String faceId,
     required String feature,
@@ -112,7 +111,7 @@ class FaceRecognitionFlutter {
     return finalResult;
   }
 
-  /// 6. 人脸图录入人脸信息
+  /// Enrolls [faceId] from a Base64-encoded image.
   static Future<FaceRecognitionResult> addFaceBySDKImage({
     required String faceId,
     required String imageBase64,
@@ -126,14 +125,14 @@ class FaceRecognitionFlutter {
     return finalResult;
   }
 
-  /// 删除人脸特征
+  /// Deletes the locally stored feature for [faceId].
   static Future<void> deleteFaceFeature(String faceId) async {
     await _channel.invokeMethod('deleteFaceFeature', {
       'faceId': faceId,
     });
   }
 
-  /// 检查人脸是否存在
+  /// Checks whether a feature exists locally for [faceId].
   static Future<bool> isFaceExist(String faceId) async {
     final dynamic result = await _channel.invokeMethod('isFaceExist', {
       'faceId': faceId,
@@ -143,7 +142,7 @@ class FaceRecognitionFlutter {
     return false;
   }
 
-  /// 获取人脸图片 Base64
+  /// Returns the stored face image as Base64, if available.
   static Future<String?> getFaceImageBase64(String faceId) async {
     final String? base64 = await _channel.invokeMethod('getFaceImageBase64', {
       'faceId': faceId,
@@ -151,12 +150,12 @@ class FaceRecognitionFlutter {
     return base64;
   }
 
-  /// 切换摄像头 (仅 Android)
+  /// Switches to [cameraId] on Android.
   static Future<void> switchCamera(int cameraId) async {
     await _channel.invokeMethod('switchCamera', {'cameraId': cameraId});
   }
 
-  /// 跳转原生 Demo 导航页
+  /// Opens the native FaceAISDK demo screen.
   static Future<void> goNativeDemoNavi() async {
     await _channel.invokeMethod('goNativeDemoNavi');
   }
@@ -164,9 +163,6 @@ class FaceRecognitionFlutter {
   static void _printResult(String method, FaceRecognitionResult result) {
     if (kDebugMode) {
       print('FaceRecognitionFlutter $method result: $result');
-      if (result.faceBase64 != null && result.faceBase64!.length > 50) {
-        print('  faceBase64: ${result.faceBase64!.substring(0, 20)}...');
-      }
     }
   }
 }

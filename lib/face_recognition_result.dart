@@ -5,7 +5,7 @@ class FaceRecognitionResult {
   /// Result code. See [FaceRecognitionResultCode].
   final int code;
 
-  /// Tip message or error description.
+  /// Native status or error message.
   final String? message;
 
   /// Face similarity score [0.0, 1.0].
@@ -40,7 +40,7 @@ class FaceRecognitionResult {
     );
   }
 
-  /// Whether the operation was successful.
+  /// True for success codes 1, 3, and 10.
   bool get isSuccess {
     return code == FaceRecognitionResultCode.verifySuccess ||
         code == FaceRecognitionResultCode.motionLivenessSuccess ||

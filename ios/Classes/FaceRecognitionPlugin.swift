@@ -17,7 +17,6 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     let args = call.arguments as? [String: Any]
-    print("FaceAiSdkPlugin handle method: \(call.method), args: \(String(describing: args))")
 
     switch call.method {
     case "addFaceBySDKCamera":
@@ -31,7 +30,6 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
               faceBase64 = FaceSDKSwiftManager.getFaceImageBase64(faceId)
           }
           let res: [String: Any] = ["code": code, "faceFeature": feature, "faceBase64": faceBase64, "message": message]
-          print("FaceAiSdkPlugin addFaceBySDKCamera result: \(res)")
           result(res)
       }
 
@@ -40,7 +38,6 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
       let imageBase64 = args?["imageBase64"] as? String ?? ""
       FaceSDKSwiftManager.addFaceByBase64(faceId, imageBase64) { code, feature, message in
           let res: [String: Any] = ["code": code, "faceFeature": feature, "message": message]
-          print("FaceAiSdkPlugin addFaceBySDKImage result: \(res)")
           result(res)
       }
 
@@ -63,7 +60,6 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
               "faceBase64": faceBase64,
               "message": message
           ]
-          print("FaceAiSdkPlugin faceVerify result: \(res)")
           result(res)
       }
 
@@ -83,14 +79,12 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
               "faceBase64": faceBase64,
               "message": message
           ]
-          print("FaceAiSdkPlugin livenessVerify result: \(res)")
           result(res)
       }
 
     case "deleteFaceFeature":
       let faceId = args?["faceId"] as? String ?? ""
       FaceSDKSwiftManager.deleteFaceFeature(faceId)
-      print("FaceAiSdkPlugin deleteFaceFeature faceId: \(faceId)")
       result(["code": 1, "message": "Success"])
 
     case "insertFaceFeature":
@@ -98,7 +92,6 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
       let feature = args?["feature"] as? String ?? ""
       FaceSDKSwiftManager.insertFaceFeature(faceId, feature) { code, message in
           let res: [String: Any] = ["code": code, "message": message, "faceId": faceId]
-          print("FaceAiSdkPlugin insertFaceFeature result: \(res)")
           result(res)
       }
 

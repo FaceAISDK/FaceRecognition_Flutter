@@ -46,10 +46,9 @@ struct FaceAINaviView: View {
                                     faceID: faceID,
                                     addFacePerformanceMode: 1,
                                     needShowConfirmDialog: true,
-                                    onDismiss: { result, feature, message in
+                                    onDismiss: { result, _, message in
                                         // Shows the operation result. 显示操作结果。
                                         triggerToast(message: message, style: result == 1 ? .success : .failure)
-                                        print("🎆 AddFace  Status: \(result),  Message: \(message), Feature: \(feature)")
                                     }
                                 )
                             ) {
@@ -59,10 +58,9 @@ struct FaceAINaviView: View {
                             NavigationLink(
                                 destination: AddFaceByImage(
                                     faceID: faceID,
-                                    onDismiss: { result, feature, message in
+                                    onDismiss: { result, _, message in
                                         // Shows the operation result. 显示操作结果。
                                         triggerToast(message: message, style: result == 1 ? .success : .failure)
-                                        print("🎆 AddFace  Status: \(result),  Message: \(message), Feature: \(feature)")
                                     }
                                 )
                             ) {
@@ -82,14 +80,11 @@ struct FaceAINaviView: View {
                                     motionLivenessTimeOut: 7,
                                     motionLivenessSteps: 2,
 
-                                    onDismiss: { code, similarity, liveness, message in
+                                    onDismiss: { _, similarity, liveness, message in
                                         let isSuccess = liveness > silentLivenessThreshold && similarity > 0.83
                                         let fullMessage =
                                             "\(message), Liveness: \(String(format: "%.2f", liveness)) , similarity: \(String(format: "%.2f", similarity))"
                                         triggerToast(message: fullMessage, style: isSuccess ? .success : .failure)
-                                        print(
-                                            "🎆 Face Verify  Result: \(code), Similarity: \(similarity), Liveness: \(liveness), Message: \(message)"
-                                        )
                                     }
                                 )
                             ) {
@@ -102,13 +97,10 @@ struct FaceAINaviView: View {
                                     motionLiveness: "1,2,3,4,5",
                                     motionLivenessTimeOut: 7,
                                     motionLivenessSteps: 2,
-                                    onDismiss: { code, liveness, message in
+                                    onDismiss: { _, liveness, message in
                                         let isSuccess = liveness > silentLivenessThreshold
                                         let fullMessage = "\(message), Liveness: \(String(format: "%.2f", liveness))"
                                         triggerToast(message: fullMessage, style: isSuccess ? .success : .failure)
-                                        print(
-                                            "🎆 Liveness Result: \(code), Liveness Score: \(liveness) , Message: \(message)"
-                                        )
                                     }
                                 )
                             ) {
@@ -120,11 +112,11 @@ struct FaceAINaviView: View {
                         // Supporting SDK checks. SDK 辅助测试。
                         VStack(spacing: 12) {
                             Button(action: {
-                                guard let faceFeature = UserDefaults.standard.string(forKey: faceID) else {
-                                    print("isFaceFeatureExist？ ： No ! ")
-                                    return
-                                }
-                                print("\n😊FaceFeature: \(faceFeature)")
+                                let exists = UserDefaults.standard.string(forKey: faceID)?.count == 1024
+                                triggerToast(
+                                    message: exists ? "Face feature exists" : "Face feature not found",
+                                    style: exists ? .success : .failure
+                                )
                             }) {
                                 MenuRowView(
                                     icon: "magnifyingglass.circle", title: "Is Face Feature Exist", showChevron: false

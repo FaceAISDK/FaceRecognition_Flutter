@@ -73,7 +73,6 @@ public class FaceSDKSwiftManager: NSObject {
 	    // 2. 校验通过，执行存储
 	    UserDefaults.standard.set(feature, forKey: faceID)
 
-	    print("【FaceSDK】人脸特征值插入成功，ID: \(faceID)")
 	    callback(NSNumber(value: 1),"insert Face success")
 	}
 

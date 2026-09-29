@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 typedef FaceRecognitionViewCreatedCallback = void Function(FaceRecognitionController controller);
 
+/// Embeds the native face capture view in a Flutter layout.
 class FaceRecognitionView extends StatefulWidget {
   final FaceRecognitionViewCreatedCallback? onViewCreated;
   final Map<String, dynamic>? creationParams;
@@ -78,16 +79,19 @@ class _FaceRecognitionViewState extends State<FaceRecognitionView> {
   }
 }
 
+/// Controls an embedded [FaceRecognitionView].
 class FaceRecognitionController {
   final MethodChannel _channel;
 
   FaceRecognitionController(int id)
       : _channel = MethodChannel('com.faceaisdk/view_$id');
 
+  /// Starts camera scanning.
   Future<void> startScan() async {
     return _channel.invokeMethod('startScan');
   }
 
+  /// Stops camera scanning.
   Future<void> stopScan() async {
     return _channel.invokeMethod('stopScan');
   }

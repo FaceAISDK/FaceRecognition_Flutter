@@ -43,7 +43,6 @@ class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Act
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
     activity?.let { FaceSDKConfig.init(it) }
-    android.util.Log.d("FaceRecognitionPlugin", "onMethodCall: ${call.method}, arguments: ${call.arguments}")
 
     when (call.method) {
       "addFaceBySDKCamera" -> {
@@ -296,7 +295,6 @@ class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Act
             "faceBase64" to faceBase64,
             "faceFeature" to faceFeature
         )
-        android.util.Log.d("FaceAiSdkPlugin", "onActivityResult: requestCode=$requestCode, result=$resultMap")
         pendingResult?.success(resultMap)
         pendingResult = null
         return true

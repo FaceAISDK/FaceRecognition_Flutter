@@ -1,3 +1,12 @@
+## 2.0.2
+- Updated the Android and iOS FaceAISDK integrations to the 2026.09.22 release.
+- Removed biometric data from native debug logs and tightened demo app settings.
+- Refreshed the example UI, app icons, and English/Chinese documentation.
+
+## 2.0.1
+- Improved liveness detection sensitivity.
+- Other minor updates and refinements.
+
 ## 2.0.0
 - iOS: Made face size detection threshold more lenient for better user experience.
 - Android: Redesigned and polished the "Add Face" dialog UI.

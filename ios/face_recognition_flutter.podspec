@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'face_recognition_flutter'
-  s.version          = '1.3.0'
+  s.version          = '2.0.2'
   s.summary          = 'Offline face recognition and liveness detection for Flutter.'
   s.description      = <<-DESC
 Offline face recognition and liveness detection Flutter plugin for Android and iOS.
@@ -12,19 +12,13 @@ Offline face recognition and liveness detection Flutter plugin for Android and i
   s.source_files = 'Classes/**/*'
   s.static_framework = true
 
-  # 修改前
-  # s.resource_bundles = {
-  #   'face_recognition_flutter' => ['Resources/**/*']
-  # }
-
-  # Keep resources in the app main bundle so NSLocalizedString(...) can resolve
-  # Localizable.strings without changing Swift code under Classes/FaceAISDK.
+  # Load localized strings from the app bundle.
   s.resources = ['Resources/*.lproj']
 
 
   s.vendored_frameworks = 'Frameworks/*.framework'
   s.dependency 'Flutter'
-  s.dependency 'FaceAISDK_Core', '2026.08.11'
+  s.dependency 'FaceAISDK_Core', '2026.09.22'
   s.dependency 'TensorFlowLiteSwift'
   s.platform = :ios, '15.5'
 
