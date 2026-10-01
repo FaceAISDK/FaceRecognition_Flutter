@@ -18,6 +18,7 @@ FaceAISDK Flutter 离线人脸识别与活体检测插件，支持 Android 和 i
 - 支持自定义相似度阈值的 1:1 人脸核验。
 - 支持动作、动作 + 炫彩、炫彩和静默活体检测。
 - 支持本地人脸特征查询、插入、删除、存在性检查和图片导出。
+- 无需打开相机即可比较两个由 SDK 生成的人脸特征的相似度。
 - 提供原生相机 UI 和可嵌入 Flutter 布局的平台视图。
 - 原生 UI 内置英文和简体中文资源。
 
@@ -131,12 +132,13 @@ if (result.isSuccess) {
 
 ### 活体模式
 
-| 值 | 模式 | 说明 |
-| --- | --- | --- |
-| `1` | 动作活体 | 完成一个或多个指定人脸动作 |
-| `2` | 动作 + 炫彩活体 | 组合动作与屏幕炫彩活体检测 |
-| `3` | 炫彩活体 | 使用屏幕颜色变化检测，请避免强光环境 |
-| `4` | 静默活体 | 无需用户执行动作的无感活体检测 |
+| 值   | 模式        | 说明                 |
+|-----|-----------|--------------------|
+| `0` | 无活体       | -                  |
+| `1` | 动作活体      | 完成一个或多个指定人脸动作      |
+| `2` | 动作 + 炫彩活体 | 组合动作与屏幕炫彩活体检测      |
+| `3` | 炫彩活体      | 使用屏幕颜色变化检测，请避免强光环境 |
+| `4` | 静默活体      | 无需用户执行动作的无感活体检测    |
 
 ### 动作类型
 
@@ -172,6 +174,7 @@ final result = await FaceRecognitionFlutter.livenessVerify(
 | `livenessVerify` | 仅执行活体检测 | `FaceRecognitionResult` |
 | `getFaceFeature` | 获取本地保存的人脸特征 | `FaceRecognitionResult` |
 | `insertFaceFeature` | 插入或同步人脸特征 | `FaceRecognitionResult` |
+| `compareFaceFeatures` | 比较两个 1024 字符的人脸特征 | `FaceRecognitionResult` |
 | `deleteFaceFeature` | 删除本地人脸特征 | `void` |
 | `isFaceExist` | 检查本地是否存在指定人脸 ID | `bool` |
 | `getFaceImageBase64` | 将已保存的人脸图片导出为 Base64 | `String?` |
@@ -206,6 +209,24 @@ await FaceRecognitionFlutter.deleteFaceFeature('user_002');
 ```
 
 插入特征不会创建人脸图片，因此上面的图片查询使用通过相机录入的 ID。
+
+### 比较人脸特征
+
+```dart
+final comparison = await FaceRecognitionFlutter.compareFaceFeatures(
+  feature1: firstFeature,
+  feature2: secondFeature,
+);
+if (comparison.isSuccess) {
+  print('Similarity: ${comparison.similarity}');
+} else {
+  print(comparison.message);
+}
+```
+
+请传入 SDK 生成的两个 1024 字符、无填充 Base64 特征，支持标准及 URL-safe
+字符集。校验仅检查格式。`isSuccess` 表示比较计算成功，是否属于同一人需结合
+原始相似度分数和业务阈值判断。
 
 ## 嵌入原生视图
 
@@ -315,7 +336,7 @@ adb start-server
 
 - [FaceAISDK iOS](https://github.com/FaceAISDK/FaceAISDK_iOS)
 - [FaceAISDK Android](https://github.com/FaceAISDK/FaceAISDK_Android)
-- [FaceAISDK Flutter](https://github.com/FaceAISDK/FaceAISDK_Flutter_Plugin)
+- [FaceAISDK Flutter](https://github.com/FaceAISDK/FaceRecognition_Flutter)
 - [FaceAISDK React Native](https://github.com/FaceAISDK/FaceRecognition_ReactNative)
 
 版本历史请参阅 [CHANGELOG.md](CHANGELOG.md)。

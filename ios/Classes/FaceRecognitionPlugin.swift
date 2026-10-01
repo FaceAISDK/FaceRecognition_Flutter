@@ -95,6 +95,30 @@ public class FaceRecognitionPlugin: NSObject, FlutterPlugin {
           result(res)
       }
 
+    case "compareFaceFeatures":
+      let features = [
+          (args?["feature1"] as? String ?? "").trimmingCharacters(in: .whitespacesAndNewlines),
+          (args?["feature2"] as? String ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+      ]
+      if let index = features.firstIndex(where: { $0.count != 1024 }) {
+          result(["code": 0, "message": "Feature \(index + 1) must be 1024 characters (got \(features[index].count))."])
+      } else {
+          let normalized = features.map {
+              $0.replacingOccurrences(of: "-", with: "+")
+                  .replacingOccurrences(of: "_", with: "/")
+          }
+          guard features.allSatisfy({
+              $0.range(of: "^[A-Za-z0-9+/_-]{1024}$", options: .regularExpression) != nil
+          }), normalized.allSatisfy({ Data(base64Encoded: $0)?.count == 768 }) else {
+              result(["code": 0, "message": "Features must be valid unpadded SDK Base64."])
+              return
+          }
+          let score = VerifyTwoFaceSimiModel().evaluateSimilarity(f1: normalized[0], f2: normalized[1])
+          result(score.isFinite && (0...1).contains(score)
+              ? ["code": 1, "message": "Comparison completed", "similarity": NSNumber(value: score)]
+              : ["code": 0, "message": "Face feature comparison failed"])
+      }
+
     case "getFaceFeature":
       let faceId = args?["faceId"] as? String ?? ""
       let feature = FaceSDKSwiftManager.getiOSFaceFeature(faceId)

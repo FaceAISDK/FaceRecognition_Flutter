@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'face_recognition_result.dart';
@@ -8,6 +9,10 @@ export 'face_recognition_result.dart';
 
 class FaceRecognitionFlutter {
   FaceRecognitionFlutter._();
+
+  /// Length of a face feature returned by the current native SDK.
+  static const int faceFeatureLength = 1024;
+  static final RegExp _faceFeaturePattern = RegExp(r'^[A-Za-z0-9+/_-]+$');
 
   static const MethodChannel _channel =
       MethodChannel('FaceRecognition_Flutter');
@@ -108,6 +113,58 @@ class FaceRecognitionFlutter {
     });
     final finalResult = FaceRecognitionResult.fromMap(result ?? {});
     _printResult('insertFaceFeature', finalResult);
+    return finalResult;
+  }
+
+  /// Compares two SDK face features without opening the camera.
+  ///
+  /// Both features must be 1024-character SDK Base64 strings (standard or
+  /// URL-safe alphabet, without padding). Only the format is validated.
+  /// A successful result contains a raw [FaceRecognitionResult.similarity]
+  /// score in the 0–1 range;
+  /// it does not decide whether the two faces belong to the same person.
+  static Future<FaceRecognitionResult> compareFaceFeatures({
+    required String feature1,
+    required String feature2,
+  }) async {
+    final features = [feature1.trim(), feature2.trim()];
+    for (var index = 0; index < features.length; index++) {
+      final feature = features[index];
+      if (feature.length != faceFeatureLength) {
+        return FaceRecognitionResult(
+          code: 0,
+          message: 'Feature ${index + 1} must be $faceFeatureLength characters '
+              '(got ${feature.length}).',
+        );
+      }
+      if (!_faceFeaturePattern.hasMatch(feature) ||
+          base64Decode(feature).length != faceFeatureLength * 3 ~/ 4) {
+        return FaceRecognitionResult(
+          code: 0,
+          message: 'Feature ${index + 1} must be valid unpadded SDK Base64.',
+        );
+      }
+    }
+
+    final Map? result = await _channel.invokeMethod('compareFaceFeatures', {
+      'feature1': features[0],
+      'feature2': features[1],
+    });
+    if (result?['code'] == 1) {
+      final score = result?['similarity'];
+      if (score is! num || !score.isFinite || score < 0 || score > 1) {
+        return FaceRecognitionResult(
+          code: 0,
+          message: 'The native SDK returned an invalid similarity score.',
+        );
+      }
+    }
+    final finalResult = FaceRecognitionResult.fromMap(result ??
+        {
+          'code': 0,
+          'message': 'Face feature comparison returned no result.',
+        });
+    _printResult('compareFaceFeatures', finalResult);
     return finalResult;
   }
 

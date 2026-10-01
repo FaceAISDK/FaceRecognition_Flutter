@@ -1,3 +1,10 @@
+## 2.1.0
+- Added `compareFaceFeatures` for Android and iOS, with a bilingual demo.
+- Validated feature length, unpadded Base64 payloads, and similarity scores; normalized standard and URL-safe Base64 for each native SDK.
+- Serialized Android comparisons off the UI thread and added unit, widget, and native integration tests.
+- Updated example build configuration for the current Flutter SDK and native integration tests.
+- Corrected the package repository and issue links.
+
 ## 2.0.2
 - Updated the Android and iOS FaceAISDK integrations to the 2026.09.22 release.
 - Removed biometric data from native debug logs and tightened demo app settings.

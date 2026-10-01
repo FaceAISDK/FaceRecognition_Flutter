@@ -81,6 +81,22 @@ void main() {
     expect(calls.last.arguments, {'faceId': 'yourFaceID', 'feature': feature});
   });
 
+  testWidgets('feature comparison prompts for two real SDK features',
+      (tester) async {
+    final calls = <MethodCall>[];
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      calls.add(call);
+      return null;
+    });
+
+    await tester.pumpWidget(const MyApp());
+    await tapAction(tester, 'Compare Face Features');
+
+    expect(calls, isEmpty);
+    expect(find.textContaining('Face feature 1 must be 1024 characters'),
+        findsOneWidget);
+  });
+
   testWidgets('a pending SDK call blocks another action and reports errors',
       (tester) async {
     final calls = <String>[];

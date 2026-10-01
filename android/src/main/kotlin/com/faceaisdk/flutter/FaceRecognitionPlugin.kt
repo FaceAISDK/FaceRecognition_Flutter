@@ -12,13 +12,19 @@ import io.flutter.plugin.common.PluginRegistry
 
 import com.faceAI.demo.FaceSDKConfig
 import android.graphics.Bitmap
+import android.os.Handler
+import android.os.Looper
+import android.util.Base64
 import com.faceAI.demo.base.utils.BitmapUtils;
 import com.ai.face.faceSearch.search.Image2FaceFeature;
+import com.ai.face.faceVerify.verify.FaceVerifyUtils
 import com.ai.face.core.engine.FaceAISDKEngine;
 import com.faceAI.demo.SysCamera.search.ImageToast
 import com.faceAI.demo.SysCamera.verify.FaceVerificationActivity
 import com.faceAI.demo.SysCamera.addFace.AddFaceFeatureActivity
 import com.faceAI.demo.SysCamera.verify.LivenessDetectActivity
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, PluginRegistry.ActivityResultListener {
   private lateinit var channel : MethodChannel
@@ -26,9 +32,12 @@ class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Act
   private var activity: Activity? = null
   private var pendingResult: MethodChannel.Result? = null
   private var currentFaceId: String? = null
+  private lateinit var comparisonExecutor: ExecutorService
+  private val featurePattern = Regex("[A-Za-z0-9+/_-]{1024}")
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     context = flutterPluginBinding.applicationContext
+    comparisonExecutor = Executors.newSingleThreadExecutor()
     // com.tencent.mmkv.MMKV.initialize(context) FaceSDKConfig 已经初始化了
     FaceSDKConfig.init(context)
 
@@ -175,6 +184,38 @@ class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Act
             ))
         }
       }
+      "compareFaceFeatures" -> {
+        val features = listOf("feature1", "feature2").map { key ->
+            call.argument<String>(key)?.trim().orEmpty()
+        }
+        val invalidIndex = features.indexOfFirst { it.length != 1024 }
+        if (invalidIndex >= 0) {
+            val length = features[invalidIndex].length
+            result.success(mapOf("code" to 0, "message" to "Feature ${invalidIndex + 1} must be 1024 characters (got $length)."))
+            return
+        }
+        val normalized = features.map { it.replace('+', '-').replace('/', '_') }
+        if (features.any { !featurePattern.matches(it) } || normalized.any {
+            Base64.decode(it, Base64.URL_SAFE or Base64.NO_PADDING or Base64.NO_WRAP).size != 768
+        }) {
+            result.success(mapOf("code" to 0, "message" to "Features must be valid unpadded SDK Base64."))
+            return
+        }
+        // Serialize SDK access and keep comparison work off the UI thread.
+        comparisonExecutor.execute {
+            val response = try {
+                val score = FaceVerifyUtils().evaluateFaceSimiByFeature(context, normalized[0], normalized[1])
+                if (score.isFinite() && score in 0f..1f) {
+                    mapOf("code" to 1, "message" to "Comparison completed", "similarity" to score.toDouble())
+                } else {
+                    mapOf("code" to 0, "message" to "Face feature comparison failed")
+                }
+            } catch (_: Exception) {
+                mapOf("code" to 0, "message" to "Face feature comparison failed")
+            }
+            Handler(Looper.getMainLooper()).post { result.success(response) }
+        }
+      }
       "getFaceFeature" -> {
         val faceId = call.argument<String>("faceId")
         if (faceId != null) {
@@ -303,6 +344,7 @@ class FaceRecognitionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Act
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    comparisonExecutor.shutdownNow()
     channel.setMethodCallHandler(null)
   }
 

@@ -24,5 +24,17 @@ To run a release build on a physical device, use `flutter run --release`.
 2. Try **Face Verification**, **Liveness Detection**, or **Retrieve Face Feature**.
 3. To test feature restoration, retrieve the feature, delete it, then tap **Restore Face Feature**. The demo keeps the 1024-character feature in memory for this session.
 4. To test **Image Enrollment**, copy a Base64-encoded image to the device clipboard.
+5. To test **Compare Face Features**, replace the two empty feature strings in `lib/main.dart` with SDK-generated 1024-character features.
 
 The result panel shows SDK codes and messages, with shortened previews of features and image Base64.
+
+## Tests
+
+Run widget tests with `flutter test test`. To exercise the native comparison
+and validation on a physical Android or iOS device:
+
+```bash
+flutter test integration_test/compare_face_features_test.dart -d <device-id>
+```
+
+The integration tests use synthetic vectors and do not enroll or store faces.

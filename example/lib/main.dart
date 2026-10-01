@@ -73,6 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
         'en': 'Retrieve a stored face feature',
         'zh': '读取已保存的人脸特征'
       },
+      'btn_compare': {'en': 'Compare Face Features', 'zh': '比较人脸特征相似度'},
+      'hint_compare': {
+        'en': 'Set two SDK features in the demo code first',
+        'zh': '先在演示代码中填写两个 SDK 人脸特征'
+      },
       'btn_insert': {'en': 'Restore Face Feature', 'zh': '同步人脸特征信息'},
       'hint_insert': {
         'en': 'Re-import a feature saved in this session',
@@ -123,6 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
           "${result.similarity != null ? 'similarity: ${result.similarity}\n' : ''}"
           "liveness: ${result.livenessValue}\n"
           "faceBase64: ${_truncate(result.faceBase64)}";
+    } else if (method == 'compareFaceFeatures') {
+      final similarity = result.similarity;
+      _resultDisplay = "code: ${result.code}\n"
+          "message: ${result.message}"
+          "${similarity == null ? '' : '\nsimilarity: ${(similarity * 100).toStringAsFixed(2)}%'}";
     } else {
       _resultDisplay = "code: ${result.code}\n"
           "message: ${result.message}\n"
@@ -134,6 +144,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _showMessage(String message) {
     if (mounted) setState(() => _resultDisplay = message);
+  }
+
+  String _featureLengthMessage(int index, int length) {
+    const expected = FaceRecognitionFlutter.faceFeatureLength;
+    return Localizations.localeOf(context).languageCode == 'zh'
+        ? '人脸特征 $index 长度应为 $expected 个字符（当前 $length）。'
+        : 'Face feature $index must be $expected characters (got $length).';
   }
 
   // Keep camera flows serial and surface platform errors in the result panel.
@@ -242,6 +259,29 @@ class _MyHomePageState extends State<MyHomePage> {
                     final res = await FaceRecognitionFlutter.getFaceFeature(
                         _testFaceId);
                     _updateDisplay(res);
+                  }),
+
+                  // Replace both placeholders with features produced by the SDK.
+                  _buildMenuButton(t('btn_compare'), t('hint_compare'),
+                      Icons.compare_arrows_outlined, () async {
+                    const feature1 = '';
+                    const feature2 = '';
+                    if (feature1.length !=
+                        FaceRecognitionFlutter.faceFeatureLength) {
+                      _showMessage(_featureLengthMessage(1, feature1.length));
+                      return;
+                    }
+                    if (feature2.length !=
+                        FaceRecognitionFlutter.faceFeatureLength) {
+                      _showMessage(_featureLengthMessage(2, feature2.length));
+                      return;
+                    }
+                    final result =
+                        await FaceRecognitionFlutter.compareFaceFeatures(
+                      feature1: feature1,
+                      feature2: feature2,
+                    );
+                    _updateDisplay(result, method: 'compareFaceFeatures');
                   }),
 
                   // Restore the feature cached by this demo session.

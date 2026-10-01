@@ -18,6 +18,7 @@ FaceAISDK's offline face recognition and liveness detection plugin for Flutter. 
 - 1:1 face verification with a configurable similarity threshold.
 - Motion, motion + color, color, and silent liveness detection.
 - Local face feature query, insertion, deletion, existence checks, and image export.
+- Compare two SDK-generated face features without opening the camera.
 - Built-in native camera UI and an embeddable Flutter platform view.
 - Native UI resources in English and Simplified Chinese.
 
@@ -172,6 +173,7 @@ All methods are asynchronous. Optional parameters and platform differences are d
 | `livenessVerify` | Runs liveness detection without face comparison | `FaceRecognitionResult` |
 | `getFaceFeature` | Gets the locally stored feature for a face ID | `FaceRecognitionResult` |
 | `insertFaceFeature` | Inserts or synchronizes a face feature | `FaceRecognitionResult` |
+| `compareFaceFeatures` | Compares two 1024-character SDK face features | `FaceRecognitionResult` |
 | `deleteFaceFeature` | Deletes a local face feature | `void` |
 | `isFaceExist` | Checks whether a face ID exists locally | `bool` |
 | `getFaceImageBase64` | Exports the stored face image as Base64 | `String?` |
@@ -206,6 +208,25 @@ await FaceRecognitionFlutter.deleteFaceFeature('user_002');
 ```
 
 Feature insertion does not create a face image. The image call above uses the camera-enrolled ID.
+
+### Compare face features
+
+```dart
+final comparison = await FaceRecognitionFlutter.compareFaceFeatures(
+  feature1: firstFeature,
+  feature2: secondFeature,
+);
+if (comparison.isSuccess) {
+  print('Similarity: ${comparison.similarity}');
+} else {
+  print(comparison.message);
+}
+```
+
+Use two 1024-character, unpadded Base64 features returned by the SDK. Standard
+and URL-safe alphabets are supported. Validation checks the format only.
+`isSuccess` means the comparison completed; apply your own threshold to the
+raw similarity score to decide whether the faces match.
 
 ## Embedded Native View
 
@@ -315,7 +336,7 @@ Face recognition and liveness processing run locally on the device. Your applica
 
 - [FaceAISDK iOS](https://github.com/FaceAISDK/FaceAISDK_iOS)
 - [FaceAISDK Android](https://github.com/FaceAISDK/FaceAISDK_Android)
-- [FaceAISDK Flutter](https://github.com/FaceAISDK/FaceAISDK_Flutter_Plugin)
+- [FaceAISDK Flutter](https://github.com/FaceAISDK/FaceRecognition_Flutter)
 - [FaceAISDK React Native](https://github.com/FaceAISDK/FaceRecognition_ReactNative)
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
