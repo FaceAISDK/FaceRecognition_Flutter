@@ -407,7 +407,7 @@ class _MyHomePageState extends State<MyHomePage> {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(14),
-        side: const BorderSide(color: Color(0xFFE2EBE6)),
+        side: const BorderSide(color: Color(0xFFB8CFC1)),
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
