@@ -26,6 +26,20 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets('result panel uses compact text and icon sizes', (tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    expect(tester.widget<Icon>(find.byIcon(Icons.terminal_rounded)).size, 16);
+    expect(tester.widget<Text>(find.text('Latest Result')).style?.fontSize, 13);
+    expect(
+        tester
+            .widget<SelectableText>(find.byType(SelectableText))
+            .style
+            ?.fontSize,
+        12);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('sync uses a feature returned by the SDK', (tester) async {
     tester.view.physicalSize = const Size(375, 812);
     tester.view.devicePixelRatio = 1;

@@ -345,10 +345,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Row(
                     children: [
                       const Icon(Icons.terminal_rounded,
-                          color: _green, size: 18),
+                          color: _green, size: 16),
                       const SizedBox(width: 8),
                       Text(t('result'),
                           style: const TextStyle(
+                              fontSize: 13,
                               fontWeight: FontWeight.w600,
                               color: Color(0xFF18352C))),
                       if (_isBusy) ...[
@@ -375,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   : null,
                               style: const TextStyle(
                                   color: Color(0xFF39574B),
-                                  fontSize: 13,
+                                  fontSize: 12,
                                   height: 1.4,
                                   fontFamily: 'monospace'),
                             ),
