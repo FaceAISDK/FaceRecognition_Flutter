@@ -47,6 +47,7 @@ local.properties
 .gradle/
 **/.gradle/
 **/android/.gradle/
+**/.kotlin/
 **/android/app/debug/
 **/android/app/profile/
 **/android/app/release/

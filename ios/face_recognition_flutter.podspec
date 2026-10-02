@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'face_recognition_flutter'
-  s.version          = '2.1.0'
+  s.version          = '2.1.1'
   s.summary          = 'Offline face recognition and liveness detection for Flutter.'
   s.description      = <<-DESC
 Offline face recognition and liveness detection Flutter plugin for Android and iOS.

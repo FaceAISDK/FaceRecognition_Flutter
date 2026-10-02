@@ -1,3 +1,8 @@
+## 2.1.1
+- Updated the Android FaceAISDK dependency to `2026.09.29` in the plugin and example.
+- Added missing native demo runtime dependencies for Android release builds.
+- Refined the example's result typography, feature card borders, and demo image.
+
 ## 2.1.0
 - Added `compareFaceFeatures` for Android and iOS, with a bilingual demo.
 - Validated feature length, unpadded Base64 payloads, and similarity scores; normalized standard and URL-safe Base64 for each native SDK.

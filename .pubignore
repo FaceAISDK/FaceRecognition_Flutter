@@ -1,6 +1,7 @@
 .run/
 .dart_tool/
 build/
+**/.kotlin/
 local.properties
 gradle/gradle-daemon-jvm.properties
 example/.dart_tool/

@@ -1,6 +1,6 @@
 name: face_recognition_flutter
 description: Offline face recognition and liveness detection Flutter plugin for Android and iOS, supporting face enrollment, 1:1 verification, and face management.
-version: 2.1.0
+version: 2.1.1
 homepage: https://github.com/FaceAISDK/FaceRecognition_Flutter
 repository: https://github.com/FaceAISDK/FaceRecognition_Flutter
 issue_tracker: https://github.com/FaceAISDK/FaceRecognition_Flutter/issues
